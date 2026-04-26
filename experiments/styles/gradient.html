@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI For Work — Gradient</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAFE;
+    --ink:#0B0B14;
+    --mute:#5B5B6B;
+    --line:rgba(11,11,20,.08);
+    --p1:#7C5CFF;
+    --p2:#FF5CA7;
+    --p3:#5CC8FF;
+    --p4:#FFB35C;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 28px;position:relative}
+
+  /* ambient blobs */
+  .bg{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.6}
+  .b1{width:600px;height:600px;background:var(--p1);top:-200px;left:-150px}
+  .b2{width:700px;height:700px;background:var(--p2);top:200px;right:-250px;opacity:.45}
+  .b3{width:500px;height:500px;background:var(--p3);top:70%;left:20%;opacity:.4}
+  .b4{width:450px;height:450px;background:var(--p4);bottom:-100px;right:10%;opacity:.35}
+
+  nav{position:sticky;top:16px;z-index:30;margin:16px 0 0}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.72);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);border:1px solid rgba(255,255,255,.6);border-radius:999px;padding:10px 14px 10px 20px;box-shadow:0 20px 60px -30px rgba(11,11,20,.2)}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;letter-spacing:-.01em}
+  .logo .o{width:22px;height:22px;border-radius:50%;background:conic-gradient(from 0deg,var(--p1),var(--p2),var(--p3),var(--p4),var(--p1));box-shadow:0 0 20px rgba(124,92,255,.5)}
+  nav ul{list-style:none;display:flex;gap:24px;font-size:14px;color:var(--mute)}
+  nav ul a:hover{color:var(--ink)}
+  .apply{background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:14px;font-weight:500;transition:transform .15s}
+  .apply:hover{transform:translateY(-1px)}
+
+  /* hero */
+  .hero{padding:80px 0 120px;text-align:center;position:relative}
+  .hero .wrap{max-width:1100px}
+  .badge{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 8px;border-radius:999px;background:rgba(255,255,255,.7);backdrop-filter:blur(12px);border:1px solid var(--line);font-size:13px;color:var(--mute);margin-bottom:28px}
+  .badge b{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  h1{font-size:clamp(52px,8vw,108px);line-height:.98;letter-spacing:-.04em;font-weight:700;max-width:16ch;margin:0 auto 24px}
+  h1 .grad{background:linear-gradient(100deg,var(--p1) 0%,var(--p2) 50%,var(--p4) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:shimmer 6s ease-in-out infinite}
+  @keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  .hero .sub{font-size:20px;color:var(--mute);max-width:58ch;margin:0 auto 40px;line-height:1.55}
+  .hero .sub b{color:var(--ink);font-weight:500}
+  .cta{display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .15s,box-shadow .2s;cursor:pointer;border:none}
+  .btn-primary{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;box-shadow:0 20px 40px -10px rgba(124,92,255,.5)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 28px 50px -10px rgba(124,92,255,.6)}
+  .btn-ghost{background:rgba(255,255,255,.7);backdrop-filter:blur(12px);color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{background:#fff;transform:translateY(-1px)}
+
+  .hero-stats{margin-top:80px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:800px;margin-left:auto;margin-right:auto}
+  .hstat{background:rgba(255,255,255,.6);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.7);border-radius:20px;padding:24px;text-align:left}
+  .hstat .v{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1;background:linear-gradient(135deg,var(--p1),var(--p2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hstat:nth-child(2) .v{background:linear-gradient(135deg,var(--p3),var(--p1));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hstat:nth-child(3) .v{background:linear-gradient(135deg,var(--p4),var(--p2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hstat .l{margin-top:8px;font-size:14px;color:var(--mute)}
+
+  section{padding:120px 0;position:relative}
+  .eyebrow{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(124,92,255,.12);color:var(--p1);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;margin-bottom:18px}
+  h2{font-size:clamp(38px,5.4vw,72px);line-height:1.02;letter-spacing:-.03em;font-weight:700;max-width:22ch;margin-bottom:24px}
+  h2 .grad{background:linear-gradient(100deg,var(--p1),var(--p2) 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sec-lede{font-size:19px;color:var(--mute);max-width:56ch;margin-bottom:56px;line-height:1.55}
+
+  .sec-center{text-align:center}
+  .sec-center h2{margin-left:auto;margin-right:auto}
+  .sec-center .sec-lede{margin-left:auto;margin-right:auto}
+
+  /* mirror */
+  .mirror-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{background:rgba(255,255,255,.7);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.8);border-radius:24px;padding:28px;transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;inset:0;border-radius:24px;padding:1px;background:linear-gradient(135deg,rgba(124,92,255,.3),rgba(255,92,167,.2),transparent);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:0;transition:opacity .2s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 30px 60px -20px rgba(11,11,20,.15)}
+  .card:hover::before{opacity:1}
+  .card .n{font-size:14px;font-weight:600;color:var(--p1);margin-bottom:12px}
+  .card p{font-size:16px;line-height:1.5}
+  .mirror-grid .card:nth-child(2) .n{color:var(--p2)}
+  .mirror-grid .card:nth-child(3) .n{color:var(--p3)}
+  .mirror-grid .card:nth-child(4) .n{color:var(--p4)}
+  .mirror-grid .card:nth-child(5) .n{color:var(--p1)}
+  .mirror-grid .card:nth-child(6) .n{color:var(--p2)}
+
+  /* audience */
+  .cloud{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .cloud span{padding:8px 16px;border-radius:999px;font-size:14px;background:rgba(255,255,255,.7);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.8);transition:transform .15s,background .15s}
+  .cloud span:hover{transform:translateY(-2px)}
+  .cloud.warm span:nth-child(4n){background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;border-color:transparent}
+  .cloud.warm span:nth-child(7n){background:linear-gradient(135deg,var(--p3),var(--p1));color:#fff;border-color:transparent}
+  .cloud.cool span:nth-child(3n){background:linear-gradient(135deg,var(--p2),var(--p4));color:#fff;border-color:transparent}
+  .cloud.cool span:nth-child(5n){background:linear-gradient(135deg,var(--p4),var(--p1));color:#fff;border-color:transparent}
+  .lbl{font-size:14px;color:var(--mute);margin:40px 0 0;font-weight:500}
+
+  .callout{margin-top:64px;padding:48px;border-radius:32px;background:linear-gradient(135deg,rgba(124,92,255,.08),rgba(255,92,167,.08));border:1px solid rgba(124,92,255,.15);font-size:21px;line-height:1.45;max-width:70ch;position:relative}
+
+  /* modules */
+  .mods{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .mod{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:36px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+  .mod:hover{transform:translateY(-4px);box-shadow:0 40px 80px -30px rgba(11,11,20,.25)}
+  .mod .icon{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;color:#fff;font-size:22px;font-weight:700;position:relative;box-shadow:0 12px 30px -10px rgba(124,92,255,.4)}
+  .mod:nth-child(1) .icon{background:linear-gradient(135deg,var(--p1),var(--p2))}
+  .mod:nth-child(2) .icon{background:linear-gradient(135deg,var(--p3),var(--p1))}
+  .mod:nth-child(3) .icon{background:linear-gradient(135deg,var(--p2),var(--p4))}
+  .mod:nth-child(4) .icon{background:linear-gradient(135deg,var(--p4),var(--p1))}
+  .mod .no{font-size:13px;color:var(--mute);margin-bottom:6px;font-weight:500}
+  .mod h3{font-size:28px;line-height:1.15;letter-spacing:-.02em;font-weight:600;margin-bottom:16px}
+  .mod p{font-size:16px;line-height:1.55;color:var(--mute);margin-bottom:24px}
+  .mod .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .mod .tags b{font-weight:500;font-size:12px;padding:5px 11px;border-radius:999px;background:rgba(124,92,255,.08);color:var(--p1)}
+
+  /* format */
+  .format-wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:32px;align-items:start}
+  .timeline{display:flex;flex-direction:column;gap:0;position:relative;padding-left:32px;border-left:2px solid var(--line)}
+  .tl{padding:20px 0;position:relative}
+  .tl::before{content:"";position:absolute;left:-39px;top:28px;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--p1)}
+  .tl:nth-child(2)::before{border-color:var(--p2)}
+  .tl:nth-child(3)::before{border-color:var(--p3)}
+  .tl:nth-child(4)::before{border-color:var(--p4)}
+  .tl:nth-child(5)::before{border-color:var(--p1)}
+  .tl:nth-child(6)::before{border-color:var(--p2);background:linear-gradient(135deg,var(--p1),var(--p2))}
+  .tl .w{font-size:13px;color:var(--p1);font-weight:600;margin-bottom:6px}
+  .tl h4{font-size:20px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+  .tl p{font-size:14px;color:var(--mute)}
+  .side{background:linear-gradient(160deg,var(--p1),var(--p2));color:#fff;border-radius:28px;padding:40px;position:sticky;top:120px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(124,92,255,.5)}
+  .side::before{content:"";position:absolute;top:-50%;right:-30%;width:70%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.25),transparent 60%);pointer-events:none}
+  .side h3{font-size:28px;font-weight:600;line-height:1.15;margin-bottom:12px;position:relative}
+  .side p{color:rgba(255,255,255,.85);font-size:15px;line-height:1.55;margin-bottom:24px;position:relative}
+  .side .btn{background:#fff;color:var(--ink);box-shadow:none;position:relative}
+  .side .btn:hover{box-shadow:0 20px 40px -10px rgba(0,0,0,.3)}
+
+  /* hosts */
+  .hosts-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .host{background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+  .host:hover{transform:translateY(-4px);box-shadow:0 40px 80px -30px rgba(11,11,20,.2)}
+  .host .ph{aspect-ratio:16/10;background:linear-gradient(135deg,var(--p1),var(--p2));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:14px;font-weight:500;letter-spacing:.14em;position:relative;overflow:hidden}
+  .host .ph::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.3),transparent 60%)}
+  .host:nth-child(2) .ph{background:linear-gradient(135deg,var(--p3),var(--p4))}
+  .host .body{padding:32px}
+  .host h4{font-size:28px;font-weight:600;letter-spacing:-.015em;margin-bottom:6px}
+  .host .role{font-size:13px;color:var(--p1);font-weight:500;margin-bottom:20px;text-transform:uppercase;letter-spacing:.08em}
+  .host:nth-child(2) .role{color:var(--p3)}
+  .host ul{list-style:none;font-size:15px}
+  .host li{padding:10px 0;border-top:1px solid var(--line);color:var(--ink)}
+
+  /* cta */
+  .cta-sec{padding:0 28px 120px}
+  .cta-box{max-width:1100px;margin:0 auto;background:linear-gradient(135deg,#0B0B14,#1a1a30);border-radius:40px;padding:100px 48px;text-align:center;position:relative;overflow:hidden;color:#fff;box-shadow:0 60px 120px -30px rgba(11,11,20,.4)}
+  .cta-box::before{content:"";position:absolute;top:-40%;left:-20%;width:60%;height:180%;background:radial-gradient(circle,rgba(124,92,255,.5),transparent 60%);filter:blur(40px)}
+  .cta-box::after{content:"";position:absolute;bottom:-40%;right:-20%;width:60%;height:180%;background:radial-gradient(circle,rgba(255,92,167,.5),transparent 60%);filter:blur(40px)}
+  .cta-box .wrap{position:relative;max-width:800px;margin:0 auto;padding:0}
+  .cta-box h2{color:#fff;margin:0 auto 20px;max-width:18ch}
+  .cta-box h2 .grad{background:linear-gradient(100deg,#fff,var(--p3) 50%,var(--p2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cta-box p{font-size:19px;color:rgba(255,255,255,.7);max-width:56ch;margin:0 auto 40px;line-height:1.55}
+
+  footer{padding:40px 0;color:var(--mute);font-size:14px;border-top:1px solid var(--line)}
+  footer .wrap{display:flex;justify-content:space-between}
+
+  @media(max-width:860px){
+    .mirror-grid,.mods,.hosts-grid,.hero-stats,.format-wrap{grid-template-columns:1fr}
+    .side{position:static}
+    nav ul{display:none}
+    .cta-box{padding:60px 24px;border-radius:28px}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="blob b4"></div>
+</div>
+
+<nav><div class="wrap">
+  <a href="#" class="logo"><span class="o"></span> AI For Work</a>
+  <ul>
+    <li><a href="#mirror">Для кого</a></li>
+    <li><a href="#program">Программа</a></li>
+    <li><a href="#format">Формат</a></li>
+    <li><a href="#hosts">Ведущие</a></li>
+  </ul>
+  <a href="#cta" class="apply">Заявиться →</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="badge"><b>Поток I</b> Старт скоро · осталось мало мест</div>
+  <h1>Отдайте рутину агенту. Оставьте себе <span class="grad">смысл</span>.</h1>
+  <p class="sub">Практический курс по ИИ-агентам для <b>не-разработчиков</b>. Учим использовать Codex и Claude Code, чтобы искать, читать, анализировать и собирать информацию — без программирования.</p>
+  <div class="cta">
+    <a href="#cta" class="btn btn-primary">Узнать, подойдёт ли курс →</a>
+    <a href="#program" class="btn btn-ghost">Программа курса</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="v">6 нед</div><div class="l">живой формат + практика дома</div></div>
+    <div class="hstat"><div class="v">4 мод</div><div class="l">практических воркшопа</div></div>
+    <div class="hstat"><div class="v">1 кейс</div><div class="l">из вашей рабочей реальности</div></div>
+  </div>
+</div></header>
+
+<section id="mirror"><div class="wrap sec-center">
+  <div class="eyebrow">Узнаёте себя?</div>
+  <h2>Работа, в которой слишком <span class="grad">много ручного</span>.</h2>
+  <p class="sec-lede">Если хотя бы два пункта про вас — вы уже нашли свой курс.</p>
+  <div class="mirror-grid">
+    <div class="card"><div class="n">— 01</div><p>Регулярно открываете 10 вкладок и 3 таблицы, чтобы собрать «нормальный вывод».</p></div>
+    <div class="card"><div class="n">— 02</div><p>У вас есть папки и выгрузки, до которых страшно дотрагиваться.</p></div>
+    <div class="card"><div class="n">— 03</div><p>«Быстрый ресёрч» почему-то занимает полдня.</p></div>
+    <div class="card"><div class="n">— 04</div><p>Руками переносите информацию между сервисами.</p></div>
+    <div class="card"><div class="n">— 05</div><p>Хотите не «спросить у нейронки», а дать задачу и получить результат.</p></div>
+    <div class="card"><div class="n">— 06</div><p>Чувствуете, что живёте в табличках, а не работаете.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Для кого</div>
+  <h2>Для всех, чья работа <span class="grad">— это информация</span>.</h2>
+  <p class="sec-lede">Курс не привязан к одной профессии. Он для любых ролей и задач, где много сбора, сверки, отчётов и повторов.</p>
+
+  <div class="lbl">Роли</div>
+  <div class="cloud warm">
+    <span>маркетологи</span><span>аналитики</span><span>продакты</span><span>проджекты</span><span>HR и рекрутеры</span><span>сейлзы</span><span>операционные</span><span>исследователи</span><span>редакторы</span><span>методисты</span><span>продюсеры курсов</span><span>фаундеры</span><span>account managers</span><span>customer success</span><span>people ops</span><span>SMM</span><span>PR</span><span>контент-команды</span><span>комьюнити-менеджеры</span>
+  </div>
+
+  <div class="lbl">Задачи</div>
+  <div class="cloud cool">
+    <span>ресёрч</span><span>таблицы</span><span>отчёты</span><span>презентации</span><span>Telegram</span><span>вакансии</span><span>лидогенерация</span><span>анализ рынка</span><span>анализ конкурентов</span><span>поиск клиентов</span><span>обработка выгрузок</span><span>дашборды</span><span>брифы</span><span>сводки</span><span>контент-планы</span><span>формы</span><span>инсайты</span>
+  </div>
+
+  <div class="callout">Мы не забираем интересную часть работы. Наоборот — показываем, как отдать агенту рутину: собрать, разложить, проверить, оформить, перенести. А вы остаётесь со смыслами, решениями и качеством.</div>
+</div></section>
+
+<section id="program"><div class="wrap sec-center">
+  <div class="eyebrow">Программа</div>
+  <h2>Четыре модуля, построенные вокруг <span class="grad">реальных задач</span>.</h2>
+  <p class="sec-lede">На каждом модуле — воркшоп, домашка, разбор. В конце — свой проект на вашей рабочей задаче.</p>
+  <div class="mods" style="text-align:left">
+    <div class="mod">
+      <div class="icon">01</div>
+      <div class="no">Модуль 01 · файлы и таблицы</div>
+      <h3>Из страшной таблицы — в презентацию</h3>
+      <p>Берём локальную выгрузку и превращаем её в рабочий артефакт: HTML-отчёт, слайды или документ в стиле вашей компании.</p>
+      <div class="tags"><b>файлы</b><b>таблицы</b><b>отчёт</b><b>презентация</b></div>
+    </div>
+    <div class="mod">
+      <div class="icon">02</div>
+      <div class="no">Модуль 02 · research</div>
+      <h3>Ресёрч рынка на HeadHunter</h3>
+      <p>Вакансии и компании как источник открытых данных. Формулируем критерии и анализируем по смыслу, а не по чекбоксам.</p>
+      <div class="tags"><b>ресёрч</b><b>вакансии</b><b>рынок</b><b>лиды</b></div>
+    </div>
+    <div class="mod">
+      <div class="icon">03</div>
+      <div class="no">Модуль 03 · мессенджеры</div>
+      <h3>Telegram без ручного копирования</h3>
+      <p>Мониторинг каналов, сводки обсуждений, инсайты и триггеры — и автоматическая доставка в нужное место.</p>
+      <div class="tags"><b>telegram</b><b>сводки</b><b>мониторинг</b><b>дашборды</b></div>
+    </div>
+    <div class="mod">
+      <div class="icon">04</div>
+      <div class="no">Модуль 04 · browser use</div>
+      <h3>Рутина в браузере</h3>
+      <p>Агент действует как пользователь: формы, кабинеты, LinkedIn, Яндекс Метрика. И как сделать так, чтобы вас не забанили.</p>
+      <div class="tags"><b>browser use</b><b>формы</b><b>linkedin</b><b>метрика</b></div>
+    </div>
+  </div>
+  <div class="callout" style="margin:56px auto 0">Суть модулей — не в этих конкретных инструментах, а в <b>подходах</b>, применимых к любым данным, сервисам и процессам.</div>
+</div></section>
+
+<section id="format"><div class="wrap">
+  <div class="eyebrow">Формат</div>
+  <h2>6 недель живого ритма, <span class="grad">который реально выдержать</span>.</h2>
+  <p class="sec-lede">Занятия вживую, записи остаются. Основная практика — дома, в своём темпе.</p>
+  <div class="format-wrap">
+    <div class="timeline">
+      <div class="tl"><div class="w">Неделя 0</div><h4>Знакомство и настройка</h4><p>Установка инструментов, первый простой шаг, знакомство с группой.</p></div>
+      <div class="tl"><div class="w">Неделя 1</div><h4>Файлы и таблицы</h4><p>Первый воркшоп, первая домашка, первый артефакт.</p></div>
+      <div class="tl"><div class="w">Неделя 2</div><h4>Ресёрч рынка</h4><p>Работа с открытыми данными, отбор по смыслу.</p></div>
+      <div class="tl"><div class="w">Неделя 3</div><h4>Telegram</h4><p>Сводки, мониторинг, автоматические отправки.</p></div>
+      <div class="tl"><div class="w">Неделя 4</div><h4>Браузер</h4><p>Формы, кабинеты, аккуратная работа с веб-интерфейсами.</p></div>
+      <div class="tl"><div class="w">Неделя 5</div><h4>Финальный проект</h4><p>Ваш собственный рабочий процесс. Финальная встреча с презентациями.</p></div>
+    </div>
+    <aside class="side">
+      <h3>Живые занятия. Практика дома.</h3>
+      <p>После каждой домашки — разбор частых ошибок и удачных решений. Это помогает держать темп и видеть, как думают другие.</p>
+      <a href="#cta" class="btn btn-primary">Заявиться в поток →</a>
+    </aside>
+  </div>
+</div></section>
+
+<section id="hosts"><div class="wrap sec-center">
+  <div class="eyebrow">Ведущие</div>
+  <h2>Курс ведут <span class="grad">Коля и Саша</span>.</h2>
+  <p class="sec-lede">Коля отвечает за технологию и агентные подходы. Саша — за формат, комьюнити и то, чтобы курс не превратился в программистские штуки.</p>
+  <div class="hosts-grid" style="text-align:left">
+    <div class="host">
+      <div class="ph">ФОТО · КОЛЯ</div>
+      <div class="body">
+        <h4>Коля Шейко</h4>
+        <div class="role">технология и агенты</div>
+        <ul>
+          <li>Фаундер агентства ИИ-автоматизации</li>
+          <li>Ко-фаундер конференций entropy.talk</li>
+          <li>Автор канала «AI и грабли»</li>
+        </ul>
+      </div>
+    </div>
+    <div class="host">
+      <div class="ph">ФОТО · САША</div>
+      <div class="body">
+        <h4>Саша Литская</h4>
+        <div class="role">формат и комьюнити</div>
+        <ul>
+          <li>Владелица керамической мастерской-коворкинга</li>
+          <li>Основатель арт-пространства в Академгородке</li>
+          <li>Продюсер и операционный директор онлайн-школы керамики</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="cta" class="cta-sec">
+  <div class="cta-box">
+    <div class="wrap">
+      <div class="eyebrow" style="background:rgba(255,255,255,.12);color:#fff">В первый поток</div>
+      <h2>Хотите <span class="grad">попробовать</span>, как это сработает у вас?</h2>
+      <p>Если в вашей работе много ручной информационной рутины — часть её уже можно отдать агенту. Мы покажем, как именно, на понятных рабочих задачах.</p>
+      <a href="#" class="btn btn-primary">Оставить заявку →</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <span>© 2026 AI For Work</span>
+  <span>hello@aiforwork.ru</span>
+</div></footer>
+
+</body>
+</html>

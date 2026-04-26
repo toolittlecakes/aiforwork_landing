@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI For Work — 静</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF7F2;
+    --paper-deep:#F2EEE6;
+    --ink:#1A1816;
+    --ink-soft:#5A554D;
+    --ink-mute:#8D877C;
+    --hair:#DDD6C8;
+    --hair-dim:#EAE4D7;
+    --vermilion:#B33A2C;
+    --vermilion-deep:#8B2A1F;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink)}
+  body{
+    font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15px;line-height:1.75;
+    font-weight:300;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0 0.07  0 0 0 0.025 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:48px 56px 120px;position:relative}
+
+  /* —— top meta rail —— */
+  .rail{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute)}
+  .rail .left{text-align:left}
+  .rail .right{text-align:right}
+  .rail .mark{display:inline-flex;align-items:center;gap:10px;color:var(--ink)}
+  .rail .mark .seal{width:22px;height:22px;border-radius:3px;background:var(--vermilion);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Shippori Mincho";font-size:13px;font-weight:700;letter-spacing:0;box-shadow:inset 0 0 0 2px rgba(255,255,255,.25)}
+
+  hr.hair{border:none;height:1px;background:var(--hair);margin:34px 0}
+
+  /* —— hero —— */
+  .hero{display:grid;grid-template-columns:56px 1fr 220px;gap:36px;margin-top:40px;align-items:stretch;min-height:560px}
+  .vert{writing-mode:vertical-rl;font-family:"Shippori Mincho";font-weight:500;font-size:14px;letter-spacing:.5em;color:var(--ink-soft);border-left:1px solid var(--hair);padding-left:14px;height:100%}
+  .vert .num{font-family:"IBM Plex Mono";color:var(--vermilion);letter-spacing:.2em;margin-bottom:18px}
+  .hero .center{display:flex;flex-direction:column;justify-content:center;padding-right:10px}
+  .eyebrow{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--vermilion);margin-bottom:26px}
+  .eyebrow::before{content:"";display:inline-block;width:28px;height:1px;background:var(--vermilion);vertical-align:middle;margin-right:12px;translate:0 -3px}
+  h1{font-family:"Shippori Mincho";font-weight:500;font-size:78px;line-height:1.15;letter-spacing:-.01em;color:var(--ink)}
+  h1 em{font-style:italic;font-weight:400;color:var(--ink-soft)}
+  h1 .ja{display:block;font-size:22px;letter-spacing:.35em;color:var(--vermilion);margin-bottom:18px;font-weight:400}
+  .deck{margin-top:30px;font-size:16px;line-height:1.9;max-width:50ch;color:var(--ink-soft);font-weight:300}
+  .deck b{color:var(--ink);font-weight:500}
+  .meta{margin-top:46px;display:flex;gap:36px;font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute)}
+  .meta div b{display:block;font-family:"Shippori Mincho";font-size:22px;color:var(--ink);font-weight:500;margin-top:4px;letter-spacing:-.01em}
+
+  /* big seal on the right */
+  .hero .right{display:flex;align-items:flex-start;justify-content:flex-end}
+  .seal-big{
+    width:180px;height:180px;border-radius:6px;
+    background:var(--vermilion);color:#fff;
+    display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+    align-items:center;justify-items:center;gap:0;
+    box-shadow:inset 0 0 0 4px rgba(255,255,255,.18), inset 0 0 0 6px var(--vermilion);
+    position:relative;
+    font-family:"Shippori Mincho";font-weight:800;font-size:56px;line-height:1;letter-spacing:-.04em;
+  }
+  .seal-big span{padding:6px}
+  .seal-big::after{
+    content:"";position:absolute;inset:6px;
+    background:
+      radial-gradient(circle at 20% 30%, transparent 0 1px, rgba(255,255,255,.1) 1px 2px, transparent 2px),
+      radial-gradient(circle at 70% 60%, transparent 0 1px, rgba(255,255,255,.08) 1px 2px, transparent 2px);
+    background-size:8px 8px, 12px 12px;
+    pointer-events:none;mix-blend-mode:screen;opacity:.8;
+  }
+  .seal-label{margin-top:14px;font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);text-align:center;width:180px}
+
+  /* —— section —— */
+  section{margin-top:96px}
+  .sec-head{display:grid;grid-template-columns:56px 1fr auto;gap:36px;align-items:baseline;padding-bottom:20px;border-bottom:1px solid var(--hair)}
+  .sec-head .n{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.25em;color:var(--vermilion);text-transform:uppercase}
+  .sec-head h2{font-family:"Shippori Mincho";font-weight:500;font-size:40px;letter-spacing:-.01em;line-height:1.1}
+  .sec-head h2 .ja{font-family:"Shippori Mincho";font-size:14px;letter-spacing:.3em;color:var(--vermilion);margin-right:14px;font-weight:400;vertical-align:4px}
+  .sec-head .tag{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute)}
+  .sec-body{padding-top:30px;display:grid;grid-template-columns:56px 1fr;gap:36px}
+  .sec-body > .spacer{}
+
+  /* —— mirror —— */
+  .mirror{display:grid;gap:0}
+  .mirror li{list-style:none;display:grid;grid-template-columns:44px 1fr;gap:18px;padding:20px 0;border-bottom:1px solid var(--hair-dim);font-size:17px;line-height:1.6;color:var(--ink)}
+  .mirror li .idx{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.2em;color:var(--vermilion);padding-top:6px}
+  .mirror li b{font-weight:500}
+
+  /* —— audience —— */
+  .aud{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  .aud h3{font-family:"Shippori Mincho";font-weight:500;font-size:20px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--hair)}
+  .aud h3 .ja{color:var(--vermilion);font-size:14px;letter-spacing:.3em;margin-right:10px}
+  .aud ul{list-style:none}
+  .aud li{padding:8px 0;font-size:15px;color:var(--ink-soft);display:flex;justify-content:space-between;border-bottom:1px dotted var(--hair-dim)}
+  .aud li::before{content:""}
+  .aud li span.d{font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.15em;color:var(--ink-mute);text-transform:uppercase}
+
+  /* —— modules —— */
+  .mods{display:grid;gap:0}
+  .mod{display:grid;grid-template-columns:120px 1fr 200px;gap:40px;padding:36px 0;border-bottom:1px solid var(--hair);align-items:start}
+  .mod .idx{font-family:"Shippori Mincho";font-weight:500;font-size:62px;line-height:.9;color:var(--ink);letter-spacing:-.02em}
+  .mod .idx .ja{display:block;font-size:14px;color:var(--vermilion);letter-spacing:.3em;margin-bottom:8px;font-weight:400}
+  .mod .body h4{font-family:"Shippori Mincho";font-weight:500;font-size:26px;letter-spacing:-.005em;margin-bottom:12px}
+  .mod .body p{font-size:15.5px;line-height:1.75;color:var(--ink-soft);max-width:52ch}
+  .mod .side{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);text-align:right}
+  .mod .side b{display:block;color:var(--vermilion);margin-bottom:6px}
+  .mod .side .line{margin:8px 0;height:1px;background:var(--hair)}
+
+  /* —— format —— */
+  .format{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .format p{font-size:16px;line-height:1.9;color:var(--ink-soft);max-width:48ch}
+  .format p + p{margin-top:12px}
+  .weeks{display:grid;grid-template-columns:1fr;gap:0}
+  .week{display:grid;grid-template-columns:60px 1fr auto;gap:18px;padding:12px 0;border-bottom:1px solid var(--hair-dim);font-size:14.5px}
+  .week b{font-family:"Shippori Mincho";color:var(--vermilion);font-size:16px;font-weight:500}
+  .week .d{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.15em;color:var(--ink-mute);text-transform:uppercase}
+
+  /* —— pricing —— */
+  .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--ink)}
+  .price{padding:32px 28px 32px 0;border-right:1px solid var(--hair);border-bottom:1px solid var(--ink)}
+  .price:last-child{border-right:none;padding-right:0}
+  .price:nth-child(2){padding-left:28px}
+  .price:nth-child(3){padding-left:28px}
+  .price .tier{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--vermilion)}
+  .price .tier .ja{font-family:"Shippori Mincho";letter-spacing:.3em;font-size:12px;margin-right:8px;color:var(--vermilion)}
+  .price .amt{font-family:"Shippori Mincho";font-weight:500;font-size:52px;line-height:1;letter-spacing:-.02em;margin:14px 0 6px}
+  .price .amt em{font-style:italic;font-weight:400;color:var(--ink-soft)}
+  .price .per{font-size:13px;color:var(--ink-mute);font-family:"IBM Plex Mono";letter-spacing:.08em;text-transform:uppercase}
+  .price ul{list-style:none;margin-top:22px}
+  .price ul li{padding:7px 0;font-size:14px;color:var(--ink-soft);border-bottom:1px dotted var(--hair-dim);display:grid;grid-template-columns:12px 1fr;gap:12px}
+  .price ul li::before{content:"—";color:var(--vermilion);font-weight:500}
+  .price .go{margin-top:22px;display:inline-flex;align-items:center;gap:8px;font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:4px}
+  .price .go::after{content:"→"}
+  .price.feat .amt{color:var(--vermilion)}
+
+  /* —— hosts —— */
+  .hosts{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  .host{display:grid;grid-template-columns:110px 1fr;gap:24px}
+  .host .portrait{width:110px;height:140px;background:var(--paper-deep);border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;font-family:"Shippori Mincho";font-weight:500;font-size:36px;color:var(--vermilion);letter-spacing:-.02em}
+  .host h4{font-family:"Shippori Mincho";font-weight:500;font-size:22px;margin-bottom:4px}
+  .host h4 .ja{font-size:12px;letter-spacing:.3em;color:var(--vermilion);margin-right:10px;font-weight:400;vertical-align:3px}
+  .host .role{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:12px}
+  .host p{font-size:14.5px;line-height:1.7;color:var(--ink-soft)}
+
+  /* —— faq —— */
+  .faq{}
+  .faq details{padding:20px 0;border-bottom:1px solid var(--hair)}
+  .faq summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:44px 1fr 24px;gap:18px;align-items:baseline;font-family:"Shippori Mincho";font-size:19px;font-weight:500;letter-spacing:-.005em}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary .idx{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.18em;color:var(--vermilion);text-transform:uppercase}
+  .faq summary::after{content:"＋";font-family:"Shippori Mincho";color:var(--ink-mute);font-size:20px;text-align:right;font-weight:300}
+  .faq details[open] summary::after{content:"−"}
+  .faq p{margin:14px 0 0 62px;font-size:15px;line-height:1.8;color:var(--ink-soft);max-width:60ch}
+
+  /* —— final CTA —— */
+  .final{margin-top:110px;display:grid;grid-template-columns:56px 1fr 220px;gap:36px;align-items:end;padding-top:44px;border-top:1px solid var(--ink)}
+  .final .vert-end{writing-mode:vertical-rl;font-family:"Shippori Mincho";font-size:14px;letter-spacing:.5em;color:var(--ink-soft);border-left:1px solid var(--hair);padding-left:14px}
+  .final h2{font-family:"Shippori Mincho";font-weight:500;font-size:58px;line-height:1.1;letter-spacing:-.015em}
+  .final h2 em{font-style:italic;font-weight:400;color:var(--vermilion)}
+  .final h2 .ja{display:block;font-size:16px;letter-spacing:.35em;color:var(--vermilion);margin-bottom:14px;font-weight:400}
+  .final p{margin-top:20px;font-size:16px;line-height:1.85;color:var(--ink-soft);max-width:52ch}
+  .final .buttons{margin-top:28px;display:flex;gap:18px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;font-family:"IBM Plex Mono";font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn::after{content:"→"}
+  .final .seal-col{display:flex;flex-direction:column;align-items:center}
+
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--hair);display:flex;justify-content:space-between;font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute)}
+
+  @media (max-width:900px){
+    .wrap{padding:28px 24px 80px}
+    .hero{grid-template-columns:1fr}
+    .vert{display:none}
+    .hero .right{justify-content:flex-start}
+    h1{font-size:46px}
+    .aud,.format,.hosts,.final{grid-template-columns:1fr}
+    .mod{grid-template-columns:1fr}
+    .prices{grid-template-columns:1fr}
+    .price{padding:28px 0!important;border-right:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="rail">
+    <span class="left">Издание 001 / MMXXVI</span>
+    <span class="mark"><span class="seal">静</span> AI for Work</span>
+    <span class="right">Курс · 6 недель · Осень</span>
+  </div>
+
+  <hr class="hair">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="vert"><span class="num">〇 〇 一</span>　静 — 仕 事 に お け る 人 工 知 能</div>
+    <div class="center">
+      <div class="eyebrow">Практический курс · набор открыт</div>
+      <h1>
+        <span class="ja">静 ・ AI for Work</span>
+        Агенты,<br>которые&nbsp;работают<br><em>— тихо и точно.</em>
+      </h1>
+      <p class="deck">Курс по ИИ-агентам <b>Codex</b> и <b>Claude Code</b> для тех, кто не пишет код, но ежедневно делает одни и те же задачи. Шесть недель, четыре модуля, один собственный агент в финале.</p>
+      <div class="meta">
+        <div>Недель<b>六 / 6</b></div>
+        <div>Модулей<b>四 / 4</b></div>
+        <div>Финальный проект<b>一 / 1</b></div>
+      </div>
+    </div>
+    <div class="right">
+      <div>
+        <div class="seal-big">
+          <span>A</span><span>I</span>
+          <span>F</span><span>W</span>
+        </div>
+        <div class="seal-label">印 · authenticated seal</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MIRROR -->
+  <section>
+    <div class="sec-head">
+      <span class="n">§ 01</span>
+      <h2><span class="ja">鏡</span>Узнаёте себя?</h2>
+      <span class="tag">Mirror · self-check</span>
+    </div>
+    <div class="sec-body">
+      <div></div>
+      <ul class="mirror">
+        <li><span class="idx">01</span><div>Каждую неделю собираете <b>одну и ту же презентацию</b> из Excel.</div></li>
+        <li><span class="idx">02</span><div>Читаете по сорок вакансий с HH, чтобы «понять рынок» зарплат.</div></li>
+        <li><span class="idx">03</span><div>По пятницам руками собираете сводки из Telegram-чатов.</div></li>
+        <li><span class="idx">04</span><div>Копируете данные из таблицы в таблицу и называете это аналитикой.</div></li>
+        <li><span class="idx">05</span><div>Пробовали ChatGPT — понравилось, но дальше игрушки не зашло.</div></li>
+        <li><span class="idx">06</span><div>Знаете, что «агенты — это серьёзно», но не знаете, с чего начать.</div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- AUDIENCE -->
+  <section>
+    <div class="sec-head">
+      <span class="n">§ 02</span>
+      <h2><span class="ja">対象</span>Для кого курс</h2>
+      <span class="tag">Audience</span>
+    </div>
+    <div class="sec-body">
+      <div></div>
+      <div class="aud">
+        <div>
+          <h3><span class="ja">役</span>Роли</h3>
+          <ul>
+            <li>Продакт-менеджер<span class="d">Product</span></li>
+            <li>Маркетолог<span class="d">Marketing</span></li>
+            <li>HR / Рекрутер<span class="d">People</span></li>
+            <li>Аналитик<span class="d">Analytics</span></li>
+            <li>Операционный<span class="d">Ops</span></li>
+            <li>Фаундер / ассистент<span class="d">Founders</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3><span class="ja">課</span>Задачи</h3>
+          <ul>
+            <li>Ресёрч рынка и конкурентов<span class="d">Research</span></li>
+            <li>Регулярные отчёты и сводки<span class="d">Reports</span></li>
+            <li>Презентации из таблиц<span class="d">Decks</span></li>
+            <li>Скоринг вакансий и кандидатов<span class="d">Hiring</span></li>
+            <li>Свод чатов, писем, лент<span class="d">Inbox</span></li>
+            <li>Проверка гипотез<span class="d">Validation</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section>
+    <div class="sec-head">
+      <span class="n">§ 03</span>
+      <h2><span class="ja">章</span>Четыре модуля</h2>
+      <span class="tag">Program</span>
+    </div>
+    <div class="sec-body">
+      <div></div>
+      <div class="mods">
+        <div class="mod">
+          <div class="idx"><span class="ja">一</span>01</div>
+          <div class="body">
+            <h4>Файлы, таблицы, презентации</h4>
+            <p>Превращаем .xlsx и .csv в готовые слайды без Excel-формул и без дизайнера. Агент читает, считает, собирает — вы смотрите результат и утверждаете.</p>
+          </div>
+          <div class="side"><b>Инструмент</b>Codex<div class="line"></div>Claude Code</div>
+        </div>
+        <div class="mod">
+          <div class="idx"><span class="ja">二</span>02</div>
+          <div class="body">
+            <h4>Ресёрч по HeadHunter</h4>
+            <p>Агент собирает вакансии, скорит по вашим критериям, делает сводку рынка зарплат. Вместо недели чтения — пятнадцать минут на живых данных.</p>
+          </div>
+          <div class="side"><b>Инструмент</b>Browser<div class="line"></div>HH API</div>
+        </div>
+        <div class="mod">
+          <div class="idx"><span class="ja">三</span>03</div>
+          <div class="body">
+            <h4>Telegram-ассистент</h4>
+            <p>Сводки по чатам, поиск по тысячам сообщений, ответы по шаблону, фильтрация по авторам и темам. То, что вы делали руками по пятницам.</p>
+          </div>
+          <div class="side"><b>Инструмент</b>Bot API<div class="line"></div>MTProto</div>
+        </div>
+        <div class="mod">
+          <div class="idx"><span class="ja">四</span>04</div>
+          <div class="body">
+            <h4>Автономный браузер</h4>
+            <p>Агент кликает, заполняет формы, ходит по сайтам за вас. На этом модуле строим финальный проект — собственного агента под конкретную рабочую задачу.</p>
+          </div>
+          <div class="side"><b>Инструмент</b>Browser-use<div class="line"></div>Playwright</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMAT -->
+  <section>
+    <div class="sec-head">
+      <span class="n">§ 04</span>
+      <h2><span class="ja">流</span>Как устроено</h2>
+      <span class="tag">Format</span>
+    </div>
+    <div class="sec-body">
+      <div></div>
+      <div class="format">
+        <div>
+          <p>Шесть недель, один финальный проект. Каждую неделю — один модуль: короткое видео, практика на своих задачах, живой разбор в формате встречи. Никаких двухчасовых лекций.</p>
+          <p>Параллельно — закрытый чат с авторами: без «спасибо, полезно», только конкретные задачи и решения. После курса чат остаётся с вами.</p>
+        </div>
+        <div class="weeks">
+          <div class="week"><b>Нед. 1</b><div>Onboarding · настройка среды</div><span class="d">W1</span></div>
+          <div class="week"><b>Нед. 2</b><div>Файлы → презентация</div><span class="d">W2</span></div>
+          <div class="week"><b>Нед. 3</b><div>Ресёрч на HH</div><span class="d">W3</span></div>
+          <div class="week"><b>Нед. 4</b><div>Telegram-ассистент</div><span class="d">W4</span></div>
+          <div class="week"><b>Нед. 5</b><div>Автономный браузер</div><span class="d">W5</span></div>
+          <div class="week"><b>Нед. 6</b><div>Финальный проект · защита</div><span class="d">W6</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section>
+    <div class="sec-head">
+      <span class="n">§ 05</span>
+      <h2><span class="ja">料</span>Тарифы</h2>
+      <span class="tag">Pricing</span>
+    </div>
+    <div class="sec-body">
+      <div></div>
+      <div class="prices">
+        <div class="price">
+          <div class="tier"><span class="ja">基</span>Базовый</div>
+          <div class="amt">29<em>.000₽</em></div>
+          <div class="per">для самостоятельных</div>
+          <ul>
+            <li>Все модули и материалы</li>
+            <li>Доступ в общий чат</li>
+            <li>Разборы в записи</li>
+            <li>Финальный проект самостоятельно</li>
+          </ul>
+          <a class="go" href="#">Выбрать</a>
+        </div>
+        <div class="price feat">
+          <div class="tier"><span class="ja">中</span>С проверкой</div>
+          <div class="amt">59<em>.000₽</em></div>
+          <div class="per">рекомендуем большинству</div>
+          <ul>
+            <li>Всё из «Базового»</li>
+            <li>Проверка домашних заданий</li>
+            <li>Личный фидбэк по проекту</li>
+            <li>Доступ к живым разборам</li>
+          </ul>
+          <a class="go" href="#">Выбрать</a>
+        </div>
+        <div class="price">
+          <div class="tier"><span class="ja">特</span>VIP</div>
+          <div class="amt">149<em>.000₽</em></div>
+          <div class="per">агент под вашу задачу</div>
+          <ul>
+            <li>Всё из «С проверкой»</li>
+            <li>Две 1-на-1 с авторами</li>
+            <li>Кастомный агент под задачу</li>
+            <li>Приоритет на новых потоках</li>
+          </ul>
+          <a class="go" href="#">Выбрать</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOSTS -->
+  <section>
+    <div class="sec-head">
+      <span class="n">§ 06</span>
+      <h2><span class="ja">師</span>Кто ведёт</h2>
+      <span class="tag">Authors</span>
+    </div>
+    <div class="sec-body">
+      <div></div>
+      <div class="hosts">
+        <div class="host">
+          <div class="portrait">К・Ш</div>
+          <div>
+            <h4><span class="ja">技</span>Коля Шейко</h4>
+            <div class="role">Техническая часть · инженер</div>
+            <p>Десять лет в продуктовой разработке, работает с агентами ежедневно. Отвечает за то, чтобы всё запускалось и действительно работало на ваших задачах.</p>
+          </div>
+        </div>
+        <div class="host">
+          <div class="portrait">С・Л</div>
+          <div>
+            <h4><span class="ja">形</span>Саша Литская</h4>
+            <div class="role">Формат · методология</div>
+            <p>Куратор образовательных программ. Делает так, чтобы сложное становилось простым и оставалось в голове — не только на время курса, но и после.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="sec-head">
+      <span class="n">§ 07</span>
+      <h2><span class="ja">問</span>Частые вопросы</h2>
+      <span class="tag">FAQ</span>
+    </div>
+    <div class="sec-body">
+      <div></div>
+      <div class="faq">
+        <details open><summary><span class="idx">01</span><span>Нужно ли уметь программировать?</span></summary><p>Нет. Курс сделан для тех, кто не пишет код. Всё, что нужно — умение открыть терминал по пошаговой инструкции.</p></details>
+        <details><summary><span class="idx">02</span><span>Какая машина нужна?</span></summary><p>Любой современный ноутбук. Mac, Windows, Linux — всё подходит. Подробные инструкции по установке даём в первой неделе.</p></details>
+        <details><summary><span class="idx">03</span><span>Что если я пропущу неделю?</span></summary><p>Материалы и разборы остаются доступны. Чат помогает догнать.</p></details>
+        <details><summary><span class="idx">04</span><span>Курс точно окупится?</span></summary><p>Если автоматизируем хотя бы одну из ваших еженедельных рутин — да. Обычно получается три-четыре.</p></details>
+        <details><summary><span class="idx">05</span><span>Можно оплатить от юрлица?</span></summary><p>Да, оформляем договор и счёт. Напишите нам после выбора тарифа.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final">
+    <div class="vert-end">終 ・ 始 め よ う</div>
+    <div>
+      <h2>
+        <span class="ja">始</span>
+        Хватит копировать.<br><em>Пора делегировать.</em>
+      </h2>
+      <p>Набор на первый поток открыт. Мест немного — курс идёт в камерном формате, иначе разборы теряют смысл. Запись закрывается, когда набирается группа.</p>
+      <div class="buttons">
+        <a class="btn" href="#">Записаться на курс</a>
+        <a class="btn ghost" href="#">Скачать программу</a>
+      </div>
+    </div>
+    <div class="seal-col">
+      <div class="seal-big" style="width:140px;height:140px;font-size:44px">
+        <span>始</span><span>  </span>
+        <span>  </span><span>印</span>
+      </div>
+      <div class="seal-label" style="width:140px">начало · authorised</div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© MMXXVI · AI for Work</span>
+    <span>静 · изданный тираж 001</span>
+    <span>hello@aiforwork</span>
+  </footer>
+
+</div>
+</body>
+</html>

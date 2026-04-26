@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI For Work — Black Ops</title>
+  <style>
+    :root {
+      --bg: #10110f;
+      --panel: #181a17;
+      --panel-2: #20231e;
+      --ink: #f2f5e9;
+      --muted: #a7ad9f;
+      --line: #363b33;
+      --green: #b7ff4a;
+      --red: #ff4d5d;
+      --blue: #50e0ff;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(183, 255, 74, .14), transparent 26rem),
+        radial-gradient(circle at 80% 16%, rgba(255, 77, 93, .12), transparent 24rem),
+        var(--bg);
+      color: var(--ink);
+      font-family: "IBM Plex Sans", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      background: rgba(16, 17, 15, .82);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .nav div {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid rgba(183, 255, 74, .55);
+      border-radius: 6px;
+      background: var(--green);
+      color: #12140e;
+      font-weight: 850;
+      box-shadow: 0 0 34px rgba(183, 255, 74, .18);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 0 46px rgba(183, 255, 74, .32);
+      border-color: var(--green);
+    }
+
+    .ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+      box-shadow: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+      gap: clamp(30px, 6vw, 86px);
+      padding: clamp(56px, 9vw, 120px) 0 58px;
+      align-items: center;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      color: var(--green);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+    }
+
+    .status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 18px var(--green);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(54px, 9vw, 128px);
+      line-height: .88;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 em {
+      display: block;
+      color: var(--red);
+      font-style: normal;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 24px 0 0;
+      color: #e7ebdc;
+      font-size: clamp(20px, 2.3vw, 30px);
+      line-height: 1.22;
+      font-weight: 700;
+    }
+
+    .copy {
+      max-width: 660px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .terminal {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(24, 26, 23, .88);
+      box-shadow: 0 22px 80px rgba(0, 0, 0, .32);
+      overflow: hidden;
+      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+    }
+
+    .terminal:hover {
+      transform: translateY(-4px);
+      border-color: rgba(183, 255, 74, .6);
+      box-shadow: 0 28px 96px rgba(0, 0, 0, .44), 0 0 48px rgba(183, 255, 74, .08);
+    }
+
+    .terminal-head {
+      display: flex;
+      gap: 7px;
+      padding: 13px;
+      border-bottom: 1px solid var(--line);
+      background: #151713;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+    .dot:nth-child(2) { background: #ffc84a; }
+    .dot:nth-child(3) { background: var(--green); }
+
+    .terminal-body {
+      padding: 18px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 14px;
+    }
+
+    .line { color: var(--muted); margin: 0 0 12px; }
+    .line strong { color: var(--ink); }
+    .ok { color: var(--green); }
+    .hot { color: var(--red); }
+    .blue { color: var(--blue); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .section {
+      padding: 60px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-title {
+      grid-column: span 5;
+      margin: 0;
+      font-size: clamp(34px, 5vw, 66px);
+      line-height: .96;
+    }
+
+    .section-copy {
+      grid-column: span 7;
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .card {
+      grid-column: span 3;
+      min-height: 188px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(183, 255, 74, .55);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .22);
+    }
+
+    .card.wide { grid-column: span 6; }
+
+    .num {
+      display: inline-flex;
+      margin-bottom: 16px;
+      color: var(--green);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.08;
+    }
+
+    p { margin: 0; }
+    .card p, li { color: var(--muted); }
+
+    .chips {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #141612;
+      color: var(--muted);
+      font-size: 14px;
+      transition: color .16s ease, border-color .16s ease, transform .16s ease;
+    }
+
+    .chip:hover {
+      color: var(--ink);
+      border-color: var(--green);
+      transform: translateY(-2px);
+    }
+
+    .pricing .card { grid-column: span 4; }
+    .pricing .card:nth-child(2) {
+      border-color: rgba(183, 255, 74, .7);
+      box-shadow: inset 0 0 0 1px rgba(183, 255, 74, .2), 0 0 44px rgba(183, 255, 74, .08);
+    }
+
+    ul { margin: 12px 0 0; padding-left: 18px; }
+    li + li { margin-top: 7px; }
+
+    .final {
+      padding: clamp(64px, 10vw, 130px) 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .final-box {
+      padding: clamp(28px, 5vw, 64px);
+      border: 1px solid rgba(183, 255, 74, .52);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(183, 255, 74, .16), transparent 34%),
+        var(--panel);
+    }
+
+    .final h2 {
+      margin: 0;
+      max-width: 900px;
+      font-size: clamp(38px, 6vw, 78px);
+      line-height: .94;
+    }
+
+    .final p {
+      max-width: 720px;
+      margin: 22px 0 28px;
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .ops-panel {
+      margin: 0 0 20px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(24, 26, 23, .86);
+      box-shadow: 0 18px 70px rgba(0, 0, 0, .24);
+    }
+
+    .ops-panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .ops-panel-head h2 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 54px);
+      line-height: .95;
+    }
+
+    .ops-run {
+      min-height: 44px;
+      padding: 0 15px;
+      border: 1px solid rgba(183, 255, 74, .6);
+      border-radius: 6px;
+      background: var(--green);
+      color: #11140e;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .ops-run:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 32px rgba(183, 255, 74, .26);
+    }
+
+    .ops-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+      gap: 12px;
+    }
+
+    .ops-log,
+    .ops-result {
+      min-height: 230px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #10120f;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 14px;
+    }
+
+    .ops-log p {
+      margin: 0 0 10px;
+      color: var(--muted);
+    }
+
+    .ops-log p.done { color: var(--green); }
+    .ops-log p.hot { color: var(--red); }
+
+    .ops-result strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--blue);
+      text-transform: uppercase;
+    }
+
+    .ops-result div {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .section-title, .section-copy, .card, .card.wide, .pricing .card { grid-column: 1 / -1; }
+      .ops-grid { grid-template-columns: 1fr; }
+      .ops-panel-head { display: grid; align-items: start; }
+      .nav div { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav">
+      <a class="brand" href="#">AI_FOR_WORK</a>
+      <div>
+        <a href="#program">program</a>
+        <a href="#format">format</a>
+        <a href="#tariffs">tariffs</a>
+      </div>
+      <a class="button" href="#cta">Проверить fit</a>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <div class="status">agent course / non-dev mode</div>
+        <h1>AI For <em>Work</em></h1>
+        <p class="lead">Практический курс по ИИ-агентам для людей, у которых работа завязана на информацию, файлы, таблицы, сайты, Telegram и отчёты.</p>
+        <p class="copy">Не «спросить у нейронки», а дать агенту задачу и получить рабочий результат: ресёрч, сводку, презентацию, дашборд, заполненную форму или обработанную выгрузку.</p>
+        <div class="actions">
+          <a class="button" href="#cta">Хочу в первый поток</a>
+          <a class="button ghost" href="#program">Смотреть программу</a>
+        </div>
+      </div>
+      <aside class="terminal">
+        <div class="terminal-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="terminal-body">
+          <p class="line">$ codex run <strong>"разобрать выгрузку"</strong></p>
+          <p class="line ok">✓ прочитал файлы и таблицы</p>
+          <p class="line ok">✓ нашёл паттерны и провалы</p>
+          <p class="line blue">→ собрал HTML-отчёт</p>
+          <p class="line hot">→ подготовил вопросы для проверки</p>
+        </div>
+      </aside>
+    </header>
+
+    <section class="ops-panel" aria-label="Интерактивная терминальная демонстрация">
+      <div class="ops-panel-head">
+        <h2>Запустить агентный сценарий</h2>
+        <button class="ops-run" type="button" id="ops-run">run next</button>
+      </div>
+      <div class="ops-grid">
+        <div class="ops-log" id="ops-log"></div>
+        <div class="ops-result">
+          <strong>artifact</strong>
+          <div id="ops-result">Нажмите run next, чтобы прогнать сценарии курса как терминальную симуляцию.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid">
+        <h2 class="section-title">Ручная информационная рутина больше не обязана быть вашей.</h2>
+        <p class="section-copy">У нас нет цели забрать интересную часть работы. Мы показываем, как отдавать агенту сбор, разбор, сверку, оформление и перенос данных, чтобы вы занимались смыслами и качеством результата.</p>
+        <article class="card"><span class="num">01</span><h3>10 вкладок</h3><p>Собрать из них нормальный вывод, а не список ссылок.</p></article>
+        <article class="card"><span class="num">02</span><h3>Страшные файлы</h3><p>Выгрузки, таблицы и документы, до которых давно страшно дотрагиваться.</p></article>
+        <article class="card"><span class="num">03</span><h3>Полдня ресёрча</h3><p>Задача казалась быстрой, но съела фокус и календарь.</p></article>
+        <article class="card"><span class="num">04</span><h3>Перенос между сервисами</h3><p>Чаты, кабинеты, формы, таблицы и рабочие документы.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="program">
+      <div class="grid">
+        <h2 class="section-title">Программа из четырёх рабочих сценариев.</h2>
+        <p class="section-copy">На каждом модуле разбираем конкретный инструментальный кейс и общий подход, который можно переносить на свои данные, сервисы и процессы.</p>
+        <article class="card wide"><span class="num">module 1</span><h3>Файлы и таблицы</h3><p>Из локальной выгрузки в понятный HTML-отчёт, презентацию или документ.</p></article>
+        <article class="card wide"><span class="num">module 2</span><h3>HeadHunter research</h3><p>Вакансии, компании, требования, роли, спрос и паттерны рынка.</p></article>
+        <article class="card wide"><span class="num">module 3</span><h3>Telegram без копипаста</h3><p>Сводки, темы, инсайты, триггеры для продаж и уведомления.</p></article>
+        <article class="card wide"><span class="num">module 4</span><h3>Browser use</h3><p>Формы, кабинеты, LinkedIn, Яндекс Метрика и веб-интерфейсы.</p></article>
+        <div class="chips">
+          <span class="chip">skills/mcp</span><span class="chip">интерактивные артефакты</span><span class="chip">самопроверка агента</span><span class="chip">постановка задач</span><span class="chip">память правильного пути</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="format">
+      <div class="grid">
+        <h2 class="section-title">Формат: живые занятия, записи и практика дома.</h2>
+        <p class="section-copy">Около 6 недель: знакомство и настройка, четыре практических воркшопа с домашками, разбор ошибок, финальная неделя и презентации проектов.</p>
+        <article class="card wide"><h3>Финальный проект</h3><p>Вы выбираете реальный рабочий процесс и пробуете перестроить его с помощью ИИ-агента.</p></article>
+        <article class="card wide"><h3>Комьюнити</h3><p>Темп, рабочие знакомства, обмен подходами и понимание, как похожие задачи решают люди с разным бэкграундом.</p></article>
+      </div>
+    </section>
+
+    <section class="section pricing" id="tariffs">
+      <div class="grid">
+        <h2 class="section-title">Три уровня участия.</h2>
+        <p class="section-copy">Цены не указываем на лендинге. Вместо этого ведём человека к разговору про условия участия.</p>
+        <article class="card"><h3>Базовый</h3><p>Живые занятия, записи, материалы, задания, общий чат и финальная встреча.</p></article>
+        <article class="card"><h3>С проверкой домашек</h3><p>Проверка заданий, фидбек по результату и процессу, рекомендации по упрощению решений.</p></article>
+        <article class="card"><h3>VIP</h3><p>2 личные консультации, помощь с выбором подхода и обсуждение применения в вашей реальности.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid">
+        <h2 class="section-title">Курс ведут Саша и Коля.</h2>
+        <p class="section-copy">Коля отвечает за техническую часть и агентные подходы. Саша — за образовательный формат, структуру, комьюнити и то, чтобы курс не превратился в набор сложных программистских штук.</p>
+        <article class="card wide"><h3>Коля Шейко</h3><ul><li>Фаундер агентства ИИ-автоматизации</li><li>Ко-фаундер entropy.talk</li><li>Автор канала «AI и грабли»</li></ul></article>
+        <article class="card wide"><h3>Саша Литская</h3><ul><li>Владелица керамической мастерской коворкинга</li><li>Основатель арт-пространства и оффлайн-сообщества</li><li>Продюсер и операционный директор онлайн-школы</li></ul></article>
+      </div>
+    </section>
+
+    <section class="final" id="cta">
+      <div class="final-box">
+        <h2>Покажем, как отдавать агенту рутину без программирования и без магии.</h2>
+        <p>Если вы чувствуете, что в вашей работе много ручной информационной рутины, скорее всего, часть её уже можно автоматизировать агентом.</p>
+        <a class="button" href="#">Узнать условия участия</a>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const runs = [
+        ["files_to_report", ["read ./exports/*.csv", "detect messy columns", "build report.html", "prepare slides outline"], "Готов HTML-отчёт, список проблем в данных и структура презентации."],
+        ["hh_market_research", ["collect vacancies", "group requirements", "extract companies", "rank lead quality"], "Готова таблица компаний, роли, требования и вывод по спросу на рынке."],
+        ["telegram_digest", ["scan channels", "cluster topics", "find sales triggers", "send digest"], "Готова сводка по темам, инсайтам и триггерам для рабочей команды."],
+        ["browser_use", ["open cabinet", "fill form", "check result", "write action log"], "Форма заполнена, результат проверен, лог действий сохранён."]
+      ];
+
+      let index = 0;
+      const log = document.getElementById("ops-log");
+      const result = document.getElementById("ops-result");
+      const button = document.getElementById("ops-run");
+
+      function run() {
+        const [name, lines, output] = runs[index];
+        index = (index + 1) % runs.length;
+        button.textContent = `running ${name}`;
+        log.innerHTML = `<p class="hot">$ codex ${name}</p>`;
+        result.textContent = "Выполняется...";
+
+        lines.forEach((line, lineIndex) => {
+          window.setTimeout(() => {
+            log.insertAdjacentHTML("beforeend", `<p class="done">✓ ${line}</p>`);
+            if (lineIndex === lines.length - 1) {
+              result.textContent = output;
+              button.textContent = "run next";
+            }
+          }, 260 * (lineIndex + 1));
+        });
+      }
+
+      button.addEventListener("click", run);
+      run();
+    })();
+  </script>
+</body>
+</html>

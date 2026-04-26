@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI For Work — Concrete</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F2F0EB;
+    --ink:#0A0A0A;
+    --red:#EC2313;
+    --mute:#66665F;
+    --rule:#0A0A0A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter Tight',sans-serif;font-size:16px;line-height:1.4;-webkit-font-smoothing:antialiased;font-feature-settings:"ss01" 1,"cv11" 1}
+  a{color:inherit;text-decoration:none}
+
+  /* 12-col grid container */
+  .grid{max-width:1600px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;position:relative}
+  .full{grid-column:1/-1}
+
+  /* visible grid (light) */
+  .guides{position:fixed;inset:0;pointer-events:none;z-index:0;max-width:1600px;margin:0 auto;display:grid;grid-template-columns:32px repeat(12,1fr) 32px;gap:0}
+  .guides > *{border-right:1px solid rgba(10,10,10,.04);height:100%}
+  .guides > *:first-child,.guides > *:last-child{border:none}
+
+  /* HEADER */
+  header.top{grid-column:1/-1;padding:20px 0;border-bottom:1.5px solid var(--rule);display:grid;grid-template-columns:subgrid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:center}
+  .logo{grid-column:1/4;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:16px;letter-spacing:-.02em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+  .logo::before{content:"";width:20px;height:20px;background:var(--red)}
+  nav.top-nav{grid-column:4/10;display:flex;gap:28px;font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+  nav.top-nav a{position:relative;padding:4px 0;border-bottom:1.5px solid transparent}
+  nav.top-nav a:hover{border-color:var(--red);color:var(--red)}
+  .idx{grid-column:10/13;text-align:right;font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--mute)}
+  .idx b{color:var(--ink)}
+
+  /* HERO — concrete poetry */
+  .hero{grid-column:1/-1;padding:48px 0 0;position:relative;border-bottom:1.5px solid var(--rule)}
+  .hero-inner{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end}
+  .hero .tag{grid-column:1/5;font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding-bottom:4px;border-bottom:1.5px solid var(--rule);margin-bottom:12px;font-weight:500}
+  .hero .tag span{color:var(--red)}
+  .hero h1{grid-column:1/-1;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(80px,14vw,260px);line-height:.82;letter-spacing:-.055em;text-transform:uppercase;position:relative;padding-bottom:20px;font-feature-settings:"ss01" 1}
+  .hero h1 .l{display:block;position:relative}
+  .hero h1 .l em{font-style:normal}
+  .hero h1 .red{color:var(--red)}
+  .hero h1 .outline{-webkit-text-stroke:2px var(--ink);color:transparent}
+  .hero h1 .slash{color:var(--red);font-weight:500;font-style:normal;margin:0 .15em;display:inline-block;transform:translateY(-.05em)}
+  .hero h1 .shift{display:inline-block;padding-left:.9em}
+  .hero h1 .tight{letter-spacing:-.08em}
+
+  .hero-meta{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:36px 0 28px;border-top:1.5px solid var(--rule)}
+  .meta-cell{grid-column:span 3;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+  .meta-cell b{display:block;font-family:'Inter Tight',sans-serif;font-size:32px;letter-spacing:-.02em;color:var(--ink);font-weight:700;margin-top:6px;text-transform:none}
+  .meta-cell:nth-child(3) b{color:var(--red)}
+
+  /* DECK */
+  .deck{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:48px 0;border-bottom:1.5px solid var(--rule)}
+  .deck .label{grid-column:1/3;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);padding-top:8px;font-weight:500}
+  .deck p{grid-column:3/10;font-size:30px;line-height:1.25;letter-spacing:-.02em;font-weight:500;max-width:32ch}
+  .deck p b{background:var(--ink);color:var(--bg);padding:0 8px;font-weight:600}
+  .deck .act{grid-column:10/13;display:flex;flex-direction:column;gap:10px;align-self:end;text-align:right}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;background:var(--ink);color:var(--bg);font-family:'Inter Tight',sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;border:1.5px solid var(--ink);transition:all .15s;justify-content:center}
+  .btn:hover{background:var(--red);border-color:var(--red)}
+  .btn.g{background:transparent;color:var(--ink)}
+  .btn.g:hover{background:var(--ink);color:var(--bg)}
+
+  /* SECTION SCAFFOLD */
+  section{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:80px 0;border-bottom:1.5px solid var(--rule);position:relative}
+  .section-no{grid-column:1/3;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:96px;line-height:.85;letter-spacing:-.04em;color:var(--red);align-self:start}
+  .section-no sub{vertical-align:top;font-size:18px;color:var(--mute);margin-left:6px;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
+  .section-h{grid-column:3/11;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(48px,7vw,112px);line-height:.9;letter-spacing:-.035em;text-transform:uppercase}
+  .section-h em{font-style:normal;color:var(--red)}
+  .section-h .out{-webkit-text-stroke:1.5px var(--ink);color:transparent}
+  .section-meta{grid-column:11/13;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);text-align:right;align-self:end;padding-bottom:8px;border-bottom:1.5px solid var(--rule)}
+
+  /* MIRROR */
+  .mirror-list{grid-column:1/-1;margin-top:48px;display:grid;grid-template-columns:repeat(12,1fr);gap:0;border-top:1.5px solid var(--rule)}
+  .mi{grid-column:span 6;padding:28px 0;border-bottom:1.5px solid var(--rule);display:grid;grid-template-columns:80px 1fr 40px;gap:20px;align-items:baseline;position:relative}
+  .mi:nth-child(even){padding-left:32px;border-left:1.5px solid var(--rule)}
+  .mi:nth-child(odd){padding-right:32px}
+  .mi .n{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:14px;letter-spacing:.12em;color:var(--red);text-transform:uppercase}
+  .mi p{font-size:24px;line-height:1.3;font-weight:500;letter-spacing:-.01em}
+  .mi p u{text-decoration:none;border-bottom:3px solid var(--red);padding-bottom:1px}
+  .mi .ar{font-size:20px;color:var(--red);text-align:right;transform:translateY(2px)}
+
+  /* AUDIENCE */
+  .aud-intro{grid-column:3/11;margin-top:48px;padding-top:24px;border-top:1.5px solid var(--rule);font-size:20px;line-height:1.4;max-width:60ch}
+  .aud-block{grid-column:1/-1;margin-top:40px;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:24px;border-top:1.5px solid var(--rule)}
+  .aud-block .lbl{grid-column:1/3;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);font-weight:500;padding-top:8px}
+  .aud-block .ls{grid-column:3/13}
+  .type-cloud{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,48px);line-height:1.05;letter-spacing:-.02em;text-transform:uppercase}
+  .type-cloud span{display:inline-block;padding:4px 14px 4px 0;position:relative}
+  .type-cloud span:not(:last-child)::after{content:"/";color:var(--red);margin-left:2px;font-weight:500}
+  .type-cloud.tasks span{font-weight:500}
+  .type-cloud.tasks span:nth-child(odd){color:var(--red)}
+
+  .stmt{grid-column:3/11;margin-top:72px;padding:32px 0;border-top:3px solid var(--red);border-bottom:1.5px solid var(--rule);font-family:'Inter Tight',sans-serif;font-weight:500;font-size:28px;line-height:1.25;letter-spacing:-.015em}
+  .stmt b{font-weight:700}
+  .stmt .callout{background:var(--red);color:var(--bg);padding:0 8px;font-weight:700}
+
+  /* PROGRAM */
+  .mods{grid-column:1/-1;margin-top:48px;display:grid;grid-template-columns:repeat(12,1fr);gap:0;border-top:1.5px solid var(--rule);border-left:1.5px solid var(--rule)}
+  .mod{grid-column:span 6;border-right:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule);padding:44px 36px;position:relative;min-height:360px;display:flex;flex-direction:column;justify-content:space-between;transition:background .2s}
+  .mod:hover{background:var(--ink);color:var(--bg)}
+  .mod:hover .no{color:#fff8}
+  .mod:hover h3 em{color:var(--red)}
+  .mod:hover .tg b{border-color:#fff3;color:#fff}
+  .mod .no{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);font-weight:500;margin-bottom:16px}
+  .mod .no::before{content:"";display:inline-block;width:24px;height:1.5px;background:var(--red);vertical-align:middle;margin-right:10px}
+  .mod h3{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:44px;line-height:.95;letter-spacing:-.03em;text-transform:uppercase;margin-bottom:20px;max-width:16ch}
+  .mod h3 em{font-style:normal;color:var(--red)}
+  .mod p{font-size:17px;line-height:1.5;max-width:46ch;font-weight:400;color:inherit}
+  .mod .tg{margin-top:28px;display:flex;flex-wrap:wrap;gap:6px}
+  .mod .tg b{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border:1.5px solid var(--mute);color:var(--mute)}
+  .mod .big-n{position:absolute;right:24px;top:24px;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:140px;line-height:.8;color:transparent;-webkit-text-stroke:1.5px var(--red);letter-spacing:-.05em;opacity:.7;pointer-events:none}
+
+  .approach{grid-column:1/-1;margin-top:56px;padding-top:40px;border-top:1.5px solid var(--rule);display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+  .approach h4{grid-column:1/5;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:28px;letter-spacing:-.02em;text-transform:uppercase;line-height:1}
+  .approach ul{grid-column:5/10;list-style:none;columns:2;column-gap:32px;font-size:15px;line-height:1.8}
+  .approach li::before{content:"→ ";color:var(--red);font-weight:700}
+  .approach .note{grid-column:10/13;font-family:'Inter Tight',sans-serif;font-size:18px;line-height:1.4;font-weight:500;color:var(--ink);padding-left:24px;border-left:2px solid var(--red)}
+
+  /* FORMAT */
+  .tl{grid-column:1/-1;margin-top:48px;display:grid;grid-template-columns:repeat(6,1fr);gap:0;border:1.5px solid var(--rule)}
+  .tl div{padding:28px 20px;border-right:1.5px solid var(--rule);position:relative;transition:background .15s}
+  .tl div:last-child{border-right:none}
+  .tl div:hover{background:var(--ink);color:var(--bg)}
+  .tl div:hover .w{color:var(--red)}
+  .tl div:hover h4{color:var(--bg)}
+  .tl div .w{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:500;margin-bottom:10px}
+  .tl div h4{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.01em;line-height:1.1;margin-bottom:6px}
+  .tl div p{font-size:13px;line-height:1.4;color:var(--mute)}
+  .tl div:hover p{color:#d0d0c8}
+
+  /* HOSTS */
+  .hosts-g{grid-column:1/-1;margin-top:48px;display:grid;grid-template-columns:repeat(12,1fr);gap:0;border-top:1.5px solid var(--rule);border-left:1.5px solid var(--rule)}
+  .host{grid-column:span 6;border-right:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule);padding:36px;display:grid;grid-template-columns:1fr 1.3fr;gap:28px}
+  .host .ph{aspect-ratio:3/4;background:repeating-linear-gradient(0deg,var(--ink),var(--ink) 1px,var(--bg) 1px,var(--bg) 4px);position:relative;display:flex;align-items:flex-end}
+  .host .ph::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--ink))}
+  .host .ph span{position:relative;padding:12px;color:var(--bg);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500}
+  .host:nth-child(2) .ph{background:repeating-linear-gradient(90deg,var(--ink),var(--ink) 1px,var(--bg) 1px,var(--bg) 4px)}
+  .host h4{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:44px;letter-spacing:-.03em;line-height:.9;text-transform:uppercase;margin-bottom:4px}
+  .host .role{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:20px;font-weight:500}
+  .host ul{list-style:none;font-size:14px;line-height:1.5}
+  .host li{padding:10px 0;border-top:1.5px solid var(--rule)}
+  .host li:first-child{border-top:none}
+
+  /* CTA */
+  .closer{grid-column:1/-1;padding:120px 0;background:var(--ink);color:var(--bg);display:grid;grid-template-columns:repeat(12,1fr);gap:24px;position:relative;border:none}
+  .closer .section-no{color:var(--red)}
+  .closer .section-h{grid-column:1/-1;text-align:center;font-size:clamp(64px,12vw,200px);line-height:.85;letter-spacing:-.045em;margin:24px 0 32px}
+  .closer .section-h em{color:var(--red)}
+  .closer .section-h .out{-webkit-text-stroke:1.5px var(--bg)}
+  .closer p{grid-column:4/10;text-align:center;font-size:20px;line-height:1.4;color:#d0d0c8;margin-bottom:40px}
+  .closer .center{grid-column:1/-1;text-align:center}
+  .closer .btn{background:var(--red);color:var(--bg);border-color:var(--red);font-size:14px;padding:18px 32px}
+  .closer .btn:hover{background:var(--bg);color:var(--ink);border-color:var(--bg)}
+
+  footer{grid-column:1/-1;padding:24px 0;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+  footer span{grid-column:span 4}
+  footer span:nth-child(2){text-align:center}
+  footer span:nth-child(3){text-align:right}
+
+  @media(max-width:960px){
+    .grid{grid-template-columns:repeat(4,1fr)}
+    .hero-inner,section,.hero-meta,.deck,.mods,.mirror-list,.tl,.hosts-g,.approach,.aud-block,.closer,header.top,footer{grid-template-columns:repeat(4,1fr)}
+    .logo,.section-no,.mi,.mod,.host,.meta-cell,.tl div,.approach h4,.approach ul,.approach .note,.deck .label,.deck p,.deck .act,.aud-block .lbl,.aud-block .ls,.aud-intro,.stmt,.section-h,.section-meta,.closer p,.hero h1,footer span,nav.top-nav,.idx{grid-column:1/-1!important}
+    .mi:nth-child(even){padding-left:0;border-left:none}
+    .tl{grid-template-columns:1fr}
+    .tl div{border-right:none;border-bottom:1.5px solid var(--rule)}
+    .host{grid-template-columns:1fr}
+    nav.top-nav{display:none}
+    .hero h1{font-size:56px;letter-spacing:-.04em}
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+
+  <header class="top">
+    <a href="#" class="logo">AI·FOR·WORK</a>
+    <nav class="top-nav">
+      <a href="#s01">узнавание</a>
+      <a href="#s02">адресат</a>
+      <a href="#s03">программа</a>
+      <a href="#s04">формат</a>
+      <a href="#s05">ведущие</a>
+    </nav>
+    <div class="idx">№ <b>I / 2026</b> — первый поток</div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="tag full" style="grid-column:1/5">Практический курс · <span>для не-разработчиков</span></div>
+      <h1>
+        <span class="l">отдайте</span>
+        <span class="l shift"><span class="outline">рутину</span><span class="slash">/</span>агенту.</span>
+        <span class="l">оставь<span class="red">те</span></span>
+        <span class="l shift tight"><em>смысл</em><span class="slash">.</span></span>
+      </h1>
+      <div class="hero-meta">
+        <div class="meta-cell">Длительность <b>6 нед.</b></div>
+        <div class="meta-cell">Модулей <b>4</b></div>
+        <div class="meta-cell">Финальный <b>1 проект</b></div>
+        <div class="meta-cell">Формат <b>живой · записи</b></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="deck">
+    <div class="label">— Описание</div>
+    <p>Курс по ИИ-агентам. Учим использовать <b>Codex</b> и <b>Claude Code</b>, чтобы искать, читать, анализировать и собирать информацию — без программирования.</p>
+    <div class="act">
+      <a href="#apply" class="btn">Заявиться →</a>
+      <a href="#s03" class="btn g">Программа →</a>
+    </div>
+  </div>
+
+  <section id="s01">
+    <div class="section-no">01<sub>§</sub></div>
+    <h2 class="section-h">Узнаёте <em>себя?</em></h2>
+    <div class="section-meta">— вопрос вместо презентации. отметьте совпадения.</div>
+
+    <div class="mirror-list">
+      <div class="mi"><div class="n">001</div><p>Регулярно открываете <u>10 вкладок и 3 таблицы</u>, чтобы собрать «нормальный вывод».</p><div class="ar">→</div></div>
+      <div class="mi"><div class="n">002</div><p>Есть папки и выгрузки, до которых <u>страшно дотрагиваться</u>.</p><div class="ar">→</div></div>
+      <div class="mi"><div class="n">003</div><p>«Быстрый ресёрч» почему-то занимает <u>полдня</u>.</p><div class="ar">→</div></div>
+      <div class="mi"><div class="n">004</div><p>Руками переносите информацию между сервисами.</p><div class="ar">→</div></div>
+      <div class="mi"><div class="n">005</div><p>Хотите не «спросить у нейронки», а <u>дать задачу</u> и получить результат.</p><div class="ar">→</div></div>
+      <div class="mi"><div class="n">006</div><p>Чувствуете, что <u>живёте в табличках</u>, а не работаете.</p><div class="ar">→</div></div>
+    </div>
+  </section>
+
+  <section id="s02">
+    <div class="section-no">02<sub>§</sub></div>
+    <h2 class="section-h">Для <em>кого</em> <span class="out">курс</span></h2>
+    <div class="section-meta">— не привязан к профессии. привязан к характеру работы.</div>
+
+    <p class="aud-intro">Маркетинг, продукт, HR, продажи, ресёрч, операции — везде, где много сбора, сверки, отчётов и повторов, агент уже сегодня забирает половину процесса.</p>
+
+    <div class="aud-block">
+      <div class="lbl">— Роли</div>
+      <div class="ls">
+        <div class="type-cloud">
+          <span>маркетологи</span><span>аналитики</span><span>продакты</span><span>проджекты</span><span>HR</span><span>сейлзы</span><span>operations</span><span>исследователи</span><span>редакторы</span><span>методисты</span><span>продюсеры</span><span>фаундеры</span><span>account mgrs</span><span>customer success</span><span>people ops</span><span>SMM</span><span>PR</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="aud-block">
+      <div class="lbl">— Задачи</div>
+      <div class="ls">
+        <div class="type-cloud tasks">
+          <span>ресёрч</span><span>таблицы</span><span>отчёты</span><span>презентации</span><span>Telegram</span><span>вакансии</span><span>лидген</span><span>анализ рынка</span><span>конкуренты</span><span>поиск клиентов</span><span>выгрузки</span><span>дашборды</span><span>брифы</span><span>сводки</span><span>формы</span><span>инсайты</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="stmt">Мы <b>не забираем</b> интересную часть работы. Наоборот — показываем, как отдать агенту <span class="callout">рутину</span>: собрать, разложить, проверить, оформить, перенести. А вы остаётесь со смыслами и качеством.</p>
+  </section>
+
+  <section id="s03">
+    <div class="section-no">03<sub>§</sub></div>
+    <h2 class="section-h">Программа / <em>четыре</em> практики</h2>
+    <div class="section-meta">— воркшоп · домашка · разбор · ×4</div>
+
+    <div class="mods">
+      <article class="mod">
+        <div class="big-n">01</div>
+        <div class="no">Модуль 01 · файлы + таблицы</div>
+        <h3>Из таблицы —<br>в <em>презентацию</em></h3>
+        <p>Берём локальную выгрузку и превращаем её в рабочий артефакт: HTML-отчёт, слайды, документ в стиле компании.</p>
+        <div class="tg"><b>файлы</b><b>таблицы</b><b>отчёт</b><b>презентация</b></div>
+      </article>
+      <article class="mod">
+        <div class="big-n">02</div>
+        <div class="no">Модуль 02 · research</div>
+        <h3>Ресёрч рынка<br>на <em>HeadHunter</em></h3>
+        <p>Вакансии и компании — источник открытых данных. Формулируем критерии, анализируем по смыслу, переносим на найм, продажи, bizdev.</p>
+        <div class="tg"><b>ресёрч</b><b>вакансии</b><b>рынок</b><b>лиды</b></div>
+      </article>
+      <article class="mod">
+        <div class="big-n">03</div>
+        <div class="no">Модуль 03 · мессенджеры</div>
+        <h3><em>Telegram</em> без ручного копирования</h3>
+        <p>Лента → рабочий источник: мониторинг каналов, сводки, триггеры. Автоматическая доставка в нужное место.</p>
+        <div class="tg"><b>telegram</b><b>сводки</b><b>мониторинг</b><b>дашборды</b></div>
+      </article>
+      <article class="mod">
+        <div class="big-n">04</div>
+        <div class="no">Модуль 04 · browser use</div>
+        <h3>Рутина в <em>браузере</em></h3>
+        <p>Агент как пользователь: формы, кабинеты, LinkedIn, Метрика. Плюс разговор о том, как не получить бан.</p>
+        <div class="tg"><b>browser</b><b>формы</b><b>linkedin</b><b>метрика</b></div>
+      </article>
+    </div>
+
+    <div class="approach">
+      <h4>На фоне —<br>общие подходы</h4>
+      <ul>
+        <li>как эффективно ставить задачи</li>
+        <li>как заставить агента запоминать путь</li>
+        <li>как расширять возможности через skills / mcp</li>
+        <li>как делать интерактивные артефакты</li>
+        <li>как получать обратную связь от агента</li>
+        <li>как агент проверяет сам себя</li>
+      </ul>
+      <div class="note">Суть — не в этих конкретных инструментах, а в подходах, применимых к любым данным и сервисам.</div>
+    </div>
+  </section>
+
+  <section id="s04">
+    <div class="section-no">04<sub>§</sub></div>
+    <h2 class="section-h">Шесть <em>недель</em></h2>
+    <div class="section-meta">— живые занятия, записи остаются, основная практика — дома</div>
+
+    <div class="tl">
+      <div><div class="w">Week 0</div><h4>Знакомство<br>&amp; настройка</h4><p>Установка инструментов, первый простой шаг.</p></div>
+      <div><div class="w">Week 1</div><h4>Файлы<br>и таблицы</h4><p>Первый воркшоп + домашка.</p></div>
+      <div><div class="w">Week 2</div><h4>Ресёрч<br>рынка</h4><p>Открытые данные, отбор по смыслу.</p></div>
+      <div><div class="w">Week 3</div><h4>Telegram</h4><p>Сводки, мониторинг, отправки.</p></div>
+      <div><div class="w">Week 4</div><h4>Рутина<br>в браузере</h4><p>Формы, кабинеты, LinkedIn.</p></div>
+      <div><div class="w">Week 5</div><h4>Финальный<br>проект</h4><p>Свой процесс + презентации.</p></div>
+    </div>
+  </section>
+
+  <section id="s05">
+    <div class="section-no">05<sub>§</sub></div>
+    <h2 class="section-h">Ведут <em>Коля</em> &amp; <em>Саша</em></h2>
+    <div class="section-meta">— тех и формат. чтобы курс не съехал в программирование.</div>
+
+    <div class="hosts-g">
+      <article class="host">
+        <div class="ph"><span>н. шейко</span></div>
+        <div>
+          <h4>Коля<br>Шейко</h4>
+          <div class="role">— тех и агенты</div>
+          <ul>
+            <li>Фаундер агентства ИИ-автоматизации</li>
+            <li>Ко-фаундер конференций entropy.talk</li>
+            <li>Автор канала «AI и грабли»</li>
+          </ul>
+        </div>
+      </article>
+      <article class="host">
+        <div class="ph"><span>с. литская</span></div>
+        <div>
+          <h4>Саша<br>Литская</h4>
+          <div class="role">— формат и комьюнити</div>
+          <ul>
+            <li>Владелица керамической мастерской-коворкинга</li>
+            <li>Основатель арт-пространства в Академгородке</li>
+            <li>Продюсер и операционный директор онлайн-школы керамики</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="apply" class="closer">
+    <div class="section-no">06<sub>§ apply</sub></div>
+    <h2 class="section-h">В <em>первый</em> <span class="out">поток?</span></h2>
+    <p>Если в вашей работе много ручной информационной рутины — часть её уже можно отдать агенту. Мы покажем, как.</p>
+    <div class="center"><a href="#" class="btn">Оставить заявку →</a></div>
+  </section>
+
+  <footer>
+    <span>© 2026 AI For Work</span>
+    <span>№ I / 2026</span>
+    <span>hello@aiforwork.ru</span>
+  </footer>
+
+</div>
+
+</body>
+</html>

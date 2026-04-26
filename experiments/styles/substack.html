@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI For Work — курс по ИИ-агентам для не-разработчиков</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..800;1,8..60,400..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF9F4;
+    --paper-2:#F3EFE6;
+    --ink:#1A1613;
+    --ink-2:#433C36;
+    --muted:#766D65;
+    --rule:#E4DED1;
+    --rule-strong:#C9BFAE;
+    --brand:#B8451A;
+    --brand-soft:#F4D8C6;
+    --accent:#2C4A3E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink)}
+  body{
+    font-family:"Source Serif 4", Georgia, serif;
+    font-optical-sizing:auto;
+    font-size:18px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .sans{font-family:"Inter", sans-serif;}
+  .mono{font-family:"JetBrains Mono", ui-monospace, monospace;}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+  .narrow{max-width:760px;margin:0 auto;padding:0 28px}
+
+  /* Masthead */
+  .mast{
+    border-bottom:1px solid var(--rule);
+    background:var(--paper);
+    position:sticky;top:0;z-index:20;
+    backdrop-filter:saturate(120%) blur(6px);
+    -webkit-backdrop-filter:saturate(120%) blur(6px);
+  }
+  .mast-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:24px;padding:16px 28px;max-width:1120px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand-mark{
+    width:30px;height:30px;border-radius:6px;
+    background:var(--ink);color:var(--paper);
+    display:grid;place-items:center;
+    font-family:"Source Serif 4",serif;font-weight:700;font-size:17px;
+    font-style:italic;
+    letter-spacing:-.02em;
+  }
+  .brand-name{
+    font-family:"Source Serif 4",serif;
+    font-weight:700;font-size:20px;letter-spacing:-.01em;
+    font-variation-settings:"opsz" 32;
+  }
+  .brand-sub{font-family:"Inter",sans-serif;font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+  .nav{display:flex;gap:28px;align-items:center;font-family:"Inter",sans-serif;font-size:14px;color:var(--ink-2)}
+  .nav a{opacity:.8}
+  .nav a:hover{opacity:1}
+  .nav .cta{
+    background:var(--ink);color:var(--paper);
+    padding:9px 16px;border-radius:999px;font-weight:500;
+  }
+  .nav .cta:hover{background:var(--brand)}
+
+  /* Above-the-fold editorial hero */
+  .hero{
+    padding:72px 0 48px;
+    border-bottom:1px solid var(--rule);
+  }
+  .kicker{
+    font-family:"Inter",sans-serif;
+    font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--brand);
+    display:flex;align-items:center;gap:12px;
+    margin-bottom:20px;
+  }
+  .kicker::before, .kicker::after{content:"";flex:0 0 28px;height:1px;background:var(--brand);opacity:.5}
+  .kicker::before{display:none}
+  .h1{
+    font-family:"Source Serif 4",serif;
+    font-weight:600;
+    font-size:clamp(40px, 6.2vw, 76px);
+    line-height:1.04;
+    letter-spacing:-.025em;
+    font-variation-settings:"opsz" 60;
+    max-width:16ch;
+    margin-bottom:28px;
+  }
+  .h1 em{font-style:italic;color:var(--brand);font-weight:500}
+  .lede{
+    font-family:"Source Serif 4",serif;
+    font-size:clamp(18px, 1.5vw, 22px);
+    line-height:1.55;
+    color:var(--ink-2);
+    max-width:60ch;
+    margin-bottom:36px;
+  }
+  .byline{
+    display:flex;align-items:center;gap:14px;
+    padding-top:24px;border-top:1px solid var(--rule);
+    font-family:"Inter",sans-serif;font-size:14px;color:var(--muted);
+  }
+  .byline-avatars{display:flex}
+  .byline-avatars span{
+    width:34px;height:34px;border-radius:50%;
+    border:2px solid var(--paper);
+    background:linear-gradient(135deg,#C9A374,#8A5A3B);
+  }
+  .byline-avatars span:nth-child(2){margin-left:-10px;background:linear-gradient(135deg,#6B8E7F,#2C4A3E)}
+  .byline b{color:var(--ink-2);font-weight:600}
+
+  .hero-cta{
+    display:flex;gap:14px;align-items:center;margin-top:32px;flex-wrap:wrap;
+    font-family:"Inter",sans-serif;
+  }
+  .btn-primary{
+    background:var(--ink);color:var(--paper);
+    padding:14px 22px;border-radius:999px;
+    font-size:15px;font-weight:500;letter-spacing:.01em;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary:hover{background:var(--brand)}
+  .btn-ghost{
+    color:var(--ink-2);font-size:14px;font-weight:500;
+    text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--rule-strong);
+  }
+  .btn-ghost:hover{text-decoration-color:var(--brand);color:var(--ink)}
+
+  /* Section headers in publication style */
+  section{padding:72px 0;border-bottom:1px solid var(--rule)}
+  .sec-label{
+    font-family:"Inter",sans-serif;
+    font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);
+    display:flex;align-items:center;gap:12px;
+    margin-bottom:16px;
+  }
+  .sec-label span{
+    width:28px;height:1px;background:var(--rule-strong);display:inline-block;
+  }
+  .sec-title{
+    font-family:"Source Serif 4",serif;
+    font-weight:500;
+    font-size:clamp(30px, 4vw, 46px);
+    line-height:1.1;letter-spacing:-.015em;
+    font-variation-settings:"opsz" 48;
+    max-width:22ch;
+    margin-bottom:18px;
+  }
+  .sec-title em{font-style:italic;color:var(--brand)}
+  .sec-desc{
+    font-family:"Source Serif 4",serif;
+    font-size:18px;color:var(--ink-2);max-width:62ch;line-height:1.6;
+  }
+
+  /* Mirror — as excerpts from a column */
+  .mirror-list{
+    margin-top:40px;
+    display:grid;grid-template-columns:1fr;
+    border-top:1px solid var(--rule);
+  }
+  .mirror-item{
+    padding:24px 0;border-bottom:1px solid var(--rule);
+    display:grid;grid-template-columns:64px 1fr;gap:24px;align-items:baseline;
+  }
+  .mirror-num{
+    font-family:"Source Serif 4",serif;font-style:italic;
+    font-size:28px;color:var(--brand);font-weight:500;
+    font-variation-settings:"opsz" 32;
+  }
+  .mirror-text{font-size:19px;line-height:1.55;color:var(--ink-2)}
+
+  /* Audience — quiet chips, two labels */
+  .aud-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:48px;
+  }
+  .chip-label{
+    font-family:"Inter",sans-serif;font-size:12px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    font-family:"Inter",sans-serif;font-size:13px;
+    padding:7px 13px;border-radius:999px;
+    background:var(--paper-2);color:var(--ink-2);
+    border:1px solid var(--rule);
+  }
+  .chip.alt{background:var(--brand-soft);border-color:#E9BFA1;color:#763017}
+  .aud-quote{
+    margin-top:56px;padding-left:28px;border-left:3px solid var(--brand);
+    font-family:"Source Serif 4",serif;font-style:italic;
+    font-size:22px;line-height:1.5;color:var(--ink);max-width:64ch;
+    font-variation-settings:"opsz" 32;
+  }
+  .aud-quote + p{
+    margin-top:24px;font-family:"Source Serif 4",serif;
+    font-size:18px;color:var(--ink-2);max-width:64ch;line-height:1.6;
+  }
+
+  /* Program — long-read cards */
+  .modules{margin-top:40px;display:grid;grid-template-columns:1fr;gap:0}
+  .module{
+    padding:40px 0;border-top:1px solid var(--rule);
+    display:grid;grid-template-columns:180px 1fr;gap:48px;align-items:start;
+  }
+  .module:last-child{border-bottom:1px solid var(--rule)}
+  .mod-meta{font-family:"Inter",sans-serif}
+  .mod-index{
+    font-family:"Source Serif 4",serif;font-style:italic;font-weight:500;
+    font-size:46px;color:var(--brand);line-height:1;margin-bottom:8px;
+    font-variation-settings:"opsz" 60;
+  }
+  .mod-kicker{
+    font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);
+  }
+  .mod-content h3{
+    font-family:"Source Serif 4",serif;font-weight:600;
+    font-size:28px;line-height:1.15;letter-spacing:-.01em;
+    font-variation-settings:"opsz" 40;
+    margin-bottom:12px;max-width:22ch;
+  }
+  .mod-do{font-size:18px;color:var(--ink-2);line-height:1.6;margin-bottom:20px;max-width:60ch}
+  .mod-result{
+    padding:18px 22px;background:var(--paper-2);border-radius:6px;
+    border-left:3px solid var(--accent);
+    font-size:16px;line-height:1.55;color:var(--ink-2);max-width:60ch;
+  }
+  .mod-result b{
+    font-family:"Inter",sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+    display:block;margin-bottom:6px;
+  }
+  .mod-tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px}
+  .mod-tags .chip{font-size:12px;padding:5px 10px}
+
+  .aside-note{
+    margin-top:56px;padding:32px;background:var(--paper-2);
+    border:1px solid var(--rule);border-radius:6px;
+    font-size:17px;color:var(--ink-2);line-height:1.6;max-width:68ch;
+  }
+  .aside-note h4{
+    font-family:"Inter",sans-serif;font-size:12px;font-weight:700;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--brand);
+    margin-bottom:14px;
+  }
+  .aside-note ul{list-style:none;padding:0;margin-top:14px}
+  .aside-note li{
+    padding:8px 0 8px 22px;position:relative;font-size:16px;color:var(--ink-2);
+  }
+  .aside-note li::before{
+    content:"—";position:absolute;left:0;color:var(--brand);font-weight:600;
+  }
+
+  /* Final project — pull quote style */
+  .final-project{
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:40px;align-items:start;
+  }
+  .fp-quote{
+    font-family:"Source Serif 4",serif;font-style:italic;
+    font-size:26px;line-height:1.4;letter-spacing:-.01em;
+    color:var(--ink);font-variation-settings:"opsz" 48;
+  }
+  .fp-quote::before{
+    content:"“";font-size:80px;line-height:.8;color:var(--brand);
+    font-family:"Source Serif 4",serif;
+    display:block;margin-bottom:-18px;
+  }
+  .fp-body p{font-size:17px;line-height:1.7;color:var(--ink-2);margin-bottom:16px}
+
+  /* Format / timeline as archive list */
+  .timeline{margin-top:40px;border-top:1px solid var(--rule)}
+  .tl-row{
+    display:grid;grid-template-columns:120px 1fr auto;gap:32px;
+    padding:18px 0;border-bottom:1px solid var(--rule);align-items:baseline;
+  }
+  .tl-week{
+    font-family:"Inter",sans-serif;font-size:12px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  }
+  .tl-title{
+    font-family:"Source Serif 4",serif;font-size:20px;color:var(--ink);font-weight:500;
+    font-variation-settings:"opsz" 32;
+  }
+  .tl-tag{
+    font-family:"Inter",sans-serif;font-size:12px;color:var(--brand);
+    padding:4px 10px;border:1px solid var(--brand-soft);border-radius:999px;
+    background:#FBEEE4;
+  }
+
+  /* Community — two-column editorial */
+  .comm{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;margin-top:40px;align-items:start}
+  .comm ul{list-style:none}
+  .comm li{
+    padding:14px 0;border-bottom:1px solid var(--rule);
+    font-size:17px;color:var(--ink-2);
+    display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:baseline;
+  }
+  .comm li::before{
+    content:"§";color:var(--brand);font-weight:600;
+    font-family:"Source Serif 4",serif;font-size:18px;font-style:italic;
+  }
+
+  /* Pricing — subscription style cards */
+  .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#fff}
+  .tier{
+    padding:36px 32px;background:var(--paper);
+    border-right:1px solid var(--rule);
+    display:flex;flex-direction:column;
+  }
+  .tier:last-child{border-right:none}
+  .tier.feat{
+    background:#fff;position:relative;
+  }
+  .tier.feat::before{
+    content:"РЕКОМЕНДУЕМ";
+    position:absolute;top:0;left:0;right:0;
+    background:var(--brand);color:var(--paper);
+    font-family:"Inter",sans-serif;font-size:10px;font-weight:700;
+    letter-spacing:.2em;text-align:center;padding:7px 0;
+  }
+  .tier.feat{padding-top:56px}
+  .tier-name{
+    font-family:"Source Serif 4",serif;font-weight:600;
+    font-size:24px;letter-spacing:-.01em;margin-bottom:6px;
+    font-variation-settings:"opsz" 32;
+  }
+  .tier-name em{font-style:italic;color:var(--brand);font-weight:500}
+  .tier-desc{font-size:15px;color:var(--muted);line-height:1.5;margin-bottom:22px;min-height:3em}
+  .tier-list{list-style:none;margin-bottom:22px;flex:1}
+  .tier-list li{
+    padding:9px 0 9px 22px;position:relative;font-size:15px;color:var(--ink-2);line-height:1.45;
+    border-bottom:1px dashed var(--rule);
+  }
+  .tier-list li:last-child{border-bottom:none}
+  .tier-list li::before{
+    content:"✓";position:absolute;left:0;color:var(--accent);font-weight:600;
+    font-family:"Inter",sans-serif;font-size:13px;
+  }
+  .tier-list li.no{color:var(--muted)}
+  .tier-list li.no::before{content:"—";color:var(--muted);font-weight:500}
+  .tier-cta{
+    font-family:"Inter",sans-serif;font-size:14px;font-weight:500;
+    padding:12px 18px;border-radius:999px;text-align:center;
+    background:var(--paper-2);color:var(--ink);
+    border:1px solid var(--rule-strong);
+  }
+  .tier.feat .tier-cta{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .tier-cta:hover{background:var(--brand);color:var(--paper);border-color:var(--brand)}
+  .price-note{
+    margin-top:20px;font-size:13px;color:var(--muted);font-style:italic;text-align:center;
+  }
+
+  /* Hosts — Substack author cards */
+  .hosts{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:48px}
+  .host{
+    padding:32px;background:var(--paper);
+    border:1px solid var(--rule);border-radius:8px;
+    display:grid;grid-template-columns:96px 1fr;gap:24px;align-items:start;
+  }
+  .host-avatar{
+    width:96px;height:96px;border-radius:50%;
+    background:linear-gradient(135deg,#C9A374,#8A5A3B);
+    position:relative;overflow:hidden;
+  }
+  .host-avatar.b{background:linear-gradient(135deg,#8CA89B,#2C4A3E)}
+  .host-avatar::after{
+    content:"";position:absolute;inset:0;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .2 0'/%3E%3C/filter%3E%3Crect width='96' height='96' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;opacity:.6;
+  }
+  .host-name{
+    font-family:"Source Serif 4",serif;font-weight:600;
+    font-size:22px;letter-spacing:-.01em;margin-bottom:4px;
+    font-variation-settings:"opsz" 32;
+  }
+  .host-role{
+    font-family:"Inter",sans-serif;font-size:12px;color:var(--brand);
+    letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:14px;
+  }
+  .host-bio{list-style:none}
+  .host-bio li{
+    font-size:15px;color:var(--ink-2);line-height:1.5;padding:4px 0;
+  }
+  .host-bio li::before{content:"·  ";color:var(--muted)}
+  .host-link{
+    display:inline-block;margin-top:12px;
+    font-family:"Inter",sans-serif;font-size:13px;color:var(--brand);font-weight:500;
+    text-decoration:underline;text-underline-offset:3px;
+  }
+
+  /* FAQ */
+  .faq{margin-top:40px;border-top:1px solid var(--rule)}
+  details{border-bottom:1px solid var(--rule);padding:20px 0}
+  summary{
+    list-style:none;cursor:pointer;
+    font-family:"Source Serif 4",serif;font-size:20px;font-weight:500;
+    color:var(--ink);
+    display:flex;justify-content:space-between;gap:20px;align-items:baseline;
+    font-variation-settings:"opsz" 32;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{
+    content:"+";font-family:"Inter",sans-serif;color:var(--brand);font-weight:400;font-size:22px;
+    transition:transform .2s;
+  }
+  details[open] summary::after{content:"–"}
+  details p{
+    margin-top:14px;font-size:16px;line-height:1.65;color:var(--ink-2);max-width:64ch;
+  }
+
+  /* Final CTA — subscription banner */
+  .final{
+    background:var(--ink);color:var(--paper);padding:88px 0;
+    border-bottom:none;
+    position:relative;overflow:hidden;
+  }
+  .final::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(600px 400px at 80% 20%, rgba(184,69,26,.18), transparent),
+      radial-gradient(500px 300px at 10% 90%, rgba(44,74,62,.25), transparent);
+  }
+  .final .wrap{position:relative}
+  .final .kicker{color:var(--brand-soft)}
+  .final .kicker::after{background:var(--brand-soft);opacity:.4}
+  .final h2{
+    font-family:"Source Serif 4",serif;font-weight:500;
+    font-size:clamp(36px, 5vw, 58px);
+    line-height:1.08;letter-spacing:-.02em;
+    max-width:18ch;margin-bottom:20px;
+    font-variation-settings:"opsz" 60;
+  }
+  .final h2 em{font-style:italic;color:#E9BFA1}
+  .final p{
+    font-size:19px;line-height:1.55;color:#C9BFAE;max-width:58ch;margin-bottom:32px;
+  }
+  .final .btn-primary{
+    background:var(--paper);color:var(--ink);
+  }
+  .final .btn-primary:hover{background:var(--brand-soft)}
+
+  /* Footer */
+  footer{
+    padding:36px 0;font-family:"Inter",sans-serif;font-size:13px;color:var(--muted);
+    background:var(--paper);
+  }
+  footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+
+  @media (max-width: 860px){
+    .aud-grid, .final-project, .comm, .hosts{grid-template-columns:1fr;gap:32px}
+    .module{grid-template-columns:1fr;gap:12px}
+    .mod-index{font-size:36px}
+    .pricing{grid-template-columns:1fr}
+    .tier{border-right:none;border-bottom:1px solid var(--rule)}
+    .tl-row{grid-template-columns:90px 1fr;gap:16px}
+    .tl-tag{grid-column:2;justify-self:start}
+    .nav{display:none}
+    .host{grid-template-columns:72px 1fr;padding:24px}
+    .host-avatar{width:72px;height:72px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Masthead -->
+<header class="mast">
+  <div class="mast-inner">
+    <div class="brand">
+      <div class="brand-mark">A</div>
+      <div>
+        <div class="brand-name">AI For Work</div>
+        <div class="brand-sub">A weekly practice · Est. 2026</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#mirror">Про кого</a>
+      <a href="#program">Программа</a>
+      <a href="#format">Формат</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#faq">FAQ</a>
+      <a href="#cta" class="cta">Записаться</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" style="border-bottom:1px solid var(--rule)">
+  <div class="wrap">
+    <div class="kicker">Выпуск №&nbsp;001 · Курс · 6 недель</div>
+    <h1 class="h1">Практический курс <em>по ИИ-агентам</em> для не-разработчиков</h1>
+    <p class="lede">Для людей, у которых много ручной работы с информацией: таблицами, файлами, сайтами, Telegram, вакансиями, отчётами, презентациями, исследованиями и рабочими процессами. Учим использовать кодинговых агентов — Codex и Claude Code — чтобы искать, читать, анализировать и преобразовывать информацию. Без навыков разработки.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="#cta">Узнать, подойдёт ли мне курс →</a>
+      <a class="btn-ghost" href="#program">Посмотреть программу</a>
+    </div>
+    <div class="byline">
+      <div class="byline-avatars"><span></span><span></span></div>
+      <div>Курс ведут <b>Коля Шейко</b> и <b>Саша Литская</b> · Следующий поток — осень 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- Mirror -->
+<section id="mirror">
+  <div class="wrap">
+    <div class="sec-label"><span></span> Узнаёте себя?</div>
+    <h2 class="sec-title">Пять признаков <em>ручной рутины</em>, которую уже можно отдать агенту</h2>
+    <p class="sec-desc">Если хотя бы одно из этого звучит про вас — скорее всего, значительную часть работы можно перестроить. Курс про то, как именно.</p>
+    <div class="mirror-list">
+      <div class="mirror-item"><div class="mirror-num">i.</div><div class="mirror-text">Регулярно открываете 10 вкладок, 3 таблицы и потом собираете из этого «нормальный вывод».</div></div>
+      <div class="mirror-item"><div class="mirror-num">ii.</div><div class="mirror-text">У вас есть папки, файлы, выгрузки и документы, до которых страшно дотрагиваться.</div></div>
+      <div class="mirror-item"><div class="mirror-num">iii.</div><div class="mirror-text">Постоянно делаете «быстрый ресёрч», который почему-то занимает полдня.</div></div>
+      <div class="mirror-item"><div class="mirror-num">iv.</div><div class="mirror-text">Руками переносите информацию между сервисами.</div></div>
+      <div class="mirror-item"><div class="mirror-num">v.</div><div class="mirror-text">Хотите не просто «спросить у нейронки», а дать ей задачу и получить готовый рабочий результат.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Audience -->
+<section>
+  <div class="wrap">
+    <div class="sec-label"><span></span> Для кого курс</div>
+    <h2 class="sec-title">Курс <em>не привязан</em> к одной профессии</h2>
+    <p class="sec-desc">Он для всех, у кого работа завязана на информацию, ручной сбор данных, отчёты, исследования, таблицы, коммуникации и повторяющиеся процессы.</p>
+
+    <div class="aud-grid">
+      <div>
+        <div class="chip-label">Роли</div>
+        <div class="chips">
+          <span class="chip">маркетологи</span>
+          <span class="chip">аналитики</span>
+          <span class="chip">продакты</span>
+          <span class="chip">проджекты</span>
+          <span class="chip">HR и рекрутеры</span>
+          <span class="chip">сейлзы</span>
+          <span class="chip">операционные менеджеры</span>
+          <span class="chip">исследователи</span>
+          <span class="chip">редакторы</span>
+          <span class="chip">методисты</span>
+          <span class="chip">продюсеры курсов</span>
+          <span class="chip">фаундеры</span>
+          <span class="chip">аккаунт-менеджеры</span>
+          <span class="chip">customer success</span>
+          <span class="chip">people ops</span>
+          <span class="chip">SMM</span>
+          <span class="chip">PR</span>
+          <span class="chip">контент-команды</span>
+          <span class="chip">комьюнити-менеджеры</span>
+        </div>
+      </div>
+      <div>
+        <div class="chip-label">Задачи</div>
+        <div class="chips">
+          <span class="chip alt">ресёрч</span>
+          <span class="chip alt">таблицы</span>
+          <span class="chip alt">отчёты</span>
+          <span class="chip alt">презентации</span>
+          <span class="chip alt">Telegram</span>
+          <span class="chip alt">вакансии</span>
+          <span class="chip alt">лидогенерация</span>
+          <span class="chip alt">анализ рынка</span>
+          <span class="chip alt">анализ конкурентов</span>
+          <span class="chip alt">поиск клиентов</span>
+          <span class="chip alt">обработка выгрузок</span>
+          <span class="chip alt">дашборды</span>
+          <span class="chip alt">брифы</span>
+          <span class="chip alt">сводки</span>
+          <span class="chip alt">контент-планы</span>
+          <span class="chip alt">заполнение форм</span>
+          <span class="chip alt">поиск инсайтов</span>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="aud-quote">У нас нет цели забрать интересную часть работы. Наоборот, мы хотим показать, как отдать агенту рутину, которая обычно отнимает силы: собрать, разложить, проверить, сверить, оформить, перенести.</blockquote>
+    <p>Пока агент собирает данные, чистит таблицу, ищет ссылки или собирает черновик отчёта, вы занимаетесь смыслами, доменными решениями, выбором подхода и качеством результата.</p>
+  </div>
+</section>
+
+<!-- Program -->
+<section id="program">
+  <div class="wrap">
+    <div class="sec-label"><span></span> Программа · 4 модуля</div>
+    <h2 class="sec-title">Знакомство с ИИ-агентами и <em>четыре практических</em> модуля</h2>
+    <p class="sec-desc">Начинаем с установки и настройки среды. Дальше — четыре блока, где на конкретных рабочих задачах разбираем подходы, применимые к любым данным, сервисам и процессам.</p>
+
+    <div class="modules">
+      <article class="module">
+        <div class="mod-meta">
+          <div class="mod-index">I.</div>
+          <div class="mod-kicker">Модуль один</div>
+        </div>
+        <div class="mod-content">
+          <h3>Как агент работает с вашими файлами: из страшной таблицы в презентацию</h3>
+          <p class="mod-do">Берём локальную таблицу или выгрузку и превращаем её в понятный рабочий артефакт: HTML-отчёт, презентацию или структурированный документ.</p>
+          <div class="mod-result"><b>Результат</b>Умеем давать агенту файлы, таблицы и примеры оформления, чтобы вместо пересказа получать готовый материал: визуализацию, отчёт или презентацию в стиле вашей компании.</div>
+          <div class="mod-tags">
+            <span class="chip">файлы</span><span class="chip">таблицы</span><span class="chip">отчёт</span><span class="chip">презентация</span><span class="chip">преобразование данных</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="module">
+        <div class="mod-meta">
+          <div class="mod-index">II.</div>
+          <div class="mod-kicker">Модуль два</div>
+        </div>
+        <div class="mod-content">
+          <h3>Ресёрч рынка на HeadHunter</h3>
+          <p class="mod-do">Используем HeadHunter как понятный источник открытых данных: вакансии, компании, требования, роли, спрос на специалистов и паттерны рынка.</p>
+          <div class="mod-result"><b>Результат</b>Умеем собирать информацию из открытых источников, формулировать критерии отбора, анализировать по смыслу вместо поверхностных фильтров. Понимаем, как использовать подход для разных задач: поиска работы, анализа рынка, найма, продаж и bizdev.</div>
+          <div class="mod-tags">
+            <span class="chip">ресёрч</span><span class="chip">вакансии</span><span class="chip">рынок</span><span class="chip">фильтрация</span><span class="chip">ссылки</span><span class="chip">лиды</span><span class="chip">поиск клиентов</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="module">
+        <div class="mod-meta">
+          <div class="mod-index">III.</div>
+          <div class="mod-kicker">Модуль три</div>
+        </div>
+        <div class="mod-content">
+          <h3>Telegram без ручного копирования</h3>
+          <p class="mod-do">Собираем инфу из Telegram-каналов и чатов — анализируем сообщения, вытаскиваем темы, инсайты, триггеры для продажи. Отправляем результаты туда, где они нужны: себе, команде, руководителю или в рабочий чат.</p>
+          <div class="mod-result"><b>Результат</b>Превращаем Telegram из бесконечной ленты в рабочий источник данных: мониторим каналы, собираем сводки, анализируем обсуждения, отправляем уведомления и дашборды.</div>
+          <div class="mod-tags">
+            <span class="chip">Telegram</span><span class="chip">каналы</span><span class="chip">чаты</span><span class="chip">сводки</span><span class="chip">мониторинг</span><span class="chip">боты</span><span class="chip">уведомления</span><span class="chip">дашборды</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="module">
+        <div class="mod-meta">
+          <div class="mod-index">IV.</div>
+          <div class="mod-kicker">Модуль четыре</div>
+        </div>
+        <div class="mod-content">
+          <h3>Рутина в браузере: формы, кабинеты, LinkedIn, Яндекс Метрика</h3>
+          <p class="mod-do">Разбираем задачи, где агенту нужно действовать как пользователю: открыть сайт, пройти интерфейс, заполнить форму, добавить людей в LinkedIn, настроить счётчик в Яндекс Метрике.</p>
+          <div class="mod-result"><b>Результат</b>Browser use подключён к агенту и настроен, а вы знаете, где его применять, как это делать и как сделать так, чтобы вас не забанили.</div>
+          <div class="mod-tags">
+            <span class="chip">browser use</span><span class="chip">формы</span><span class="chip">личные кабинеты</span><span class="chip">LinkedIn</span><span class="chip">Яндекс Метрика</span><span class="chip">аккаунты</span><span class="chip">веб-интерфейсы</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="aside-note">
+      <h4>На фоне — общие подходы к работе с агентами</h4>
+      Суть модулей не только в конкретных инструментах, но и в подходах, применимых к любым данным и процессам. Параллельно мы разбираем:
+      <ul>
+        <li>как эффективно ставить задачи</li>
+        <li>как сделать так, чтобы агент запоминал правильный путь, а не начинал каждый раз с нуля</li>
+        <li>как расширять его возможности за счёт skills / mcp</li>
+        <li>как создавать интерактивные артефакты, которыми можно делиться</li>
+        <li>как получать от самого агента обратную связь по взаимодействию с ним</li>
+        <li>как сделать так, чтобы агент мог сам себя проверить</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Final project -->
+<section>
+  <div class="wrap">
+    <div class="sec-label"><span></span> Финальный проект</div>
+    <h2 class="sec-title">Не демо из учебника — <em>ваш первый</em> рабочий кейс</h2>
+    <div class="final-project">
+      <div class="fp-quote">Частый кейс на курсах — занятия пройдены, примеры рассмотрены, а как применить это к своей работе не понятно. Поэтому в конце мы проводим вас через первый самостоятельный проект.</div>
+      <div class="fp-body">
+        <p>Вы выберете один рабочий процесс из своей реальной жизни: отчёт, ресёрч, таблицу, мониторинг, поиск клиентов, работу с файлами или другой повторяющийся процесс.</p>
+        <p>За неделю попробуете перестроить его с помощью ИИ-агента, а на финальной встрече покажете, что получилось.</p>
+        <p><b>Результат.</b> У вас останется не набор учебных демо, а первый собранный кейс под вашу нишу и ваши задачи, который вы уже сможете использовать в работе.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Format -->
+<section id="format">
+  <div class="wrap">
+    <div class="sec-label"><span></span> Формат и длительность</div>
+    <h2 class="sec-title">Шесть недель, <em>живые встречи</em>, спокойный темп</h2>
+    <p class="sec-desc">Неделя знакомства и настройки, четыре недели практических воркшопов с домашками и неделя на финальный проект. Занятия проходят вживую, записи остаются.</p>
+
+    <div class="timeline">
+      <div class="tl-row"><div class="tl-week">Неделя 0</div><div class="tl-title">Знакомство, настройка инструментов, первый простой шаг</div><div class="tl-tag">Онбординг</div></div>
+      <div class="tl-row"><div class="tl-week">Неделя 1</div><div class="tl-title">Воркшоп I — файлы, таблицы, отчёты, презентации</div><div class="tl-tag">Практика</div></div>
+      <div class="tl-row"><div class="tl-week">Неделя 2</div><div class="tl-title">Воркшоп II — ресёрч рынка на HeadHunter</div><div class="tl-tag">Практика</div></div>
+      <div class="tl-row"><div class="tl-week">Неделя 3</div><div class="tl-title">Воркшоп III — Telegram без ручного копирования</div><div class="tl-tag">Практика</div></div>
+      <div class="tl-row"><div class="tl-week">Неделя 4</div><div class="tl-title">Воркшоп IV — браузерная рутина и browser use</div><div class="tl-tag">Практика</div></div>
+      <div class="tl-row"><div class="tl-week">Неделя 5</div><div class="tl-title">Финальный проект и итоговые презентации участников</div><div class="tl-tag">Проект</div></div>
+    </div>
+
+    <div class="aside-note">
+      <h4>Как устроена практика</h4>
+      Основная практика — дома, чтобы вы могли спокойно пройти задачу на своём компьютере в своём темпе. После каждого воркшопа — домашка, а в начале следующего занятия — разбор частых ошибок и удачных решений.
+    </div>
+  </div>
+</section>
+
+<!-- Community -->
+<section>
+  <div class="wrap">
+    <div class="sec-label"><span></span> Комьюнити</div>
+    <h2 class="sec-title">Все говорят про комьюнити, <em>а мы</em> — делаем</h2>
+    <div class="comm">
+      <div>
+        <p class="sec-desc">Помните, как в универе? Ценность обучения складывалась и из образования, и из социальных связей. Мы не хотим, чтобы вы проходили курс в одиночку. Будем делать так, чтобы незнакомые друг другу люди обсуждали подходы, делились находками, сверялись друг с другом и видели, как похожие задачи решают люди с разным бэкграундом.</p>
+      </div>
+      <ul>
+        <li>проще держать темп</li>
+        <li>видно, как думают другие</li>
+        <li>появляются рабочие знакомства</li>
+        <li>можно находить идеи и людей для своих задач</li>
+        <li>после курса остаются единомышленники, с которыми можно дальше развиваться в теме AI-агентов</li>
+        <li>это весело</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-label"><span></span> Тарифы</div>
+    <h2 class="sec-title">Три формата <em>участия</em></h2>
+    <p class="sec-desc">Цены на лендинге не указываем — напишите нам, и мы расскажем об условиях текущего потока.</p>
+
+    <div class="pricing">
+      <div class="tier">
+        <div class="tier-name">Базовый</div>
+        <div class="tier-desc">Для тех, кто хочет разобраться в подходе и попробовать самостоятельно.</div>
+        <ul class="tier-list">
+          <li>живые занятия</li>
+          <li>записи</li>
+          <li>материалы и задания</li>
+          <li>общий чат</li>
+          <li>участие в групповой динамике</li>
+          <li>финальная встреча</li>
+          <li class="no">проверка домашних заданий</li>
+          <li class="no">персональная обратная связь</li>
+          <li class="no">личные консультации</li>
+        </ul>
+        <a href="#cta" class="tier-cta">Узнать условия</a>
+      </div>
+
+      <div class="tier feat">
+        <div class="tier-name">С&nbsp;проверкой <em>домашек</em></div>
+        <div class="tier-desc">Для тех, кто хочет пройти курс руками и получить обратную связь.</div>
+        <ul class="tier-list">
+          <li>всё из базового тарифа</li>
+          <li>проверка домашних заданий</li>
+          <li>фидбек и по результату, и по процессу работы с агентом</li>
+          <li>рекомендации, как можно было решить задачу проще, быстрее или аккуратнее</li>
+          <li>возможность задавать вопросы по домашкам</li>
+        </ul>
+        <a href="#cta" class="tier-cta">Узнать условия</a>
+      </div>
+
+      <div class="tier">
+        <div class="tier-name">VIP</div>
+        <div class="tier-desc">Для тех, кто хочет больше личного внимания.</div>
+        <ul class="tier-list">
+          <li>всё из тарифа с проверкой</li>
+          <li>2 личные консультации</li>
+          <li>помощь с выбором подхода под ваши рабочие задачи</li>
+          <li>обсуждение, как применить инструменты курса в вашей реальности</li>
+        </ul>
+        <a href="#cta" class="tier-cta">Узнать условия</a>
+      </div>
+    </div>
+    <div class="price-note">Консультации помогают разобрать задачу и выбрать направление, но не являются разработкой сложной автоматизации под ключ.</div>
+  </div>
+</section>
+
+<!-- Hosts -->
+<section>
+  <div class="wrap">
+    <div class="sec-label"><span></span> Кто ведёт</div>
+    <h2 class="sec-title">Курс ведут <em>Коля и Саша</em></h2>
+    <p class="sec-desc">Коля отвечает за техническую часть и агентные подходы. Саша — за образовательный формат, структуру и комьюнити, чтобы курс не превратился в набор сложных программистских штук.</p>
+
+    <div class="hosts">
+      <div class="host">
+        <div class="host-avatar"></div>
+        <div>
+          <div class="host-name">Коля Шейко</div>
+          <div class="host-role">Техника · агенты</div>
+          <ul class="host-bio">
+            <li>Фаундер агентства ИИ-автоматизации</li>
+            <li>Ко-фаундер ИИ-конференций entropy.talk</li>
+            <li>Автор профильного тг-канала AI и грабли</li>
+          </ul>
+          <a class="host-link" href="https://t.me/ai_grably">Читать канал →</a>
+        </div>
+      </div>
+      <div class="host">
+        <div class="host-avatar b"></div>
+        <div>
+          <div class="host-name">Саша Литская</div>
+          <div class="host-role">Формат · комьюнити</div>
+          <ul class="host-bio">
+            <li>Владелица керамической мастерской и коворкинга</li>
+            <li>Основатель арт-пространства и оффлайн-сообщества в Академгородке</li>
+            <li>Продюсер и операционный директор в онлайн-школе керамики</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="narrow">
+    <div class="sec-label"><span></span> Частые вопросы</div>
+    <h2 class="sec-title">FAQ</h2>
+
+    <div class="faq">
+      <details>
+        <summary>Нужно ли уметь программировать?</summary>
+        <p>Нет. Курс как раз для не-разработчиков. Мы будем работать с агентами с фокусом на рабочих задачах: данные, файлы, сайты, отчёты, Telegram, браузер.</p>
+      </details>
+      <details>
+        <summary>Почему вы говорите про Codex / Claude Code? Это же инструменты для программистов?</summary>
+        <p>Изначально да, но они оказались применимы и для обычных рабочих задач. Агенты могут работать с файлами, запускать действия на компьютере, помогать с таблицами, отчётами, сайтами, браузером и рабочими процессами.</p>
+      </details>
+      <details>
+        <summary>А если у меня Claude Code, а не Codex?</summary>
+        <p>Можно. Мы показываем общие подходы, а не фишки одного сервиса. Codex используем как основной пример, но логика постановки задач, проверки результата и работы с агентом применима и к Claude Code.</p>
+      </details>
+      <details>
+        <summary>Я слышал, что Claude Code круче. Почему тогда Codex?</summary>
+        <p>Мы не делаем курс про религию одного сервиса. Codex удобен как базовый пример: доступен в обычной подписке ChatGPT, больше лимиты, чем у Claude Code, есть встроенная транскрибация на русском.</p>
+      </details>
+      <details>
+        <summary>А если Codex / Claude Code поменяют условия подписки?</summary>
+        <p>Такое возможно, инструменты быстро меняются. Поэтому курс строится не вокруг кнопок в одном интерфейсе, а вокруг навыка: как ставить задачи агенту, давать контекст, проверять результат и переносить подход между инструментами.</p>
+      </details>
+      <details>
+        <summary>Нужна ли платная подписка?</summary>
+        <p>Да, нужна подписка ChatGPT Plus. Её, кстати, можно оплачивать через отдельные сервисы рублёвыми картами. Про это мы тоже расскажем в начале курса.</p>
+      </details>
+      <details>
+        <summary>Будут ли записи?</summary>
+        <p>Конечно, записи занятий будут доступны участникам.</p>
+      </details>
+      <details>
+        <summary>Сколько времени займут домашки?</summary>
+        <p>Мы проектируем задания как короткие практические задачи. Ориентир — 30–40 минут на базовое прохождение, но всегда можно потратить вечер, докручивая до идеала.</p>
+      </details>
+      <details>
+        <summary>Ой а можно без домашек?</summary>
+        <p>Да, для этого есть базовый тариф. Вы сможете смотреть занятия, быть в чате и пробовать самостоятельно, но без проверки и персонального фидбека.</p>
+      </details>
+      <details>
+        <summary>Как проходит проверка домашек?</summary>
+        <p>Мы смотрим не только итоговый результат, но и процесс: как ставили задачу агенту, где потеряли контекст, где можно было сделать проще, быстрее, точнее.</p>
+      </details>
+      <details>
+        <summary>Можно ли прийти со своим кейсом?</summary>
+        <p>В финальном проекте вы будете применять навыки курса к своему рабочему процессу. В VIP-тарифе можно отдельно обсудить свою задачу на консультациях.</p>
+      </details>
+      <details>
+        <summary>Можно оплатить иностранной картой?</summary>
+        <p>Стандартный способ оплаты — через РФ. Если вам не подходит — напишите нам, подберём вариант вручную: перевод, крипта или что-то ещё.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section id="cta" class="final">
+  <div class="wrap">
+    <div class="kicker">Первый поток · осень 2026</div>
+    <h2>Хочу в <em>первый поток</em></h2>
+    <p>Если вы чувствуете, что в вашей работе много ручной информационной рутины, скорее всего, часть её уже можно отдавать ИИ-агенту. Мы покажем, как это делать на понятных рабочих задачах — без программирования и без магии.</p>
+    <a class="btn-primary" href="#">Оставить заявку →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 AI For Work · Курс по ИИ-агентам для не-разработчиков</div>
+    <div>hello@aiforwork.ru · <a href="https://t.me/ai_grably" style="text-decoration:underline">t.me/ai_grably</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI For Work — Премиум-курс</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0C1220;
+    --bg-2:#121A2E;
+    --bg-card:#182138;
+    --bg-hi:#1E2944;
+    --ink:#F3EEDF;
+    --ink-2:#D6CFB8;
+    --muted:#8F8A79;
+    --mute-2:#625E52;
+    --rule:#23304D;
+    --rule-soft:#2E3D5E;
+    --gold:#C9A461;
+    --gold-2:#E2C488;
+    --gold-deep:#9A7A3F;
+    --cream:#EDE4CC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  body{font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.65;letter-spacing:-.003em;
+    background:
+      radial-gradient(900px 520px at 50% -10%, rgba(201,164,97,.12) 0%, transparent 60%),
+      radial-gradient(600px 400px at 100% 30%, rgba(201,164,97,.06) 0%, transparent 60%),
+      var(--bg);
+    background-attachment:fixed;
+  }
+  a{color:inherit}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+
+  /* —— nav —— */
+  .nav-outer{position:sticky;top:0;z-index:20;background:rgba(12,18,32,.7);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);border-bottom:1px solid var(--rule)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:"Fraunces";font-weight:600;font-size:18px;letter-spacing:-.01em}
+  .brand .mark{width:30px;height:30px;border-radius:50%;background:conic-gradient(from 180deg, var(--gold-2), var(--gold), var(--gold-deep), var(--gold));position:relative;box-shadow:0 0 0 1px rgba(201,164,97,.3) inset, 0 6px 20px rgba(201,164,97,.25)}
+  .brand .mark::after{content:"";position:absolute;inset:5px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 0 1px rgba(201,164,97,.4)}
+  .nav ul{list-style:none;display:flex;gap:30px;font-size:14px;color:var(--muted);font-weight:500}
+  .nav ul a{text-decoration:none;transition:color .2s}
+  .nav ul a:hover{color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:"Inter";font-weight:500;font-size:14px;letter-spacing:.005em;padding:10px 18px;border-radius:4px;text-decoration:none;transition:all .2s;border:1px solid transparent}
+  .btn.gold{background:linear-gradient(180deg, var(--gold-2) 0%, var(--gold) 100%);color:#1A1408;box-shadow:0 1px 0 rgba(255,255,255,.3) inset, 0 8px 20px rgba(201,164,97,.2)}
+  .btn.gold:hover{translate:0 -1px;box-shadow:0 1px 0 rgba(255,255,255,.3) inset, 0 12px 26px rgba(201,164,97,.3)}
+  .btn.ghost{color:var(--ink);border-color:var(--rule-soft)}
+  .btn.ghost:hover{background:var(--bg-hi)}
+  .btn.lg{padding:14px 28px;font-size:15px}
+
+  /* —— hero —— */
+  .hero{padding:100px 0 80px;position:relative}
+  .hero .grid{display:grid;grid-template-columns:1.25fr 1fr;gap:60px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:"JetBrains Mono";font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--gold);display:inline-block}
+  h1{margin-top:20px;font-family:"Fraunces";font-weight:500;font-size:76px;line-height:1.02;letter-spacing:-.025em;font-variation-settings:"opsz" 144}
+  h1 em{font-style:italic;color:var(--gold-2);font-weight:500}
+  .lede{margin-top:26px;font-size:18px;line-height:1.65;color:var(--ink-2);max-width:48ch}
+  .lede b{color:var(--ink);font-weight:500}
+  .cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .cta-row .hint{font-family:"JetBrains Mono";font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+  .hero-meta{margin-top:44px;padding-top:30px;border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:520px}
+  .hero-meta div{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+  .hero-meta div b{display:block;font-family:"Fraunces";font-weight:500;font-size:26px;color:var(--ink);letter-spacing:-.01em;margin-top:4px;font-variation-settings:"opsz" 60}
+
+  /* —— hero poster —— */
+  .poster{aspect-ratio:3/4;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:linear-gradient(180deg, #182138 0%, #0C1220 100%);position:relative;box-shadow:0 40px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(201,164,97,.08) inset}
+  .poster::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(closest-side at 30% 20%, rgba(201,164,97,.25) 0%, transparent 55%),
+    radial-gradient(closest-side at 80% 70%, rgba(201,164,97,.15) 0%, transparent 55%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.01) 0 2px, transparent 2px 4px);
+  }
+  .poster::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");mix-blend-mode:screen;opacity:.6}
+  .poster .content{position:absolute;inset:0;padding:36px 30px;display:flex;flex-direction:column;justify-content:space-between;z-index:1}
+  .poster .top{display:flex;justify-content:space-between;align-items:center;font-family:"JetBrains Mono";font-size:10px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+  .poster .top .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+  .poster .mid{text-align:center}
+  .poster .mid .sub{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:18px}
+  .poster .mid h3{font-family:"Fraunces";font-weight:400;font-size:46px;line-height:1;letter-spacing:-.02em;color:var(--ink);font-variation-settings:"opsz" 144}
+  .poster .mid h3 em{font-style:italic;color:var(--gold-2)}
+  .poster .mid .line{width:40px;height:1px;background:var(--gold);margin:18px auto;opacity:.6}
+  .poster .mid .byline{font-family:"Fraunces";font-style:italic;font-size:18px;color:var(--ink-2);font-weight:400}
+  .poster .bot{display:flex;justify-content:space-between;align-items:flex-end;font-family:"JetBrains Mono";font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+  .poster .bot .seal{width:54px;height:54px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Fraunces";font-style:italic;font-size:22px;color:var(--gold);position:relative}
+  .poster .bot .seal::before{content:"";position:absolute;inset:-5px;border:1px solid var(--gold);border-radius:50%;opacity:.4}
+
+  /* —— section base —— */
+  section.block{padding:110px 0;border-bottom:1px solid var(--rule)}
+  .sec-head{display:grid;grid-template-columns:1fr 1.5fr;gap:60px;margin-bottom:54px;align-items:end}
+  .sec-head .kicker{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  .sec-head h2{font-family:"Fraunces";font-weight:500;font-size:54px;line-height:1.05;letter-spacing:-.025em;font-variation-settings:"opsz" 144}
+  .sec-head h2 em{font-style:italic;color:var(--gold-2)}
+  .sec-head .lede{font-size:17px;color:var(--ink-2);line-height:1.65;max-width:52ch;align-self:start;padding-top:20px}
+
+  /* —— mirror —— */
+  .mirror{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--rule)}
+  .mirror .item{padding:26px 4px 26px 64px;border-bottom:1px solid var(--rule);position:relative;font-size:16px;line-height:1.55;color:var(--ink-2)}
+  .mirror .item:nth-child(odd){padding-right:44px;border-right:1px solid var(--rule)}
+  .mirror .item:nth-child(even){padding-left:44px}
+  .mirror .item::before{content:counter(mi);counter-increment:mi;font-family:"Fraunces";font-style:italic;font-size:32px;color:var(--gold);position:absolute;left:0;top:20px;font-weight:400}
+  .mirror{counter-reset:mi 0}
+  .mirror .item:nth-child(even)::before{left:auto;left:0;translate:0}
+
+  /* —— audience split —— */
+  .aud{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);background:var(--bg-card)}
+  .aud .pane{padding:38px 36px;border-right:1px solid var(--rule)}
+  .aud .pane:last-child{border-right:none}
+  .aud h3{font-family:"Fraunces";font-weight:500;font-size:26px;letter-spacing:-.01em;margin-bottom:8px;font-variation-settings:"opsz" 60}
+  .aud h3 em{font-style:italic;color:var(--gold-2)}
+  .aud p{font-size:14.5px;color:var(--muted);margin-bottom:22px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:"Inter";font-size:13px;font-weight:500;padding:7px 14px;border-radius:999px;background:var(--bg-hi);border:1px solid var(--rule-soft);color:var(--ink-2)}
+  .chip.g{background:rgba(201,164,97,.1);border-color:rgba(201,164,97,.3);color:var(--gold-2)}
+
+  /* —— modules —— */
+  .mods{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--rule)}
+  .mod{display:grid;grid-template-columns:90px 1.6fr 1fr auto;gap:30px;padding:36px 6px;border-bottom:1px solid var(--rule);align-items:start;transition:background .2s}
+  .mod:hover{background:rgba(201,164,97,.03)}
+  .mod .idx{font-family:"Fraunces";font-weight:400;font-size:70px;line-height:.9;color:var(--gold);font-style:italic;letter-spacing:-.02em;font-variation-settings:"opsz" 144}
+  .mod .body h4{font-family:"Fraunces";font-weight:500;font-size:28px;letter-spacing:-.015em;margin-bottom:10px;font-variation-settings:"opsz" 60}
+  .mod .body p{font-size:15.5px;line-height:1.65;color:var(--ink-2);max-width:44ch}
+  .mod .details{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:14px;display:grid;gap:6px}
+  .mod .details b{color:var(--gold-2);font-weight:500}
+  .mod .details div{display:flex;justify-content:space-between;gap:18px}
+  .mod .wk{font-family:"Fraunces";font-style:italic;font-size:14px;color:var(--muted);padding-top:20px;white-space:nowrap}
+
+  /* —— format —— */
+  .format{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .format .text p{font-size:16.5px;line-height:1.75;color:var(--ink-2);margin-bottom:16px}
+  .format .text p b{color:var(--ink);font-weight:500}
+  .format .weeks{border-left:1px solid var(--rule)}
+  .week{display:grid;grid-template-columns:70px 1fr auto;gap:20px;padding:18px 0 18px 28px;border-bottom:1px solid var(--rule);font-size:15px}
+  .week:last-child{border-bottom:none}
+  .week b{font-family:"Fraunces";font-style:italic;font-weight:500;color:var(--gold);font-size:18px;font-variation-settings:"opsz" 60}
+  .week .title{color:var(--ink)}
+  .week .tag{font-family:"JetBrains Mono";font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+
+  /* —— pricing —— */
+  .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule)}
+  .price{padding:34px 30px;border-right:1px solid var(--rule);background:var(--bg-card);display:flex;flex-direction:column}
+  .price:last-child{border-right:none}
+  .price.feat{background:linear-gradient(180deg, rgba(201,164,97,.1) 0%, rgba(201,164,97,.03) 100%);position:relative}
+  .price.feat::before{content:"";position:absolute;top:-1px;left:-1px;right:-1px;height:3px;background:linear-gradient(90deg, var(--gold-deep), var(--gold-2), var(--gold-deep))}
+  .price .tier{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .price.feat .tier{color:var(--gold)}
+  .price .amt{font-family:"Fraunces";font-weight:500;font-size:52px;letter-spacing:-.03em;margin:14px 0 4px;line-height:1;color:var(--ink);font-variation-settings:"opsz" 144}
+  .price .amt .cur{font-family:"Fraunces";font-weight:400;color:var(--muted);font-size:22px;margin-left:4px;letter-spacing:-.02em;font-style:italic}
+  .price .per{font-family:"Fraunces";font-style:italic;font-size:14px;color:var(--muted);margin-bottom:24px}
+  .price ul{list-style:none;margin-bottom:24px;flex:1}
+  .price ul li{padding:8px 0;padding-left:22px;position:relative;font-size:14.5px;color:var(--ink-2);line-height:1.55;border-bottom:1px solid var(--rule)}
+  .price ul li:last-child{border-bottom:none}
+  .price ul li::before{content:"—";position:absolute;left:0;top:8px;color:var(--gold);font-weight:500}
+  .price .go{display:block;text-align:center;padding:14px 16px;border-radius:4px;font-family:"Inter";font-weight:500;font-size:14px;text-decoration:none;background:transparent;color:var(--ink);border:1px solid var(--rule-soft);transition:all .2s}
+  .price .go:hover{background:var(--bg-hi);border-color:var(--gold)}
+  .price.feat .go{background:linear-gradient(180deg, var(--gold-2), var(--gold));color:#1A1408;border:none}
+  .price.feat .go:hover{translate:0 -1px}
+
+  /* —— hosts —— */
+  .hosts{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+  .host{display:grid;grid-template-columns:1fr 2fr;gap:30px;border-top:1px solid var(--rule);padding-top:32px}
+  .host .portrait{aspect-ratio:3/4;border:1px solid var(--rule);background:linear-gradient(180deg, #1E2944 0%, #0C1220 100%);position:relative;overflow:hidden}
+  .host .portrait::before{content:"";position:absolute;inset:0;background:radial-gradient(closest-side at 50% 30%, rgba(201,164,97,.3) 0%, transparent 55%)}
+  .host .portrait::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");mix-blend-mode:screen;opacity:.5}
+  .host .portrait .mono{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:"Fraunces";font-style:italic;font-weight:500;font-size:72px;color:rgba(201,164,97,.5);letter-spacing:-.04em;font-variation-settings:"opsz" 144;z-index:1}
+  .host h4{font-family:"Fraunces";font-weight:500;font-size:28px;letter-spacing:-.015em;font-variation-settings:"opsz" 60}
+  .host .role{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:6px 0 14px}
+  .host p{font-size:15px;line-height:1.65;color:var(--ink-2)}
+  .host .credits{margin-top:14px;font-family:"Fraunces";font-style:italic;font-size:14px;color:var(--muted)}
+
+  /* —— faq —— */
+  .faq{max-width:800px;margin:0 auto;border-top:1px solid var(--rule)}
+  .faq details{padding:24px 0;border-bottom:1px solid var(--rule)}
+  .faq summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:60px 1fr 30px;gap:20px;align-items:baseline;font-family:"Fraunces";font-weight:500;font-size:20px;letter-spacing:-.01em;color:var(--ink)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary .q{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500}
+  .faq summary::after{content:"＋";color:var(--gold);font-weight:300;font-size:20px;text-align:right;font-family:"Fraunces"}
+  .faq details[open] summary::after{content:"−"}
+  .faq .answer{padding:14px 0 0 80px;font-size:15.5px;line-height:1.7;color:var(--ink-2);max-width:62ch}
+
+  /* —— final cta —— */
+  .final{padding:110px 0 130px;text-align:center;position:relative;overflow:hidden;border:none}
+  .final::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 320px at 50% 0, rgba(201,164,97,.15), transparent 70%);pointer-events:none}
+  .final .mark{display:inline-block;width:48px;height:48px;border:1px solid var(--gold);border-radius:50%;position:relative;margin-bottom:30px}
+  .final .mark::before{content:"";position:absolute;inset:6px;border:1px solid var(--gold);border-radius:50%;opacity:.4}
+  .final .mark::after{content:"✦";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px}
+  .final h2{font-family:"Fraunces";font-weight:500;font-size:64px;line-height:1.02;letter-spacing:-.03em;font-variation-settings:"opsz" 144}
+  .final h2 em{font-style:italic;color:var(--gold-2)}
+  .final p{margin:24px auto 0;font-size:18px;color:var(--ink-2);max-width:560px;line-height:1.65}
+  .final .cta-row{justify-content:center;margin-top:36px}
+  .final .small{margin-top:24px;font-family:"JetBrains Mono";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+  footer{padding:36px 0;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);border-top:1px solid var(--rule);font-family:"JetBrains Mono";letter-spacing:.04em}
+  footer a{text-decoration:none;color:var(--muted)}
+
+  @media (max-width:900px){
+    .nav ul{display:none}
+    .hero .grid{grid-template-columns:1fr}
+    h1{font-size:46px}
+    .sec-head{grid-template-columns:1fr;gap:18px}
+    .sec-head h2{font-size:34px}
+    .final h2{font-size:40px}
+    .mirror,.aud,.prices,.hosts,.format{grid-template-columns:1fr}
+    .mirror .item{border-right:none!important;padding:22px 0 22px 54px!important}
+    .aud .pane{border-right:none;border-bottom:1px solid var(--rule)}
+    .price{border-right:none;border-bottom:1px solid var(--rule)}
+    .mod{grid-template-columns:60px 1fr;gap:18px}
+    .mod .details,.mod .wk{grid-column:2}
+  }
+</style>
+</head>
+<body>
+
+<div class="nav-outer">
+  <div class="wrap nav">
+    <div class="brand"><span class="mark"></span> AI For Work</div>
+    <ul><a href="#program">Программа</a><a href="#format">Формат</a><a href="#hosts">Ведущие</a><a href="#price">Тарифы</a></ul>
+    <div><a class="btn gold" href="#price">Записаться</a></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="grid">
+    <div>
+      <span class="eyebrow">Практический курс · первый поток · 2026</span>
+      <h1>Агенты,<br>которые делают<br><em>вашу работу</em>.</h1>
+      <p class="lede">Камерный курс по ИИ-агентам — <b>Codex</b> и <b>Claude Code</b> — для тех, кто не пишет код, но ежедневно тратит часы на рутину. Шесть недель, четыре модуля, один собственный агент в конце.</p>
+      <div class="cta-row">
+        <a class="btn gold lg" href="#">Записаться на курс</a>
+        <a class="btn ghost lg" href="#">Программа курса</a>
+      </div>
+      <div class="hero-meta">
+        <div>Длительность<b>6 недель</b></div>
+        <div>Модулей<b>четыре</b></div>
+        <div>Стартует<b>осенью</b></div>
+      </div>
+    </div>
+    <div class="poster">
+      <div class="content">
+        <div class="top">
+          <span><span class="dot" style="display:inline-block;margin-right:8px;vertical-align:2px"></span> № 001</span>
+          <span>MMXXVI</span>
+        </div>
+        <div class="mid">
+          <div class="sub">— Курс —</div>
+          <h3>AI<br><em>For</em> Work</h3>
+          <div class="line"></div>
+          <div class="byline">Шейко · Литская</div>
+        </div>
+        <div class="bot">
+          <span>Editio prima</span>
+          <span class="seal">af</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MIRROR -->
+<section class="block" id="mirror">
+  <div class="sec-head">
+    <div>
+      <span class="kicker">— 01 — Узнаёте себя —</span>
+      <h2>Курс — про тех, кто хочет перестать <em>делать руками</em>.</h2>
+    </div>
+    <p class="lede">Если совпадают хотя бы три пункта — курс даст конкретный результат на ваших задачах. За шесть недель мы закроем их агентами.</p>
+  </div>
+  <div class="mirror">
+    <div class="item">Каждую неделю собираете одну и ту же презентацию из Excel.</div>
+    <div class="item">Читаете по сорок вакансий с HH, чтобы «понять рынок» зарплат.</div>
+    <div class="item">По пятницам руками собираете сводки из Telegram-чатов.</div>
+    <div class="item">Копируете данные из таблицы в таблицу и называете это аналитикой.</div>
+    <div class="item">Пробовали ChatGPT — понравилось, но в работу не зашло.</div>
+    <div class="item">Знаете, что агенты — это серьёзно, но не знаете, с чего начать.</div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section class="block" id="who">
+  <div class="sec-head">
+    <div>
+      <span class="kicker">— 02 — Для кого —</span>
+      <h2>Продакты, HR, маркетологи, <em>аналитики</em>.</h2>
+    </div>
+    <p class="lede">Не-разработчики, чья работа состоит из повторяющихся задач — и которые устали делать их руками.</p>
+  </div>
+  <div class="aud">
+    <div class="pane">
+      <h3>Роли</h3>
+      <p>Кто приходит на курс чаще всего — и кому он в первую очередь подходит.</p>
+      <div class="chips">
+        <span class="chip">Продакт</span><span class="chip">Маркетолог</span>
+        <span class="chip">HR / рекрутер</span><span class="chip">Аналитик</span>
+        <span class="chip">Операционный</span><span class="chip">Фаундер</span>
+        <span class="chip">Ассистент</span><span class="chip">PM</span>
+      </div>
+    </div>
+    <div class="pane">
+      <h3>Задачи</h3>
+      <p>Именно те задачи, с которыми мы разбираемся — на ваших же живых данных.</p>
+      <div class="chips">
+        <span class="chip g">Ресёрч</span><span class="chip g">Отчёты</span>
+        <span class="chip">Презентации</span><span class="chip">Скоринг вакансий</span>
+        <span class="chip">Парсинг сайтов</span><span class="chip">Свод чатов</span>
+        <span class="chip">Проверка гипотез</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="block" id="program">
+  <div class="sec-head">
+    <div>
+      <span class="kicker">— 03 — Программа —</span>
+      <h2>Четыре модуля,<br>один <em>собственный агент</em>.</h2>
+    </div>
+    <p class="lede">От файлов и таблиц до автономного браузера. Каждую неделю — один модуль, практика на ваших задачах и живой разбор.</p>
+  </div>
+  <div class="mods">
+    <div class="mod">
+      <div class="idx">I</div>
+      <div class="body">
+        <h4>Файлы, таблицы, презентации</h4>
+        <p>Превращаем .xlsx и .csv в готовые слайды без Excel-формул и дизайнера. Агент читает, считает, собирает.</p>
+      </div>
+      <div class="details">
+        <div><span>Инструмент</span><b>Codex</b></div>
+        <div><span>Стек</span><b>Claude Code</b></div>
+        <div><span>Результат</span><b>.pptx</b></div>
+      </div>
+      <div class="wk">Неделя 2</div>
+    </div>
+    <div class="mod">
+      <div class="idx">II</div>
+      <div class="body">
+        <h4>Ресёрч по HeadHunter</h4>
+        <p>Агент собирает вакансии, скорит по вашим критериям, делает сводку по рынку зарплат — на живых данных.</p>
+      </div>
+      <div class="details">
+        <div><span>Инструмент</span><b>Browser-use</b></div>
+        <div><span>API</span><b>HH</b></div>
+        <div><span>Результат</span><b>Отчёт</b></div>
+      </div>
+      <div class="wk">Неделя 3</div>
+    </div>
+    <div class="mod">
+      <div class="idx">III</div>
+      <div class="body">
+        <h4>Telegram-ассистент</h4>
+        <p>Сводки по чатам, поиск по тысячам сообщений, ответы по шаблону. То, что вы делали руками по пятницам.</p>
+      </div>
+      <div class="details">
+        <div><span>Инструмент</span><b>Bot API</b></div>
+        <div><span>Стек</span><b>MTProto</b></div>
+        <div><span>Результат</span><b>Бот</b></div>
+      </div>
+      <div class="wk">Неделя 4</div>
+    </div>
+    <div class="mod">
+      <div class="idx">IV</div>
+      <div class="body">
+        <h4>Автономный браузер</h4>
+        <p>Агент кликает, заполняет формы, ходит по сайтам. На этом модуле собираем финальный проект под вашу задачу.</p>
+      </div>
+      <div class="details">
+        <div><span>Инструмент</span><b>Browser-use</b></div>
+        <div><span>Стек</span><b>Playwright</b></div>
+        <div><span>Результат</span><b>Агент</b></div>
+      </div>
+      <div class="wk">Неделя 5–6</div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAT -->
+<section class="block" id="format">
+  <div class="sec-head">
+    <div>
+      <span class="kicker">— 04 — Формат —</span>
+      <h2>Шесть недель,<br>один <em>финальный проект</em>.</h2>
+    </div>
+    <p class="lede">Каждую неделю — один модуль: короткое видео, практика на своих задачах, живой разбор. Никаких двухчасовых лекций.</p>
+  </div>
+  <div class="format">
+    <div class="text">
+      <p>Материал собран так, чтобы его можно было проходить параллельно с работой — <b>по 3–4 часа в неделю</b>, без вечерних марафонов.</p>
+      <p>Параллельно работает закрытый чат с авторами: без «спасибо, полезно» — только конкретные задачи и решения. Чат остаётся с вами и после курса.</p>
+      <p>Финальная неделя — собственный агент под свою работу: от постановки задачи до готового запускающегося решения и защиты.</p>
+    </div>
+    <div class="weeks">
+      <div class="week"><b>I</b><div class="title">Onboarding, настройка среды, первая команда</div><span class="tag">Нед. 1</span></div>
+      <div class="week"><b>II</b><div class="title">Файлы, таблицы, презентации</div><span class="tag">Нед. 2</span></div>
+      <div class="week"><b>III</b><div class="title">Ресёрч на HeadHunter</div><span class="tag">Нед. 3</span></div>
+      <div class="week"><b>IV</b><div class="title">Telegram-ассистент</div><span class="tag">Нед. 4</span></div>
+      <div class="week"><b>V</b><div class="title">Автономный браузер</div><span class="tag">Нед. 5</span></div>
+      <div class="week"><b>VI</b><div class="title">Финальный проект и защита</div><span class="tag">Нед. 6</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOSTS -->
+<section class="block" id="hosts">
+  <div class="sec-head">
+    <div>
+      <span class="kicker">— 05 — Ведущие —</span>
+      <h2>Два автора,<br><em>две роли</em>.</h2>
+    </div>
+    <p class="lede">Один отвечает за техническую глубину, другая — за то, чтобы это было реально пройти и применить без фонового гула.</p>
+  </div>
+  <div class="hosts">
+    <div class="host">
+      <div class="portrait"><div class="mono">кш</div></div>
+      <div>
+        <h4>Коля Шейко</h4>
+        <div class="role">— Техническая часть · инженер</div>
+        <p>10+ лет в продуктовой разработке, работает с агентами ежедневно. Отвечает за то, чтобы всё запускалось и решало именно вашу задачу.</p>
+        <div class="credits">— автор технической программы</div>
+      </div>
+    </div>
+    <div class="host">
+      <div class="portrait"><div class="mono">сл</div></div>
+      <div>
+        <h4>Саша Литская</h4>
+        <div class="role">— Формат · методология</div>
+        <p>Куратор образовательных программ. Делает так, чтобы сложное становилось простым и оставалось с вами после финиша.</p>
+        <div class="credits">— автор формата и методологии</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="block" id="price">
+  <div class="sec-head">
+    <div>
+      <span class="kicker">— 06 — Тарифы —</span>
+      <h2>Выберите формат, <em>который вам подходит</em>.</h2>
+    </div>
+    <p class="lede">Три тарифа — от самостоятельного прохождения до работы один-на-один с авторами. Апгрейд возможен в первую неделю.</p>
+  </div>
+  <div class="prices">
+    <div class="price">
+      <span class="tier">I · Базовый</span>
+      <div class="amt">29<span class="cur">.000 ₽</span></div>
+      <div class="per">единоразово · без проверки</div>
+      <ul>
+        <li>Все модули и материалы</li>
+        <li>Доступ в общий чат</li>
+        <li>Разборы в записи</li>
+        <li>Финальный проект самостоятельно</li>
+      </ul>
+      <a class="go" href="#">Выбрать</a>
+    </div>
+    <div class="price feat">
+      <span class="tier">II · С проверкой</span>
+      <div class="amt">59<span class="cur">.000 ₽</span></div>
+      <div class="per">— рекомендуем большинству —</div>
+      <ul>
+        <li>Всё из «Базового»</li>
+        <li>Проверка домашних заданий</li>
+        <li>Личный фидбэк по проекту</li>
+        <li>Доступ к живым разборам</li>
+      </ul>
+      <a class="go" href="#">Выбрать</a>
+    </div>
+    <div class="price">
+      <span class="tier">III · VIP</span>
+      <div class="amt">149<span class="cur">.000 ₽</span></div>
+      <div class="per">агент под вашу задачу</div>
+      <ul>
+        <li>Всё из «С проверкой»</li>
+        <li>Две 1-на-1 с авторами</li>
+        <li>Кастомный агент под задачу</li>
+        <li>Приоритет на новых потоках</li>
+      </ul>
+      <a class="go" href="#">Выбрать</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block" id="faq">
+  <div class="sec-head">
+    <div>
+      <span class="kicker">— 07 — FAQ —</span>
+      <h2>Частые <em>вопросы</em>.</h2>
+    </div>
+    <p class="lede">Если ответа на ваш вопрос здесь нет — напишите нам прямо, обычно отвечаем в течение дня.</p>
+  </div>
+  <div class="faq">
+    <details open><summary><span class="q">Q.01</span><span>Нужно ли уметь программировать?</span><span></span></summary><div class="answer">Нет. Курс сделан для тех, кто не пишет код. Всё, что нужно — умение открыть терминал по пошаговой инструкции.</div></details>
+    <details><summary><span class="q">Q.02</span><span>Какая машина нужна?</span><span></span></summary><div class="answer">Любой современный ноутбук. Mac, Windows, Linux — подходит. Инструкции по установке даём в первой неделе.</div></details>
+    <details><summary><span class="q">Q.03</span><span>Что если пропущу неделю?</span><span></span></summary><div class="answer">Материалы и разборы остаются в доступе. Чат помогает догнать пропущенное.</div></details>
+    <details><summary><span class="q">Q.04</span><span>Курс окупится?</span><span></span></summary><div class="answer">Если автоматизируем хотя бы одну из ваших еженедельных рутин — да. Обычно получается три-четыре.</div></details>
+    <details><summary><span class="q">Q.05</span><span>Можно оплатить от юрлица?</span><span></span></summary><div class="answer">Да, оформляем договор и счёт. Напишите нам после выбора тарифа.</div></details>
+  </div>
+</section>
+
+</div>
+
+<!-- FINAL -->
+<section class="final">
+  <div class="wrap">
+    <span class="mark"></span>
+    <h2>Хватит копировать.<br><em>Пора делегировать.</em></h2>
+    <p>Набор на первый поток открыт. Группа камерная — так разборы работают. Запись закроется, как только группа наполнится.</p>
+    <div class="cta-row">
+      <a class="btn gold lg" href="#">Записаться на курс</a>
+      <a class="btn ghost lg" href="#">Скачать программу</a>
+    </div>
+    <div class="small">— От 29.000 ₽ · 6 недель · 4 модуля —</div>
+  </div>
+</section>
+
+<div class="wrap">
+  <footer>
+    <span>© MMXXVI · AI For Work</span>
+    <span>hello@aiforwork · <a href="#">Оферта</a></span>
+  </footer>
+</div>
+
+</body>
+</html>

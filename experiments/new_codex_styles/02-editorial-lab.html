@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI For Work — Editorial Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f3ead9; --ink:#15110c; --muted:#675d50; --red:#e33e28; --blue:#163f6b; --line:#15110c; --soft:#fff8ea; --radius:22px; }
+    * { box-sizing: border-box; }
+    body { margin:0; background: var(--paper); color: var(--ink); font-family: Manrope, sans-serif; line-height:1.55; }
+    body:before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.38; background-image: linear-gradient(rgba(21,17,12,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(21,17,12,.045) 1px, transparent 1px); background-size: 28px 28px; }
+    a { color:inherit; }
+    .wrap { width:min(1120px, calc(100% - 34px)); margin:auto; position:relative; }
+    .nav { display:flex; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:2px solid var(--line); }
+    .brand { font-weight:800; letter-spacing:-.06em; font-size:24px; }
+    .nav a { text-decoration:none; font-weight:700; }
+    .navlinks { display:flex; gap:20px; color:var(--muted); font-size:14px; }
+    .pill { display:inline-flex; min-height:46px; align-items:center; justify-content:center; padding:0 20px; border:2px solid var(--line); border-radius:999px; background:var(--red); color:#fff8ea; text-decoration:none; font-weight:800; box-shadow:5px 5px 0 var(--line); }
+    .pill.light { background:var(--soft); color:var(--ink); }
+    .hero { padding:62px 0 44px; }
+    .label { text-transform:uppercase; letter-spacing:.16em; font-weight:800; font-size:12px; color:var(--red); }
+    h1,h2,h3 { margin:0; letter-spacing:-.055em; line-height:.94; }
+    h1,h2 { font-family:"Instrument Serif", serif; font-weight:400; }
+    h1 { font-size:clamp(68px, 13vw, 172px); max-width:1030px; }
+    h2 { font-size:clamp(44px, 7vw, 92px); margin-bottom:22px; }
+    h3 { font-size:28px; }
+    .hero-sub { display:grid; grid-template-columns:1fr 1fr; gap:24px; border-top:2px solid var(--line); border-bottom:2px solid var(--line); padding:24px 0; margin-top:28px; font-size:20px; }
+    .hero-actions { display:flex; gap:14px; flex-wrap:wrap; margin-top:28px; }
+    section { padding:58px 0; }
+    .marquee { border-block:2px solid var(--line); padding:16px 0; overflow:hidden; background:var(--ink); color:var(--paper); font-weight:800; white-space:nowrap; }
+    .marquee span { display:inline-block; padding-right:40px; animation:roll 26s linear infinite; }
+    @keyframes roll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .two { display:grid; grid-template-columns:.8fr 1.2fr; gap:28px; align-items:start; }
+    .note { border:2px solid var(--line); background:var(--soft); padding:22px; border-radius:var(--radius); box-shadow:8px 8px 0 var(--blue); }
+    .pain-list { display:grid; gap:12px; }
+    .pain { display:grid; grid-template-columns:54px 1fr; gap:14px; align-items:center; padding:16px; border:2px solid var(--line); background:#fff3d4; border-radius:18px; }
+    .num { font-family:"Instrument Serif", serif; font-size:42px; color:var(--red); line-height:1; }
+    .tags { display:flex; flex-wrap:wrap; gap:10px; }
+    .tag { padding:9px 13px; border:2px solid var(--line); border-radius:999px; background:var(--soft); font-weight:700; font-size:13px; }
+    .tag.red { background:var(--red); color:#fff8ea; }
+    .banner { display:grid; grid-template-columns:1fr 1fr; gap:0; border:2px solid var(--line); border-radius:28px; overflow:hidden; box-shadow:12px 12px 0 var(--line); }
+    .banner > div { padding:32px; }
+    .banner .left { background:var(--blue); color:#fff8ea; }
+    .banner .right { background:var(--soft); }
+    .modules { display:grid; gap:18px; }
+    .module { display:grid; grid-template-columns:170px 1fr 260px; gap:22px; border-top:2px solid var(--line); padding-top:22px; }
+    .module:last-child { border-bottom:2px solid var(--line); padding-bottom:22px; }
+    .module .kicker { font-weight:800; color:var(--red); }
+    .module p { margin-top:0; color:var(--muted); }
+    .result { color:var(--ink)!important; font-weight:700; }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .card { border:2px solid var(--line); border-radius:var(--radius); background:var(--soft); padding:24px; }
+    .card.featured { background:var(--red); color:#fff8ea; box-shadow:8px 8px 0 var(--line); }
+    .card ul { padding-left:20px; }
+    .hosts { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .portrait { height:180px; border:2px solid var(--line); border-radius:22px; margin-bottom:18px; background: radial-gradient(circle at 30% 30%, var(--red) 0 16%, transparent 17%), radial-gradient(circle at 70% 55%, var(--blue) 0 22%, transparent 23%), repeating-linear-gradient(-35deg, #fff3d4 0 12px, var(--paper) 12px 24px); }
+    details { border-top:2px solid var(--line); padding:18px 0; }
+    details:last-child { border-bottom:2px solid var(--line); }
+    summary { cursor:pointer; font-weight:800; font-size:19px; }
+    details p { color:var(--muted); max-width:850px; }
+    .final { border:2px solid var(--line); border-radius:32px; background:var(--ink); color:var(--paper); padding:38px; display:grid; grid-template-columns:1fr auto; gap:28px; align-items:center; box-shadow:12px 12px 0 var(--red); }
+    footer { padding:32px 0; color:var(--muted); }
+    @media(max-width:900px){ .navlinks{display:none}.hero-sub,.two,.banner,.module,.cards,.hosts,.final{grid-template-columns:1fr}.module{gap:8px}.module aside{display:none} }
+  </style>
+</head>
+<body>
+  <nav class="wrap nav"><div class="brand">AI For Work</div><div class="navlinks"><a href="#program">Программа</a><a href="#format">Формат</a><a href="#pricing">Тарифы</a><a href="#faq">FAQ</a></div><a class="pill light" href="#cta">В первый поток</a></nav>
+  <header class="wrap hero"><div class="label">Практический курс по ИИ-агентам для не-разработчиков</div><h1>Рабочая рутина должна выполняться, а не высасывать вас.</h1><div class="hero-sub"><p>Курс для людей, у которых много ручной работы с информацией: таблицами, файлами, сайтами, Telegram, вакансиями, отчётами, презентациями, исследованиями.</p><p>Учим использовать Codex / Claude Code, чтобы искать, читать, анализировать, преобразовывать, собирать и отправлять информацию. Без навыков разработки.</p></div><div class="hero-actions"><a class="pill" href="#pricing">Узнать, подойдёт ли мне курс</a><a class="pill light" href="#program">Открыть программу</a></div></header>
+  <div class="marquee"><span>ресёрч · таблицы · отчёты · презентации · Telegram · вакансии · лидогенерация · анализ рынка · дашборды · брифы · инсайты · </span><span>ресёрч · таблицы · отчёты · презентации · Telegram · вакансии · лидогенерация · анализ рынка · дашборды · брифы · инсайты · </span></div>
+  <main>
+    <section class="wrap two"><div><h2>Узнаёте себя?</h2><div class="note">Это не курс «про промпты». Это курс про то, как давать агенту рабочие задачи и получать артефакты, которые можно использовать.</div></div><div class="pain-list"><div class="pain"><span class="num">1</span><span>10 вкладок, 3 таблицы и попытка собрать из этого нормальный вывод.</span></div><div class="pain"><span class="num">2</span><span>Папки, файлы, выгрузки и документы, до которых страшно дотрагиваться.</span></div><div class="pain"><span class="num">3</span><span>«Быстрый ресёрч», который занимает полдня.</span></div><div class="pain"><span class="num">4</span><span>Ручной перенос информации между сервисами.</span></div><div class="pain"><span class="num">5</span><span>Хочется не спросить нейронку, а дать ей задачу и получить результат.</span></div></div></section>
+    <section class="wrap"><div class="banner"><div class="left"><h2>Не забираем интересную часть работы.</h2></div><div class="right"><p>Наоборот: показываем, как отдать агенту рутину, которая обычно отнимает силы — собрать, разложить, проверить, сверить, оформить, перенести.</p><p>Пока агент собирает данные, чистит таблицу, ищет ссылки или собирает черновик отчёта, вы занимаетесь смыслами, доменными решениями, выбором подхода и качеством результата.</p><div class="tags"><span class="tag red">маркетологи</span><span class="tag">аналитики</span><span class="tag">HR</span><span class="tag">сейлзы</span><span class="tag">фаундеры</span><span class="tag">редакторы</span><span class="tag">people ops</span><span class="tag">SMM</span><span class="tag">PR</span></div></div></div></section>
+    <section class="wrap" id="program"><h2>Программа</h2><div class="modules"><article class="module"><div class="kicker">Модуль 1</div><div><h3>Из страшной таблицы в презентацию</h3><p>Берём локальную таблицу или выгрузку и превращаем её в HTML-отчёт, презентацию или структурированный документ.</p><p class="result">Результат: готовый материал, визуализация или отчёт в стиле вашей компании.</p></div><aside><div class="tags"><span class="tag">файлы</span><span class="tag">таблицы</span><span class="tag">отчёт</span></div></aside></article><article class="module"><div class="kicker">Модуль 2</div><div><h3>Ресёрч рынка на HeadHunter</h3><p>Вакансии, компании, требования, роли, спрос на специалистов и паттерны рынка.</p><p class="result">Результат: критерии отбора, анализ по смыслу, применение для найма, продаж и bizdev.</p></div><aside><div class="tags"><span class="tag">рынок</span><span class="tag">вакансии</span><span class="tag">лиды</span></div></aside></article><article class="module"><div class="kicker">Модуль 3</div><div><h3>Telegram без ручного копирования</h3><p>Собираем инфу из каналов и чатов, вытаскиваем темы, инсайты, триггеры для продажи, отправляем результаты в рабочие места.</p><p class="result">Результат: Telegram превращается из ленты в источник данных.</p></div><aside><div class="tags"><span class="tag">сводки</span><span class="tag">мониторинг</span><span class="tag">боты</span></div></aside></article><article class="module"><div class="kicker">Модуль 4</div><div><h3>Рутина в браузере</h3><p>Сайты, формы, кабинеты, LinkedIn, Яндекс Метрика и задачи, где агент действует как пользователь.</p><p class="result">Результат: Browser use подключен и понятно, где применять его безопасно.</p></div><aside><div class="tags"><span class="tag">browser use</span><span class="tag">формы</span><span class="tag">аккаунты</span></div></aside></article></div></section>
+    <section class="wrap two" id="format"><div><h2>Формат и финальный проект</h2><p>Курс длится около 6 недель: неделя знакомства и настройки, 4 недели практических воркшопов с домашками и неделя на финальный проект.</p><p>В конце вы выбираете реальный рабочий процесс и перестраиваете его с помощью ИИ-агента.</p></div><div class="note"><h3>Структура</h3><ul><li>неделя 0 — настройка и первый шаг</li><li>4 практических воркшопа</li><li>домашка после каждого занятия</li><li>разбор ошибок и удачных решений</li><li>финальная встреча с короткими презентациями</li></ul></div></section>
+    <section class="wrap"><h2>Комьюнити, которое работает</h2><div class="tags"><span class="tag red">проще держать темп</span><span class="tag">видно, как думают другие</span><span class="tag">рабочие знакомства</span><span class="tag">идеи для своих задач</span><span class="tag">единомышленники после курса</span><span class="tag">это весело</span></div></section>
+    <section class="wrap" id="pricing"><h2>Тарифы</h2><div class="cards"><article class="card"><h3>Базовый</h3><p>Разобраться в подходе и попробовать самостоятельно.</p><ul><li>живые занятия</li><li>записи</li><li>материалы и задания</li><li>общий чат</li><li>финальная встреча</li></ul><a class="pill light" href="#cta">Узнать условия</a></article><article class="card featured"><h3>С проверкой домашек</h3><p>Пройти курс руками и получить обратную связь.</p><ul><li>всё из базового</li><li>проверка домашних заданий</li><li>фидбек по результату и процессу</li><li>вопросы по домашкам</li></ul><a class="pill light" href="#cta">Узнать условия</a></article><article class="card"><h3>VIP</h3><p>Больше личного внимания и консультации по своим задачам.</p><ul><li>всё из тарифа с проверкой</li><li>2 личные консультации</li><li>помощь с выбором подхода</li><li>разбор применения в вашей реальности</li></ul><a class="pill light" href="#cta">Узнать условия</a></article></div></section>
+    <section class="wrap"><h2>Кто ведёт</h2><div class="hosts"><article class="card"><div class="portrait"></div><h3>Коля Шейко</h3><ul><li>Фаундер агентства ИИ-автоматизации</li><li>Ко-фаундер ИИ-конференций entropy.talk</li><li>Автор тг-канала <a href="https://t.me/ai_grably">AI и грабли</a></li></ul></article><article class="card"><div class="portrait"></div><h3>Саша Литская</h3><ul><li>Владелица керамической мастерской коворкинга</li><li>Основатель арт-пространства и оффлайн-сообщества в Академгородке</li><li>Продюсер и операционный директор в онлайн-школе керамики</li></ul></article></div></section>
+    <section class="wrap" id="faq"><h2>FAQ</h2><details open><summary>Нужно ли уметь программировать?</summary><p>Нет. Курс как раз для не-разработчиков.</p></details><details><summary>А если у меня Claude Code, а не Codex?</summary><p>Можно. Мы показываем общие подходы, а не конкретные фишки одного сервиса.</p></details><details><summary>Нужна ли платная подписка?</summary><p>Да, нужна подписка ChatGPT Plus. Про варианты оплаты расскажем в начале курса.</p></details><details><summary>Ой, а можно без домашек?</summary><p>Да, для этого есть базовый тариф: занятия, записи, чат и самостоятельная практика без проверки.</p></details><details><summary>Как проходит проверка домашек?</summary><p>Смотрим итоговый результат и процесс: как ставили задачу агенту, где потеряли контекст, где можно проще.</p></details><details><summary>Можно оплатить иностранной картой?</summary><p>Стандартный способ оплаты пока через РФ. Если не подходит — напишите, подберём вариант вручную.</p></details></section>
+    <section class="wrap" id="cta"><div class="final"><div><h2>Пора перестать носить данные руками.</h2><p>Если в работе много информационной рутины, часть её уже можно отдавать ИИ-агенту.</p></div><a class="pill" href="mailto:hello@example.com">Хочу в первый поток</a></div></section>
+  </main>
+  <footer class="wrap">AI For Work · Codex / Claude Code · без программирования и без магии</footer>
+</body>
+</html>

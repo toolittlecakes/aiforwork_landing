@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI for Work — Editorial</title>
+  <style>
+    :root {
+      --bg: #faf4e7;
+      --text: #1e1a16;
+      --muted: #6e6355;
+      --line: #e1d6c8;
+      --accent: #a36b38;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Garamond", "Times New Roman", serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .lead {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 24px 0;
+      margin-bottom: 36px;
+    }
+
+    .lead p {
+      margin: 0;
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    h1, h2 { font-family: "Arial", "Helvetica Neue", sans-serif; }
+    h1 { font-size: clamp(2.3rem, 4.8vw, 3.6rem); letter-spacing: -0.5px; margin: 8px 0 18px; }
+    h2 { margin: 0 0 12px; font-size: 1.4rem; }
+
+    .meta {
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      letter-spacing: 1.3px;
+      color: var(--accent);
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .block {
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+    }
+
+    .block p { color: var(--muted); font-size: 1rem; }
+
+    .quote {
+      margin-left: 22px;
+      border-left: 3px solid var(--accent);
+      padding-left: 18px;
+      color: #3d3327;
+      font-style: italic;
+    }
+
+    .cta {
+      margin-top: 14px;
+      display: inline-block;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 11px 16px;
+      border-radius: 2px;
+      font-family: "Arial", sans-serif;
+    }
+
+    .side {
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 18px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.82rem;
+      background: #f0e6d4;
+      border-radius: 16px;
+      padding: 6px 10px;
+      margin-right: 6px;
+      margin-bottom: 8px;
+    }
+
+    .facts {
+      margin-top: 28px;
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .facts div { background: #fef9ef; border: 1px solid var(--line); padding: 14px; }
+
+    @media (max-width: 900px) {
+      .story, .facts { grid-template-columns: 1fr; }
+      .wrap { padding-top: 32px; }
+      .side { margin-top: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="lead">
+      <div class="meta">AI for Work</div>
+      <h1>Тонко настроенный поток для тех, кто ценит порядок.</h1>
+      <p>Одна из частых причин провала проектов — хаотичные процессы. Здесь мы предлагаем спокойный, но уверенный UX, где система берёт на себя рутину, а люди остаются фокусом продукта.</p>
+    </div>
+
+    <section class="story">
+      <article class="block">
+        <h2>Два шага к более «чистому» управлению</h2>
+        <p>Сначала система собирает рабочие артефакты: задачи, задачи по задачам, коммуникации и черновики решений. Затем она структурирует их в единый контур с приоритетами и статусами.</p>
+        <p class="quote">«Нам не нужна была новая экосистема ради экосистемы. Нам нужен инструмент, который понимает наш ритм и помогает не терять его.»</p>
+        <a class="cta" href="#">Запросить вводный созвон</a>
+      </article>
+
+      <aside class="side">
+        <div class="tag">Прозрачность</div>
+        <div class="tag">Скорость</div>
+        <div class="tag">Дисциплина</div>
+        <div class="tag">AI-помощь</div>
+      </aside>
+    </section>
+
+    <section class="facts">
+      <div>Автосбор задач и решений — меньше пересборок.</div>
+      <div>Единые статусы — легче понимать, где узкое место.</div>
+      <div>Ясные триггеры — меньше забытых дедлайнов.</div>
+    </section>
+  </main>
+</body>
+</html>

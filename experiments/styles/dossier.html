@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI For Work — Declassified</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --manila:#E8D6A8;
+    --manila-2:#DFC991;
+    --manila-edge:#C9B075;
+    --paper:#F4ECD2;
+    --paper-2:#ECE2C1;
+    --ink:#1A1613;
+    --ink-soft:#4A3F2F;
+    --ink-mute:#7A6A4F;
+    --rule:#B79E68;
+    --rule-dim:#D4BE86;
+    --red:#B4231A;
+    --red-deep:#7E1711;
+    --blue:#1E3A6B;
+    --stamp:#A8241B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--manila);color:var(--ink)}
+  body{
+    font-family:"Courier Prime","Courier New",monospace;font-size:15px;line-height:1.6;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.35) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 90%, rgba(0,0,0,.12) 0%, transparent 55%),
+      linear-gradient(180deg, var(--manila) 0%, var(--manila-2) 100%);
+    background-attachment:fixed;
+  }
+  /* noise */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='2' seed='13'/><feColorMatrix values='0 0 0 0 0.08  0 0 0 0 0.07  0 0 0 0 0.05  0 0 0 0.13 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  /* stains */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.55;
+    background:
+      radial-gradient(160px 90px at 6% 14%, rgba(120,80,20,.12) 0%, transparent 70%),
+      radial-gradient(220px 140px at 94% 32%, rgba(120,80,20,.14) 0%, transparent 70%),
+      radial-gradient(180px 110px at 12% 72%, rgba(120,80,20,.10) 0%, transparent 70%);
+  }
+  .wrap{max-width:1200px;margin:0 auto;padding:32px 28px 90px;position:relative;z-index:2}
+
+  /* ——— file tab header ——— */
+  .folder{position:relative}
+  .tab{display:inline-block;background:var(--manila-edge);color:var(--ink);padding:6px 22px 6px 16px;font-family:"Archivo Narrow";font-weight:700;font-size:11px;letter-spacing:.22em;text-transform:uppercase;border-radius:4px 4px 0 0;box-shadow:inset 0 -2px 0 rgba(0,0,0,.12)}
+  .tab::before{content:"⌥ ";color:var(--red);margin-right:2px}
+  .sheet{
+    background:var(--paper);
+    border:1.5px solid var(--rule);
+    border-radius:0 4px 4px 4px;
+    box-shadow:0 20px 40px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.4);
+    padding:34px 40px 40px;
+    position:relative;
+  }
+  /* punch holes */
+  .sheet::before,.sheet::after{
+    content:"";position:absolute;width:16px;height:16px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, var(--manila-2), var(--manila-edge) 70%, var(--ink-mute) 100%);
+    box-shadow:inset 0 2px 4px rgba(0,0,0,.45);
+    left:26px;
+  }
+  .sheet::before{top:56px}
+  .sheet::after{bottom:56px}
+
+  /* ——— doc header ——— */
+  .dochead{border:2px solid var(--ink);padding:16px 18px;margin-bottom:26px;background:rgba(255,255,255,.25);position:relative}
+  .dochead .row{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:baseline;font-family:"Archivo Narrow";font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+  .dochead .row + .row{margin-top:10px;padding-top:10px;border-top:1px dashed var(--rule)}
+  .dochead b{color:var(--ink);font-weight:700}
+  .dochead .title{font-family:"Special Elite";font-size:22px;letter-spacing:.04em;text-transform:none;color:var(--ink);margin:0 auto;font-weight:400}
+  .dochead .classification{color:var(--red);font-weight:800;letter-spacing:.3em}
+  .dochead .barcode{display:flex;gap:2px;height:26px;align-items:center}
+  .dochead .barcode span{width:2px;height:100%;background:var(--ink)}
+  .dochead .barcode span:nth-child(2n){width:1px;opacity:.7}
+  .dochead .barcode span:nth-child(3n){width:3px}
+
+  /* ——— CLASSIFIED stamps ——— */
+  .stamp{
+    position:absolute;font-family:"Archivo";font-weight:900;font-size:22px;letter-spacing:.18em;
+    color:var(--stamp);border:3px solid var(--stamp);padding:6px 14px;
+    background:rgba(255,255,255,.1);opacity:.85;
+    text-transform:uppercase;
+    box-shadow:inset 0 0 0 2px rgba(168,36,27,.2);
+    pointer-events:none;
+  }
+  .stamp::before{content:"";position:absolute;inset:-2px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.8 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");mix-blend-mode:lighten;opacity:.7;pointer-events:none}
+  .stamp.s-top{top:40px;right:70px;rotate:7deg}
+  .stamp.s-mid{top:50%;left:55%;rotate:-4deg;font-size:18px}
+  .stamp.s-bottom{bottom:50px;left:50%;translate:-50% 0;rotate:-3deg}
+
+  /* ——— case row ——— */
+  .case{display:grid;grid-template-columns:1fr 260px;gap:36px;align-items:start;margin-top:14px}
+  .kicker{font-family:"Archivo Narrow";font-weight:700;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+  .kicker::before{content:"●  ";color:var(--red)}
+  h1{font-family:"Special Elite";font-weight:400;font-size:66px;line-height:1.1;letter-spacing:-.01em;color:var(--ink)}
+  h1 em{font-style:italic;color:var(--red)}
+  h1 .redacted{display:inline-block;background:var(--ink);color:var(--ink);padding:0 16px;margin:0 4px;user-select:none;vertical-align:-3px;font-weight:700;border-radius:2px}
+  .subject{margin-top:20px;font-size:16px;line-height:1.7;max-width:58ch;color:var(--ink)}
+  .subject b{background:rgba(180,35,26,.12);padding:1px 4px;font-weight:700}
+  .meta{margin-top:24px;border:1px solid var(--ink);padding:16px 18px;background:rgba(255,255,255,.25);display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .meta div{font-family:"Archivo Narrow";font-weight:600;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute)}
+  .meta div b{display:block;font-family:"Special Elite";font-size:22px;color:var(--ink);letter-spacing:-.01em;margin-top:4px;font-weight:400}
+
+  /* ——— photo/id card ——— */
+  .idcard{border:2px solid var(--ink);padding:14px;background:var(--paper-2);position:relative}
+  .idcard .label{font-family:"Archivo Narrow";font-weight:700;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px}
+  .idcard .photo{
+    aspect-ratio:4/5;
+    background:
+      repeating-linear-gradient(45deg, rgba(0,0,0,.05) 0 6px, transparent 6px 12px),
+      linear-gradient(180deg, #9E8A66 0%, #7A6A4F 100%);
+    border:1px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Archivo";font-weight:800;font-size:52px;color:rgba(255,255,255,.6);letter-spacing:.05em;
+    position:relative;
+  }
+  .idcard .photo::after{
+    content:"REDACTED";position:absolute;left:10%;right:10%;top:50%;translate:0 -50%;
+    background:var(--ink);color:var(--manila);font-family:"Archivo";font-weight:900;font-size:14px;letter-spacing:.2em;text-align:center;padding:4px 0;
+  }
+  .idcard .fields{margin-top:12px;display:grid;gap:4px;font-family:"Archivo Narrow";font-size:11px;color:var(--ink-soft);letter-spacing:.06em}
+  .idcard .fields span{display:block;text-transform:uppercase}
+  .idcard .fields span b{color:var(--ink);font-weight:700}
+  .idcard .sig{margin-top:10px;border-top:1px solid var(--ink);padding-top:6px;font-family:"Special Elite";font-style:italic;font-size:13px;color:var(--ink-soft);text-align:center}
+
+  /* ——— section ——— */
+  .section{margin-top:44px;padding-top:28px;border-top:2px solid var(--ink)}
+  .section .head{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:baseline;margin-bottom:20px}
+  .section .head .n{font-family:"Archivo";font-weight:900;font-size:14px;letter-spacing:.22em;color:var(--red);padding:5px 10px;border:2px solid var(--red);text-transform:uppercase}
+  .section .head h2{font-family:"Special Elite";font-size:34px;letter-spacing:.005em;line-height:1}
+  .section .head .code{font-family:"Archivo Narrow";font-weight:600;font-size:11px;letter-spacing:.22em;color:var(--ink-mute);text-transform:uppercase}
+
+  /* ——— mirror (evidence list) ——— */
+  .evidence{border:1.5px solid var(--ink);background:rgba(255,255,255,.2)}
+  .evidence .ev-head{display:grid;grid-template-columns:80px 1fr 120px 90px;gap:14px;padding:10px 14px;background:var(--ink);color:var(--manila);font-family:"Archivo Narrow";font-weight:700;font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+  .evidence .ev-row{display:grid;grid-template-columns:80px 1fr 120px 90px;gap:14px;padding:12px 14px;border-bottom:1px dashed var(--rule);font-size:14.5px;align-items:center}
+  .evidence .ev-row:last-child{border-bottom:none}
+  .evidence .ev-row .id{font-family:"Archivo Narrow";font-weight:700;color:var(--red);letter-spacing:.12em;font-size:12px}
+  .evidence .ev-row .date{font-family:"Archivo Narrow";font-size:12px;color:var(--ink-mute);letter-spacing:.08em;text-transform:uppercase}
+  .evidence .ev-row .flag{font-family:"Archivo";font-weight:800;font-size:10px;letter-spacing:.18em;padding:3px 8px;text-align:center;border:1.5px solid var(--red);color:var(--red);text-transform:uppercase}
+  .evidence .ev-row .flag.ok{border-color:var(--ink);color:var(--ink)}
+
+  /* ——— audience ——— */
+  .aud{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .aud .block{border:1.5px solid var(--ink);padding:22px;background:rgba(255,255,255,.22)}
+  .aud .block h3{font-family:"Special Elite";font-size:18px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--ink)}
+  .aud ul{list-style:none;display:grid;gap:4px;font-family:"Archivo Narrow";font-size:13.5px}
+  .aud ul li{padding:5px 10px;border:1px dashed var(--rule);display:flex;justify-content:space-between}
+  .aud ul li span{font-family:"Courier Prime";color:var(--ink-mute);font-size:11px;letter-spacing:.08em}
+
+  /* ——— modules (ops files) ——— */
+  .ops{display:grid;gap:14px}
+  .op{border:1.5px solid var(--ink);background:rgba(255,255,255,.25);padding:0}
+  .op .bar{display:grid;grid-template-columns:auto 1fr auto auto;gap:16px;padding:10px 14px;background:var(--ink);color:var(--manila);font-family:"Archivo Narrow";font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;align-items:center}
+  .op .bar .code{color:var(--red-deep);background:var(--manila);padding:2px 8px;letter-spacing:.22em}
+  .op .bar .status{border:1px solid var(--manila);padding:2px 8px}
+  .op .body{display:grid;grid-template-columns:1fr 300px;gap:24px;padding:22px 20px}
+  .op h4{font-family:"Special Elite";font-size:24px;line-height:1.15;margin-bottom:10px}
+  .op p{font-size:14.5px;line-height:1.7;color:var(--ink);max-width:58ch}
+  .op .brief{border-left:3px solid var(--red);padding:6px 12px;margin-top:12px;background:rgba(180,35,26,.07);font-size:13.5px;color:var(--ink-soft);font-style:italic}
+  .op .assets{font-family:"Archivo Narrow";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);padding-top:10px;border-top:1px dashed var(--rule);margin-top:12px;display:flex;gap:12px;flex-wrap:wrap}
+  .op .assets b{color:var(--ink);font-weight:700}
+  .op .side{border-left:1px dashed var(--rule);padding-left:20px;font-family:"Archivo Narrow";font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+  .op .side div{padding:5px 0;border-bottom:1px dotted var(--rule-dim);display:flex;justify-content:space-between;gap:10px}
+  .op .side div b{color:var(--ink);font-weight:700;letter-spacing:.04em;text-transform:none;font-family:"Courier Prime";font-size:13px}
+
+  /* ——— pricing (authorisation levels) ——— */
+  .levels{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--ink);background:rgba(255,255,255,.22)}
+  .level{padding:26px 22px;border-right:1.5px solid var(--ink);position:relative}
+  .level:last-child{border-right:none}
+  .level.feat{background:var(--ink);color:var(--manila)}
+  .level .tier{font-family:"Archivo";font-weight:900;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
+  .level.feat .tier{color:#F4B83F}
+  .level .amt{font-family:"Special Elite";font-size:46px;line-height:1;margin:10px 0 4px}
+  .level .per{font-family:"Archivo Narrow";font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute)}
+  .level.feat .per{color:rgba(244,184,63,.7)}
+  .level ul{list-style:none;margin-top:16px;font-size:13.5px}
+  .level ul li{padding:6px 0 6px 22px;position:relative;line-height:1.55;border-bottom:1px dotted var(--rule-dim)}
+  .level.feat ul li{border-bottom-color:rgba(244,184,63,.2)}
+  .level ul li::before{content:"☒";position:absolute;left:0;color:var(--red);font-size:11px;top:7px}
+  .level.feat ul li::before{color:#F4B83F}
+  .level .go{margin-top:18px;display:inline-block;padding:10px 18px;border:2px solid var(--ink);font-family:"Archivo";font-weight:900;font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;background:var(--ink);color:var(--manila)}
+  .level.feat .go{background:#F4B83F;color:var(--ink);border-color:#F4B83F}
+  .level .stamp-small{position:absolute;top:12px;right:12px;font-family:"Archivo";font-weight:900;font-size:9px;letter-spacing:.25em;color:var(--red);border:1.5px solid var(--red);padding:3px 6px;rotate:6deg;background:rgba(255,255,255,.1)}
+  .level.feat .stamp-small{color:#F4B83F;border-color:#F4B83F}
+
+  /* ——— hosts (personnel) ——— */
+  .personnel{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .person{display:grid;grid-template-columns:130px 1fr;gap:22px;border:1.5px solid var(--ink);padding:16px;background:rgba(255,255,255,.22)}
+  .person .photo{aspect-ratio:4/5;background:
+    repeating-linear-gradient(45deg, rgba(0,0,0,.06) 0 6px, transparent 6px 12px),
+    linear-gradient(180deg, #8D7854 0%, #5C4D34 100%);
+    border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;
+    font-family:"Archivo";font-weight:900;font-size:40px;color:rgba(255,255,255,.7)}
+  .person h4{font-family:"Special Elite";font-size:22px;margin-bottom:4px}
+  .person .role{font-family:"Archivo Narrow";font-weight:700;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+  .person .fields{display:grid;grid-template-columns:80px 1fr;gap:4px 12px;font-family:"Archivo Narrow";font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:12px}
+  .person .fields b{color:var(--ink);font-weight:700;font-family:"Courier Prime";font-size:13px;letter-spacing:0;text-transform:none}
+  .person p{font-size:13.5px;line-height:1.6;color:var(--ink-soft)}
+
+  /* ——— faq (interrogation) ——— */
+  .qa{border:1.5px solid var(--ink);background:rgba(255,255,255,.22)}
+  .qa details{border-bottom:1px dashed var(--rule)}
+  .qa details:last-child{border-bottom:none}
+  .qa summary{list-style:none;cursor:pointer;padding:14px 18px;display:grid;grid-template-columns:60px 1fr 30px;gap:16px;align-items:center;font-family:"Special Elite";font-size:17px}
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary .q{font-family:"Archivo";font-weight:900;font-size:12px;letter-spacing:.22em;color:var(--red);border:1.5px solid var(--red);padding:3px 8px;text-align:center;text-transform:uppercase}
+  .qa summary::after{content:"+";font-family:"Archivo";font-weight:400;font-size:22px;color:var(--ink);text-align:right}
+  .qa details[open] summary::after{content:"−"}
+  .qa .answer{padding:0 18px 16px 96px;font-size:14.5px;line-height:1.7;color:var(--ink-soft);border-top:1px dotted var(--rule-dim);padding-top:10px;margin-top:-4px}
+  .qa .answer::before{content:"A. ";font-family:"Archivo";font-weight:900;color:var(--ink);letter-spacing:.18em}
+
+  /* ——— final CTA ——— */
+  .final{margin-top:54px;padding:40px 36px;border:3px double var(--ink);background:rgba(255,255,255,.28);position:relative}
+  .final .kicker{color:var(--red)}
+  .final h2{font-family:"Special Elite";font-size:50px;line-height:1.1;max-width:24ch}
+  .final h2 em{color:var(--red);font-style:italic}
+  .final p{margin-top:18px;font-size:16px;line-height:1.7;max-width:58ch;color:var(--ink)}
+  .final .buttons{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;font-family:"Archivo";font-weight:900;font-size:13px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;background:var(--ink);color:var(--manila);border:2px solid var(--ink)}
+  .btn::after{content:"→"}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .final .stamp{position:absolute;font-size:26px;right:40px;top:50%;translate:0 -50%;rotate:-5deg}
+
+  /* ——— footer ——— */
+  .footmeta{margin-top:26px;padding-top:16px;border-top:1px dashed var(--rule);display:flex;justify-content:space-between;font-family:"Archivo Narrow";font-weight:600;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute)}
+
+  @media (max-width:900px){
+    .case,.op .body,.aud,.levels,.personnel{grid-template-columns:1fr}
+    .level{border-right:none;border-bottom:1.5px solid var(--ink)}
+    .op .side{border-left:none;border-top:1px dashed var(--rule);padding-left:0;padding-top:14px;margin-top:14px}
+    h1{font-size:42px}
+    .meta{grid-template-columns:repeat(2,1fr)}
+    .sheet{padding:24px 22px 28px}
+    .sheet::before,.sheet::after{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="folder">
+    <span class="tab">File · AFW-001/MMXXVI</span>
+    <div class="sheet">
+
+      <!-- stamps -->
+      <div class="stamp s-top">DECLASSIFIED</div>
+
+      <!-- document header -->
+      <div class="dochead">
+        <div class="row">
+          <span>File No. <b>AFW-2026-001</b></span>
+          <span class="title">THE AI-FOR-WORK DOSSIER</span>
+          <span class="classification">TOP SECRET ⋆ CLEARED</span>
+        </div>
+        <div class="row">
+          <span>Origin <b>MOSCOW ⋆ REMOTE</b></span>
+          <span style="text-align:center">Subject: самостоятельный оператор на базе ИИ-агентов</span>
+          <span>Issued <b>25 · IV · 2026</b></span>
+        </div>
+        <div class="row" style="align-items:center">
+          <span>Access <b>LEVEL-3+</b></span>
+          <span style="text-align:center"><span class="barcode"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></span>
+          <span>Pages <b>I / VIII</b></span>
+        </div>
+      </div>
+
+      <!-- CASE / HERO -->
+      <div class="case">
+        <div>
+          <div class="kicker">Case brief · сводка по делу</div>
+          <h1>Операция:<br><em>«AI FOR WORK».</em><br>Цель — <span class="redacted">‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏</span> рутину.</h1>
+          <p class="subject">Практический курс по <b>ИИ-агентам</b> (Codex, Claude Code) для&nbsp;личного состава без&nbsp;инженерной подготовки. Шесть недель, четыре модуля, один&nbsp;автономный агент — в итоге файла.</p>
+          <div class="meta">
+            <div>Продолжительность<b>6 нед.</b></div>
+            <div>Модулей<b>IV</b></div>
+            <div>Финальный проект<b>1</b></div>
+            <div>Предварительная подготовка<b>нет</b></div>
+          </div>
+        </div>
+        <div>
+          <div class="idcard">
+            <div class="label">Subject · identification card</div>
+            <div class="photo">AFW</div>
+            <div class="fields">
+              <span>Code: <b>AFW-01</b></span>
+              <span>Role: <b>Operator / non-dev</b></span>
+              <span>Status: <b>ACTIVE</b></span>
+              <span>Clearance: <b>Level-3+</b></span>
+            </div>
+            <div class="sig">— подпись куратора —</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIRROR / EVIDENCE -->
+      <div class="section">
+        <div class="head">
+          <span class="n">§ 01 / Evidence</span>
+          <h2>Узнаёте себя?</h2>
+          <span class="code">Exhibit A · observations</span>
+        </div>
+        <div class="evidence">
+          <div class="ev-head">
+            <span>File #</span><span>Наблюдение</span><span>Дата фиксации</span><span>Статус</span>
+          </div>
+          <div class="ev-row"><span class="id">AF-01</span><span>Каждую неделю копипастите данные из таблицы в таблицу и называете это «аналитикой».</span><span class="date">Пт, 21:47</span><span class="flag">flag</span></div>
+          <div class="ev-row"><span class="id">AF-02</span><span>Читаете по сорок вакансий с HH, чтобы «понять» рынок зарплат.</span><span class="date">Ср, 14:12</span><span class="flag">flag</span></div>
+          <div class="ev-row"><span class="id">AF-03</span><span>По пятницам руками собираете сводки из Telegram-чатов.</span><span class="date">Пт, 18:03</span><span class="flag">flag</span></div>
+          <div class="ev-row"><span class="id">AF-04</span><span>Собираете одну и ту же презентацию из Excel раз в неделю.</span><span class="date">Пн, 09:00</span><span class="flag">flag</span></div>
+          <div class="ev-row"><span class="id">AF-05</span><span>Пробовали ChatGPT — понравилось, но в работу не зашло.</span><span class="date">— / —</span><span class="flag ok">noted</span></div>
+          <div class="ev-row"><span class="id">AF-06</span><span>Знаете, что «ИИ всё решит», но не знаете, с какой стороны подойти.</span><span class="date">— / —</span><span class="flag ok">noted</span></div>
+        </div>
+      </div>
+
+      <!-- AUDIENCE / PROFILE -->
+      <div class="section">
+        <div class="head">
+          <span class="n">§ 02 / Profile</span>
+          <h2>Субъектный состав</h2>
+          <span class="code">Exhibit B · who the subject is</span>
+        </div>
+        <div class="aud">
+          <div class="block">
+            <h3>Роли · officers</h3>
+            <ul>
+              <li>Продакт-менеджер<span>product</span></li>
+              <li>Маркетолог<span>marketing</span></li>
+              <li>HR · Рекрутер<span>people</span></li>
+              <li>Аналитик<span>analytics</span></li>
+              <li>Операционный<span>ops</span></li>
+              <li>Фаундер · ассистент<span>founder</span></li>
+            </ul>
+          </div>
+          <div class="block">
+            <h3>Задачи · assignments</h3>
+            <ul>
+              <li>Ресёрч рынка и конкурентов<span>research</span></li>
+              <li>Регулярные отчёты и сводки<span>reports</span></li>
+              <li>Презентации из таблиц<span>decks</span></li>
+              <li>Скоринг вакансий и кандидатов<span>hiring</span></li>
+              <li>Свод чатов, писем, лент<span>inbox</span></li>
+              <li>Проверка гипотез<span>validation</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULES / OPERATIONS -->
+      <div class="section">
+        <div class="head">
+          <span class="n">§ 03 / Operations</span>
+          <h2>Четыре боевые задачи</h2>
+          <span class="code">Ops I–IV · scope of training</span>
+        </div>
+        <div class="ops">
+          <div class="op">
+            <div class="bar"><span class="code">OP-01</span><span>Файлы, таблицы, презентации</span><span class="status">cleared</span><span>Week 2</span></div>
+            <div class="body">
+              <div>
+                <h4>«Превратить Excel в слайды»</h4>
+                <p>Агент принимает <code>.xlsx</code> / <code>.csv</code>, считает агрегаты, собирает слайды в нужной вёрстке. Оператор участвует только на этапе утверждения материалов.</p>
+                <div class="brief">brief — устранить ручной сбор еженедельных отчётов из таблиц.</div>
+                <div class="assets"><span>assets: <b>Codex</b></span><span><b>Claude Code</b></span><span><b>.xlsx / .csv / .pptx</b></span></div>
+              </div>
+              <div class="side">
+                <div>Длительность<b>5 дней</b></div>
+                <div>Практика<b>на своих файлах</b></div>
+                <div>Разбор<b>1 · live</b></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="op">
+            <div class="bar"><span class="code">OP-02</span><span>Ресёрч по HeadHunter</span><span class="status">cleared</span><span>Week 3</span></div>
+            <div class="body">
+              <div>
+                <h4>«Собрать рынок за 15 минут»</h4>
+                <p>Агент собирает вакансии по вашим критериям, скорит по важным для вас признакам, выдаёт сводку по рынку зарплат и требованиям.</p>
+                <div class="brief">brief — заменить недели ручного чтения вакансий одним запросом.</div>
+                <div class="assets"><span>assets: <b>Browser-use</b></span><span><b>HH API</b></span><span><b>Claude Code</b></span></div>
+              </div>
+              <div class="side">
+                <div>Длительность<b>5 дней</b></div>
+                <div>Выхлоп<b>готовая сводка</b></div>
+                <div>Разбор<b>1 · live</b></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="op">
+            <div class="bar"><span class="code">OP-03</span><span>Telegram-ассистент</span><span class="status">cleared</span><span>Week 4</span></div>
+            <div class="body">
+              <div>
+                <h4>«Свод чатов без боли»</h4>
+                <p>Сводки по чатам, умный поиск по тысячам сообщений, ответы по шаблону, фильтрация по людям и темам. Освобождает пятницы.</p>
+                <div class="brief">brief — закрыть регулярный «свод по чатам» одной командой.</div>
+                <div class="assets"><span>assets: <b>Bot API</b></span><span><b>MTProto</b></span><span><b>Codex</b></span></div>
+              </div>
+              <div class="side">
+                <div>Длительность<b>5 дней</b></div>
+                <div>Тип<b>персональный бот</b></div>
+                <div>Разбор<b>1 · live</b></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="op">
+            <div class="bar"><span class="code">OP-04</span><span>Автономный браузер</span><span class="status">cleared</span><span>Week 5–6</span></div>
+            <div class="body">
+              <div>
+                <h4>«Агент на задаче»</h4>
+                <p>Агент кликает, заполняет формы, ходит по сайтам, выполняет регулярные действия. На этом модуле строится финальный проект — агент под вашу задачу.</p>
+                <div class="brief">brief — финальная операция: собственный агент в реальной работе.</div>
+                <div class="assets"><span>assets: <b>Browser-use</b></span><span><b>Playwright</b></span><span><b>Claude Code</b></span></div>
+              </div>
+              <div class="side">
+                <div>Длительность<b>2 недели</b></div>
+                <div>Итог<b>запускаемый агент</b></div>
+                <div>Защита<b>демо · live</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEVELS / PRICING -->
+      <div class="section">
+        <div class="head">
+          <span class="n">§ 04 / Clearance</span>
+          <h2>Уровни допуска</h2>
+          <span class="code">Authorised access tiers</span>
+        </div>
+        <div class="levels">
+          <div class="level">
+            <span class="stamp-small">Level-1</span>
+            <div class="tier">Базовый</div>
+            <div class="amt">29.000₽</div>
+            <div class="per">self-study · materials only</div>
+            <ul>
+              <li>Все модули и материалы</li>
+              <li>Доступ в общий чат</li>
+              <li>Разборы в записи</li>
+              <li>Финальный проект самостоятельно</li>
+            </ul>
+            <a class="go" href="#">Заявка</a>
+          </div>
+          <div class="level feat">
+            <span class="stamp-small">Level-2 · recommended</span>
+            <div class="tier">С проверкой</div>
+            <div class="amt">59.000₽</div>
+            <div class="per">supervised · feedback loop</div>
+            <ul>
+              <li>Всё из «Базового»</li>
+              <li>Проверка домашних заданий</li>
+              <li>Личный фидбэк по проекту</li>
+              <li>Доступ к живым разборам</li>
+            </ul>
+            <a class="go" href="#">Заявка</a>
+          </div>
+          <div class="level">
+            <span class="stamp-small">Level-3+</span>
+            <div class="tier">VIP</div>
+            <div class="amt">149.000₽</div>
+            <div class="per">bespoke · 1-on-1 ops</div>
+            <ul>
+              <li>Всё из «С проверкой»</li>
+              <li>Две 1-на-1 с авторами</li>
+              <li>Кастомный агент под задачу</li>
+              <li>Приоритет на новых потоках</li>
+            </ul>
+            <a class="go" href="#">Заявка</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PERSONNEL -->
+      <div class="section">
+        <div class="head">
+          <span class="n">§ 05 / Personnel</span>
+          <h2>Кто ведёт операцию</h2>
+          <span class="code">Handlers · authorised</span>
+        </div>
+        <div class="personnel">
+          <div class="person">
+            <div class="photo">КШ</div>
+            <div>
+              <h4>Коля Шейко</h4>
+              <div class="role">Technical handler · инженер</div>
+              <div class="fields">
+                <span>ID:</span><b>AFW-H01</b>
+                <span>Scope:</span><b>agents &amp; infra</b>
+                <span>Years:</span><b>10+ product dev</b>
+              </div>
+              <p>Работает с агентами ежедневно. Отвечает за то, чтобы всё запускалось и действительно работало на ваших задачах.</p>
+            </div>
+          </div>
+          <div class="person">
+            <div class="photo">СЛ</div>
+            <div>
+              <h4>Саша Литская</h4>
+              <div class="role">Format handler · методолог</div>
+              <div class="fields">
+                <span>ID:</span><b>AFW-H02</b>
+                <span>Scope:</span><b>format &amp; retention</b>
+                <span>Focus:</span><b>education design</b>
+              </div>
+              <p>Куратор образовательных программ. Делает так, чтобы сложное становилось простым и не забывалось через неделю после финиша.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ / INTERROGATION -->
+      <div class="section">
+        <div class="head">
+          <span class="n">§ 06 / Q&amp;A</span>
+          <h2>Протокол допроса</h2>
+          <span class="code">Interrogation log · transcript</span>
+        </div>
+        <div class="qa">
+          <details open>
+            <summary><span class="q">Q.01</span><span>Нужно ли программировать?</span></summary>
+            <div class="answer">Нет. Курс для тех, кто не пишет код. Всё, что нужно — умение открыть терминал по пошаговой инструкции.</div>
+          </details>
+          <details>
+            <summary><span class="q">Q.02</span><span>Какой ноутбук нужен?</span></summary>
+            <div class="answer">Любой современный ноутбук. Mac, Windows, Linux — подходит. Инструкции по установке даются в первой неделе.</div>
+          </details>
+          <details>
+            <summary><span class="q">Q.03</span><span>Что если пропущу неделю?</span></summary>
+            <div class="answer">Материалы и разборы остаются в доступе. Чат помогает догнать пропущенное.</div>
+          </details>
+          <details>
+            <summary><span class="q">Q.04</span><span>Курс окупится?</span></summary>
+            <div class="answer">Если автоматизируем хотя бы одну из ваших еженедельных рутин — да. Обычно получается три-четыре.</div>
+          </details>
+          <details>
+            <summary><span class="q">Q.05</span><span>Можно оплатить от юрлица?</span></summary>
+            <div class="answer">Да, оформляем договор и счёт. Напишите нам после выбора тарифа.</div>
+          </details>
+        </div>
+      </div>
+
+      <!-- FINAL -->
+      <div class="final">
+        <div class="stamp s-mid">APPROVED</div>
+        <div class="kicker">Order of engagement · приказ о выступлении</div>
+        <h2>Хватит копировать.<br><em>Пора делегировать.</em></h2>
+        <p>Набор на первый поток открыт. Группа камерная — так разборы работают. Запись закрывается, как только группа наполняется.</p>
+        <div class="buttons">
+          <a class="btn" href="#">Подать заявку</a>
+          <a class="btn ghost" href="#">Скачать программу</a>
+        </div>
+      </div>
+
+      <div class="footmeta">
+        <span>File AFW-2026-001 · page i of viii</span>
+        <span>© MMXXVI · AI for Work</span>
+        <span>hello@aiforwork</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

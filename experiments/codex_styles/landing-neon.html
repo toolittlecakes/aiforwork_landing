@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI for Work — Neon Ops</title>
+  <style>
+    :root {
+      --bg: #070811;
+      --panel: #101426;
+      --text: #e2ecff;
+      --muted: #a5aec8;
+      --neon: #00ffd5;
+      --pink: #ff2bdc;
+      --violet: #7b67ff;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(123, 103, 255, 0.16), transparent 40%), var(--bg);
+      color: var(--text);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .wrap {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 48px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 3px);
+      mix-blend-mode: soft-light;
+      z-index: 1;
+    }
+
+    .topbar, .card, .stats, .actions {
+      border: 1px solid rgba(127, 136, 175, 0.3);
+      background: rgba(16, 20, 38, 0.55);
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 18px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .brand span { color: var(--neon); }
+
+    .btn {
+      color: #0b1023;
+      text-decoration: none;
+      background: linear-gradient(90deg, var(--neon), var(--pink));
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 700;
+    }
+
+    .card {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      padding: 34px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.9rem, 5vw, 3.2rem);
+      letter-spacing: 0.3px;
+    }
+
+    p { color: var(--muted); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 16px;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .stat {
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,255,213,0.22);
+      background: rgba(0, 255, 213, 0.08);
+      text-align: center;
+    }
+    .stat b { font-size: 1.35rem; display: block; color: white; }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .item {
+      border: 1px dashed rgba(255,255,255,0.26);
+      padding: 12px;
+      border-radius: 10px;
+      color: #dbe6ff;
+    }
+
+    .item strong { color: var(--neon); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .chip {
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .card, .actions, .stats, .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <main class="wrap">
+    <div class="topbar">
+      <div class="brand"><span>AI</span> for Work</div>
+      <a class="btn" href="#">Start</a>
+    </div>
+
+    <section class="card">
+      <div>
+        <h1>Ускорьте команду через AI-операционный контур.</h1>
+        <p>Набор инструментов для управления задачами, контентом и фоллоуапами в одном интерфейсе без лишнего шума.</p>
+        <div class="stats">
+          <div class="stat"><b>72%</b><span>меньше ручного поиска</span></div>
+          <div class="stat"><b>3x</b><span>больше завершенных задач</span></div>
+          <div class="stat"><b>0.8с</b><span>реакция бота на тикеты</span></div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="item"><strong>Интеграции:</strong> почта, CRM, чаты</div>
+        <div class="item"><strong>Контроль:</strong> приоритеты, дедлайны, статусы</div>
+        <div class="item"><strong>Безопасность:</strong> изолированные рабочие пространства</div>
+        <div class="item"><strong>Оповещения:</strong> умные напоминания и эскалации</div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="chip">Сильная типографика и читаемость.</div>
+      <div class="chip">Модель, которая учится на привычках команды.</div>
+      <div class="chip">Минималистичный интерфейс без «карго-культа» функций.</div>
+    </section>
+  </main>
+</body>
+</html>

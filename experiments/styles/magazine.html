@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI For Work — Magazine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PP+Editorial+New&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3EFE7;
+    --paper-2:#EAE5D7;
+    --ink:#0E0D0B;
+    --mute:#6C6659;
+    --rule:#0E0D0B;
+    --accent:#B83227;
+    --gold:#A57D2E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:'EB Garamond',serif;font-size:19px;line-height:1.55;-webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(ellipse 1200px 800px at 20% -10%,rgba(184,50,39,.05),transparent 60%),
+      radial-gradient(ellipse 1000px 700px at 110% 110%,rgba(165,125,46,.06),transparent 60%);
+  }
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;mix-blend-mode:multiply;opacity:.35;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .05 0 0 0 0 .04 0 0 0 0 .03 0 0 0 .08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+  a{color:inherit}
+  .serif{font-family:'Fraunces',serif}
+  .display{font-family:'Fraunces',serif;font-variation-settings:"opsz" 144}
+  .sans{font-family:'IBM Plex Sans',sans-serif}
+  .italic{font-style:italic}
+
+  .wrap{max-width:1280px;margin:0 auto;padding:0 40px;position:relative;z-index:2}
+
+  /* masthead */
+  .mast{border-bottom:1px solid var(--rule);padding:14px 0}
+  .mast .wrap{display:grid;grid-template-columns:1fr auto 1fr;gap:32px;align-items:center;font-family:'IBM Plex Sans',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+  .mast .ttl{font-family:'Fraunces',serif;font-weight:500;font-size:26px;letter-spacing:-.02em;text-transform:none;color:var(--ink);text-align:center}
+  .mast .ttl i{font-style:italic;color:var(--accent)}
+  .mast nav ul{list-style:none;display:flex;gap:24px;justify-content:flex-end}
+  .mast nav a{text-decoration:none}
+  .mast nav a:hover{color:var(--ink)}
+
+  /* folio */
+  .folio{display:flex;justify-content:space-between;font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding:12px 0 40px;border-bottom:1px solid var(--rule);margin-bottom:40px}
+  .folio b{color:var(--ink);font-weight:500}
+
+  /* cover */
+  .cover{padding:40px 0 72px;border-bottom:2px solid var(--rule)}
+  .cover .wrap{display:grid;grid-template-columns:7fr 5fr;gap:48px}
+  .cover .lead{grid-column:1}
+  .cover .side{grid-column:2;padding-top:24px}
+  .cover h1{font-family:'Fraunces',serif;font-variation-settings:"opsz" 144;font-weight:500;font-size:clamp(72px,11vw,192px);line-height:.88;letter-spacing:-.035em;margin:24px 0 0}
+  .cover h1 em{font-style:italic;font-weight:400;color:var(--accent)}
+  .cover h1 span.amp{font-family:'PP Editorial New','Fraunces',serif;font-style:italic;color:var(--gold)}
+  .deck{font-family:'Fraunces',serif;font-style:italic;font-size:28px;line-height:1.3;color:#2A2722;margin-top:36px;max-width:36ch}
+  .byline{font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-top:36px}
+  .byline b{color:var(--ink)}
+
+  .cover .side{border-left:1px solid var(--rule);padding-left:36px;font-size:17px;line-height:1.6}
+  .cover .side .dek-label{font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .cover .side p::first-letter{font-family:'Fraunces',serif;font-size:72px;float:left;line-height:.85;padding-right:10px;padding-top:6px;color:var(--accent);font-weight:500}
+  .cover .side .cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;background:var(--ink);color:var(--paper);text-decoration:none;font-family:'IBM Plex Sans',sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;transition:background .15s}
+  .btn:hover{background:var(--accent)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+
+  .orn{display:flex;justify-content:center;align-items:center;gap:16px;padding:48px 0;font-family:'Fraunces',serif;font-style:italic;color:var(--gold);font-size:22px}
+  .orn::before,.orn::after{content:"";height:1px;background:var(--rule);flex:1;max-width:180px}
+
+  /* feature */
+  .feature{padding:56px 0;border-bottom:1px solid var(--rule);position:relative}
+  .feature .wrap{display:grid;grid-template-columns:1fr 7fr 4fr;gap:32px}
+  .chap{font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);writing-mode:vertical-rl;transform:rotate(180deg);padding-top:20px;align-self:start}
+  .feature h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(44px,6vw,84px);line-height:.98;letter-spacing:-.02em;max-width:18ch;grid-column:2;margin-bottom:32px}
+  .feature h2 em{font-style:italic;color:var(--accent)}
+  .feature .margin{grid-column:3;font-family:'IBM Plex Sans',sans-serif;font-size:12px;line-height:1.55;color:var(--mute);padding-top:12px;border-top:1px solid var(--rule);max-width:32ch}
+  .feature .margin b{color:var(--ink);display:block;margin-bottom:8px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;font-size:10px}
+
+  /* mirror list */
+  .mirror{padding:64px 0;border-bottom:2px solid var(--rule)}
+  .mirror .wrap{display:grid;grid-template-columns:1fr 7fr 4fr;gap:32px}
+  .mirror ol{grid-column:2;list-style:none;counter-reset:m}
+  .mirror li{counter-increment:m;padding:22px 0;border-top:1px solid var(--rule);display:grid;grid-template-columns:60px 1fr;gap:24px;align-items:baseline;font-size:22px;line-height:1.4}
+  .mirror li::before{content:counter(m,decimal-leading-zero);font-family:'Fraunces',serif;font-style:italic;font-size:38px;color:var(--accent);line-height:1;font-weight:400}
+  .mirror li:last-child{border-bottom:1px solid var(--rule)}
+  .mirror li p{max-width:46ch}
+  .mirror li p em{color:var(--accent);font-style:italic}
+  .mirror .margin{grid-column:3}
+  .mirror .pull{font-family:'Fraunces',serif;font-style:italic;font-size:28px;line-height:1.3;padding:24px 0;border-top:3px solid var(--accent);border-bottom:1px solid var(--rule);color:#2A2722}
+
+  /* audience */
+  .aud{padding:72px 0;border-bottom:1px solid var(--rule)}
+  .aud .wrap{display:grid;grid-template-columns:5fr 7fr;gap:48px}
+  .aud .left h3{font-family:'Fraunces',serif;font-weight:500;font-size:44px;line-height:1.05;letter-spacing:-.02em;margin-bottom:20px}
+  .aud .left h3 em{font-style:italic;color:var(--accent)}
+  .aud .left p{color:#2A2722;font-size:19px}
+  .aud .lbl{font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);margin:32px 0 14px;padding-top:14px;border-top:1px solid var(--rule)}
+  .aud .cloud{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:'Fraunces',serif;font-size:20px;line-height:1.8}
+  .aud .cloud span{padding-right:14px;border-right:1px solid rgba(0,0,0,.2)}
+  .aud .cloud span:last-child{border-right:none}
+  .aud .cloud span:nth-child(4n){font-style:italic;color:var(--accent)}
+
+  /* modules */
+  .prog{padding:80px 0;border-bottom:2px solid var(--rule);background:var(--paper-2)}
+  .prog .section-label{font-family:'Fraunces',serif;font-style:italic;text-align:center;color:var(--gold);font-size:24px;margin-bottom:8px}
+  .prog h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(56px,8vw,112px);line-height:.95;letter-spacing:-.03em;text-align:center;margin-bottom:72px}
+  .prog h2 em{font-style:italic;color:var(--accent)}
+  .mods{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
+  .mod{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:44px 40px;position:relative;min-height:360px;display:flex;flex-direction:column;justify-content:space-between}
+  .mod .mno{font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+  .mod h3{font-family:'Fraunces',serif;font-weight:500;font-size:34px;line-height:1.08;letter-spacing:-.02em;margin-bottom:18px;max-width:22ch}
+  .mod p{font-family:'EB Garamond',serif;font-size:19px;line-height:1.55;max-width:46ch;color:#2A2722}
+  .mod .tags{margin-top:22px;display:flex;flex-wrap:wrap;gap:4px 10px;font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+  .mod .tags b{font-weight:500}
+  .mod .tags span::before{content:"·  "}
+  .mod::after{content:"⁕";position:absolute;top:28px;right:32px;color:var(--gold);font-size:24px}
+
+  /* format */
+  .format{padding:80px 0;border-bottom:1px solid var(--rule)}
+  .format .wrap{display:grid;grid-template-columns:4fr 8fr;gap:48px;align-items:start}
+  .format h2{font-family:'Fraunces',serif;font-weight:400;font-size:56px;line-height:1;letter-spacing:-.02em}
+  .format h2 em{font-style:italic;color:var(--accent)}
+  .format .lede{margin-top:16px;font-size:18px;line-height:1.5;color:#2A2722;max-width:38ch}
+  .format ol{list-style:none;counter-reset:w -1}
+  .format li{counter-increment:w;display:grid;grid-template-columns:100px 1fr;gap:28px;padding:20px 0;border-top:1px solid var(--rule);align-items:baseline}
+  .format li::before{content:"Неделя " counter(w);font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:500}
+  .format li strong{font-family:'Fraunces',serif;font-weight:500;font-size:24px;line-height:1.15}
+  .format li span{display:block;font-size:17px;color:#4A4337;margin-top:4px;max-width:60ch}
+  .format li:last-child{border-bottom:1px solid var(--rule)}
+
+  /* hosts */
+  .hosts{padding:96px 0;border-bottom:2px solid var(--rule);background:var(--paper-2)}
+  .hosts .section-label{font-family:'Fraunces',serif;font-style:italic;text-align:center;color:var(--gold);font-size:24px;margin-bottom:8px}
+  .hosts h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(48px,6vw,88px);line-height:1;letter-spacing:-.025em;text-align:center;margin-bottom:64px}
+  .hosts h2 em{font-style:italic;color:var(--accent)}
+  .hgrid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--rule)}
+  .host{padding:40px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:grid;grid-template-columns:1fr 1.3fr;gap:28px}
+  .host:nth-child(even){border-right:none}
+  .host .ph{aspect-ratio:3/4;background:
+    repeating-linear-gradient(0deg,rgba(14,13,11,.08) 0,rgba(14,13,11,.08) 1px,transparent 1px,transparent 3px),
+    linear-gradient(135deg,#7a6a5a,#3a3328);
+    display:flex;align-items:flex-end;padding:12px;color:var(--paper);font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+  .host:nth-child(2) .ph{background:
+    repeating-linear-gradient(0deg,rgba(14,13,11,.08) 0,rgba(14,13,11,.08) 1px,transparent 1px,transparent 3px),
+    linear-gradient(135deg,#8a6a4a,#4a2a18)}
+  .host h4{font-family:'Fraunces',serif;font-weight:500;font-size:34px;letter-spacing:-.02em;line-height:1;margin-bottom:4px}
+  .host .role{font-family:'Fraunces',serif;font-style:italic;color:var(--accent);font-size:16px;margin-bottom:18px}
+  .host ul{list-style:none;font-size:16px;line-height:1.4}
+  .host li{padding:10px 0;border-top:1px solid rgba(0,0,0,.12)}
+  .host li:first-child{border-top:none}
+
+  /* cta */
+  .closer{padding:140px 0 120px;text-align:center;position:relative}
+  .closer::before{content:"§";font-family:'Fraunces',serif;font-style:italic;font-size:80px;color:var(--gold);display:block;margin-bottom:16px}
+  .closer h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(64px,10vw,160px);line-height:.95;letter-spacing:-.03em;max-width:16ch;margin:0 auto 28px}
+  .closer h2 em{font-style:italic;color:var(--accent)}
+  .closer .lede{font-family:'Fraunces',serif;font-style:italic;font-size:26px;line-height:1.4;max-width:52ch;margin:0 auto 40px;color:#2A2722}
+
+  footer{border-top:2px solid var(--rule);padding:32px 0;font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+  footer .wrap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+  footer .c{text-align:center}
+  footer .r{text-align:right}
+
+  @media(max-width:900px){
+    .wrap{padding:0 24px}
+    .cover .wrap,.feature .wrap,.mirror .wrap,.aud .wrap,.mods,.format .wrap,.hgrid{grid-template-columns:1fr}
+    .chap{writing-mode:horizontal-tb;transform:none}
+    .host{grid-template-columns:1fr;border-right:none}
+    .cover .side{border-left:none;padding-left:0;border-top:1px solid var(--rule);padding-top:24px}
+    .feature .margin,.mirror .margin{max-width:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="mast"><div class="wrap">
+  <div>№ I · Весна 2026</div>
+  <div class="ttl">AI <i>For</i> Work</div>
+  <nav><ul>
+    <li><a href="#feature">Эссе</a></li>
+    <li><a href="#program">Программа</a></li>
+    <li><a href="#hosts">Редакция</a></li>
+    <li><a href="#apply">Подписка</a></li>
+  </ul></nav>
+</div></header>
+
+<div class="wrap"><div class="folio">
+  <span><b>Выпуск I.</b> Рутина и её замещение</span>
+  <span>Практический курс для не-разработчиков · 6 недель</span>
+  <span>стр. <b>002</b></span>
+</div></div>
+
+<section class="cover"><div class="wrap">
+  <div class="lead">
+    <div class="byline">— Предисловие · От редакции</div>
+    <h1>Отдайте <em>рутину</em>, <span class="amp">&amp;</span> оставьте <em>смысл</em>.</h1>
+    <p class="deck">Шесть недель о том, как научить ИИ-агента работать за вас с таблицами, вакансиями, Telegram и браузером — не написав ни строки кода.</p>
+    <div class="byline">— Ведут <b>Коля Шейко</b> и <b>Саша Литская</b> · старт первого потока</div>
+  </div>
+  <aside class="side">
+    <div class="dek-label">— От автора</div>
+    <p>Этот курс возник из наблюдения: большинство рабочих задач, которые мы считаем сложными, на самом деле — скучные. Открыть вкладки, собрать таблицу, свести колонки, переложить в документ. Именно эту часть агенты уже умеют делать хорошо. Мы покажем, как именно.</p>
+    <div class="cta">
+      <a href="#apply" class="btn">Заявиться в поток</a>
+      <a href="#program" class="btn ghost">Читать программу</a>
+    </div>
+  </aside>
+</div></section>
+
+<div class="orn">⁕ ⁕ ⁕</div>
+
+<section id="feature" class="feature"><div class="wrap">
+  <div class="chap">Глава I · Узнавание</div>
+  <div>
+    <h2>Работа, в которой слишком много <em>невидимого труда</em>.</h2>
+  </div>
+  <aside class="margin">
+    <b>— от редактора</b>
+    Мы не собираем здесь список проблем. Мы составляем описание состояния, которое читатель, скорее всего, уже знает по своему рабочему дню — но редко называет вслух.
+  </aside>
+</div></section>
+
+<section class="mirror"><div class="wrap">
+  <div></div>
+  <ol>
+    <li><p>Регулярно открываете десять вкладок и три таблицы, чтобы собрать из этого <em>один нормальный вывод</em>.</p></li>
+    <li><p>У вас есть папки, выгрузки и документы, до которых <em>страшно дотрагиваться</em>.</p></li>
+    <li><p>«Быстрый ресёрч» почему-то занимает <em>полдня</em>.</p></li>
+    <li><p>Руками переносите информацию между сервисами — раз за разом.</p></li>
+    <li><p>Хотите не «спросить у нейронки», а <em>дать ей задачу и получить</em> готовый рабочий результат.</p></li>
+    <li><p>Чувствуете, что рутина съедает больше половины рабочего дня — и при этом <em>ничего не создаёт</em>.</p></li>
+  </ol>
+  <aside class="margin">
+    <div class="pull">«Мы не хотим забрать у вас интересную часть работы. Наоборот — мы хотим, чтобы у вас <i>было</i> время на интересную часть».</div>
+  </aside>
+</div></section>
+
+<section class="aud"><div class="wrap">
+  <div class="left">
+    <h3>Для <em>всех</em>, у кого работа — это прежде всего информация.</h3>
+    <p>Курс не привязан к одной профессии: маркетинг, продукт, HR, продажи, ресёрч, операции — любая роль, где много сбора, сверки и повторений.</p>
+  </div>
+  <div>
+    <div class="lbl">— Роли</div>
+    <div class="cloud">
+      <span>маркетологи</span><span>аналитики</span><span>продакты</span><span>проджекты</span><span>HR и рекрутеры</span><span>сейлзы</span><span>операционные</span><span>исследователи</span><span>редакторы</span><span>методисты</span><span>продюсеры</span><span>фаундеры</span><span>account managers</span><span>customer success</span><span>people ops</span><span>SMM</span><span>PR</span><span>контент-команды</span><span>комьюнити-менеджеры</span>
+    </div>
+    <div class="lbl">— Задачи</div>
+    <div class="cloud">
+      <span>ресёрч</span><span>таблицы</span><span>отчёты</span><span>презентации</span><span>Telegram</span><span>вакансии</span><span>лидогенерация</span><span>анализ рынка</span><span>поиск клиентов</span><span>выгрузки</span><span>дашборды</span><span>брифы</span><span>сводки</span><span>контент-планы</span><span>формы</span><span>инсайты</span>
+    </div>
+  </div>
+</div></section>
+
+<section id="program" class="prog"><div class="wrap">
+  <div class="section-label">— Глава II —</div>
+  <h2>Программа из четырёх <em>практик</em>.</h2>
+  <div class="mods">
+    <article class="mod">
+      <div>
+        <div class="mno">— Модуль первый</div>
+        <h3>Из страшной таблицы — в презентацию</h3>
+        <p>Берём локальную выгрузку и превращаем её в понятный рабочий артефакт: HTML-отчёт, слайды, документ в стиле компании. Агент читает файл, а отдаёт — форму.</p>
+      </div>
+      <div class="tags"><b>Теги.</b> <span>файлы</span><span>таблицы</span><span>отчёт</span><span>презентация</span></div>
+    </article>
+    <article class="mod">
+      <div>
+        <div class="mno">— Модуль второй</div>
+        <h3>Ресёрч рынка на HeadHunter</h3>
+        <p>Вакансии и компании — как открытый источник данных. Учимся формулировать критерии, анализировать по смыслу и переносить подход: на найм, продажи, bizdev, поиск работы.</p>
+      </div>
+      <div class="tags"><b>Теги.</b> <span>ресёрч</span><span>вакансии</span><span>рынок</span><span>лиды</span></div>
+    </article>
+    <article class="mod">
+      <div>
+        <div class="mno">— Модуль третий</div>
+        <h3>Telegram без ручного копирования</h3>
+        <p>Превращаем бесконечную ленту в рабочий источник: мониторинг каналов, сводки обсуждений, инсайты, триггеры. И автоматическая доставка туда, где они нужны.</p>
+      </div>
+      <div class="tags"><b>Теги.</b> <span>telegram</span><span>сводки</span><span>мониторинг</span><span>дашборды</span></div>
+    </article>
+    <article class="mod">
+      <div>
+        <div class="mno">— Модуль четвёртый</div>
+        <h3>Рутина в браузере</h3>
+        <p>Агент — как пользователь: формы, личные кабинеты, LinkedIn, Яндекс Метрика. И аккуратный разговор о том, где можно, где нельзя, и как сделать, чтобы вас не забанили.</p>
+      </div>
+      <div class="tags"><b>Теги.</b> <span>browser use</span><span>формы</span><span>linkedin</span><span>метрика</span></div>
+    </article>
+  </div>
+
+  <p class="deck" style="margin:56px auto 0;max-width:58ch;text-align:center">Суть модулей — не в конкретных инструментах, а в подходах, применимых к любым данным, сервисам и процессам.</p>
+</div></section>
+
+<section class="format"><div class="wrap">
+  <div>
+    <h2>Шесть <em>недель</em>. Живой ритм, записи остаются.</h2>
+    <p class="lede">Одно занятие в неделю, домашка, разбор ошибок и удачных решений, финальный проект на собственном рабочем кейсе.</p>
+  </div>
+  <ol>
+    <li><div><strong>Знакомство и настройка</strong><span>Установка инструментов, первый простой шаг, знакомство с группой.</span></div></li>
+    <li><div><strong>Файлы и таблицы</strong><span>Первый воркшоп с локальными выгрузками. Первая домашка.</span></div></li>
+    <li><div><strong>Ресёрч рынка</strong><span>Работа с открытыми данными, отбор по смыслу.</span></div></li>
+    <li><div><strong>Telegram</strong><span>Сводки, мониторинг, автоматические отправки.</span></div></li>
+    <li><div><strong>Рутина в браузере</strong><span>Формы, кабинеты, LinkedIn, Метрика.</span></div></li>
+    <li><div><strong>Финальный проект</strong><span>Свой процесс + финальная встреча с презентациями участников.</span></div></li>
+  </ol>
+</div></section>
+
+<section id="hosts" class="hosts"><div class="wrap">
+  <div class="section-label">— Редакция —</div>
+  <h2>Курс ведут <em>Коля</em> и <em>Саша</em>.</h2>
+  <div class="hgrid">
+    <article class="host">
+      <div class="ph">портрет · н. шейко</div>
+      <div>
+        <h4>Коля Шейко</h4>
+        <div class="role">технология и агентные подходы</div>
+        <ul>
+          <li>Фаундер агентства ИИ-автоматизации</li>
+          <li>Ко-фаундер конференций entropy.talk</li>
+          <li>Автор канала «AI и грабли»</li>
+        </ul>
+      </div>
+    </article>
+    <article class="host">
+      <div class="ph">портрет · с. литская</div>
+      <div>
+        <h4>Саша Литская</h4>
+        <div class="role">формат, комьюнити, смысл</div>
+        <ul>
+          <li>Владелица керамической мастерской-коворкинга</li>
+          <li>Основатель арт-пространства в Академгородке</li>
+          <li>Продюсер и операционный директор онлайн-школы керамики</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+<section id="apply" class="closer"><div class="wrap">
+  <h2>Хотите <em>в первый</em> поток?</h2>
+  <p class="lede">Если в вашей работе много ручной информационной рутины — скорее всего, часть её уже можно отдать агенту. Мы покажем как.</p>
+  <a href="#" class="btn">Оставить заявку</a>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© MMXXVI · AI For Work</span>
+  <span class="c">Выпуск I · Весна 2026</span>
+  <span class="r">hello@aiforwork.ru</span>
+</div></footer>
+
+</body>
+</html>

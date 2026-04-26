@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI For Work — Dashboard</title>
+  <style>
+    :root {
+      --bg: #eef1f4;
+      --ink: #101418;
+      --muted: #65707a;
+      --panel: #ffffff;
+      --line: #d8dee5;
+      --green: #24c26a;
+      --blue: #2d6cdf;
+      --orange: #ff8a35;
+      --pink: #e94878;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .app {
+      display: grid;
+      grid-template-columns: 252px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .side {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 20px;
+      border-right: 1px solid var(--line);
+      background: #f8fafc;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      font-weight: 900;
+    }
+
+    .mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+    }
+
+    .menu {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .menu a {
+      padding: 10px 12px;
+      border-radius: 8px;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background: white;
+      color: var(--ink);
+      box-shadow: 0 1px 0 var(--line);
+    }
+
+    .side-cta {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      padding: 14px;
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: white;
+      font-size: 14px;
+    }
+
+    .side-cta a {
+      display: inline-flex;
+      margin-top: 12px;
+      padding: 9px 11px;
+      border-radius: 6px;
+      background: white;
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .main {
+      padding: 22px clamp(16px, 3vw, 34px) 60px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: white;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      border-radius: 7px;
+      background: var(--ink);
+      color: white;
+      font-weight: 800;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(16, 20, 24, .16);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 380px;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 0 14px 34px rgba(24, 31, 39, .06);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-3px);
+      border-color: #b9c4d0;
+      box-shadow: 0 20px 44px rgba(24, 31, 39, .1);
+    }
+
+    .hero-copy {
+      padding: clamp(26px, 5vw, 56px);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 860px;
+      font-size: clamp(48px, 7vw, 104px);
+      line-height: .91;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 22px 0 0;
+      color: #34404b;
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.25;
+      font-weight: 650;
+    }
+
+    .copy {
+      max-width: 680px;
+      margin: 18px 0 28px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .metric {
+      padding: 14px;
+      border-radius: 8px;
+      background: #f4f7fa;
+      border: 1px solid var(--line);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 27px;
+      line-height: 1;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .run {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .run-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .run-tabs button {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: white;
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .16s ease, background .16s ease, border-color .16s ease;
+    }
+
+    .run-tabs button:hover {
+      transform: translateY(-2px);
+      border-color: var(--ink);
+    }
+
+    .run-tabs button.is-active {
+      background: var(--ink);
+      color: white;
+    }
+
+    .task {
+      padding: 13px;
+      border-radius: 8px;
+      background: #f7f9fb;
+      border: 1px solid var(--line);
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .task:hover {
+      transform: translateX(4px);
+      border-color: var(--blue);
+      background: #edf3ff;
+    }
+
+    .task strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: #e4e9ef;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--green);
+    }
+
+    .section {
+      margin-top: 16px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin: 34px 0 12px;
+    }
+
+    h2 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 440px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      min-height: 172px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #b9c4d0;
+      box-shadow: 0 18px 38px rgba(24, 31, 39, .08);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 21px;
+      line-height: 1.1;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .card .badge {
+      display: inline-flex;
+      margin-bottom: 14px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: #edf3ff;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .wide-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 12px;
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .list li {
+      padding: 12px;
+      border-radius: 8px;
+      background: #f7f9fb;
+      color: var(--muted);
+    }
+
+    .price {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .price .card:nth-child(2) {
+      border-color: rgba(36, 194, 106, .5);
+      box-shadow: inset 4px 0 0 var(--green);
+    }
+
+    .final {
+      margin-top: 18px;
+      padding: clamp(34px, 6vw, 70px);
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: white;
+    }
+
+    .final h2 { max-width: 900px; }
+    .final p {
+      max-width: 720px;
+      color: #c6d0d9;
+      font-size: 18px;
+    }
+    .final .button { background: var(--green); color: var(--ink); }
+
+    .pulse {
+      animation: pulse .5s ease;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(.98); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 1020px) {
+      .app { grid-template-columns: 1fr; }
+      .side {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .side-cta { position: static; margin-top: 16px; }
+      .hero, .wide-grid { grid-template-columns: 1fr; }
+      .cards, .price { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .menu { display: none; }
+      .topbar, .section-head { align-items: start; flex-direction: column; }
+      .cards, .price, .metrics { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <a class="brand" href="#"><span class="mark"></span><span>AI For Work</span></a>
+      <nav class="menu">
+        <a class="active" href="#">Обзор</a>
+        <a href="#program">Программа</a>
+        <a href="#format">Формат</a>
+        <a href="#pricing">Тарифы</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="side-cta">
+        Первый поток для тех, кто хочет перестать руками гонять информацию между сервисами.
+        <a href="#cta">Узнать условия</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <span class="pill">Практический курс по ИИ-агентам для не-разработчиков</span>
+        <a class="button" href="#cta">Проверить fit</a>
+      </div>
+
+      <section class="hero">
+        <div class="panel hero-copy">
+          <h1>AI For Work</h1>
+          <p class="lead">Учимся использовать Codex / Claude Code для рабочих задач с информацией: таблицы, файлы, сайты, Telegram, отчёты, презентации и исследования.</p>
+          <p class="copy">Курс для людей, которые хотят давать агенту задачу и получать готовый рабочий результат без навыков разработки.</p>
+          <a class="button" href="#cta">Хочу в первый поток</a>
+          <div class="metrics">
+            <div class="metric"><strong>6</strong><span>недель</span></div>
+            <div class="metric"><strong>4</strong><span>практических модуля</span></div>
+            <div class="metric"><strong>1</strong><span>финальный проект</span></div>
+          </div>
+        </div>
+        <div class="panel run">
+          <div class="run-tabs">
+            <button class="is-active" type="button" data-dashboard="0">Файлы</button>
+            <button type="button" data-dashboard="1">HH</button>
+            <button type="button" data-dashboard="2">Telegram</button>
+            <button type="button" data-dashboard="3">Browser</button>
+          </div>
+          <div class="task"><strong>Собрать ресёрч</strong><span>HeadHunter, рынок, вакансии</span><div class="bar"><span style="width: 84%"></span></div></div>
+          <div class="task"><strong>Разобрать выгрузку</strong><span>таблица → отчёт → презентация</span><div class="bar"><span style="width: 72%"></span></div></div>
+          <div class="task"><strong>Сделать Telegram-сводку</strong><span>темы, инсайты, уведомления</span><div class="bar"><span style="width: 91%"></span></div></div>
+          <div class="task"><strong>Пройти браузерный сценарий</strong><span>формы, кабинеты, интерфейсы</span><div class="bar"><span style="width: 64%"></span></div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Курс для работы, где много ручной сборки информации.</h2>
+          <p>Маркетологи, аналитики, продакты, HR, сейлзы, операционные менеджеры, исследователи, редакторы, фаундеры и команды, которым нужно быстрее доходить до вывода.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><span class="badge">pain</span><h3>10 вкладок</h3><p>Собрать нормальный вывод из разрозненных источников.</p></article>
+          <article class="card"><span class="badge">pain</span><h3>Файлы и выгрузки</h3><p>Разобрать, проверить, сверить, оформить.</p></article>
+          <article class="card"><span class="badge">pain</span><h3>Быстрый ресёрч</h3><p>Который постоянно съедает полдня.</p></article>
+          <article class="card"><span class="badge">pain</span><h3>Копипаст</h3><p>Перенос данных между сервисами, чатами и формами.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="program">
+        <div class="section-head">
+          <h2>Программа</h2>
+          <p>Каждый модуль — конкретный рабочий сценарий и подход, который можно переносить на другие процессы.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><span class="badge">01</span><h3>Файлы</h3><p>Из страшной таблицы в HTML-отчёт, презентацию или документ.</p></article>
+          <article class="card"><span class="badge">02</span><h3>HeadHunter</h3><p>Открытые данные: вакансии, компании, роли, спрос и паттерны рынка.</p></article>
+          <article class="card"><span class="badge">03</span><h3>Telegram</h3><p>Каналы, чаты, сводки, мониторинг, боты, уведомления.</p></article>
+          <article class="card"><span class="badge">04</span><h3>Browser use</h3><p>Формы, кабинеты, LinkedIn, Яндекс Метрика и веб-интерфейсы.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="format">
+        <div class="wide-grid">
+          <div class="panel card">
+            <h2>Формат и длительность</h2>
+            <p>Около 6 недель: неделя знакомства и настройки, 4 практических воркшопа с домашками и неделя на финальный проект.</p>
+          </div>
+          <div class="panel card">
+            <h3>Финальный проект</h3>
+            <p>Вы выбираете один рабочий процесс из реальной жизни и перестраиваете его с помощью ИИ-агента.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pricing">
+        <div class="section-head">
+          <h2>Тарифы</h2>
+          <p>Цены на лендинге не указываем, CTA ведёт на условия участия.</p>
+        </div>
+        <div class="price">
+          <article class="card"><h3>Базовый</h3><p>Живые занятия, записи, материалы, задания, общий чат и финальная встреча.</p></article>
+          <article class="card"><h3>С проверкой домашек</h3><p>Проверка заданий, фидбек по результату и процессу работы с агентом.</p></article>
+          <article class="card"><h3>VIP</h3><p>2 личные консультации и помощь с применением подходов в вашей реальности.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="wide-grid">
+          <div class="panel card">
+            <h2>FAQ</h2>
+            <ul class="list">
+              <li><strong>Нужно ли уметь программировать?</strong> Нет, курс для не-разработчиков.</li>
+              <li><strong>Можно с Claude Code?</strong> Да, показываем общие подходы.</li>
+              <li><strong>Будут ли записи?</strong> Да, записи остаются участникам.</li>
+            </ul>
+          </div>
+          <div class="panel card">
+            <h3>Кто ведёт</h3>
+            <p>Коля отвечает за техническую часть и агентные подходы. Саша — за образовательный формат, структуру и комьюнити.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="final" id="cta">
+        <h2>Покажем, как отдавать агенту рутину без программирования и без магии.</h2>
+        <p>Если в вашей работе много ручной информационной рутины, часть её уже можно делегировать ИИ-агенту.</p>
+        <a class="button" href="#">Узнать условия участия</a>
+      </section>
+    </main>
+  </div>
+  <script>
+    (() => {
+      const scenarios = [
+        {
+          metrics: ["1", "3", "7"],
+          tasks: [
+            ["Прочитать выгрузку", "xlsx/csv, поля, дубли", 82],
+            ["Найти структуру", "сегменты, аномалии, выводы", 74],
+            ["Собрать отчёт", "HTML + тезисы для презентации", 88],
+            ["Проверить результат", "вопросы и ручная валидация", 64]
+          ]
+        },
+        {
+          metrics: ["42", "9", "5"],
+          tasks: [
+            ["Собрать вакансии", "HeadHunter и открытые данные", 78],
+            ["Сгруппировать требования", "роли, навыки, паттерны", 69],
+            ["Вытащить компании", "потенциальные лиды", 73],
+            ["Собрать сводку", "рынок и выводы", 84]
+          ]
+        },
+        {
+          metrics: ["12", "6", "3"],
+          tasks: [
+            ["Прочитать каналы", "темы и обсуждения", 91],
+            ["Найти инсайты", "триггеры и повторы", 83],
+            ["Собрать дайджест", "короткая сводка", 88],
+            ["Отправить в чат", "команда или руководитель", 72]
+          ]
+        },
+        {
+          metrics: ["4", "11", "1"],
+          tasks: [
+            ["Открыть интерфейс", "сайт или личный кабинет", 67],
+            ["Пройти шаги", "клики, поля, формы", 58],
+            ["Проверить итог", "видимый результат", 74],
+            ["Сохранить лог", "что было сделано", 81]
+          ]
+        }
+      ];
+
+      const buttons = Array.from(document.querySelectorAll("[data-dashboard]"));
+      const metricValues = Array.from(document.querySelectorAll(".metric strong"));
+      const tasks = Array.from(document.querySelectorAll(".run .task"));
+
+      function render(index) {
+        const scenario = scenarios[index];
+        buttons.forEach((button, buttonIndex) => button.classList.toggle("is-active", buttonIndex === index));
+        metricValues.forEach((metric, metricIndex) => {
+          metric.textContent = scenario.metrics[metricIndex];
+        });
+        tasks.forEach((task, taskIndex) => {
+          const [title, text, progress] = scenario.tasks[taskIndex];
+          task.querySelector("strong").textContent = title;
+          task.querySelector("span").textContent = text;
+          task.querySelector(".bar span").style.width = `${progress}%`;
+          task.classList.remove("pulse");
+          window.requestAnimationFrame(() => task.classList.add("pulse"));
+        });
+      }
+
+      buttons.forEach((button) => button.addEventListener("click", () => render(Number(button.dataset.dashboard))));
+    })();
+  </script>
+</body>
+</html>

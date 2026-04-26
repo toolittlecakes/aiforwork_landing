@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI for Work — Minimal</title>
+  <style>
+    :root {
+      --bg: #fbfbf8;
+      --text: #101010;
+      --muted: #646464;
+      --line: #dddddd;
+      --accent: #111;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 72px 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 48px;
+    }
+
+    .brand {
+      font-family: "Arial Black", "Helvetica Neue", sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .btn {
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+      padding: 9px 16px;
+      text-decoration: none;
+      font-family: "Arial", sans-serif;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 42px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+      font-family: "Arial", sans-serif;
+      font-weight: 700;
+    }
+
+    p, li {
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .accent-box {
+      border-left: 4px solid var(--accent);
+      padding-left: 16px;
+      margin: 24px 0 16px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      padding: 24px;
+      background: white;
+    }
+
+    .panel h3 {
+      margin: 0 0 12px;
+      font-family: "Arial", sans-serif;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1.2px;
+      color: #1a1a1a;
+    }
+
+    ul { margin: 0; padding-left: 20px; }
+    li { margin-bottom: 10px; }
+    .primary {
+      margin-top: 24px;
+      display: inline-block;
+      padding: 12px 18px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      font-family: "Arial", sans-serif;
+    }
+
+    .proof {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      font-family: "Arial", sans-serif;
+    }
+
+    .proof-item {
+      border: 1px solid var(--line);
+      padding: 16px;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 840px) {
+      .grid, .proof {
+        grid-template-columns: 1fr;
+      }
+      header { flex-direction: column; align-items: flex-start; gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="brand">AI FOR WORK</div>
+      <a class="btn" href="#">Открыть продукт</a>
+    </header>
+
+    <section class="grid">
+      <div>
+        <p style="font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 1.3px; margin: 0 0 10px; font-size: 0.8rem; color:#333;">Рабочая дисциплина нового поколения</p>
+        <h1>Система, которая помогает вашей команде не тонуть в задачах.</h1>
+        <div class="accent-box">
+          <p style="margin: 0;">Просто в использовании, прозрачная логика и спокойный ритм для сложных процессов.</p>
+        </div>
+        <a class="primary" href="#">Получить доступ</a>
+      </div>
+
+      <aside class="panel">
+        <h3>Что внутри</h3>
+        <ul>
+          <li>Единый чат с контекстом по проекту</li>
+          <li>Автосбор заметок и решений</li>
+          <li>Сборка планов и приоритетов за минуту</li>
+          <li>Единый трекер прогресса команды</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="proof">
+      <div class="proof-item">Чёткая канва задач</div>
+      <div class="proof-item">Экономия времени на рутине</div>
+      <div class="proof-item">Меньше хаоса в коммуникации</div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI for Work — Glass Flow</title>
+  <style>
+    :root {
+      --bg1: #0b1022;
+      --bg2: #2a1f54;
+      --glass: rgba(255, 255, 255, 0.1);
+      --text: #f4f7ff;
+      --muted: #c5c9dd;
+      --accent: #73e8ff;
+      --accent2: #ab7bff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "Inter", system-ui, sans-serif;
+      color: var(--text);
+      background: linear-gradient(130deg, var(--bg1), var(--bg2) 55%, #12192b);
+      overflow-x: hidden;
+    }
+
+    .aurora {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(115, 232, 255, 0.24), transparent 45%),
+        radial-gradient(circle at 82% 10%, rgba(171, 123, 255, 0.25), transparent 40%),
+        radial-gradient(circle at 50% 88%, rgba(112, 255, 174, 0.2), transparent 35%);
+      filter: blur(25px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 64px;
+      padding: 12px 16px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+    }
+
+    .brand { font-weight: 700; letter-spacing: 0.6px; }
+    .brand span { color: var(--accent); }
+
+    .cta {
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      border: none;
+      border-radius: 999px;
+      color: #10172a;
+      font-weight: 700;
+      padding: 10px 16px;
+      cursor: pointer;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+    }
+
+    .card {
+      padding: 36px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 45px rgba(4, 8, 26, 0.35);
+    }
+
+    h1 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; margin: 0 0 12px; }
+    p { color: var(--muted); line-height: 1.6; }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.84rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      margin-bottom: 16px;
+      color: #dbe4ff;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 24px; gap: 12px; }
+    .stat { text-align: center; padding: 16px; border-radius: 12px; background: rgba(255,255,255,0.09); }
+    .stat b { font-size: 1.4rem; display: block; }
+
+    .feature-title { margin: 0 0 14px; }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .feature {
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .features { grid-template-columns: 1fr; }
+      nav { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora"></div>
+  <main class="wrap">
+    <nav>
+      <div class="brand"><span>AI</span> for Work</div>
+      <button class="cta">Запросить демо</button>
+    </nav>
+
+    <section class="hero">
+      <article class="card">
+        <span class="tag">Автоматизация команды без перегруза</span>
+        <h1>Лендосы, которые собираются сами: идей, задач и решений.</h1>
+        <p>Соберите рабочий поток в одной плоскости: идеи, дедлайны, заметки и статусы. AI for Work делает рутину тихо, а вам — ясную картину.</p>
+        <div class="stats">
+          <div class="stat"><b>4.2x</b><span>скорость подготовки отчётов</span></div>
+          <div class="stat"><b>24/7</b><span>мониторинг задач</span></div>
+          <div class="stat"><b>98%</b><span>команда в одном контуре</span></div>
+        </div>
+      </article>
+      <aside class="card">
+        <h3 class="feature-title">Быстрый старт за 3 шага</h3>
+        <div class="features">
+          <div class="feature">Подключите источники задач</div>
+          <div class="feature">Задайте правила и приоритеты</div>
+          <div class="feature">Получите итоговый план на день</div>
+        </div>
+        <p style="margin-top: 16px;">Никакой сложной миграции, только логика и контроль. Включаете, задаете тон, получаете ритм.</p>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

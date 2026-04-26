@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI For Work — Command Desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #10120f;
+      --panel: #181c17;
+      --panel-2: #d9ff68;
+      --ink: #f4f0df;
+      --muted: #aaa998;
+      --line: rgba(244,240,223,.18);
+      --accent: #d9ff68;
+      --accent-2: #ff6b3d;
+      --shadow: 0 24px 80px rgba(0,0,0,.45);
+      --radius: 28px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 8%, rgba(217,255,104,.22), transparent 28rem),
+        radial-gradient(circle at 86% 32%, rgba(255,107,61,.18), transparent 24rem),
+        linear-gradient(120deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        var(--bg);
+      background-size: auto, auto, 34px 34px, auto;
+      color: var(--ink);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1160px, calc(100% - 36px)); margin: 0 auto; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(16,18,15,.76);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; gap: 18px; }
+    .brand { font-family: "Space Grotesk"; font-weight: 700; letter-spacing: -.03em; font-size: 22px; }
+    .navlinks { display: flex; gap: 18px; font-size: 13px; color: var(--muted); }
+    .navlinks a { text-decoration: none; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #111;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 12px 36px rgba(217,255,104,.18);
+    }
+    .btn.secondary { background: transparent; color: var(--ink); border-color: var(--line); box-shadow: none; }
+    .hero { padding: 72px 0 56px; }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 26px; align-items: stretch; }
+    .hero-copy {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(28px, 5vw, 58px);
+      background: linear-gradient(155deg, rgba(255,255,255,.06), rgba(255,255,255,.015));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-copy:after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      right: -90px;
+      bottom: -150px;
+      background: var(--accent);
+      filter: blur(70px);
+      opacity: .18;
+    }
+    .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: .18em; font-size: 12px; font-weight: 700; }
+    h1, h2, h3 { font-family: "Space Grotesk"; line-height: .96; letter-spacing: -.055em; margin: 0; }
+    h1 { font-size: clamp(52px, 9vw, 112px); margin: 18px 0 22px; max-width: 900px; }
+    h2 { font-size: clamp(36px, 5vw, 70px); margin-bottom: 22px; }
+    h3 { font-size: 26px; letter-spacing: -.035em; }
+    .lead { font-size: clamp(18px, 2vw, 23px); color: #f4f0df; max-width: 760px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+    .terminal {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #080a07;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      min-height: 100%;
+    }
+    .dots { display: flex; gap: 8px; margin-bottom: 24px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent-2); }
+    .dot:nth-child(2) { background: var(--accent); }
+    .dot:nth-child(3) { background: #78a7ff; }
+    .prompt { color: var(--muted); font-size: 14px; }
+    .screen-card { margin-top: 14px; padding: 18px; border: 1px solid rgba(217,255,104,.32); background: rgba(217,255,104,.08); border-radius: 18px; }
+    .screen-card strong { color: var(--accent); }
+    section { padding: 64px 0; }
+    .section-head { display: flex; justify-content: space-between; gap: 24px; align-items: end; margin-bottom: 28px; }
+    .section-head p { max-width: 560px; color: var(--muted); margin: 0; }
+    .pain-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .pain {
+      min-height: 190px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      background: rgba(255,255,255,.045);
+      display: flex;
+      align-items: end;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .pain:hover { transform: translateY(-6px); background: rgba(217,255,104,.1); }
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tag { border: 1px solid var(--line); border-radius: 999px; padding: 9px 13px; color: var(--ink); background: rgba(255,255,255,.035); font-size: 13px; }
+    .tag.hot { background: var(--panel-2); color: #111; border-color: var(--panel-2); font-weight: 700; }
+    .manifesto { display: grid; grid-template-columns: .9fr 1.1fr; gap: 18px; align-items: stretch; }
+    .manifesto .big {
+      background: var(--accent);
+      color: #111;
+      border-radius: var(--radius);
+      padding: 34px;
+      font-family: "Space Grotesk";
+      font-size: clamp(30px, 4vw, 56px);
+      line-height: .98;
+      letter-spacing: -.05em;
+    }
+    .manifesto .text { border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; color: var(--muted); background: rgba(255,255,255,.04); }
+    .modules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; counter-reset: module; }
+    .module {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+      overflow: hidden;
+    }
+    .module:before {
+      counter-increment: module;
+      content: "0" counter(module);
+      position: absolute;
+      right: 24px;
+      top: 18px;
+      color: rgba(217,255,104,.28);
+      font: 700 68px/1 "Space Grotesk";
+    }
+    .module p { color: var(--muted); }
+    .module .result { color: var(--ink); border-left: 3px solid var(--accent); padding-left: 14px; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .card { border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.045); padding: 28px; }
+    .card ul { padding-left: 18px; color: var(--muted); }
+    .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .price { border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; background: rgba(255,255,255,.045); }
+    .price.featured { background: var(--ink); color: #111; transform: translateY(-10px); }
+    .price.featured .tag { color: #111; border-color: rgba(0,0,0,.2); }
+    .price ul { padding-left: 18px; }
+    .hosts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .host { min-height: 340px; border-radius: var(--radius); padding: 28px; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(217,255,104,.14), rgba(255,255,255,.04)); display: flex; flex-direction: column; justify-content: flex-end; }
+    .avatar { width: 118px; height: 118px; border-radius: 32px; background: repeating-linear-gradient(135deg, var(--accent), var(--accent) 10px, #111 10px, #111 20px); margin-bottom: 24px; border: 1px solid var(--line); }
+    details { border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; background: rgba(255,255,255,.035); }
+    details + details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+    details p { color: var(--muted); margin-bottom: 0; }
+    .final { padding: 44px; border-radius: 36px; background: var(--accent); color: #111; display: grid; grid-template-columns: 1.4fr auto; gap: 22px; align-items: center; }
+    .final h2 { color: #111; }
+    footer { padding: 36px 0; color: var(--muted); border-top: 1px solid var(--line); }
+    @media (max-width: 900px) {
+      .hero-grid, .manifesto, .split, .pricing, .hosts, .final { grid-template-columns: 1fr; }
+      .pain-grid, .modules { grid-template-columns: 1fr 1fr; }
+      .navlinks { display: none; }
+      .price.featured { transform: none; }
+    }
+    @media (max-width: 560px) {
+      .pain-grid, .modules { grid-template-columns: 1fr; }
+      section { padding: 44px 0; }
+      .final { padding: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="wrap nav">
+      <div class="brand">AI For Work</div>
+      <div class="navlinks"><a href="#program">Программа</a><a href="#format">Формат</a><a href="#pricing">Тарифы</a><a href="#faq">FAQ</a></div>
+      <a class="btn secondary" href="#cta">Хочу в поток</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Практический курс по ИИ-агентам</div>
+          <h1>Не просите нейронку. Дайте агенту работу.</h1>
+          <p class="lead">Курс для людей, у которых много ручной работы с информацией: таблицами, файлами, сайтами, Telegram, вакансиями, отчётами, презентациями, исследованиями и рабочими процессами.</p>
+          <p>Учим использовать кодинговых агентов — Codex / Claude Code — чтобы искать, читать, анализировать, преобразовывать, собирать и отправлять информацию. Без навыков разработки.</p>
+          <div class="hero-actions"><a class="btn" href="#pricing">Узнать, подойдёт ли мне курс</a><a class="btn secondary" href="#program">Смотреть программу</a></div>
+        </div>
+        <aside class="terminal">
+          <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <p class="prompt">$ agent run "собери рынок, почисти таблицу, сделай вывод"</p>
+          <div class="screen-card"><strong>01 / файлы</strong><br>Из страшной таблицы в понятный HTML-отчёт или презентацию.</div>
+          <div class="screen-card"><strong>02 / ресёрч</strong><br>HeadHunter, вакансии, компании, роли, спрос, паттерны рынка.</div>
+          <div class="screen-card"><strong>03 / Telegram</strong><br>Сводки, темы, инсайты, триггеры для продаж, уведомления.</div>
+          <div class="screen-card"><strong>04 / browser use</strong><br>Формы, кабинеты, LinkedIn, Яндекс Метрика, веб-интерфейсы.</div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head"><h2>Узнаёте себя?</h2><p>Курс не привязан к профессии. Он для всех, у кого работа завязана на информацию, ручной сбор данных, отчёты, исследования, таблицы, коммуникации и повторяющиеся процессы.</p></div>
+      <div class="pain-grid">
+        <div class="pain">Открываете 10 вкладок, 3 таблицы и потом собираете из этого «нормальный вывод».</div>
+        <div class="pain">Есть папки, файлы, выгрузки и документы, до которых страшно дотрагиваться.</div>
+        <div class="pain">«Быстрый ресёрч» почему-то занимает полдня.</div>
+        <div class="pain">Руками переносите информацию между сервисами.</div>
+        <div class="pain">Хотите не просто спросить у нейронки, а получить готовый рабочий результат.</div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head"><h2>Для кого</h2><p>Маркетинг, аналитика, HR, продажи, операции, продакты, проджекты, контент, комьюнити, фаундеры — всем, кто живёт внутри информационной рутины.</p></div>
+      <div class="tags">
+        <span class="tag hot">маркетологи</span><span class="tag">аналитики</span><span class="tag">продакты</span><span class="tag">проджекты</span><span class="tag">HR и рекрутеры</span><span class="tag">сейлзы</span><span class="tag">операционные менеджеры</span><span class="tag">исследователи</span><span class="tag">редакторы</span><span class="tag">методисты</span><span class="tag">продюсеры курсов</span><span class="tag">фаундеры</span><span class="tag">customer success</span><span class="tag">SMM</span><span class="tag">PR</span><span class="tag">контент-команды</span>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="manifesto">
+        <div class="big">Отдайте агенту рутину. Оставьте себе смысл.</div>
+        <div class="text"><p>У нас нет цели забрать интересную часть работы. Мы показываем, как делегировать агенту то, что обычно отнимает силы: собрать, разложить, проверить, сверить, оформить, перенести.</p><p>Пока агент собирает данные, чистит таблицу, ищет ссылки или собирает черновик отчёта, вы занимаетесь доменными решениями, выбором подхода и качеством результата.</p><div class="tags"><span class="tag">ресёрч</span><span class="tag">таблицы</span><span class="tag">отчёты</span><span class="tag">Telegram</span><span class="tag">лидогенерация</span><span class="tag">дашборды</span><span class="tag">брифы</span><span class="tag">формы</span></div></div>
+      </div>
+    </section>
+
+    <section class="wrap" id="program">
+      <div class="section-head"><h2>Программа</h2><p>Неделя знакомства и настройки, 4 практических воркшопа и финальный проект на реальном рабочем процессе.</p></div>
+      <div class="modules">
+        <article class="module"><h3>Как агент работает с вашими файлами</h3><p>Берём локальную таблицу или выгрузку и превращаем её в понятный рабочий артефакт: HTML-отчёт, презентацию или структурированный документ.</p><p class="result">Результат: умеем давать агенту файлы, таблицы и примеры оформления, чтобы получать готовый материал в стиле вашей компании.</p><div class="tags"><span class="tag">файлы</span><span class="tag">таблицы</span><span class="tag">презентация</span></div></article>
+        <article class="module"><h3>Ресёрч рынка на HeadHunter</h3><p>Используем HeadHunter как источник открытых данных: вакансии, компании, требования, роли, спрос на специалистов и паттерны рынка.</p><p class="result">Результат: умеем собирать информацию из открытых источников, формулировать критерии отбора и анализировать по смыслу.</p><div class="tags"><span class="tag">ресёрч</span><span class="tag">вакансии</span><span class="tag">лиды</span></div></article>
+        <article class="module"><h3>Telegram без ручного копирования</h3><p>Собираем информацию из каналов и чатов: темы, инсайты, триггеры для продажи. Отправляем результаты себе, команде или в рабочий чат.</p><p class="result">Результат: Telegram становится рабочим источником данных: сводки, мониторинг, анализ обсуждений, уведомления и дашборды.</p><div class="tags"><span class="tag">Telegram</span><span class="tag">сводки</span><span class="tag">боты</span></div></article>
+        <article class="module"><h3>Рутина в браузере</h3><p>Разбираем задачи, где агент действует как пользователь: открыть сайт, пройти интерфейс, заполнить форму, добавить людей в LinkedIn, настроить Яндекс Метрику.</p><p class="result">Результат: Browser use подключен и настроен, а вы понимаете, где его применять и как не получить бан.</p><div class="tags"><span class="tag">browser use</span><span class="tag">формы</span><span class="tag">кабинеты</span></div></article>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="split">
+        <div class="card"><h2>Финальный проект</h2><p>Вы выберете один рабочий процесс из реальной жизни: отчёт, ресёрч, таблицу, мониторинг, поиск клиентов, работу с файлами или другой повторяющийся процесс.</p><p>За неделю попробуете перестроить его с помощью ИИ-агента, а на финальной встрече покажете, что получилось.</p></div>
+        <div class="card"><h2>На фоне</h2><ul><li>как эффективно ставить задачи</li><li>как сделать, чтобы агент запоминал правильный путь</li><li>как расширять возможности через skills / MCP</li><li>как создавать интерактивные артефакты</li><li>как получать обратную связь от агента</li><li>как сделать, чтобы агент мог сам себя проверить</li></ul></div>
+      </div>
+    </section>
+
+    <section class="wrap" id="format">
+      <div class="section-head"><h2>Формат</h2><p>Около 6 недель: настройка, 4 практических воркшопа, домашки, разборы и финальный проект.</p></div>
+      <div class="split"><div class="card"><h3>Как устроено</h3><ul><li>неделя 0 — знакомство, настройка, первый простой шаг</li><li>4 практических воркшопа</li><li>после каждого воркшопа — домашка</li><li>в начале следующего занятия — разбор ошибок и удачных решений</li><li>финальная неделя — подготовка своего проекта</li></ul></div><div class="card"><h3>Комьюнити</h3><p>Мы не хотим, чтобы вы проходили курс в одиночку. Участники обсуждают подходы, делятся находками, сверяются друг с другом и видят, как похожие задачи решают люди с разным бэкграундом.</p><div class="tags"><span class="tag hot">держать темп</span><span class="tag">видеть мышление других</span><span class="tag">рабочие знакомства</span><span class="tag">идеи для задач</span></div></div></div>
+    </section>
+
+    <section class="wrap" id="pricing">
+      <div class="section-head"><h2>Тарифы</h2><p>Цены не указываем на лендинге. Основной CTA — узнать условия участия и выбрать подходящий формат.</p></div>
+      <div class="pricing">
+        <article class="price"><h3>Базовый</h3><p>Для тех, кто хочет разобраться в подходе и попробовать самостоятельно.</p><ul><li>живые занятия</li><li>записи</li><li>материалы и задания</li><li>общий чат</li><li>финальная встреча</li></ul><a class="btn secondary" href="#cta">Узнать условия</a></article>
+        <article class="price featured"><h3>С проверкой домашек</h3><p>Для тех, кто хочет пройти курс руками и получить обратную связь.</p><ul><li>всё из базового тарифа</li><li>проверка домашних заданий</li><li>фидбек по результату и процессу</li><li>рекомендации, как решить проще и аккуратнее</li></ul><a class="btn" href="#cta">Узнать условия</a></article>
+        <article class="price"><h3>VIP</h3><p>Для тех, кто хочет больше личного внимания.</p><ul><li>всё из тарифа с проверкой</li><li>2 личные консультации</li><li>помощь с выбором подхода под задачи</li><li>обсуждение применения в вашей реальности</li></ul><a class="btn secondary" href="#cta">Узнать условия</a></article>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head"><h2>Кто ведёт</h2><p>Коля отвечает за техническую часть, агентные подходы и реальные способы применять Codex / Claude Code. Саша — за образовательный формат, структуру и комьюнити.</p></div>
+      <div class="hosts"><article class="host"><div class="avatar"></div><h3>Коля Шейко</h3><ul><li>Фаундер агентства ИИ-автоматизации</li><li>Ко-фаундер ИИ-конференций entropy.talk</li><li>Автор тг-канала <a href="https://t.me/ai_grably">AI и грабли</a></li></ul></article><article class="host"><div class="avatar"></div><h3>Саша Литская</h3><ul><li>Владелица керамической мастерской коворкинга</li><li>Основатель арт-пространства и оффлайн-сообщества в Академгородке</li><li>Продюсер и операционный директор в онлайн-школе керамики</li></ul></article></div>
+    </section>
+
+    <section class="wrap" id="faq">
+      <div class="section-head"><h2>FAQ</h2><p>Коротко про вход, инструменты, подписки, домашки и формат участия.</p></div>
+      <details open><summary>Нужно ли уметь программировать?</summary><p>Нет. Курс для не-разработчиков. Мы работаем с агентами через рабочие задачи: данные, файлы, сайты, отчёты, Telegram, браузер.</p></details>
+      <details><summary>Почему Codex / Claude Code? Это же инструменты для программистов?</summary><p>Изначально да, но они применимы и для нормальных людей: могут работать с файлами, запускать действия на компьютере, помогать с таблицами, отчётами, сайтами и процессами.</p></details>
+      <details><summary>А если у меня Claude Code, а не Codex?</summary><p>Можно. Мы показываем общие подходы, а не религию одного сервиса. Основной пример — Codex, но логика применима и к Claude Code.</p></details>
+      <details><summary>Нужна ли платная подписка?</summary><p>Да, нужна подписка ChatGPT Plus. Про оплату и варианты доступа расскажем в начале курса.</p></details>
+      <details><summary>Будут ли записи?</summary><p>Да, записи занятий будут доступны участникам.</p></details>
+      <details><summary>Сколько времени займут домашки?</summary><p>Ориентир — 30-40 минут на базовое прохождение. Можно потратить больше, если хочется докрутить до идеала.</p></details>
+      <details><summary>Можно ли прийти со своим кейсом?</summary><p>Да. Финальный проект как раз строится вокруг вашего рабочего процесса. В VIP-тарифе можно отдельно обсудить задачу на консультациях.</p></details>
+    </section>
+
+    <section class="wrap" id="cta">
+      <div class="final"><div><h2>Если в вашей работе много ручной информационной рутины, часть её уже можно отдавать ИИ-агенту.</h2><p>Мы покажем, как делать это на понятных рабочих задачах — без программирования и без магии.</p></div><a class="btn secondary" href="mailto:hello@example.com">Хочу в первый поток</a></div>
+    </section>
+  </main>
+  <footer><div class="wrap">AI For Work · практический курс по ИИ-агентам для не-разработчиков</div></footer>
+</body>
+</html>

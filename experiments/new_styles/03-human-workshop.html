@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI For Work — Human Workshop</title>
+  <style>
+    :root {
+      --bg: #fbfbf7;
+      --ink: #171512;
+      --muted: #66645c;
+      --line: #dedbd1;
+      --paper: #ffffff;
+      --pink: #ff6f91;
+      --mint: #45d39a;
+      --yellow: #ffe45e;
+      --blue: #3f7cff;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(255, 228, 94, .16), transparent 28%),
+        linear-gradient(315deg, rgba(63, 124, 255, .10), transparent 30%),
+        var(--bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: white;
+      font-weight: 800;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px) rotate(-.5deg);
+      box-shadow: 0 12px 24px rgba(23, 21, 18, .16);
+    }
+
+    .button.light {
+      background: var(--yellow);
+      color: var(--ink);
+      border: 1px solid var(--ink);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 440px);
+      gap: clamp(30px, 6vw, 80px);
+      align-items: center;
+      padding: clamp(46px, 8vw, 104px) 0 60px;
+    }
+
+    .label {
+      display: inline-flex;
+      margin-bottom: 20px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--yellow);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(50px, 9vw, 124px);
+      line-height: .9;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 24px 0 0;
+      font-size: clamp(20px, 2.2vw, 30px);
+      line-height: 1.24;
+      font-weight: 720;
+    }
+
+    .copy {
+      max-width: 640px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .board {
+      position: relative;
+      min-height: 430px;
+    }
+
+    .sticky {
+      position: absolute;
+      width: 78%;
+      padding: 20px;
+      border: 1px solid rgba(23, 21, 18, .22);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: 0 22px 60px rgba(23, 21, 18, .12);
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      transition: box-shadow .18s ease, scale .18s ease;
+    }
+
+    .sticky:hover {
+      scale: 1.03;
+      box-shadow: 0 28px 70px rgba(23, 21, 18, .18);
+    }
+
+    .sticky.is-dragging {
+      cursor: grabbing;
+      z-index: 5;
+      box-shadow: 0 30px 80px rgba(23, 21, 18, .2);
+    }
+
+    .sticky h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .sticky p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .sticky.one {
+      top: 0;
+      right: 0;
+      background: #fff7a8;
+      transform: rotate(2deg);
+    }
+    .sticky.two {
+      top: 128px;
+      left: 0;
+      background: #ddfff0;
+      transform: rotate(-3deg);
+    }
+    .sticky.three {
+      top: 268px;
+      right: 18px;
+      background: #ffe4ec;
+      transform: rotate(1deg);
+    }
+
+    .section {
+      padding: 58px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: clamp(24px, 5vw, 70px);
+      align-items: start;
+      margin-bottom: 26px;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      max-width: 830px;
+      font-size: clamp(34px, 5vw, 66px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .78);
+      min-height: 180px;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(23, 21, 18, .28);
+      box-shadow: 0 18px 44px rgba(23, 21, 18, .1);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 23px;
+      line-height: 1.1;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .card.accent { background: var(--ink); color: white; }
+    .card.accent p { color: #d8d8d0; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .tag {
+      padding: 9px 11px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--line);
+      font-size: 14px;
+      font-weight: 750;
+      transition: transform .16s ease, border-color .16s ease;
+    }
+
+    .tag:hover {
+      transform: translateY(-2px) rotate(-1deg);
+      border-color: var(--ink);
+    }
+
+    .tag:nth-child(3n) { background: #e4f0ff; }
+    .tag:nth-child(3n + 1) { background: #fff7a8; }
+    .tag:nth-child(3n + 2) { background: #ddfff0; }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 18px;
+      padding: 18px;
+      border-radius: var(--radius);
+      background: white;
+      border: 1px solid var(--line);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .step:hover {
+      transform: translateX(5px);
+      border-color: var(--blue);
+      background: #f4f8ff;
+    }
+
+    .step strong {
+      color: var(--blue);
+    }
+
+    .people {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .avatar {
+      width: 76px;
+      height: 76px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background:
+        linear-gradient(135deg, var(--yellow), var(--pink));
+      border: 2px solid var(--ink);
+    }
+
+    ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    li + li { margin-top: 7px; }
+
+    .final {
+      padding: clamp(62px, 9vw, 120px) 0;
+      background: var(--yellow);
+      border-top: 1px solid var(--ink);
+    }
+
+    .final h2 { max-width: 900px; }
+    .final p {
+      max-width: 760px;
+      color: #4e4b41;
+      font-size: 19px;
+      margin: 20px 0 28px;
+    }
+
+    .mixer {
+      display: grid;
+      grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .mixer-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 0 16px 44px rgba(23, 21, 18, .08);
+    }
+
+    .mixer-card h2 {
+      font-size: clamp(28px, 4vw, 54px);
+    }
+
+    .mixer-options {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .mixer-options button {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fbfbf7;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .16s ease, background .16s ease, border-color .16s ease;
+    }
+
+    .mixer-options button:hover {
+      transform: translateX(4px);
+      border-color: var(--ink);
+    }
+
+    .mixer-options button.is-active {
+      border-color: var(--ink);
+      background: var(--yellow);
+    }
+
+    .mixer-output {
+      min-height: 220px;
+      padding: 24px;
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: white;
+    }
+
+    .mixer-output p {
+      margin: 14px 0 0;
+      color: #deded6;
+      font-size: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .hero, .section-head, .people { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr 1fr; }
+      .mixer { grid-template-columns: 1fr; }
+      .board { min-height: 380px; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 620px) {
+      .cards { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 1fr; gap: 4px; }
+      .sticky { position: static; width: 100%; transform: none; margin-bottom: 12px; }
+      .board { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="wrap nav">
+    <a class="brand" href="#">AI For Work</a>
+    <div class="nav-links">
+      <a href="#program">Программа</a>
+      <a href="#format">Формат</a>
+      <a href="#pricing">Тарифы</a>
+    </div>
+    <a class="button light" href="#cta">Узнать, подойдёт ли мне курс</a>
+  </nav>
+
+  <header class="wrap hero">
+    <div>
+      <div class="label">Практический курс по ИИ-агентам для не-разработчиков</div>
+      <h1>AI For Work</h1>
+      <p class="lead">Чтобы не тратить себя на работу, которую вы бы делегировали инициативному ассистенту.</p>
+      <p class="copy">Codex / Claude Code помогают искать, читать, анализировать, преобразовывать, собирать и отправлять информацию: от таблиц и отчётов до Telegram и браузера.</p>
+      <div class="actions">
+        <a class="button" href="#cta">Хочу в первый поток</a>
+        <a class="button light" href="#program">Смотреть модули</a>
+      </div>
+    </div>
+    <div class="board">
+      <article class="sticky one"><h3>Агент собирает</h3><p>данные, ссылки, сообщения, вакансии и файлы</p></article>
+      <article class="sticky two"><h3>Вы решаете</h3><p>что важно, какой подход выбрать и как проверить качество</p></article>
+      <article class="sticky three"><h3>На выходе</h3><p>отчёт, презентация, сводка, дашборд или заполненный процесс</p></article>
+    </div>
+  </header>
+
+  <section class="wrap mixer" aria-label="Интерактивный выбор результата">
+    <div class="mixer-card">
+      <div class="eyebrow">выберите свою боль</div>
+      <div class="mixer-options">
+        <button class="is-active" type="button" data-mix="0">таблица</button>
+        <button type="button" data-mix="1">ресёрч</button>
+        <button type="button" data-mix="2">Telegram</button>
+        <button type="button" data-mix="3">браузер</button>
+      </div>
+    </div>
+    <div class="mixer-output">
+      <h2 id="mix-title">Агент превращает таблицу в рабочий вывод</h2>
+      <p id="mix-copy">Вы даёте файл и пример нужного результата. Агент разбирает данные, собирает структуру и готовит отчёт.</p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <div class="eyebrow">Узнаёте себя?</div>
+      <h2>Много информации, много ручной сборки, мало спокойного фокуса.</h2>
+    </div>
+    <div class="cards">
+      <article class="card"><h3>Быстрый ресёрч</h3><p>Который почему-то занимает полдня.</p></article>
+      <article class="card"><h3>Таблицы и документы</h3><p>Выгрузки есть, но превратить их в вывод сложно.</p></article>
+      <article class="card"><h3>Сервисы и копипаст</h3><p>Информация руками переезжает между чатами, сайтами и файлами.</p></article>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <div class="eyebrow">Для кого</div>
+      <h2>Для всех, у кого работа завязана на информацию и повторяющиеся процессы.</h2>
+    </div>
+    <div class="tags">
+      <span class="tag">маркетологи</span><span class="tag">аналитики</span><span class="tag">продакты</span><span class="tag">проджекты</span><span class="tag">HR и рекрутеры</span><span class="tag">сейлзы</span><span class="tag">операционные менеджеры</span><span class="tag">исследователи</span><span class="tag">редакторы</span><span class="tag">фаундеры</span><span class="tag">SMM</span><span class="tag">PR</span>
+    </div>
+  </section>
+
+  <section class="wrap section" id="program">
+    <div class="section-head">
+      <div class="eyebrow">Программа</div>
+      <h2>Занятия построены вокруг рабочих задач, а не вокруг абстрактной теории.</h2>
+    </div>
+    <div class="timeline">
+      <div class="step"><strong>Неделя 0</strong><span>Знакомство, настройка инструментов, первый простой шаг.</span></div>
+      <div class="step"><strong>Модуль 1</strong><span>Как агент работает с файлами: из страшной таблицы в презентацию или отчёт.</span></div>
+      <div class="step"><strong>Модуль 2</strong><span>Ресёрч рынка на HeadHunter: вакансии, компании, роли и паттерны спроса.</span></div>
+      <div class="step"><strong>Модуль 3</strong><span>Telegram без ручного копирования: сводки, инсайты, мониторинг и отправка результатов.</span></div>
+      <div class="step"><strong>Модуль 4</strong><span>Рутина в браузере: формы, кабинеты, LinkedIn и Яндекс Метрика.</span></div>
+      <div class="step"><strong>Финал</strong><span>Собственный проект под вашу нишу, работу и реальные задачи.</span></div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="format">
+    <div class="section-head">
+      <div class="eyebrow">Формат</div>
+      <h2>Живые занятия, записи, домашняя практика и разбор частых ошибок.</h2>
+    </div>
+    <div class="cards">
+      <article class="card accent"><h3>6 недель</h3><p>Настройка, 4 практических воркшопа, финальная неделя и презентации участников.</p></article>
+      <article class="card"><h3>Практика дома</h3><p>Чтобы пройти задачу на своём компьютере и в своём темпе.</p></article>
+      <article class="card"><h3>Комьюнити</h3><p>Темп, идеи, знакомства и люди, с которыми можно развиваться в теме AI-агентов.</p></article>
+    </div>
+  </section>
+
+  <section class="wrap section" id="pricing">
+    <div class="section-head">
+      <div class="eyebrow">Тарифы</div>
+      <h2>Базовый, с проверкой домашек или VIP.</h2>
+    </div>
+    <div class="cards">
+      <article class="card"><h3>Базовый</h3><p>Живые занятия, записи, материалы, задания, общий чат и финальная встреча.</p></article>
+      <article class="card accent"><h3>С проверкой</h3><p>Фидбек по домашкам, результату и процессу работы с агентом.</p></article>
+      <article class="card"><h3>VIP</h3><p>2 личные консультации и помощь с применением инструментов в вашей реальности.</p></article>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <div class="eyebrow">Кто ведёт</div>
+      <h2>Техническая часть и образовательная структура в одной команде.</h2>
+    </div>
+    <div class="people">
+      <article class="card"><div class="avatar"></div><h3>Коля Шейко</h3><ul><li>Фаундер агентства ИИ-автоматизации</li><li>Ко-фаундер entropy.talk</li><li>Автор канала «AI и грабли»</li></ul></article>
+      <article class="card"><div class="avatar"></div><h3>Саша Литская</h3><ul><li>Владелица керамической мастерской коворкинга</li><li>Основатель арт-пространства и оффлайн-сообщества</li><li>Продюсер и операционный директор онлайн-школы</li></ul></article>
+    </div>
+  </section>
+
+  <footer class="final" id="cta">
+    <div class="wrap">
+      <h2>Часть ручной информационной рутины уже можно отдавать ИИ-агенту.</h2>
+      <p>Мы покажем, как делать это на понятных рабочих задачах — без программирования и без магии.</p>
+      <a class="button" href="#">Узнать условия участия</a>
+    </div>
+  </footer>
+  <script>
+    (() => {
+      const options = [
+        ["Агент превращает таблицу в рабочий вывод", "Вы даёте файл и пример нужного результата. Агент разбирает данные, собирает структуру и готовит отчёт."],
+        ["Агент собирает рынок в одну картину", "Вакансии, компании, требования и ссылки складываются в таблицу и короткую аналитическую сводку."],
+        ["Агент делает Telegram полезным источником", "Каналы и чаты превращаются в темы, инсайты, триггеры и уведомления для команды."],
+        ["Агент проходит интерфейс за вас", "Он открывает сайт, выполняет шаги, заполняет форму и оставляет проверяемый лог действий."]
+      ];
+
+      const buttons = Array.from(document.querySelectorAll("[data-mix]"));
+      const title = document.getElementById("mix-title");
+      const copy = document.getElementById("mix-copy");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const index = Number(button.dataset.mix);
+          buttons.forEach((item) => item.classList.toggle("is-active", item === button));
+          title.textContent = options[index][0];
+          copy.textContent = options[index][1];
+        });
+      });
+
+      document.querySelectorAll(".sticky").forEach((note) => {
+        let startX = 0;
+        let startY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        note.addEventListener("pointerdown", (event) => {
+          note.setPointerCapture(event.pointerId);
+          note.classList.add("is-dragging");
+          startX = event.clientX - currentX;
+          startY = event.clientY - currentY;
+        });
+
+        note.addEventListener("pointermove", (event) => {
+          if (!note.classList.contains("is-dragging")) return;
+          currentX = event.clientX - startX;
+          currentY = event.clientY - startY;
+          note.style.translate = `${currentX}px ${currentY}px`;
+        });
+
+        note.addEventListener("pointerup", () => {
+          note.classList.remove("is-dragging");
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

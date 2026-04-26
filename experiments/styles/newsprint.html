@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI For Work — The Daily Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF1E5;          /* FT salmon */
+    --paper-deep:#F5E6D6;
+    --ink:#151412;
+    --ink-soft:#3B362F;
+    --rule:#C9B9A5;
+    --rule-dim:#E3D5C1;
+    --red:#990F3D;            /* FT pink-red */
+    --gold:#8A6A1F;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink)}
+  body{
+    font-family:"Libre Caslon Text", Georgia, serif;
+    font-size:16px;line-height:1.55;
+    background-image:
+      radial-gradient(1200px 600px at 50% -10%, #FFE8D4 0%, transparent 60%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.08  0 0 0 0 0.07  0 0 0 0 0.05  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .wrap{max-width:1240px;margin:0 auto;padding:28px 36px 80px}
+  /* ——— masthead ——— */
+  .masthead{border-top:3px solid var(--ink);border-bottom:3px double var(--ink);padding:18px 0 14px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+  .masthead .left,.masthead .right{font-family:"Libre Franklin";font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+  .masthead .right{text-align:right}
+  .masthead .title{font-family:"DM Serif Display";font-size:66px;line-height:.95;letter-spacing:-.015em;text-align:center}
+  .masthead .title em{font-style:italic;color:var(--red)}
+  .folio{border-bottom:1px solid var(--rule);padding:10px 0;display:flex;justify-content:space-between;font-family:"JetBrains Mono";font-size:11px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase}
+
+  /* ——— hero ——— */
+  .hero{padding:34px 0 22px;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:3.2fr 1.8fr;gap:44px}
+  .kicker{font-family:"Libre Franklin";font-weight:700;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+  .kicker::before{content:"";display:inline-block;width:22px;height:2px;background:var(--red);vertical-align:middle;margin-right:10px;translate:0 -3px}
+  h1.head{font-family:"DM Serif Display";font-size:84px;line-height:.95;letter-spacing:-.02em}
+  h1.head em{font-style:italic;color:var(--red)}
+  .deck{margin-top:20px;font-size:22px;line-height:1.4;font-style:italic;color:var(--ink-soft);max-width:34ch;font-family:"Libre Caslon Text"}
+  .byline{margin-top:26px;font-family:"Libre Franklin";font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);border-top:1px solid var(--rule);padding-top:14px}
+  .byline b{color:var(--ink);font-weight:700}
+
+  .hero-side{border-left:1px solid var(--rule);padding-left:28px;columns:1;font-size:15px;line-height:1.6}
+  .hero-side p{margin-bottom:10px}
+  .hero-side p:first-of-type::first-letter{font-family:"DM Serif Display";font-size:58px;float:left;line-height:.9;padding:4px 8px 0 0;color:var(--red)}
+  .hero-side .stat{margin-top:16px;padding-top:14px;border-top:1px dotted var(--rule);display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}
+  .hero-side .stat div{font-family:"Libre Franklin";font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+  .hero-side .stat b{display:block;font-family:"DM Serif Display";font-size:30px;letter-spacing:-.01em;color:var(--ink);margin-top:2px;font-weight:normal}
+
+  /* ——— section headers ——— */
+  .section{padding:44px 0 16px;border-bottom:1px solid var(--rule)}
+  .sec-head{display:grid;grid-template-columns:120px 1fr auto;gap:20px;align-items:baseline;border-bottom:3px double var(--ink);padding-bottom:10px;margin-bottom:24px}
+  .sec-head .num{font-family:"JetBrains Mono";font-size:12px;letter-spacing:.18em;color:var(--red);text-transform:uppercase}
+  .sec-head h2{font-family:"DM Serif Display";font-size:40px;line-height:1;letter-spacing:-.01em}
+  .sec-head .tag{font-family:"Libre Franklin";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+
+  /* ——— mirror ——— */
+  .mirror{columns:2;column-gap:48px;column-rule:1px solid var(--rule)}
+  .mirror li{break-inside:avoid;list-style:none;padding:10px 0 10px 30px;border-bottom:1px dotted var(--rule-dim);position:relative;font-size:17px;line-height:1.45}
+  .mirror li::before{content:"§";position:absolute;left:0;top:9px;color:var(--red);font-family:"DM Serif Display";font-size:18px}
+  .mirror li b{font-weight:700}
+
+  /* ——— audience ——— */
+  .aud-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+  .aud-grid h3{font-family:"DM Serif Display";font-size:24px;font-style:italic;margin-bottom:12px;border-bottom:1px solid var(--rule);padding-bottom:8px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px 14px;font-family:"Libre Franklin";font-size:13px}
+  .tags span{padding:2px 8px;border:1px solid var(--rule);border-radius:2px;background:var(--paper-deep);color:var(--ink-soft)}
+  .tags span.hot{background:var(--red);color:var(--paper);border-color:var(--red)}
+
+  /* ——— modules ——— */
+  .mods{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .mod{padding:24px 22px 22px;border-right:1px solid var(--rule)}
+  .mod:last-child{border-right:none}
+  .mod .num{font-family:"DM Serif Display";font-style:italic;font-size:52px;color:var(--red);line-height:.9;margin-bottom:10px}
+  .mod h4{font-family:"DM Serif Display";font-size:22px;line-height:1.15;margin-bottom:8px}
+  .mod p{font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
+  .mod .tool{margin-top:14px;font-family:"JetBrains Mono";font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+
+  /* ——— format + community split ——— */
+  .split{display:grid;grid-template-columns:1.4fr 1fr;gap:44px}
+  .split .col h3{font-family:"DM Serif Display";font-size:28px;margin-bottom:12px}
+  .split .col p{font-size:16px;line-height:1.6;margin-bottom:10px}
+  .timeline{margin-top:18px;display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+  .timeline div{background:var(--paper-deep);border:1px solid var(--rule);padding:10px 8px;font-family:"JetBrains Mono";font-size:11px;text-align:center;letter-spacing:.05em;color:var(--ink-soft)}
+  .timeline div b{display:block;color:var(--red);font-size:13px;font-weight:700;margin-bottom:2px}
+
+  /* ——— pricing classifieds ——— */
+  .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--ink)}
+  .price{padding:26px 22px;border-right:1px solid var(--rule);position:relative}
+  .price:last-child{border-right:none}
+  .price.feat{background:var(--ink);color:var(--paper)}
+  .price .tier{font-family:"Libre Franklin";font-weight:900;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--red)}
+  .price.feat .tier{color:#FFB38A}
+  .price .amt{font-family:"DM Serif Display";font-size:56px;line-height:1;margin:8px 0 4px;letter-spacing:-.02em}
+  .price .amt em{font-style:italic;color:var(--red)}
+  .price.feat .amt em{color:#FFB38A}
+  .price ul{list-style:none;margin-top:14px;font-size:14px;line-height:1.55}
+  .price ul li{padding:6px 0;border-bottom:1px dotted var(--rule-dim);display:flex;gap:10px}
+  .price.feat ul li{border-color:#3a342b}
+  .price ul li::before{content:"◆";color:var(--red);font-size:10px;translate:0 3px}
+  .price.feat ul li::before{color:#FFB38A}
+  .price .ribbon{position:absolute;top:-1px;right:-1px;background:var(--red);color:#fff;font-family:"Libre Franklin";font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;font-weight:700}
+
+  /* ——— hosts ——— */
+  .hosts{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+  .host{display:grid;grid-template-columns:88px 1fr;gap:18px;border-top:3px double var(--ink);padding-top:16px}
+  .host .portrait{width:88px;height:110px;background:var(--paper-deep);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font-family:"DM Serif Display";font-style:italic;font-size:48px;color:var(--red)}
+  .host h4{font-family:"DM Serif Display";font-size:22px;margin-bottom:4px}
+  .host .role{font-family:"Libre Franklin";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+  .host p{font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
+
+  /* ——— faq ——— */
+  .faq{columns:2;column-gap:48px;column-rule:1px solid var(--rule)}
+  .faq details{break-inside:avoid;padding:12px 0;border-bottom:1px dotted var(--rule-dim)}
+  .faq summary{font-family:"DM Serif Display";font-size:18px;cursor:pointer;list-style:none;position:relative;padding-right:24px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";position:absolute;right:0;top:-2px;font-family:"Libre Franklin";color:var(--red);font-size:22px;font-weight:300}
+  .faq details[open] summary::after{content:"−"}
+  .faq p{margin-top:8px;font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
+
+  /* ——— final CTA ——— */
+  .cta{margin-top:40px;border:3px double var(--ink);padding:40px;text-align:center;background:var(--paper-deep)}
+  .cta .eyebrow{font-family:"Libre Franklin";font-size:11px;letter-spacing:.3em;color:var(--red);text-transform:uppercase}
+  .cta h2{font-family:"DM Serif Display";font-size:68px;line-height:1;margin:12px 0 8px;letter-spacing:-.02em}
+  .cta h2 em{font-style:italic;color:var(--red)}
+  .cta p{font-family:"Libre Caslon Text";font-style:italic;font-size:18px;color:var(--ink-soft);max-width:52ch;margin:0 auto 22px}
+  .btn{display:inline-block;background:var(--ink);color:var(--paper);padding:14px 28px;font-family:"Libre Franklin";font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:2px solid var(--ink)}
+  .btn.alt{background:transparent;color:var(--ink);margin-left:8px}
+
+  /* ——— footer ——— */
+  footer{margin-top:24px;padding-top:14px;border-top:3px double var(--ink);display:flex;justify-content:space-between;font-family:"JetBrains Mono";font-size:11px;letter-spacing:.08em;color:var(--ink-soft);text-transform:uppercase}
+
+  @media (max-width:900px){
+    .hero,.split,.aud-grid,.hosts{grid-template-columns:1fr}
+    .mods,.prices{grid-template-columns:1fr}
+    .mod,.price{border-right:none;border-bottom:1px solid var(--rule)}
+    .mirror,.faq{columns:1}
+    .masthead{grid-template-columns:1fr}
+    .masthead .title{font-size:46px}
+    h1.head{font-size:52px}
+    .cta h2{font-size:42px}
+    .timeline{grid-template-columns:repeat(3,1fr)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="left">No. 001 · Весна MMXXVI</div>
+    <div class="title">The <em>Daily</em> Work</div>
+    <div class="right">Издание для тех, кто устал копипастить</div>
+  </div>
+
+  <div class="folio">
+    <span>AI For Work · Выпуск I</span>
+    <span>Практический курс · 6 недель</span>
+    <span>Цена: от 0₽ в виде прокрастинации</span>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <div class="kicker">Главный материал номера</div>
+      <h1 class="head">AI <em>For</em> Work.<br>Не игрушка —<br>инструмент.</h1>
+      <div class="deck">Практический курс по ИИ-агентам (Codex, Claude Code) для&nbsp;тех, кто не пишет код, но хочет перестать тратить часы на&nbsp;рутину.</div>
+      <div class="byline">Авторы — <b>Коля Шейко</b> &amp; <b>Саша Литская</b> · Читать за 3 минуты · Начинается осенью</div>
+    </div>
+    <aside class="hero-side">
+      <p>Этот курс — не про промпты и не про «десять лучших GPT-хаков». Это про работу: конкретные задачи, которые каждый делает руками каждую неделю, и которые можно спокойно отдать агенту.</p>
+      <p>За шесть недель вы соберёте личного ассистента под свои задачи — не теоретически, а буквально: с командами, скриптами и проверкой на ваших же файлах.</p>
+      <div class="stat">
+        <div>Модулей<b>4</b></div>
+        <div>Недель<b>6</b></div>
+        <div>Проектов<b>1</b></div>
+        <div>Разработчиков<b>0</b></div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- MIRROR -->
+  <section class="section">
+    <div class="sec-head">
+      <span class="num">§ 01 / Mirror</span>
+      <h2>Узнаёте себя?</h2>
+      <span class="tag">Если хотя бы трижды — дальше</span>
+    </div>
+    <ul class="mirror">
+      <li><b>Копируете</b> данные из одной таблицы в другую и называете это «аналитикой».</li>
+      <li><b>Читаете</b> вакансии с HH по 40 штук в день, чтобы понять рынок.</li>
+      <li><b>Делаете</b> одну и ту же презентацию из Excel раз в неделю.</li>
+      <li><b>Собираете</b> сводки из Telegram-чатов руками по пятницам.</li>
+      <li><b>Знаете</b>, что «ИИ всё решит», но не знаете, с чего начать.</li>
+      <li><b>Пробовали</b> ChatGPT — понравилось, но дальше игрушки не ушло.</li>
+    </ul>
+  </section>
+
+  <!-- AUDIENCE -->
+  <section class="section">
+    <div class="sec-head">
+      <span class="num">§ 02 / Readers</span>
+      <h2>Для кого номер</h2>
+      <span class="tag">Не-разработчики, которых всё достало</span>
+    </div>
+    <div class="aud-grid">
+      <div>
+        <h3>Роли</h3>
+        <div class="tags">
+          <span>Продакт</span><span>Маркетолог</span><span>HR</span><span>Рекрутер</span>
+          <span>Аналитик</span><span>Операционный</span><span>Фаундер</span><span>Ассистент</span>
+          <span>Контент-менеджер</span><span>PM</span>
+        </div>
+      </div>
+      <div>
+        <h3>Задачи</h3>
+        <div class="tags">
+          <span class="hot">Ресёрч</span><span class="hot">Отчёты</span><span>Презентации</span>
+          <span>Письма</span><span>Брифы</span><span>Скоринг вакансий</span>
+          <span>Парсинг сайтов</span><span>Свод чатов</span><span>Проверка гипотез</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section class="section">
+    <div class="sec-head">
+      <span class="num">§ 03 / Program</span>
+      <h2>Четыре модуля</h2>
+      <span class="tag">От файлов до автономного агента</span>
+    </div>
+    <div class="mods">
+      <div class="mod">
+        <div class="num">I.</div>
+        <h4>Файлы, таблицы, презентации</h4>
+        <p>Превращаем .xlsx и .csv в готовые слайды без Excel-формул и дизайнера. Агент читает, считает, собирает.</p>
+        <div class="tool">Codex · Claude Code</div>
+      </div>
+      <div class="mod">
+        <div class="num">II.</div>
+        <h4>Ресёрч по HeadHunter</h4>
+        <p>Агент собирает вакансии, скорит по вашим критериям, делает сводку по рынку зарплат — на живых данных.</p>
+        <div class="tool">Browser-use · API</div>
+      </div>
+      <div class="mod">
+        <div class="num">III.</div>
+        <h4>Telegram без боли</h4>
+        <p>Сводки из чатов, ответы по шаблону, поиск по тысячам сообщений. То, что вы делали руками в пятницу.</p>
+        <div class="tool">Bot API · MTProto</div>
+      </div>
+      <div class="mod">
+        <div class="num">IV.</div>
+        <h4>Автономный браузер</h4>
+        <p>Агент кликает, заполняет формы, ходит по сайтам за вас. Заканчиваем курс живым финальным проектом.</p>
+        <div class="tool">Browser-use · Playwright</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMAT + COMMUNITY -->
+  <section class="section">
+    <div class="sec-head">
+      <span class="num">§ 04 / Format</span>
+      <h2>Как устроено</h2>
+      <span class="tag">6 недель · разборы · чат</span>
+    </div>
+    <div class="split">
+      <div class="col">
+        <h3>Шесть недель, один финальный проект</h3>
+        <p>Каждую неделю — один модуль: короткое видео, практика на своих задачах, разбор в формате живой встречи. Никаких «лекций на два часа».</p>
+        <p>Финальная неделя — собственный агент под свою работу: от постановки задачи до готового запускающегося решения.</p>
+        <div class="timeline">
+          <div><b>Нед. 1</b>Onboarding</div>
+          <div><b>Нед. 2</b>Файлы</div>
+          <div><b>Нед. 3</b>HH</div>
+          <div><b>Нед. 4</b>Telegram</div>
+          <div><b>Нед. 5</b>Browser</div>
+          <div><b>Нед. 6</b>Проект</div>
+        </div>
+      </div>
+      <div class="col">
+        <h3>Сообщество — не «поддержка»</h3>
+        <p>Закрытый чат с авторами, живые разборы заданий, обмен рабочими кейсами. Без «спасибо, очень полезно» — только конкретные задачи и решения.</p>
+        <p>После курса чат остаётся — туда возвращаются за новыми приёмами, когда работа подкидывает что-то новое.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section">
+    <div class="sec-head">
+      <span class="num">§ 05 / Terms</span>
+      <h2>Тарифы</h2>
+      <span class="tag">Classifieds</span>
+    </div>
+    <div class="prices">
+      <div class="price">
+        <div class="tier">Базовый</div>
+        <div class="amt">₽ <em>29.000</em></div>
+        <ul>
+          <li>Все модули и материалы</li>
+          <li>Доступ в чат</li>
+          <li>Разборы в записи</li>
+          <li>Финальный проект самостоятельно</li>
+        </ul>
+      </div>
+      <div class="price feat">
+        <div class="ribbon">Оптимум</div>
+        <div class="tier">С проверкой</div>
+        <div class="amt">₽ <em>59.000</em></div>
+        <ul>
+          <li>Всё из «Базового»</li>
+          <li>Проверка домашних заданий</li>
+          <li>Личный фидбэк по проекту</li>
+          <li>Доступ к живым разборам</li>
+        </ul>
+      </div>
+      <div class="price">
+        <div class="tier">VIP</div>
+        <div class="amt">₽ <em>149.000</em></div>
+        <ul>
+          <li>Всё из «С проверкой»</li>
+          <li>Две 1-на-1 сессии с авторами</li>
+          <li>Кастомный агент под задачу</li>
+          <li>Приоритет на следующих потоках</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOSTS -->
+  <section class="section">
+    <div class="sec-head">
+      <span class="num">§ 06 / Authors</span>
+      <h2>Кто ведёт</h2>
+      <span class="tag">Два автора, две роли</span>
+    </div>
+    <div class="hosts">
+      <div class="host">
+        <div class="portrait">КШ</div>
+        <div>
+          <h4>Коля Шейко</h4>
+          <div class="role">Техническая часть · инженер</div>
+          <p>Десять лет в продуктовой разработке, строит инструменты с агентами ежедневно. Отвечает за то, чтобы всё работало и запускалось с первого раза.</p>
+        </div>
+      </div>
+      <div class="host">
+        <div class="portrait">СЛ</div>
+        <div>
+          <h4>Саша Литская</h4>
+          <div class="role">Формат · методология</div>
+          <p>Куратор образовательных программ, делает так, чтобы сложное становилось понятным за один вечер и не забывалось через неделю.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="sec-head">
+      <span class="num">§ 07 / Q&amp;A</span>
+      <h2>Часто спрашивают</h2>
+      <span class="tag">Letters to the editor</span>
+    </div>
+    <div class="faq">
+      <details open><summary>Нужно ли уметь программировать?</summary><p>Нет. Курс сделан для тех, кто код не пишет и не собирается. Всё, что нужно — умение открыть терминал по инструкции.</p></details>
+      <details><summary>Какая машина нужна?</summary><p>Любой современный ноутбук. Mac, Windows, Linux — всё подходит. Подробные инструкции по установке даём в первой неделе.</p></details>
+      <details><summary>Что если я пропущу неделю?</summary><p>Все материалы остаются. Разборы — в записи. Чат догонит.</p></details>
+      <details><summary>Это точно окупится?</summary><p>Если хотя бы одну из ваших еженедельных рутин мы автоматизируем до конца курса — да. Обычно получается три-четыре.</p></details>
+      <details><summary>Можно ли оплатить от юрлица?</summary><p>Да, оформляем договор и счёт. Напишите нам после выбора тарифа.</p></details>
+      <details><summary>Будут ли ещё потоки?</summary><p>Будут, но не часто. Следующий — не раньше чем через три месяца.</p></details>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="eyebrow">Последняя полоса</div>
+    <h2>Хватит копировать.<br><em>Пора делегировать.</em></h2>
+    <p>Набор на первый поток открыт. Мест немного — курс идёт в камерном формате, иначе разборы теряют смысл.</p>
+    <a class="btn" href="#">Записаться на курс →</a>
+    <a class="btn alt" href="#">Скачать программу</a>
+  </section>
+
+  <footer>
+    <span>© AI For Work, MMXXVI</span>
+    <span>Отпечатано на ИИ и кофе</span>
+    <span>hello@aiforwork</span>
+  </footer>
+
+</div>
+</body>
+</html>

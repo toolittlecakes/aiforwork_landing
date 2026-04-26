@@ -1,0 +1,2192 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI For Work — практический курс по ИИ-агентам для не-разработчиков</title>
+<meta name="description" content="Шестинедельный практический курс: учим не-разработчиков использовать ИИ-агентов (Codex, Claude Code) для реальных рабочих задач — таблиц, отчётов, ресёрча, Telegram, браузерной рутины.">
+<meta name="theme-color" content="#ecebe6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ecebe6;
+    --bg-deep: #e1e0d9;
+    --paper: #ffffff;
+    --ink: #0e0e0d;
+    --ink-2: #333330;
+    --ink-3: #77766f;
+    --rule: #0e0e0d;
+    --rule-soft: #cac8bf;
+
+    --accent: #1c2ce5;
+    --accent-hot: #3445ff;
+    --lime: #d8ff3a;
+    --sage: #889776;
+
+    --display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, Monaco, monospace;
+
+    --wrap: 1280px;
+    --gutter: clamp(20px, 4vw, 56px);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 88px; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16.5px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  section[id] { scroll-margin-top: 88px; }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    position: relative;
+  }
+
+  a { color: inherit; }
+  ::selection { background: var(--accent); color: #fff; }
+
+  /* ==================== HEADER ==================== */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+  }
+  header .wrap {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 28px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: -0.03em;
+  }
+  .brand .mark {
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    display: inline-block;
+    position: relative;
+  }
+  .brand .mark::after {
+    content: "";
+    position: absolute;
+    right: -6px;
+    bottom: -6px;
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+  }
+  nav.top {
+    display: flex;
+    gap: 22px;
+    font-size: 14px;
+    font-weight: 500;
+    justify-self: center;
+  }
+  nav.top a {
+    text-decoration: none;
+    color: var(--ink);
+    padding: 4px 0;
+    transition: color .15s;
+  }
+  nav.top a:hover { color: var(--accent); }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding: 6px 10px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .status-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(.82); }
+  }
+
+  /* ==================== BUTTONS ==================== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 14.5px;
+    letter-spacing: -0.005em;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--bg);
+    cursor: pointer;
+    transition: transform .1s ease, background .2s, color .2s, box-shadow .2s;
+    white-space: nowrap;
+    position: relative;
+  }
+  .btn:active { transform: translate(2px, 2px); }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 4px 4px 0 0 var(--ink);
+  }
+  .btn-primary:hover {
+    background: var(--accent-hot);
+    border-color: var(--accent-hot);
+  }
+  .btn-primary:active { box-shadow: 0 0 0 0 var(--ink); }
+  .btn-solid {
+    background: var(--ink);
+    color: var(--bg);
+    box-shadow: 4px 4px 0 0 var(--accent);
+  }
+  .btn-solid:hover { background: #000; }
+  .btn-solid:active { box-shadow: 0 0 0 0 var(--accent); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink);
+    box-shadow: none;
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--bg); }
+  .btn-sm { padding: 9px 15px; font-size: 13px; }
+  .btn .arr { transition: transform .15s; display: inline-block; }
+  .btn:hover .arr { transform: translateX(3px); }
+
+  /* ==================== MARQUEE ==================== */
+  .marquee {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 12px 0;
+  }
+  .marquee-inner {
+    display: flex;
+    gap: 48px;
+    white-space: nowrap;
+    animation: scroll 38s linear infinite;
+    width: max-content;
+  }
+  .marquee-inner span {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+    display: inline-flex;
+    align-items: center;
+    gap: 48px;
+  }
+  .marquee-inner span::after {
+    content: "◆";
+    color: var(--accent-hot);
+    font-size: 11px;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-inner { animation: none; }
+  }
+
+  /* ==================== TYPE ==================== */
+  h1, h2, h3, h4 {
+    font-family: var(--display);
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: -0.035em;
+    line-height: 0.96;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  .hl { color: var(--accent); }
+  .italic { font-style: italic; font-family: var(--display); }
+
+  /* ==================== GRID RULES ==================== */
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, var(--rule-soft) 1px, transparent 1px);
+    background-size: calc(100% / 12) 100%;
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  /* ==================== SECTIONS ==================== */
+  section { padding: 110px 0; position: relative; }
+  section + section { border-top: 1px solid var(--rule); }
+  section.dark { background: var(--ink); color: var(--bg); border-top-color: var(--ink); }
+  section.paper { background: var(--paper); }
+
+  .sec-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 72px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .sec-num-big {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(110px, 14vw, 200px);
+    line-height: 0.78;
+    letter-spacing: -0.055em;
+    color: var(--ink);
+  }
+  .sec-num-big .slash {
+    color: var(--accent);
+  }
+  .sec-head .right {
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .sec-label {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sec-label::before {
+    content: "";
+    width: 36px; height: 1px;
+    background: var(--ink);
+  }
+  .sec-title {
+    font-size: clamp(32px, 4.6vw, 56px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+    max-width: 20ch;
+  }
+  .sec-title.wide { max-width: 30ch; }
+  .sec-intro {
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 58ch;
+    color: var(--ink-2);
+    margin-top: 8px;
+  }
+  section.dark .sec-head { border-bottom-color: color-mix(in srgb, var(--bg) 25%, transparent); }
+  section.dark .sec-num-big { color: var(--bg); }
+  section.dark .sec-label { color: color-mix(in srgb, var(--bg) 60%, transparent); }
+  section.dark .sec-label::before { background: var(--bg); }
+  section.dark .sec-intro { color: color-mix(in srgb, var(--bg) 75%, transparent); }
+
+  @media (max-width: 860px) {
+    .sec-head {
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-bottom: 44px;
+    }
+    .sec-num-big { font-size: 90px; line-height: .85; }
+    .sec-head .right { padding-bottom: 0; }
+  }
+
+  /* ==================== HERO ==================== */
+  .hero {
+    padding: 72px 0 96px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: relative;
+  }
+  .hero-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 44px;
+  }
+  .hero-top .dateline {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .hero-top .dateline span + span::before {
+    content: "·";
+    margin-right: 18px;
+    color: var(--ink-3);
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 9.5vw, 144px);
+    line-height: 0.88;
+    letter-spacing: -0.055em;
+    font-weight: 500;
+    margin-bottom: 44px;
+  }
+  .hero h1 .block {
+    display: block;
+  }
+  .hero h1 .box {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 0 14px;
+    margin: 0 -2px;
+    font-style: italic;
+    font-family: var(--display);
+    font-weight: 500;
+  }
+  .hero h1 .underline {
+    text-decoration: underline;
+    text-decoration-thickness: 6px;
+    text-underline-offset: 10px;
+    text-decoration-color: var(--accent);
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .hero-lede {
+    font-family: var(--display);
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.35;
+    max-width: 42ch;
+    margin: 0 0 18px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .hero-sub {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 52ch;
+    margin: 0 0 36px;
+    color: var(--ink-2);
+  }
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .spec-card {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 0;
+    position: relative;
+  }
+  .spec-card::before {
+    content: "";
+    position: absolute;
+    top: -8px; left: -8px;
+    width: 100%; height: 100%;
+    background: var(--accent);
+    z-index: -1;
+  }
+  .spec-head {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .spec-head .badge {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    color: var(--accent);
+  }
+  .spec-rows {
+    padding: 8px 20px;
+  }
+  .spec-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--rule-soft);
+    font-size: 14px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-row .k {
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    align-self: center;
+  }
+  .spec-row .v {
+    font-family: var(--display);
+    font-weight: 500;
+    color: var(--ink);
+    text-align: right;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .spec-foot {
+    padding: 16px 20px;
+    border-top: 1px solid var(--rule);
+  }
+  .spec-foot .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  @media (max-width: 900px) {
+    .hero-meta { grid-template-columns: 1fr; gap: 36px; }
+    .hero-top { grid-template-columns: 1fr; align-items: flex-start; }
+  }
+
+  /* ==================== RECOGNIZE ==================== */
+  .rec-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+  .rec-item {
+    grid-column: span 3;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 40px 32px 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    min-height: 220px;
+    background: var(--paper);
+    transition: background .2s;
+    position: relative;
+  }
+  .rec-item:hover { background: var(--bg-deep); }
+  .rec-item.full { grid-column: span 6; }
+  .rec-item .num {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-feature-settings: "tnum";
+  }
+  .rec-item p {
+    font-family: var(--display);
+    font-size: clamp(22px, 2.3vw, 28px);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+    margin: 0;
+    max-width: 24ch;
+  }
+  .rec-item.full p {
+    font-size: clamp(26px, 3vw, 40px);
+    max-width: 36ch;
+  }
+  .rec-item p em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  @media (max-width: 860px) {
+    .rec-grid { grid-template-columns: 1fr; }
+    .rec-item, .rec-item.full { grid-column: span 1; }
+  }
+
+  /* ==================== AUDIENCE ==================== */
+  .aud-lede {
+    font-family: var(--display);
+    font-size: clamp(22px, 2.8vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+    max-width: 22ch;
+    margin: 0 0 48px;
+  }
+  .aud-lede .hl { color: var(--accent); }
+
+  .chip-block {
+    margin-top: 36px;
+  }
+  .chip-label {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .chip-label .count {
+    color: var(--accent);
+    font-family: var(--mono);
+  }
+  .chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 14px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: background .15s, color .15s;
+  }
+  .chip:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .chip.mod {
+    background: var(--bg);
+    border-color: var(--rule-soft);
+    color: var(--ink-2);
+  }
+  .chip.mod:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .aud-note {
+    margin-top: 72px;
+    padding: 40px 44px;
+    background: var(--ink);
+    color: var(--bg);
+    position: relative;
+  }
+  .aud-note::before {
+    content: "✦";
+    position: absolute;
+    top: 20px; right: 24px;
+    color: var(--accent-hot);
+    font-size: 20px;
+  }
+  .aud-note p {
+    font-family: var(--display);
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+    margin: 0 0 18px;
+    font-weight: 500;
+    max-width: 62ch;
+  }
+  .aud-note p:last-child {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: color-mix(in srgb, var(--bg) 70%, transparent);
+  }
+  .aud-note em {
+    font-style: italic;
+    color: var(--accent-hot);
+    font-weight: 500;
+  }
+
+  /* ==================== PROGRAM ==================== */
+  .program-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    margin-bottom: 56px;
+  }
+  .program-intro p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .program-intro p.dim { color: var(--ink-2); }
+  .program-intro p strong {
+    font-family: var(--display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--accent);
+  }
+  @media (max-width: 820px) {
+    .program-intro { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  .modules {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .module {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr;
+    gap: 40px;
+    padding: 52px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+    position: relative;
+  }
+  .mod-index {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .mod-index .n {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(80px, 10vw, 120px);
+    line-height: 0.82;
+    letter-spacing: -0.06em;
+    color: var(--ink);
+  }
+  .mod-index .n em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .mod-index .lbl {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: 4px;
+  }
+  .mod-title h3 {
+    font-size: clamp(24px, 2.6vw, 32px);
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -0.028em;
+    margin-bottom: 20px;
+    max-width: 22ch;
+  }
+  .mod-title h3 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .mod-title .chip-group { margin-top: 20px; }
+  .mod-detail {
+    display: grid;
+    gap: 22px;
+    font-size: 15px;
+  }
+  .mod-field {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 18px;
+    line-height: 1.55;
+    align-items: baseline;
+  }
+  .mod-field .k {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .mod-field .v { color: var(--ink); }
+
+  @media (max-width: 1020px) {
+    .module { grid-template-columns: 140px 1fr; }
+    .mod-detail { grid-column: 1 / -1; padding-left: 0; }
+  }
+  @media (max-width: 640px) {
+    .module { grid-template-columns: 1fr; gap: 20px; padding: 36px 0; }
+    .mod-field { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  .meta-strip {
+    margin-top: 72px;
+    background: var(--lime);
+    padding: 44px 40px;
+    border: 1px solid var(--ink);
+    position: relative;
+  }
+  .meta-strip::before {
+    content: "";
+    position: absolute;
+    top: 8px; left: 8px;
+    width: 100%; height: 100%;
+    background: var(--ink);
+    z-index: -1;
+  }
+  .meta-strip .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: inline-block;
+    padding: 4px 8px;
+    background: var(--ink);
+    color: var(--lime);
+  }
+  .meta-strip h4 {
+    font-size: clamp(22px, 2.4vw, 28px);
+    margin-bottom: 28px;
+    font-weight: 500;
+    max-width: 28ch;
+  }
+  .meta-strip ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 40px;
+  }
+  .meta-strip li {
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: var(--ink);
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .meta-strip li::before {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink);
+    content: counter(ms, decimal-leading-zero);
+    counter-increment: ms;
+    font-weight: 500;
+  }
+  .meta-strip ul { counter-reset: ms; }
+  @media (max-width: 640px) {
+    .meta-strip ul { grid-template-columns: 1fr; }
+    .meta-strip { padding: 32px 24px; }
+  }
+
+  /* ==================== PROJECT ==================== */
+  .proj-block {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    align-items: stretch;
+  }
+  .proj-tag-box {
+    padding: 48px 36px;
+    background: var(--accent);
+    color: #fff;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+    position: relative;
+  }
+  .proj-tag-box .top {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .proj-tag-box h3 {
+    font-size: clamp(38px, 4.4vw, 56px);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+  }
+  .proj-tag-box h3 em {
+    font-style: italic;
+    font-weight: 500;
+  }
+  .proj-tag-box .meta {
+    display: flex;
+    gap: 24px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .proj-tag-box .meta span { opacity: 0.85; }
+  .proj-content {
+    padding: 44px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .proj-content p {
+    margin: 0;
+    font-size: clamp(17px, 1.8vw, 19px);
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .proj-result {
+    padding: 20px 24px;
+    border-left: 4px solid var(--accent);
+    background: var(--bg);
+  }
+  .proj-result .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .proj-result p {
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  @media (max-width: 900px) {
+    .proj-block { grid-template-columns: 1fr; }
+    .proj-tag-box { border-right: none; border-bottom: 1px solid var(--rule); padding: 36px 28px; }
+    .proj-content { padding: 32px 28px; }
+  }
+
+  /* ==================== FORMAT ==================== */
+  .format-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: var(--paper);
+    border-right: 1px solid var(--rule);
+  }
+  .timeline li {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--rule-soft);
+    align-items: center;
+    font-size: 15px;
+  }
+  .timeline li:last-child { border-bottom: none; }
+  .timeline li:hover { background: var(--bg); }
+  .timeline li .idx {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .timeline li strong {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: -0.015em;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .timeline li span.desc {
+    font-size: 14px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    background: var(--paper);
+  }
+  .stat {
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--rule-soft);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+  }
+  .stat:last-child { border-bottom: none; }
+  .stat .txt h4 {
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    margin-bottom: 4px;
+  }
+  .stat .txt p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+  .stat .big {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 52px;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+    text-align: right;
+  }
+  .stat .big small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  @media (max-width: 900px) {
+    .format-grid { grid-template-columns: 1fr; }
+    .timeline { border-right: none; border-bottom: 1px solid var(--rule); }
+  }
+
+  /* ==================== COMMUNITY ==================== */
+  .com-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+  .com-text p {
+    margin: 0 0 20px;
+  }
+  .com-text p.big {
+    font-family: var(--display);
+    font-size: clamp(22px, 2.6vw, 30px);
+    line-height: 1.18;
+    letter-spacing: -0.028em;
+    font-weight: 500;
+    color: var(--ink);
+    max-width: 22ch;
+  }
+  .com-text p.dim {
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    max-width: 52ch;
+  }
+  .com-reasons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid var(--ink);
+  }
+  .com-reasons li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+    font-family: var(--display);
+    font-size: 19px;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+  }
+  .com-reasons li::before {
+    content: counter(c, decimal-leading-zero);
+    counter-increment: c;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--accent);
+    font-weight: 500;
+    align-self: center;
+    letter-spacing: 0.06em;
+  }
+  .com-reasons { counter-reset: c; }
+  .com-reasons li::after {
+    content: "→";
+    color: var(--accent);
+    font-family: var(--display);
+    font-weight: 400;
+  }
+  @media (max-width: 860px) {
+    .com-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  /* ==================== PRICING ==================== */
+  .pricing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+  .tier {
+    padding: 40px 32px;
+    background: var(--paper);
+    border-right: 1px solid var(--rule);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .tier:last-child { border-right: none; }
+  .tier.featured {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .tier .tag-top {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: var(--accent);
+    color: #fff;
+    padding: 5px 10px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .tier .t-num {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+  }
+  .tier.featured .t-num { color: color-mix(in srgb, var(--bg) 60%, transparent); }
+  .tier h4 {
+    font-size: clamp(28px, 3vw, 36px);
+    letter-spacing: -0.03em;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .tier .for {
+    font-size: 14.5px;
+    color: var(--ink-3);
+    line-height: 1.55;
+    margin: 0 0 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .tier.featured .for {
+    color: color-mix(in srgb, var(--bg) 65%, transparent);
+    border-bottom-color: color-mix(in srgb, var(--bg) 20%, transparent);
+  }
+  .tier ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px;
+  }
+  .tier li {
+    padding: 10px 0 10px 26px;
+    position: relative;
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+  .tier li::before {
+    content: "+";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    font-family: var(--mono);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .tier ul.not li::before {
+    content: "−";
+    color: var(--ink-3);
+  }
+  .tier ul.not li { color: var(--ink-3); }
+  .tier .split {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 4px 0 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .tier.featured .split {
+    color: color-mix(in srgb, var(--bg) 55%, transparent);
+    border-top-color: color-mix(in srgb, var(--bg) 20%, transparent);
+  }
+
+  .pricing-tail {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 36px;
+    align-items: center;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .pricing-tail p {
+    margin: 0;
+    font-size: 15.5px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    max-width: 56ch;
+  }
+  @media (max-width: 900px) {
+    .pricing { grid-template-columns: 1fr; }
+    .tier { border-right: none; border-bottom: 1px solid var(--rule); }
+    .tier:last-child { border-bottom: none; }
+    .pricing-tail { grid-template-columns: 1fr; }
+  }
+
+  /* ==================== AUTHORS ==================== */
+  .auth-intro {
+    font-family: var(--display);
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.4;
+    color: var(--ink-2);
+    letter-spacing: -0.015em;
+    max-width: 62ch;
+    margin-top: 12px;
+    font-weight: 400;
+  }
+  .authors {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+  .author {
+    padding: 40px 36px;
+    background: var(--paper);
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 28px;
+    align-items: start;
+    border-right: 1px solid var(--rule);
+  }
+  .author:last-child { border-right: none; }
+  .portrait {
+    width: 120px;
+    height: 120px;
+    background: var(--bg);
+    border: 1px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-size: 44px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    position: relative;
+  }
+  .portrait::after {
+    content: "";
+    position: absolute;
+    top: 6px; right: 6px;
+    width: 10px; height: 10px;
+    background: var(--accent);
+  }
+  .author h4 {
+    font-size: 28px;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .author .role {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .author ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .author li {
+    padding: 9px 0;
+    border-top: 1px solid var(--rule-soft);
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .author li:first-child { border-top: none; padding-top: 0; }
+  .author a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+  }
+  @media (max-width: 900px) {
+    .authors { grid-template-columns: 1fr; }
+    .author { border-right: none; border-bottom: 1px solid var(--rule); }
+    .author:last-child { border-bottom: none; }
+  }
+  @media (max-width: 480px) {
+    .author { grid-template-columns: 96px 1fr; gap: 20px; padding: 30px 24px; }
+    .portrait { width: 96px; height: 96px; font-size: 34px; }
+  }
+
+  /* ==================== FAQ ==================== */
+  .faq {
+    max-width: 920px;
+    border-top: 1px solid var(--rule);
+  }
+  .faq details {
+    border-bottom: 1px solid var(--rule);
+    padding: 0;
+  }
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 24px 48px 24px 56px;
+    font-family: var(--display);
+    font-size: clamp(18px, 1.9vw, 22px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    position: relative;
+    transition: color .15s, background .15s;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary:hover { background: var(--bg-deep); }
+  .faq summary::before {
+    content: "Q.";
+    position: absolute;
+    left: 0;
+    top: 24px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .faq summary::after {
+    content: "+";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink);
+    transition: transform .2s;
+  }
+  .faq details[open] summary { color: var(--accent); }
+  .faq details[open] summary::after {
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .faq details p {
+    margin: 0 48px 28px 56px;
+    max-width: 68ch;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    padding-top: 4px;
+    position: relative;
+  }
+  .faq details p::before {
+    content: "A.";
+    position: absolute;
+    left: -56px;
+    top: 4px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-3);
+  }
+  @media (max-width: 640px) {
+    .faq summary { padding-left: 36px; padding-right: 40px; }
+    .faq summary::before { left: 0; font-size: 11px; }
+    .faq details p { margin-left: 36px; margin-right: 20px; }
+    .faq details p::before { left: -36px; font-size: 11px; }
+  }
+
+  /* ==================== FINAL ==================== */
+  .final {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 120px 0 100px;
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .final .bg-big {
+    position: absolute;
+    bottom: -48px; right: -24px;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(180px, 28vw, 380px);
+    line-height: 0.8;
+    letter-spacing: -0.06em;
+    color: color-mix(in srgb, var(--bg) 6%, transparent);
+    pointer-events: none;
+    user-select: none;
+  }
+  .final .wrap { position: relative; z-index: 2; }
+  .final .eyebrow {
+    color: color-mix(in srgb, var(--bg) 70%, transparent);
+    display: inline-flex;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .final .eyebrow::before {
+    content: "";
+    width: 42px; height: 1px;
+    background: var(--accent-hot);
+  }
+  .final h2 {
+    font-size: clamp(40px, 6.2vw, 84px);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    max-width: 22ch;
+    margin-bottom: 36px;
+    font-weight: 500;
+  }
+  .final h2 .box {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 0 14px;
+    font-style: italic;
+    margin: 0 -2px;
+  }
+  .final p {
+    font-family: var(--display);
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.4;
+    color: color-mix(in srgb, var(--bg) 80%, transparent);
+    max-width: 58ch;
+    margin: 0 0 44px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+  .final .btn-primary {
+    box-shadow: 6px 6px 0 0 #fff;
+  }
+  .final .btn-primary:active { box-shadow: 0 0 0 0 #fff; }
+  .final .btn-ghost {
+    color: var(--bg);
+    border-color: color-mix(in srgb, var(--bg) 50%, transparent);
+  }
+  .final .btn-ghost:hover {
+    background: var(--bg);
+    color: var(--ink);
+    border-color: var(--bg);
+  }
+
+  /* ==================== FOOTER ==================== */
+  footer {
+    padding: 40px 0;
+    background: var(--ink);
+    color: color-mix(in srgb, var(--bg) 55%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--bg) 12%, transparent);
+    font-size: 13.5px;
+  }
+  footer .wrap {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: center;
+  }
+  footer .brand-mini {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--bg);
+    letter-spacing: -0.02em;
+  }
+  footer .mid {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    color: color-mix(in srgb, var(--bg) 45%, transparent);
+  }
+  footer .links { display: flex; gap: 24px; justify-self: end; }
+  footer a {
+    color: color-mix(in srgb, var(--bg) 70%, transparent);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  footer a:hover { color: var(--accent-hot); }
+
+  /* ==================== REVEAL ==================== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .status-dot { animation: none; }
+  }
+
+  /* ==================== MOBILE NAV ==================== */
+  @media (max-width: 860px) {
+    nav.top { display: none; }
+    header .wrap { grid-template-columns: auto 1fr auto; }
+    .status-badge { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <span class="mark"></span>
+      <span>AI&nbsp;For&nbsp;Work</span>
+    </a>
+    <nav class="top">
+      <a href="#program">Программа</a>
+      <a href="#format">Формат</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#authors">Ведут</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <span class="status-badge"><span class="status-dot"></span>Идёт набор · поток 01</span>
+    <a class="btn btn-primary btn-sm" href="#final">Записаться <span class="arr">→</span></a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-top">
+        <div class="dateline">
+          <span>Поток 01 — Весна 2026</span>
+          <span>6 недель</span>
+          <span>Онлайн, живьём</span>
+          <span>Без кода</span>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h1>
+          <span class="block">Практический курс</span>
+          <span class="block">по <span class="box italic">ИИ-агентам</span></span>
+          <span class="block">для не-разработчиков.</span>
+        </h1>
+      </div>
+
+      <div class="hero-meta">
+        <div class="reveal">
+          <p class="hero-lede">
+            Для людей, у которых много ручной работы с информацией: таблицами, файлами, сайтами, Telegram, вакансиями, отчётами, презентациями, исследованиями и рабочими процессами.
+          </p>
+          <p class="hero-sub">
+            Учим использовать кодинговых агентов — Codex и Claude Code — чтобы искать, читать, анализировать, преобразовывать, собирать и отправлять информацию. Без навыков разработки.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#final">Узнать, подойдёт ли мне <span class="arr">→</span></a>
+            <a class="btn btn-ghost" href="#program">Посмотреть программу</a>
+          </div>
+        </div>
+
+        <aside class="spec-card reveal">
+          <div class="spec-head">
+            <span>Спецификация</span>
+            <span class="badge"><span class="status-dot" style="background: var(--accent);"></span>live</span>
+          </div>
+          <div class="spec-rows">
+            <div class="spec-row"><span class="k">Старт</span><span class="v">Весна 2026</span></div>
+            <div class="spec-row"><span class="k">Поток</span><span class="v">№ 01</span></div>
+            <div class="spec-row"><span class="k">Длительность</span><span class="v">6 недель</span></div>
+            <div class="spec-row"><span class="k">Формат</span><span class="v">Онлайн + записи</span></div>
+            <div class="spec-row"><span class="k">Модули</span><span class="v">4 практики</span></div>
+            <div class="spec-row"><span class="k">Уровень</span><span class="v">Не-разработчики</span></div>
+            <div class="spec-row"><span class="k">Нужно</span><span class="v">ChatGPT Plus</span></div>
+          </div>
+          <div class="spec-foot">
+            <a href="#final" class="btn btn-solid">Записаться в поток <span class="arr">→</span></a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-inner">
+      <span>Таблицы</span><span>Отчёты</span><span>Ресёрч</span><span>Telegram</span><span>Вакансии</span><span>Презентации</span><span>Дашборды</span><span>Лиды</span><span>Формы</span><span>Аналитика</span><span>LinkedIn</span><span>Сводки</span><span>Мониторинг</span><span>Автоматизация</span><span>Браузер</span><span>Файлы</span>
+      <span>Таблицы</span><span>Отчёты</span><span>Ресёрч</span><span>Telegram</span><span>Вакансии</span><span>Презентации</span><span>Дашборды</span><span>Лиды</span><span>Формы</span><span>Аналитика</span><span>LinkedIn</span><span>Сводки</span><span>Мониторинг</span><span>Автоматизация</span><span>Браузер</span><span>Файлы</span>
+    </div>
+  </div>
+
+  <!-- RECOGNIZE -->
+  <section id="recognize">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">01<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Узнаёте себя?</span>
+          <h2 class="sec-title">Если хоть один пункт про <span class="hl italic">вас</span> — вам сюда.</h2>
+        </div>
+      </div>
+
+      <div class="rec-grid reveal">
+        <div class="rec-item">
+          <span class="num">01 / 05</span>
+          <p>Регулярно открываете <em>10 вкладок</em>, 3 таблицы и собираете из этого «нормальный вывод».</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">02 / 05</span>
+          <p>Есть папки, файлы, выгрузки и документы, до которых <em>страшно дотрагиваться</em>.</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">03 / 05</span>
+          <p>Постоянно делаете «быстрый ресёрч», который почему-то занимает <em>полдня</em>.</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">04 / 05</span>
+          <p>Руками переносите информацию <em>между сервисами</em>.</p>
+        </div>
+        <div class="rec-item full">
+          <span class="num">05 / 05</span>
+          <p>Хотите не просто «спросить у нейронки», а дать ей задачу и получить <em>готовый рабочий результат</em>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIENCE -->
+  <section id="audience" class="paper">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">02<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Для кого</span>
+          <h2 class="sec-title">Курс не привязан к одной <span class="hl italic">профессии</span>.</h2>
+        </div>
+      </div>
+
+      <p class="aud-lede reveal">
+        Он для всех, у кого работа завязана на информацию, ручной сбор данных, отчёты, исследования, таблицы, коммуникации и повторяющиеся процессы.
+      </p>
+
+      <div class="chip-block reveal">
+        <div class="chip-label">Роли <span class="count">/ 19</span></div>
+        <div class="chip-group">
+          <span class="chip">Маркетологи</span>
+          <span class="chip">Аналитики</span>
+          <span class="chip">Продакты</span>
+          <span class="chip">Проджекты</span>
+          <span class="chip">HR и рекрутеры</span>
+          <span class="chip">Сейлзы</span>
+          <span class="chip">Операционные менеджеры</span>
+          <span class="chip">Исследователи</span>
+          <span class="chip">Редакторы</span>
+          <span class="chip">Методисты</span>
+          <span class="chip">Продюсеры курсов</span>
+          <span class="chip">Фаундеры</span>
+          <span class="chip">Аккаунт-менеджеры</span>
+          <span class="chip">Customer Success</span>
+          <span class="chip">People Ops</span>
+          <span class="chip">SMM</span>
+          <span class="chip">PR</span>
+          <span class="chip">Контент-команды</span>
+          <span class="chip">Комьюнити-менеджеры</span>
+        </div>
+      </div>
+
+      <div class="chip-block reveal">
+        <div class="chip-label">Задачи <span class="count">/ 17</span></div>
+        <div class="chip-group">
+          <span class="chip">Ресёрч</span>
+          <span class="chip">Таблицы</span>
+          <span class="chip">Отчёты</span>
+          <span class="chip">Презентации</span>
+          <span class="chip">Telegram</span>
+          <span class="chip">Вакансии</span>
+          <span class="chip">Лидогенерация</span>
+          <span class="chip">Анализ рынка</span>
+          <span class="chip">Анализ конкурентов</span>
+          <span class="chip">Поиск клиентов</span>
+          <span class="chip">Обработка выгрузок</span>
+          <span class="chip">Дашборды</span>
+          <span class="chip">Брифы</span>
+          <span class="chip">Сводки</span>
+          <span class="chip">Контент-планы</span>
+          <span class="chip">Заполнение форм</span>
+          <span class="chip">Поиск инсайтов</span>
+        </div>
+      </div>
+
+      <div class="aud-note reveal">
+        <p>У нас нет цели забрать <em>интересную часть</em> работы. Наоборот — мы хотим показать, как отдать агенту рутину, которая отнимает силы: собрать, разложить, проверить, сверить, оформить, перенести.</p>
+        <p>Пока агент собирает данные, чистит таблицу, ищет ссылки или собирает черновик отчёта — вы занимаетесь смыслами, доменными решениями, выбором подхода и качеством результата.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM -->
+  <section id="program">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">03<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Программа</span>
+          <h2 class="sec-title wide">4 практических модуля + <span class="hl italic">неделя знакомства</span>.</h2>
+        </div>
+      </div>
+
+      <div class="program-intro reveal">
+        <p>
+          <strong>Неделя 0</strong> — знакомство с ИИ-агентами: установка, настройка среды, первые практические задания. Дальше — 4 модуля, где на каждом берём реальный тип работы и перестраиваем его вокруг агента.
+        </p>
+        <p class="dim">
+          Суть не только в том, чтобы освоить конкретные инструменты, но и в том, чтобы через эти примеры разобрать подходы, применимые к работе с любыми данными, сервисами и процессами.
+        </p>
+      </div>
+
+      <div class="modules">
+        <article class="module reveal">
+          <div class="mod-index">
+            <div class="n">01<em>.</em></div>
+            <div class="lbl">Модуль</div>
+          </div>
+          <div class="mod-title">
+            <h3>Из страшной таблицы — <em>в отчёт или презентацию</em>.</h3>
+            <div class="chip-group">
+              <span class="chip mod">Файлы</span>
+              <span class="chip mod">Таблицы</span>
+              <span class="chip mod">Отчёт</span>
+              <span class="chip mod">Презентация</span>
+              <span class="chip mod">Преобразование</span>
+            </div>
+          </div>
+          <div class="mod-detail">
+            <div class="mod-field">
+              <div class="k">Что делаем</div>
+              <div class="v">Берём локальную таблицу или выгрузку и превращаем её в понятный рабочий артефакт: HTML-отчёт, презентацию или структурированный документ.</div>
+            </div>
+            <div class="mod-field">
+              <div class="k">Результат</div>
+              <div class="v">Умеем давать агенту файлы, таблицы и примеры оформления, чтобы вместо пересказа получать готовый материал: визуализацию, отчёт или презентацию в стиле компании.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="module reveal">
+          <div class="mod-index">
+            <div class="n">02<em>.</em></div>
+            <div class="lbl">Модуль</div>
+          </div>
+          <div class="mod-title">
+            <h3>Ресёрч рынка <em>на HeadHunter</em>.</h3>
+            <div class="chip-group">
+              <span class="chip mod">Ресёрч</span>
+              <span class="chip mod">Вакансии</span>
+              <span class="chip mod">Рынок</span>
+              <span class="chip mod">Фильтрация</span>
+              <span class="chip mod">Лиды</span>
+              <span class="chip mod">Поиск клиентов</span>
+            </div>
+          </div>
+          <div class="mod-detail">
+            <div class="mod-field">
+              <div class="k">Что делаем</div>
+              <div class="v">Используем HeadHunter как понятный источник открытых данных: вакансии, компании, требования, роли, спрос на специалистов и паттерны рынка.</div>
+            </div>
+            <div class="mod-field">
+              <div class="k">Результат</div>
+              <div class="v">Умеем собирать информацию из открытых источников, формулировать критерии отбора, анализировать по смыслу вместо поверхностных фильтров. Применим для поиска работы, анализа рынка, найма, продаж и bizdev.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="module reveal">
+          <div class="mod-index">
+            <div class="n">03<em>.</em></div>
+            <div class="lbl">Модуль</div>
+          </div>
+          <div class="mod-title">
+            <h3>Telegram <em>без ручного копирования</em>.</h3>
+            <div class="chip-group">
+              <span class="chip mod">Telegram</span>
+              <span class="chip mod">Каналы</span>
+              <span class="chip mod">Сводки</span>
+              <span class="chip mod">Мониторинг</span>
+              <span class="chip mod">Боты</span>
+              <span class="chip mod">Уведомления</span>
+            </div>
+          </div>
+          <div class="mod-detail">
+            <div class="mod-field">
+              <div class="k">Что делаем</div>
+              <div class="v">Собираем информацию из Telegram-каналов и чатов — анализируем сообщения, вытаскиваем темы, инсайты, триггеры. Отправляем результаты туда, где они нужны.</div>
+            </div>
+            <div class="mod-field">
+              <div class="k">Результат</div>
+              <div class="v">Превращаем Telegram из бесконечной ленты в рабочий источник данных: мониторим каналы, собираем сводки, анализируем обсуждения, отправляем уведомления и дашборды.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="module reveal">
+          <div class="mod-index">
+            <div class="n">04<em>.</em></div>
+            <div class="lbl">Модуль</div>
+          </div>
+          <div class="mod-title">
+            <h3>Рутина в браузере: <em>формы, кабинеты, LinkedIn</em>.</h3>
+            <div class="chip-group">
+              <span class="chip mod">Browser use</span>
+              <span class="chip mod">Формы</span>
+              <span class="chip mod">LinkedIn</span>
+              <span class="chip mod">Яндекс Метрика</span>
+              <span class="chip mod">Кабинеты</span>
+            </div>
+          </div>
+          <div class="mod-detail">
+            <div class="mod-field">
+              <div class="k">Что делаем</div>
+              <div class="v">Разбираем задачи, где агенту нужно действовать как пользователю: открыть сайт, пройти интерфейс, заполнить форму, добавить людей в LinkedIn, настроить счётчик в Яндекс Метрике.</div>
+            </div>
+            <div class="mod-field">
+              <div class="k">Результат</div>
+              <div class="v">Browser use подключён к агенту и настроен, а вы знаете, где его применять, как это делать — и как сделать, чтобы вас не забанили.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="meta-strip reveal">
+        <span class="tag">На полях</span>
+        <h4>Общие особенности работы с агентами — на фоне всех модулей</h4>
+        <ul>
+          <li>Как эффективно ставить задачи</li>
+          <li>Как сделать так, чтобы агент запоминал путь</li>
+          <li>Как расширять возможности через skills и MCP</li>
+          <li>Как создавать интерактивные артефакты</li>
+          <li>Как получать от агента обратную связь</li>
+          <li>Как сделать так, чтобы агент сам себя проверял</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT -->
+  <section id="project" class="paper">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">04<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Финальный проект</span>
+          <h2 class="sec-title">Первый собранный кейс под <span class="hl italic">вашу работу</span>.</h2>
+          <p class="sec-intro">
+            Частый кейс на курсах — занятия пройдены, примеры рассмотрены, а как применить это к своей работе непонятно. Поэтому в конце мы проводим вас через первый самостоятельный проект.
+          </p>
+        </div>
+      </div>
+
+      <div class="proj-block reveal">
+        <div class="proj-tag-box">
+          <div class="top">Week 06</div>
+          <h3><em>Final</em><br>Project</h3>
+          <div class="meta">
+            <span>7 days</span>
+            <span>Your case</span>
+          </div>
+        </div>
+        <div class="proj-content">
+          <p>
+            Вы выберете один рабочий процесс из своей реальной жизни: отчёт, ресёрч, таблицу, мониторинг, поиск клиентов, работу с файлами или другой повторяющийся процесс. За неделю попробуете перестроить его с помощью ИИ-агента, а на финальной встрече покажете, что получилось.
+          </p>
+          <div class="proj-result">
+            <span class="label">Результат</span>
+            <p>У вас останется не набор учебных демо, а первый собранный кейс под вашу нишу, вашу работу и ваши задачи — который уже можно использовать.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMAT -->
+  <section id="format">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">05<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Формат и длительность</span>
+          <h2 class="sec-title wide">~6 недель. Живые занятия, <span class="hl italic">основная практика</span> — дома.</h2>
+          <p class="sec-intro">
+            Неделя знакомства и настройки, 4 недели практических воркшопов с домашками, неделя на финальный проект.
+          </p>
+        </div>
+      </div>
+
+      <div class="format-grid reveal">
+        <ol class="timeline">
+          <li>
+            <span class="idx">W 00</span>
+            <div><strong>Знакомство</strong><span class="desc">Установка, настройка инструментов, первый простой шаг.</span></div>
+          </li>
+          <li>
+            <span class="idx">W 01</span>
+            <div><strong>Воркшоп 1 — файлы и таблицы</strong><span class="desc">Домашка → разбор в начале следующего занятия.</span></div>
+          </li>
+          <li>
+            <span class="idx">W 02</span>
+            <div><strong>Воркшоп 2 — ресёрч на HH</strong><span class="desc">Домашка → разбор ошибок и удачных решений.</span></div>
+          </li>
+          <li>
+            <span class="idx">W 03</span>
+            <div><strong>Воркшоп 3 — Telegram</strong><span class="desc">Домашка → разбор в начале следующего занятия.</span></div>
+          </li>
+          <li>
+            <span class="idx">W 04</span>
+            <div><strong>Воркшоп 4 — браузер и формы</strong><span class="desc">Домашка → разбор в начале финальной недели.</span></div>
+          </li>
+          <li>
+            <span class="idx">W 05</span>
+            <div><strong>Финальный проект</strong><span class="desc">Применяете подход к своему рабочему процессу.</span></div>
+          </li>
+          <li>
+            <span class="idx">END</span>
+            <div><strong>Финальная встреча</strong><span class="desc">Короткие презентации участников.</span></div>
+          </li>
+        </ol>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="txt">
+              <h4>Продолжительность</h4>
+              <p>Неделя старта + 4 практики + неделя финального проекта.</p>
+            </div>
+            <div class="big">6<small>недель</small></div>
+          </div>
+          <div class="stat">
+            <div class="txt">
+              <h4>Базовая домашка</h4>
+              <p>Ориентир — 30–40 минут. Всегда можно потратить ночь, докручивая до идеала.</p>
+            </div>
+            <div class="big">30′<small>~40 мин</small></div>
+          </div>
+          <div class="stat">
+            <div class="txt">
+              <h4>Записи</h4>
+              <p>Занятия проходят вживую, записи остаются участникам.</p>
+            </div>
+            <div class="big">∞<small>доступ</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section id="community" class="paper">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">06<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Комьюнити</span>
+          <h2 class="sec-title">Все говорят про комьюнити — <span class="hl italic">мы делаем</span>.</h2>
+        </div>
+      </div>
+
+      <div class="com-grid">
+        <div class="com-text reveal">
+          <p class="big">Помните, как в универе? Ценность обучения складывалась и из образования, и из социальных связей. Мы не хотим, чтобы вы проходили курс в одиночку.</p>
+          <p class="dim">Мы будем делать так, чтобы незнакомые друг другу люди обсуждали подходы, делились находками, сверялись друг с другом и видели, как похожие задачи решают люди с разным бэкграундом.</p>
+        </div>
+        <ul class="com-reasons reveal">
+          <li>Проще держать темп</li>
+          <li>Видно, как думают другие</li>
+          <li>Появляются рабочие знакомства</li>
+          <li>Находишь идеи и людей</li>
+          <li>Остаются единомышленники</li>
+          <li>Это весело</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">07<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Тарифы</span>
+          <h2 class="sec-title">Выберите <span class="hl italic">свой режим</span>.</h2>
+        </div>
+      </div>
+
+      <div class="pricing reveal">
+        <div class="tier">
+          <div class="t-num">Plan 01</div>
+          <h4>Базовый</h4>
+          <p class="for">Для тех, кто хочет разобраться в подходе и попробовать самостоятельно.</p>
+          <ul>
+            <li>Живые занятия</li>
+            <li>Записи</li>
+            <li>Материалы и задания</li>
+            <li>Общий чат</li>
+            <li>Участие в групповой динамике</li>
+            <li>Финальная встреча</li>
+          </ul>
+          <div class="split">Не входит</div>
+          <ul class="not">
+            <li>Проверка домашних заданий</li>
+            <li>Персональная обратная связь</li>
+            <li>Личные консультации</li>
+          </ul>
+        </div>
+
+        <div class="tier featured">
+          <span class="tag-top">★ Выбор</span>
+          <div class="t-num">Plan 02</div>
+          <h4>С проверкой</h4>
+          <p class="for">Для тех, кто хочет пройти курс руками и получить обратную связь.</p>
+          <ul>
+            <li>Всё из базового тарифа</li>
+            <li>Проверка домашних заданий</li>
+            <li>Фидбек по результату и процессу</li>
+            <li>Рекомендации, как сделать проще</li>
+            <li>Вопросы по домашкам — без ограничений</li>
+          </ul>
+        </div>
+
+        <div class="tier">
+          <div class="t-num">Plan 03</div>
+          <h4>VIP</h4>
+          <p class="for">Для тех, кто хочет больше личного внимания.</p>
+          <ul>
+            <li>Всё из тарифа с проверкой</li>
+            <li>2 личные консультации</li>
+            <li>Помощь с выбором подхода под ваши задачи</li>
+            <li>Применение в вашей реальности</li>
+          </ul>
+          <div class="split">Формат консультаций</div>
+          <p class="for" style="padding: 0; border: none; margin: 4px 0 0;">Консультации помогают разобрать задачу и выбрать направление — не являются разработкой сложной автоматизации под ключ.</p>
+        </div>
+      </div>
+
+      <div class="pricing-tail reveal">
+        <p>
+          Цены на лендинге не указываем — зависит от потока и нагрузки менторов. Напишите, и мы ответим точным прайсом и свободными местами.
+        </p>
+        <a class="btn btn-primary" href="#final">Узнать условия <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTHORS -->
+  <section id="authors" class="paper">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">08<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Кто ведёт</span>
+          <h2 class="sec-title">Курс ведут <span class="hl italic">Саша и Коля</span>.</h2>
+          <p class="auth-intro">
+            Коля отвечает за техническую часть, агентные подходы и реальные способы применять Codex и Claude Code. Саша — за образовательный формат, структуру, комьюнити и за то, чтобы курс не превратился в набор сложных программистских штук.
+          </p>
+        </div>
+      </div>
+
+      <div class="authors reveal">
+        <div class="author">
+          <div class="portrait">КШ</div>
+          <div>
+            <h4>Коля Шейко</h4>
+            <div class="role">Техника · Агенты</div>
+            <ul>
+              <li>Фаундер агентства ИИ-автоматизации</li>
+              <li>Ко-фаундер ИИ-конференций entropy.talk</li>
+              <li>Автор тг-канала <a href="https://t.me/ai_grably" rel="nofollow noopener" target="_blank">AI и грабли</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="author">
+          <div class="portrait">СЛ</div>
+          <div>
+            <h4>Саша Литская</h4>
+            <div class="role">Формат · Комьюнити</div>
+            <ul>
+              <li>Владелица керамической мастерской-коворкинга</li>
+              <li>Основатель арт-пространства в Академгородке</li>
+              <li>Продюсер и операционный директор онлайн-школы керамики</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">09<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">FAQ</span>
+          <h2 class="sec-title">Частые <span class="hl italic">вопросы</span>.</h2>
+        </div>
+      </div>
+
+      <div class="faq reveal">
+        <details>
+          <summary>Нужно ли уметь программировать?</summary>
+          <p>Нет. Курс как раз для не-разработчиков. Мы будем работать с агентами с фокусом на рабочих задачах: данные, файлы, сайты, отчёты, Telegram, браузер.</p>
+        </details>
+        <details>
+          <summary>Почему вы говорите про Codex и Claude Code? Это же инструменты для программистов?</summary>
+          <p>Изначально да, но они оказались применимы и для нормальных людей. Агенты могут работать с файлами, запускать действия на компьютере, помогать с таблицами, отчётами, сайтами, браузером и рабочими процессами.</p>
+        </details>
+        <details>
+          <summary>А если у меня Claude Code, а не Codex?</summary>
+          <p>Можно. Мы показываем общие подходы, а не конкретные фишки какого-то сервиса. Codex будет основным примером, но логика постановки задач, проверки результата и работы с агентом применима и к Claude Code.</p>
+        </details>
+        <details>
+          <summary>Я слышал, что Claude Code круче. Почему тогда Codex?</summary>
+          <p>Мы не делаем курс про религию одного сервиса. Codex удобен как базовый пример: доступен в обычной подписке ChatGPT, лимиты больше, чем у Claude Code, есть встроенная транскрибация на русском.</p>
+        </details>
+        <details>
+          <summary>А если Codex или Claude Code поменяют условия подписки?</summary>
+          <p>Такое возможно — инструменты быстро меняются. Поэтому курс строится не вокруг кнопок в одном интерфейсе, а вокруг навыка: как ставить задачи агенту, давать контекст, проверять результат и переносить подход между инструментами.</p>
+        </details>
+        <details>
+          <summary>Нужна ли платная подписка?</summary>
+          <p>Да, нужна подписка ChatGPT Plus. Её, кстати, можно оплачивать через отдельные сервисы рублёвыми картами — про это тоже расскажем в начале курса.</p>
+        </details>
+        <details>
+          <summary>Будут ли записи?</summary>
+          <p>Конечно, записи занятий будут доступны участникам.</p>
+        </details>
+        <details>
+          <summary>Сколько времени займут домашки?</summary>
+          <p>Задания спроектированы как короткие практические задачи. Ориентир — 30–40 минут на базовое прохождение, но всегда можно потратить ночь, докручивая до идеала.</p>
+        </details>
+        <details>
+          <summary>Можно без домашек?</summary>
+          <p>Да, для этого есть базовый тариф. Вы сможете смотреть занятия, быть в чате и пробовать самостоятельно — без проверки и персонального фидбека.</p>
+        </details>
+        <details>
+          <summary>Как проходит проверка домашек?</summary>
+          <p>Смотрим не только итоговый результат, но и процесс: как ставили задачу агенту, где потеряли контекст, где можно было сделать проще, быстрее, точнее.</p>
+        </details>
+        <details>
+          <summary>Можно ли прийти со своим кейсом?</summary>
+          <p>В финальном проекте вы будете применять навыки курса к своему рабочему процессу. В VIP-тарифе можно отдельно обсудить свою задачу на консультациях.</p>
+        </details>
+        <details>
+          <summary>Можно оплатить иностранной картой?</summary>
+          <p>Стандартный способ оплаты пока через РФ. Если вам не подходит — напишите, подберём вариант вручную: перевод, крипта или что-то ещё.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final" id="final">
+    <span class="bg-big" aria-hidden="true">2026</span>
+    <div class="wrap">
+      <span class="eyebrow reveal">Поток 01 · Весна 2026</span>
+      <h2 class="reveal">
+        Если в вашей работе много ручной информационной рутины — часть её уже можно <span class="box italic">отдать агенту</span>.
+      </h2>
+      <p class="reveal">
+        Мы покажем, как это делать на понятных рабочих задачах. Без программирования и без магии.
+      </p>
+      <div class="hero-cta reveal">
+        <a class="btn btn-primary" href="#">Хочу в первый поток <span class="arr">→</span></a>
+        <a class="btn btn-ghost" href="#program">Ещё раз про программу</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><span class="brand-mini">AI&nbsp;For&nbsp;Work</span></div>
+    <div class="mid">© 2026 · Stream 01 · Made with care</div>
+    <div class="links">
+      <a href="mailto:hello@example.com">hello@example.com</a>
+      <a href="https://t.me/ai_grably" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      }
+    }
+  }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

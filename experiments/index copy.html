@@ -1,0 +1,1920 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI For Work — практический курс по ИИ-агентам для не-разработчиков</title>
+<meta name="description" content="Шестинедельный практический курс: учим не-разработчиков использовать ИИ-агентов (Codex, Claude Code) для реальных рабочих задач — таблиц, отчётов, ресёрча, Telegram, браузерной рутины.">
+<meta name="theme-color" content="#efeae0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Fraunces:ital,opsz,wght@1,9..144,400..500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #efeae0;
+    --bg-2: #f7f3ea;
+    --card: #ffffff;
+    --ink: #1c1a16;
+    --ink-2: #45423a;
+    --ink-3: #8a8578;
+    --rule: #dfd8c6;
+    --rule-soft: #eae4d3;
+    --accent: #2f4a3d;
+    --accent-hover: #253a30;
+    --accent-soft: #e4ead3;
+    --warm: #c96a42;
+    --warm-soft: #f2dccc;
+
+    --display: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+
+    --wrap: 1200px;
+    --gutter: clamp(20px, 4vw, 48px);
+
+    --shadow-sm: 0 1px 2px rgba(28, 26, 22, 0.04), 0 1px 1px rgba(28, 26, 22, 0.03);
+    --shadow: 0 4px 14px rgba(28, 26, 22, 0.06), 0 1px 2px rgba(28, 26, 22, 0.03);
+    --shadow-lg: 0 14px 40px rgba(28, 26, 22, 0.08), 0 2px 6px rgba(28, 26, 22, 0.04);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16.5px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  section[id] { scroll-margin-top: 84px; }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    position: relative;
+  }
+  a { color: inherit; }
+  ::selection { background: var(--accent); color: var(--bg-2); }
+
+  /* ================= HEADER ================= */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: saturate(1.3) blur(12px);
+    -webkit-backdrop-filter: saturate(1.3) blur(12px);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  header .wrap {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 0;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-right: auto;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .brand .mark {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: var(--accent);
+    border-radius: 6px;
+    position: relative;
+  }
+  .brand .mark::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    background: var(--bg-2);
+    border-radius: 2px;
+  }
+  nav.top {
+    display: flex;
+    gap: 24px;
+    font-size: 14.5px;
+    font-weight: 500;
+  }
+  nav.top a {
+    text-decoration: none;
+    color: var(--ink-2);
+    transition: color .2s;
+  }
+  nav.top a:hover { color: var(--accent); }
+
+  /* ================= BUTTONS ================= */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14.5px;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .12s ease, background .2s, color .2s, border-color .2s, box-shadow .2s;
+    white-space: nowrap;
+    letter-spacing: -0.005em;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary {
+    background: var(--accent);
+    color: #f5efe1;
+    border-color: var(--accent);
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    box-shadow: var(--shadow);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--rule);
+  }
+  .btn-ghost:hover { background: var(--card); border-color: var(--ink); }
+  .btn-lg { padding: 15px 24px; font-size: 15.5px; border-radius: 12px; }
+  .btn .arr { transition: transform .15s; display: inline-block; }
+  .btn:hover .arr { transform: translateX(3px); }
+
+  /* ================= TYPE ================= */
+  h1, h2, h3, h4 {
+    font-family: var(--display);
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: -0.03em;
+    line-height: 1.04;
+  }
+  .display {
+    font-size: clamp(44px, 6.4vw, 82px);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    font-weight: 500;
+  }
+  .sec-title {
+    font-size: clamp(32px, 4.2vw, 52px);
+    letter-spacing: -0.032em;
+    line-height: 1.04;
+    max-width: 20ch;
+    font-weight: 500;
+  }
+  .sec-title.wide { max-width: 30ch; }
+
+  .hl {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    font-variation-settings: "opsz" 144;
+    letter-spacing: -0.01em;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .eyebrow.live .dot {
+    background: var(--warm);
+    animation: pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  /* ================= SECTIONS ================= */
+  section { padding: 110px 0; position: relative; }
+  section.alt { background: var(--bg-2); }
+  section + section { border-top: 1px solid var(--rule-soft); }
+
+  .sec-head {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 56px;
+    max-width: 760px;
+  }
+  .sec-intro {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 58ch;
+    margin: 6px 0 0;
+  }
+
+  /* ================= HERO ================= */
+  .hero {
+    padding: 72px 0 96px;
+  }
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) 360px;
+    gap: 72px;
+    align-items: start;
+  }
+  .hero-left h1 {
+    margin-top: 28px;
+    margin-bottom: 28px;
+    max-width: 14ch;
+  }
+  .hero-lede {
+    font-size: clamp(17px, 1.8vw, 19px);
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 52ch;
+    margin: 0 0 14px;
+  }
+  .hero-sub {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-3);
+    max-width: 52ch;
+    margin: 0 0 32px;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .hero-meta {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule-soft);
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+  }
+  .hero-meta .item .k {
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+  .hero-meta .item .v {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .spec-card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 4px;
+    box-shadow: var(--shadow);
+  }
+  .spec-head {
+    padding: 18px 22px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .spec-title {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.015em;
+  }
+  .spec-tag {
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--warm);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .spec-tag .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--warm);
+    animation: pulse 2.2s ease-in-out infinite;
+  }
+  .spec-rows {
+    padding: 0 22px;
+  }
+  .spec-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 12px 0;
+    border-top: 1px solid var(--rule-soft);
+    font-size: 14.5px;
+    align-items: baseline;
+  }
+  .spec-row .k {
+    color: var(--ink-3);
+  }
+  .spec-row .v {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .spec-foot {
+    padding: 14px 22px 18px;
+  }
+  .spec-foot .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  @media (max-width: 960px) {
+    .hero .wrap { grid-template-columns: 1fr; gap: 44px; }
+    .spec-card { max-width: 440px; }
+  }
+
+  /* ================= RECOGNIZE ================= */
+  .rec-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .rec-item {
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-radius: 14px;
+    padding: 24px 26px;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    align-items: start;
+    transition: border-color .2s, transform .2s, box-shadow .2s;
+  }
+  .rec-item:hover {
+    border-color: var(--rule);
+    box-shadow: var(--shadow-sm);
+  }
+  .rec-item.full { grid-column: 1 / -1; }
+  .rec-check {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .rec-check svg { width: 14px; height: 14px; }
+  .rec-item p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  @media (max-width: 700px) {
+    .rec-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ================= AUDIENCE ================= */
+  .aud-lede {
+    font-size: clamp(19px, 2.1vw, 23px);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 60ch;
+    margin: 0 0 48px;
+    font-weight: 400;
+  }
+
+  .chip-label {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+    margin: 36px 0 14px;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .chip-label .count {
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 13px;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    color: var(--ink-2);
+    font-size: 13.5px;
+    font-weight: 500;
+    border-radius: 999px;
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .aud-note {
+    margin-top: 60px;
+    padding: 36px 40px;
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-radius: 18px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+  }
+  .aud-note::before {
+    content: "";
+    position: absolute;
+    top: 36px;
+    left: -1px;
+    width: 3px;
+    height: 60px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .aud-note p {
+    margin: 0 0 16px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 60ch;
+  }
+  .aud-note p:last-child {
+    margin: 0;
+    font-size: 15.5px;
+    color: var(--ink-2);
+  }
+  .aud-note em {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  @media (max-width: 640px) {
+    .aud-note { padding: 28px 24px; }
+  }
+
+  /* ================= PROGRAM ================= */
+  .program-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .program-intro p {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .program-intro p.dim { color: var(--ink-3); }
+  @media (max-width: 820px) {
+    .program-intro { grid-template-columns: 1fr; gap: 20px; }
+  }
+
+  .modules {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .module {
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-radius: 18px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: border-color .2s, box-shadow .2s, transform .2s;
+  }
+  .module:hover {
+    border-color: var(--rule);
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+  }
+  .mod-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .mod-num {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .mod-num::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+  }
+  .mod-label {
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink-3);
+  }
+  .mod-title {
+    font-family: var(--display);
+    font-size: clamp(22px, 2.2vw, 26px);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    max-width: 22ch;
+    color: var(--ink);
+  }
+  .mod-field {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .mod-field b {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+  .mod-chips {
+    margin-top: auto;
+    padding-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .mod-chips .chip {
+    font-size: 12.5px;
+    padding: 5px 11px;
+    background: var(--bg);
+    border-color: var(--rule-soft);
+  }
+
+  @media (max-width: 820px) {
+    .modules { grid-template-columns: 1fr; }
+  }
+
+  .meta-panel {
+    margin-top: 44px;
+    padding: 36px 40px;
+    background: var(--accent);
+    color: #f5efe1;
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .meta-panel::before {
+    content: "";
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px;
+    height: 180px;
+    background: color-mix(in srgb, #f5efe1 8%, transparent);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .meta-panel .tag {
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: color-mix(in srgb, #f5efe1 70%, transparent);
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+  .meta-panel h4 {
+    font-size: clamp(22px, 2.4vw, 28px);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    max-width: 28ch;
+    font-weight: 500;
+  }
+  .meta-panel h4 em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--warm-soft);
+  }
+  .meta-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 40px;
+  }
+  .meta-panel li {
+    font-size: 15px;
+    line-height: 1.55;
+    padding-left: 22px;
+    position: relative;
+    color: color-mix(in srgb, #f5efe1 90%, transparent);
+  }
+  .meta-panel li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 12px;
+    height: 1px;
+    background: var(--warm-soft);
+  }
+  @media (max-width: 640px) {
+    .meta-panel { padding: 28px 24px; }
+    .meta-panel ul { grid-template-columns: 1fr; }
+  }
+
+  /* ================= PROJECT ================= */
+  .proj-card {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 0;
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .proj-stamp {
+    padding: 40px 36px;
+    background: var(--accent);
+    color: #f5efe1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 28px;
+  }
+  .proj-stamp .top {
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, #f5efe1 65%, transparent);
+    font-weight: 500;
+  }
+  .proj-stamp .big {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(34px, 3.8vw, 44px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+  .proj-stamp .big em {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--warm-soft);
+    font-weight: 400;
+  }
+  .proj-stamp .meta {
+    font-size: 13px;
+    color: color-mix(in srgb, #f5efe1 70%, transparent);
+    display: flex;
+    gap: 18px;
+  }
+  .proj-stamp .meta .sep { color: color-mix(in srgb, #f5efe1 35%, transparent); }
+  .proj-text {
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .proj-text p {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .proj-result {
+    padding: 20px 22px;
+    background: var(--bg);
+    border-radius: 12px;
+    border-left: 3px solid var(--accent);
+  }
+  .proj-result .label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .proj-result p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  @media (max-width: 820px) {
+    .proj-card { grid-template-columns: 1fr; }
+  }
+
+  /* ================= FORMAT ================= */
+  .format-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  .timeline li {
+    padding: 18px 26px;
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 20px;
+    align-items: center;
+    border-bottom: 1px solid var(--rule-soft);
+    transition: background .15s;
+  }
+  .timeline li:last-child { border-bottom: none; }
+  .timeline li:hover { background: var(--bg-2); }
+  .timeline li .idx {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    padding: 4px 10px;
+    background: var(--accent-soft);
+    border-radius: 6px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .timeline li strong {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: -0.015em;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .timeline li span.desc {
+    font-size: 14px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+
+  .stats {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-radius: 16px;
+    padding: 24px 26px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .stat:hover {
+    border-color: var(--rule);
+    box-shadow: var(--shadow-sm);
+  }
+  .stat .txt h4 {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    margin-bottom: 4px;
+  }
+  .stat .txt p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+  .stat .big {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 46px;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    text-align: right;
+  }
+  .stat .big em {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .stat .big small {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+    margin-top: 6px;
+  }
+  @media (max-width: 900px) {
+    .format-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+
+  /* ================= COMMUNITY ================= */
+  .com-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .com-text p.big {
+    font-size: clamp(20px, 2.2vw, 26px);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 20px;
+    max-width: 24ch;
+    font-family: var(--display);
+    font-weight: 500;
+  }
+  .com-text p.big em {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .com-text p.dim {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    max-width: 52ch;
+    margin: 0;
+  }
+  .com-reasons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .com-reasons li {
+    padding: 16px 20px;
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-radius: 12px;
+    font-size: 15.5px;
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 10px;
+    align-items: baseline;
+    transition: border-color .2s, transform .2s;
+  }
+  .com-reasons li:hover {
+    border-color: var(--accent);
+    transform: translateX(3px);
+  }
+  .com-reasons li::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    position: relative;
+    align-self: center;
+  }
+  @media (max-width: 860px) {
+    .com-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* ================= PRICING ================= */
+  .pricing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .tier {
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-radius: 18px;
+    padding: 32px 28px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .tier:hover {
+    border-color: var(--rule);
+    box-shadow: var(--shadow-sm);
+  }
+  .tier.featured {
+    background: var(--accent);
+    color: #f5efe1;
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
+  }
+  .tier.featured:hover { box-shadow: var(--shadow-lg); }
+  .tier .tag-top {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--warm);
+    color: #f5efe1;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .tier .t-num {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .tier.featured .t-num { color: color-mix(in srgb, #f5efe1 65%, transparent); }
+  .tier h4 {
+    font-size: clamp(24px, 2.6vw, 30px);
+    letter-spacing: -0.028em;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .tier.featured h4 { color: #f5efe1; }
+  .tier .for {
+    font-size: 14px;
+    color: var(--ink-3);
+    line-height: 1.55;
+    margin: 0 0 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .tier.featured .for {
+    color: color-mix(in srgb, #f5efe1 70%, transparent);
+    border-bottom-color: color-mix(in srgb, #f5efe1 18%, transparent);
+  }
+  .tier ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 14px;
+  }
+  .tier li {
+    padding: 9px 0 9px 24px;
+    position: relative;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .tier.featured li { color: #f5efe1; }
+  .tier li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    border: 2px solid var(--accent);
+  }
+  .tier.featured li::before {
+    background: color-mix(in srgb, #f5efe1 25%, transparent);
+    border-color: var(--warm-soft);
+  }
+  .tier ul.not li::before {
+    background: transparent;
+    border-color: var(--ink-3);
+    border-style: dashed;
+  }
+  .tier ul.not li {
+    color: var(--ink-3);
+  }
+  .tier .split {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+    margin: 6px 0 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .tier.featured .split {
+    color: color-mix(in srgb, #f5efe1 55%, transparent);
+    border-top-color: color-mix(in srgb, #f5efe1 20%, transparent);
+  }
+  .tier .for.plain { padding: 0; border: none; margin: 4px 0 0; }
+
+  .pricing-tail {
+    margin-top: 40px;
+    padding: 28px 32px;
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-radius: 14px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 28px;
+    align-items: center;
+  }
+  .pricing-tail p {
+    margin: 0;
+    font-size: 15px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    max-width: 56ch;
+  }
+  @media (max-width: 900px) {
+    .pricing { grid-template-columns: 1fr; }
+    .pricing-tail { grid-template-columns: 1fr; }
+  }
+
+  /* ================= AUTHORS ================= */
+  .auth-intro {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 62ch;
+    margin-top: 6px;
+  }
+  .authors {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .author {
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-radius: 18px;
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 24px;
+    align-items: start;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .author:hover {
+    border-color: var(--rule);
+    box-shadow: var(--shadow-sm);
+  }
+  .portrait {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--accent-soft), color-mix(in srgb, var(--accent) 15%, var(--bg-2)));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 36px;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+    border: 1px solid var(--rule-soft);
+  }
+  .author:nth-child(2) .portrait {
+    background: linear-gradient(135deg, var(--warm-soft), color-mix(in srgb, var(--warm) 20%, var(--bg-2)));
+    color: var(--warm);
+  }
+  .author h4 {
+    font-size: 24px;
+    letter-spacing: -0.025em;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .author .role {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .author:nth-child(2) .role { color: var(--warm); }
+  .author ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .author li {
+    padding: 8px 0;
+    border-top: 1px solid var(--rule-soft);
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+  .author li:first-child { border-top: none; padding-top: 0; }
+  .author a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  @media (max-width: 900px) {
+    .authors { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .author { grid-template-columns: 80px 1fr; gap: 18px; padding: 24px; }
+    .portrait { width: 80px; height: 80px; font-size: 28px; }
+  }
+
+  /* ================= FAQ ================= */
+  .faq {
+    max-width: 900px;
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  .faq details {
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .faq details:last-child { border-bottom: none; }
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 22px 56px 22px 28px;
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+    position: relative;
+    transition: color .2s, background .15s;
+  }
+  .faq summary:hover { background: var(--bg-2); color: var(--accent); }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "";
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    background-image:
+      linear-gradient(currentColor, currentColor),
+      linear-gradient(currentColor, currentColor);
+    background-size: 12px 1.5px, 1.5px 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translateY(-50%);
+    transition: transform .25s, color .2s;
+    color: var(--ink-3);
+  }
+  .faq details[open] summary {
+    color: var(--accent);
+    background: var(--bg-2);
+  }
+  .faq details[open] summary::after {
+    transform: translateY(-50%) rotate(45deg);
+    color: var(--accent);
+  }
+  .faq details p {
+    margin: 0 28px 22px;
+    max-width: 68ch;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+
+  /* ================= FINAL ================= */
+  .final {
+    background: var(--accent);
+    color: #f5efe1;
+    padding: 100px 0;
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .final::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 50% 40% at 85% 20%, color-mix(in srgb, var(--warm) 20%, transparent), transparent 60%),
+      radial-gradient(ellipse 45% 45% at 15% 100%, color-mix(in srgb, #f5efe1 6%, transparent), transparent 70%);
+    pointer-events: none;
+  }
+  .final .wrap { position: relative; z-index: 2; }
+  .final .eyebrow {
+    color: color-mix(in srgb, #f5efe1 70%, transparent);
+    margin-bottom: 28px;
+  }
+  .final .eyebrow .dot { background: var(--warm); }
+  .final h2 {
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    max-width: 22ch;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .final h2 .hl {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--warm-soft);
+    font-weight: 400;
+  }
+  .final p {
+    font-size: 17.5px;
+    line-height: 1.6;
+    color: color-mix(in srgb, #f5efe1 78%, transparent);
+    max-width: 56ch;
+    margin: 0 0 36px;
+  }
+  .final .btn-primary {
+    background: var(--warm);
+    border-color: var(--warm);
+    color: #f5efe1;
+  }
+  .final .btn-primary:hover {
+    background: color-mix(in srgb, var(--warm) 85%, black);
+    border-color: color-mix(in srgb, var(--warm) 85%, black);
+  }
+  .final .btn-ghost {
+    color: #f5efe1;
+    border-color: color-mix(in srgb, #f5efe1 35%, transparent);
+  }
+  .final .btn-ghost:hover {
+    background: color-mix(in srgb, #f5efe1 10%, transparent);
+    border-color: #f5efe1;
+  }
+
+  /* ================= FOOTER ================= */
+  footer {
+    padding: 32px 0;
+    background: color-mix(in srgb, var(--accent) 88%, black);
+    color: color-mix(in srgb, #f5efe1 60%, transparent);
+    font-size: 13.5px;
+    border-top: 1px solid color-mix(in srgb, #f5efe1 10%, transparent);
+  }
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  footer .brand-mini {
+    color: #f5efe1;
+    font-weight: 600;
+    font-family: var(--display);
+    letter-spacing: -0.02em;
+  }
+  footer .links { display: flex; gap: 22px; }
+  footer a {
+    color: color-mix(in srgb, #f5efe1 65%, transparent);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  footer a:hover { color: var(--warm-soft); }
+
+  /* ================= REVEAL ================= */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .eyebrow.live .dot, .spec-tag .dot { animation: none; }
+  }
+
+  /* ================= RESPONSIVE NAV ================= */
+  @media (max-width: 860px) {
+    nav.top { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <span class="mark"></span>
+      <span>AI&nbsp;For&nbsp;Work</span>
+    </a>
+    <nav class="top">
+      <a href="#program">Программа</a>
+      <a href="#format">Формат</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#authors">Ведут</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-primary" href="#final">Записаться <span class="arr">→</span></a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-left reveal">
+        <span class="eyebrow live"><span class="dot"></span>Поток 01 · Весна 2026 · идёт набор</span>
+        <h1 class="display">
+          Практический курс по <span class="hl">ИИ-агентам</span> для не-разработчиков.
+        </h1>
+        <p class="hero-lede">
+          Для людей, у которых много ручной работы с информацией: таблицами, файлами, сайтами, Telegram, вакансиями, отчётами, презентациями, исследованиями и рабочими процессами.
+        </p>
+        <p class="hero-sub">
+          Учим использовать кодинговых агентов — Codex и Claude Code — чтобы искать, читать, анализировать, преобразовывать, собирать и отправлять информацию. Без навыков разработки.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="#final">Узнать, подойдёт ли мне <span class="arr">→</span></a>
+          <a class="btn btn-ghost btn-lg" href="#program">Посмотреть программу</a>
+        </div>
+
+        <div class="hero-meta">
+          <div class="item">
+            <div class="k">Длится</div>
+            <div class="v">~6 недель</div>
+          </div>
+          <div class="item">
+            <div class="k">Модулей</div>
+            <div class="v">4 + неделя&nbsp;0</div>
+          </div>
+          <div class="item">
+            <div class="k">Формат</div>
+            <div class="v">Онлайн, живьём</div>
+          </div>
+          <div class="item">
+            <div class="k">Записи</div>
+            <div class="v">Остаются</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="spec-card reveal">
+        <div class="spec-head">
+          <span class="spec-title">О курсе</span>
+          <span class="spec-tag"><span class="dot"></span>Идёт набор</span>
+        </div>
+        <div class="spec-rows">
+          <div class="spec-row"><span class="k">Старт</span><span class="v">Весна 2026</span></div>
+          <div class="spec-row"><span class="k">Поток</span><span class="v">№ 01</span></div>
+          <div class="spec-row"><span class="k">Длительность</span><span class="v">6 недель</span></div>
+          <div class="spec-row"><span class="k">Формат</span><span class="v">Онлайн + записи</span></div>
+          <div class="spec-row"><span class="k">Уровень</span><span class="v">Не-разработчики</span></div>
+          <div class="spec-row"><span class="k">Нужно</span><span class="v">ChatGPT&nbsp;Plus</span></div>
+        </div>
+        <div class="spec-foot">
+          <a href="#final" class="btn btn-primary">Записаться в поток <span class="arr">→</span></a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- RECOGNIZE -->
+  <section id="recognize" class="alt">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="dot"></span>Узнаёте себя?</span>
+        <h2 class="sec-title">Если хоть один пункт про <span class="hl">вас</span> — вам сюда.</h2>
+      </div>
+      <div class="rec-grid">
+        <div class="rec-item reveal">
+          <span class="rec-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <p>Регулярно открываете 10 вкладок, 3 таблицы и собираете из этого «нормальный вывод».</p>
+        </div>
+        <div class="rec-item reveal">
+          <span class="rec-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <p>Есть папки, файлы, выгрузки и документы, до которых страшно дотрагиваться.</p>
+        </div>
+        <div class="rec-item reveal">
+          <span class="rec-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <p>Постоянно делаете «быстрый ресёрч», который почему-то занимает полдня.</p>
+        </div>
+        <div class="rec-item reveal">
+          <span class="rec-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <p>Руками переносите информацию между сервисами.</p>
+        </div>
+        <div class="rec-item full reveal">
+          <span class="rec-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <p>Хотите не просто «спросить у нейронки», а дать ей задачу и получить готовый рабочий результат.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIENCE -->
+  <section id="audience">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="dot"></span>Для кого</span>
+        <h2 class="sec-title">Курс не привязан к одной <span class="hl">профессии</span>.</h2>
+      </div>
+
+      <p class="aud-lede reveal">
+        Он для всех, у кого работа завязана на информацию, ручной сбор данных, отчёты, исследования, таблицы, коммуникации и повторяющиеся процессы.
+      </p>
+
+      <div class="reveal">
+        <div class="chip-label">Роли <span class="count">· 19</span></div>
+        <div class="chip-group">
+          <span class="chip">Маркетологи</span>
+          <span class="chip">Аналитики</span>
+          <span class="chip">Продакты</span>
+          <span class="chip">Проджекты</span>
+          <span class="chip">HR и рекрутеры</span>
+          <span class="chip">Сейлзы</span>
+          <span class="chip">Операционные менеджеры</span>
+          <span class="chip">Исследователи</span>
+          <span class="chip">Редакторы</span>
+          <span class="chip">Методисты</span>
+          <span class="chip">Продюсеры курсов</span>
+          <span class="chip">Фаундеры</span>
+          <span class="chip">Аккаунт-менеджеры</span>
+          <span class="chip">Customer Success</span>
+          <span class="chip">People Ops</span>
+          <span class="chip">SMM</span>
+          <span class="chip">PR</span>
+          <span class="chip">Контент-команды</span>
+          <span class="chip">Комьюнити-менеджеры</span>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="chip-label">Задачи <span class="count">· 17</span></div>
+        <div class="chip-group">
+          <span class="chip">Ресёрч</span>
+          <span class="chip">Таблицы</span>
+          <span class="chip">Отчёты</span>
+          <span class="chip">Презентации</span>
+          <span class="chip">Telegram</span>
+          <span class="chip">Вакансии</span>
+          <span class="chip">Лидогенерация</span>
+          <span class="chip">Анализ рынка</span>
+          <span class="chip">Анализ конкурентов</span>
+          <span class="chip">Поиск клиентов</span>
+          <span class="chip">Обработка выгрузок</span>
+          <span class="chip">Дашборды</span>
+          <span class="chip">Брифы</span>
+          <span class="chip">Сводки</span>
+          <span class="chip">Контент-планы</span>
+          <span class="chip">Заполнение форм</span>
+          <span class="chip">Поиск инсайтов</span>
+        </div>
+      </div>
+
+      <div class="aud-note reveal">
+        <p>У нас нет цели забрать <em>интересную часть</em> работы. Наоборот — хотим показать, как отдать агенту рутину, которая обычно отнимает силы: собрать, разложить, проверить, сверить, оформить, перенести.</p>
+        <p>Пока агент собирает данные, чистит таблицу, ищет ссылки или собирает черновик отчёта — вы занимаетесь смыслами, доменными решениями, выбором подхода и качеством результата.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM -->
+  <section id="program" class="alt">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="dot"></span>Программа</span>
+        <h2 class="sec-title wide">4 практических модуля + <span class="hl">неделя знакомства</span>.</h2>
+      </div>
+
+      <div class="program-intro reveal">
+        <p>
+          Неделя 0 — знакомство с ИИ-агентами: установка, настройка среды, первые практические задания. Дальше — 4 модуля, где берём реальный тип работы и перестраиваем его вокруг агента.
+        </p>
+        <p class="dim">
+          Суть не только в том, чтобы освоить конкретные инструменты, но и в том, чтобы через эти примеры разобрать подходы, применимые к работе с любыми данными, сервисами и процессами.
+        </p>
+      </div>
+
+      <div class="modules">
+        <article class="module reveal">
+          <div class="mod-head">
+            <div class="mod-num">Модуль 01</div>
+            <div class="mod-label">Данные</div>
+          </div>
+          <h3 class="mod-title">Из страшной таблицы — в отчёт или презентацию.</h3>
+          <div class="mod-field"><b>Что делаем</b>Берём локальную таблицу или выгрузку и превращаем её в понятный рабочий артефакт: HTML-отчёт, презентацию или структурированный документ.</div>
+          <div class="mod-field"><b>Результат</b>Умеем давать агенту файлы, таблицы и примеры оформления, чтобы вместо пересказа получать готовый материал в стиле вашей компании.</div>
+          <div class="mod-chips">
+            <span class="chip">Файлы</span>
+            <span class="chip">Таблицы</span>
+            <span class="chip">Отчёт</span>
+            <span class="chip">Презентация</span>
+          </div>
+        </article>
+
+        <article class="module reveal">
+          <div class="mod-head">
+            <div class="mod-num">Модуль 02</div>
+            <div class="mod-label">Ресёрч</div>
+          </div>
+          <h3 class="mod-title">Ресёрч рынка на HeadHunter.</h3>
+          <div class="mod-field"><b>Что делаем</b>Используем HeadHunter как источник открытых данных: вакансии, компании, требования, роли, спрос на специалистов, паттерны рынка.</div>
+          <div class="mod-field"><b>Результат</b>Умеем собирать информацию из открытых источников, формулировать критерии отбора, анализировать по смыслу — для поиска работы, найма, продаж, bizdev.</div>
+          <div class="mod-chips">
+            <span class="chip">Вакансии</span>
+            <span class="chip">Рынок</span>
+            <span class="chip">Лиды</span>
+            <span class="chip">Поиск клиентов</span>
+          </div>
+        </article>
+
+        <article class="module reveal">
+          <div class="mod-head">
+            <div class="mod-num">Модуль 03</div>
+            <div class="mod-label">Telegram</div>
+          </div>
+          <h3 class="mod-title">Telegram без ручного копирования.</h3>
+          <div class="mod-field"><b>Что делаем</b>Собираем информацию из Telegram-каналов и чатов — анализируем сообщения, вытаскиваем темы, инсайты, триггеры. Отправляем результаты туда, где они нужны.</div>
+          <div class="mod-field"><b>Результат</b>Превращаем Telegram из бесконечной ленты в рабочий источник данных: сводки, мониторинг каналов, уведомления и дашборды.</div>
+          <div class="mod-chips">
+            <span class="chip">Каналы</span>
+            <span class="chip">Сводки</span>
+            <span class="chip">Боты</span>
+            <span class="chip">Мониторинг</span>
+          </div>
+        </article>
+
+        <article class="module reveal">
+          <div class="mod-head">
+            <div class="mod-num">Модуль 04</div>
+            <div class="mod-label">Браузер</div>
+          </div>
+          <h3 class="mod-title">Рутина в браузере: формы, кабинеты, LinkedIn.</h3>
+          <div class="mod-field"><b>Что делаем</b>Разбираем задачи, где агенту нужно действовать как пользователю: пройти интерфейс, заполнить форму, добавить людей в LinkedIn, настроить счётчик в Яндекс Метрике.</div>
+          <div class="mod-field"><b>Результат</b>Browser use подключён к агенту и настроен, а вы знаете, где его применять — и как сделать, чтобы вас не забанили.</div>
+          <div class="mod-chips">
+            <span class="chip">Browser use</span>
+            <span class="chip">Формы</span>
+            <span class="chip">LinkedIn</span>
+            <span class="chip">Метрика</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="meta-panel reveal">
+        <span class="tag">На фоне всех модулей</span>
+        <h4>Общие <em>особенности</em> работы с агентами.</h4>
+        <ul>
+          <li>Как эффективно ставить задачи</li>
+          <li>Как сделать, чтобы агент запоминал путь</li>
+          <li>Как расширять возможности через skills и MCP</li>
+          <li>Как создавать интерактивные артефакты</li>
+          <li>Как получать от агента обратную связь</li>
+          <li>Как сделать, чтобы агент сам себя проверял</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT -->
+  <section id="project">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="dot"></span>Финальный проект</span>
+        <h2 class="sec-title">Первый собранный кейс под <span class="hl">вашу работу</span>.</h2>
+        <p class="sec-intro">
+          Частый кейс на курсах — занятия пройдены, примеры рассмотрены, а как применить к своей работе непонятно. Поэтому в конце мы проводим вас через первый самостоятельный проект.
+        </p>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-stamp">
+          <div class="top">Неделя 06</div>
+          <div class="big">Финальный <em>проект</em></div>
+          <div class="meta"><span>7 дней</span><span class="sep">·</span><span>Ваш кейс</span></div>
+        </div>
+        <div class="proj-text">
+          <p>Вы выберете один рабочий процесс из своей реальной жизни: отчёт, ресёрч, таблицу, мониторинг, поиск клиентов, работу с файлами или другой повторяющийся процесс. За неделю попробуете перестроить его с помощью ИИ-агента, а на финальной встрече покажете, что получилось.</p>
+          <div class="proj-result">
+            <span class="label">Результат</span>
+            <p>Останется не набор учебных демо, а первый собранный кейс под вашу нишу и ваши задачи — который уже можно использовать в работе.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMAT -->
+  <section id="format" class="alt">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="dot"></span>Формат и длительность</span>
+        <h2 class="sec-title wide">~6 недель. Живые занятия, <span class="hl">основная практика</span> — дома.</h2>
+        <p class="sec-intro">
+          Неделя знакомства и настройки, 4 недели практических воркшопов с домашками, неделя на финальный проект.
+        </p>
+      </div>
+
+      <div class="format-grid">
+        <ol class="timeline reveal">
+          <li>
+            <span class="idx">W 00</span>
+            <div><strong>Знакомство</strong><span class="desc">Установка, настройка инструментов, первый простой шаг.</span></div>
+          </li>
+          <li>
+            <span class="idx">W 01</span>
+            <div><strong>Воркшоп 1 — файлы и таблицы</strong><span class="desc">Домашка → разбор в начале следующего занятия.</span></div>
+          </li>
+          <li>
+            <span class="idx">W 02</span>
+            <div><strong>Воркшоп 2 — ресёрч на HH</strong><span class="desc">Домашка → разбор ошибок и удачных решений.</span></div>
+          </li>
+          <li>
+            <span class="idx">W 03</span>
+            <div><strong>Воркшоп 3 — Telegram</strong><span class="desc">Домашка → разбор в начале следующего занятия.</span></div>
+          </li>
+          <li>
+            <span class="idx">W 04</span>
+            <div><strong>Воркшоп 4 — браузер и формы</strong><span class="desc">Домашка → разбор в начале финальной недели.</span></div>
+          </li>
+          <li>
+            <span class="idx">W 05</span>
+            <div><strong>Финальный проект</strong><span class="desc">Применяете подход к своему рабочему процессу.</span></div>
+          </li>
+          <li>
+            <span class="idx">END</span>
+            <div><strong>Финальная встреча</strong><span class="desc">Короткие презентации участников.</span></div>
+          </li>
+        </ol>
+
+        <div class="stats reveal">
+          <div class="stat">
+            <div class="txt">
+              <h4>Продолжительность</h4>
+              <p>Старт + 4 практики + финальный проект.</p>
+            </div>
+            <div class="big"><em>6</em><small>недель</small></div>
+          </div>
+          <div class="stat">
+            <div class="txt">
+              <h4>Базовая домашка</h4>
+              <p>Ориентир — 30–40 минут на прохождение.</p>
+            </div>
+            <div class="big"><em>30′</em><small>~40 мин</small></div>
+          </div>
+          <div class="stat">
+            <div class="txt">
+              <h4>Записи</h4>
+              <p>Занятия проходят вживую, записи остаются.</p>
+            </div>
+            <div class="big"><em>∞</em><small>доступ</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section id="community">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="dot"></span>Комьюнити</span>
+        <h2 class="sec-title">Все говорят про комьюнити — <span class="hl">мы делаем</span>.</h2>
+      </div>
+
+      <div class="com-grid">
+        <div class="com-text reveal">
+          <p class="big">Помните, как в <em>универе</em>? Ценность обучения складывалась и из образования, и из социальных связей. Мы не хотим, чтобы вы проходили курс в одиночку.</p>
+          <p class="dim">Мы будем делать так, чтобы незнакомые друг другу люди обсуждали подходы, делились находками, сверялись друг с другом и видели, как похожие задачи решают люди с разным бэкграундом.</p>
+        </div>
+        <ul class="com-reasons reveal">
+          <li><span>Проще держать темп</span></li>
+          <li><span>Видно, как думают другие</span></li>
+          <li><span>Появляются рабочие знакомства</span></li>
+          <li><span>Находишь идеи и людей под свои задачи</span></li>
+          <li><span>Остаются единомышленники</span></li>
+          <li><span>Это весело</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="alt">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="dot"></span>Тарифы</span>
+        <h2 class="sec-title">Выберите <span class="hl">свой режим</span>.</h2>
+      </div>
+
+      <div class="pricing">
+        <div class="tier reveal">
+          <div class="t-num">Plan 01</div>
+          <h4>Базовый</h4>
+          <p class="for">Для тех, кто хочет разобраться в подходе и попробовать самостоятельно.</p>
+          <ul>
+            <li>Живые занятия</li>
+            <li>Записи</li>
+            <li>Материалы и задания</li>
+            <li>Общий чат</li>
+            <li>Участие в групповой динамике</li>
+            <li>Финальная встреча</li>
+          </ul>
+          <div class="split">Не входит</div>
+          <ul class="not">
+            <li>Проверка домашних заданий</li>
+            <li>Персональная обратная связь</li>
+            <li>Личные консультации</li>
+          </ul>
+        </div>
+
+        <div class="tier featured reveal">
+          <span class="tag-top">Популярный</span>
+          <div class="t-num">Plan 02</div>
+          <h4>С проверкой</h4>
+          <p class="for">Для тех, кто хочет пройти курс руками и получить обратную связь.</p>
+          <ul>
+            <li>Всё из базового тарифа</li>
+            <li>Проверка домашних заданий</li>
+            <li>Фидбек по результату и процессу</li>
+            <li>Рекомендации — как сделать проще, быстрее, аккуратнее</li>
+            <li>Вопросы по домашкам — без ограничений</li>
+          </ul>
+        </div>
+
+        <div class="tier reveal">
+          <div class="t-num">Plan 03</div>
+          <h4>VIP</h4>
+          <p class="for">Для тех, кто хочет больше личного внимания.</p>
+          <ul>
+            <li>Всё из тарифа с проверкой</li>
+            <li>2 личные консультации</li>
+            <li>Помощь с выбором подхода под ваши задачи</li>
+            <li>Применение в вашей реальности</li>
+          </ul>
+          <div class="split">Формат консультаций</div>
+          <p class="for plain">Консультации помогают разобрать задачу и выбрать направление — не являются разработкой сложной автоматизации под ключ.</p>
+        </div>
+      </div>
+
+      <div class="pricing-tail reveal">
+        <p>Цены на лендинге не указываем — зависит от потока и нагрузки менторов. Напишите, и мы ответим точным прайсом и свободными местами.</p>
+        <a class="btn btn-primary btn-lg" href="#final">Узнать условия <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTHORS -->
+  <section id="authors">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="dot"></span>Кто ведёт</span>
+        <h2 class="sec-title">Курс ведут <span class="hl">Саша и Коля</span>.</h2>
+        <p class="auth-intro">
+          Коля отвечает за техническую часть, агентные подходы и реальные способы применять Codex и Claude Code. Саша — за образовательный формат, структуру, комьюнити и за то, чтобы курс не превратился в набор сложных программистских штук.
+        </p>
+      </div>
+
+      <div class="authors reveal">
+        <div class="author">
+          <div class="portrait">КШ</div>
+          <div>
+            <h4>Коля Шейко</h4>
+            <div class="role">Техника и агенты</div>
+            <ul>
+              <li>Фаундер агентства ИИ-автоматизации</li>
+              <li>Ко-фаундер ИИ-конференций entropy.talk</li>
+              <li>Автор тг-канала <a href="https://t.me/ai_grably" rel="nofollow noopener" target="_blank">AI и грабли</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="author">
+          <div class="portrait">СЛ</div>
+          <div>
+            <h4>Саша Литская</h4>
+            <div class="role">Формат и комьюнити</div>
+            <ul>
+              <li>Владелица керамической мастерской-коворкинга</li>
+              <li>Основатель арт-пространства в Академгородке</li>
+              <li>Продюсер и операционный директор онлайн-школы керамики</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="alt">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="dot"></span>FAQ</span>
+        <h2 class="sec-title">Частые <span class="hl">вопросы</span>.</h2>
+      </div>
+
+      <div class="faq reveal">
+        <details><summary>Нужно ли уметь программировать?</summary><p>Нет. Курс как раз для не-разработчиков. Мы будем работать с агентами с фокусом на рабочих задачах: данные, файлы, сайты, отчёты, Telegram, браузер.</p></details>
+        <details><summary>Почему вы говорите про Codex и Claude Code? Это же инструменты для программистов?</summary><p>Изначально да, но они оказались применимы и для нормальных людей. Агенты могут работать с файлами, запускать действия на компьютере, помогать с таблицами, отчётами, сайтами, браузером и рабочими процессами.</p></details>
+        <details><summary>А если у меня Claude Code, а не Codex?</summary><p>Можно. Мы показываем общие подходы, а не конкретные фишки какого-то сервиса. Codex будет основным примером, но логика постановки задач, проверки результата и работы с агентом применима и к Claude Code.</p></details>
+        <details><summary>Я слышал, что Claude Code круче. Почему тогда Codex?</summary><p>Мы не делаем курс про религию одного сервиса. Codex удобен как базовый пример: доступен в обычной подписке ChatGPT, лимиты больше, чем у Claude Code, есть встроенная транскрибация на русском.</p></details>
+        <details><summary>А если Codex или Claude Code поменяют условия подписки?</summary><p>Такое возможно — инструменты быстро меняются. Поэтому курс строится не вокруг кнопок в одном интерфейсе, а вокруг навыка: как ставить задачи агенту, давать контекст, проверять результат и переносить подход между инструментами.</p></details>
+        <details><summary>Нужна ли платная подписка?</summary><p>Да, нужна подписка ChatGPT Plus. Её, кстати, можно оплачивать через отдельные сервисы рублёвыми картами — про это тоже расскажем в начале курса.</p></details>
+        <details><summary>Будут ли записи?</summary><p>Конечно, записи занятий будут доступны участникам.</p></details>
+        <details><summary>Сколько времени займут домашки?</summary><p>Задания спроектированы как короткие практические задачи. Ориентир — 30–40 минут на базовое прохождение, но всегда можно потратить ночь, докручивая до идеала.</p></details>
+        <details><summary>Можно без домашек?</summary><p>Да, для этого есть базовый тариф. Вы сможете смотреть занятия, быть в чате и пробовать самостоятельно — без проверки и персонального фидбека.</p></details>
+        <details><summary>Как проходит проверка домашек?</summary><p>Смотрим не только итоговый результат, но и процесс: как ставили задачу агенту, где потеряли контекст, где можно было сделать проще, быстрее, точнее.</p></details>
+        <details><summary>Можно ли прийти со своим кейсом?</summary><p>В финальном проекте вы будете применять навыки курса к своему рабочему процессу. В VIP-тарифе можно отдельно обсудить свою задачу на консультациях.</p></details>
+        <details><summary>Можно оплатить иностранной картой?</summary><p>Стандартный способ оплаты пока через РФ. Если вам не подходит — напишите, подберём вариант вручную: перевод, крипта или что-то ещё.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final" id="final">
+    <div class="wrap">
+      <span class="eyebrow live reveal"><span class="dot"></span>Поток 01 · Весна 2026</span>
+      <h2 class="reveal">
+        Если в вашей работе много ручной информационной рутины — часть её уже можно <span class="hl">отдать агенту</span>.
+      </h2>
+      <p class="reveal">
+        Мы покажем, как это делать на понятных рабочих задачах. Без программирования и без магии.
+      </p>
+      <div class="hero-cta reveal">
+        <a class="btn btn-primary btn-lg" href="#">Хочу в первый поток <span class="arr">→</span></a>
+        <a class="btn btn-ghost btn-lg" href="#program">Ещё раз про программу</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><span class="brand-mini">AI For Work</span> · © 2026</div>
+    <div class="links">
+      <a href="mailto:hello@example.com">hello@example.com</a>
+      <a href="https://t.me/ai_grably" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      }
+    }
+  }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

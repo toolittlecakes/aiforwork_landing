@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI for Work — Playful Flow</title>
+  <style>
+    :root {
+      --bg: #fff6fb;
+      --text: #2a1b35;
+      --accent: #ff5db1;
+      --accent2: #7b5cff;
+      --accent3: #24d7a1;
+      --card: #ffffffcc;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", "Marker Felt", "Trebuchet MS", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 10%, rgba(255,93,177,0.18), transparent 28%),
+        radial-gradient(circle at 92% 18%, rgba(123,92,255,0.16), transparent 24%),
+        radial-gradient(circle at 80% 82%, rgba(36,215,161,0.16), transparent 28%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .wrap { max-width: 1030px; margin: 0 auto; padding: 40px 18px 72px; }
+
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 2px dashed var(--accent2);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      margin: 0;
+      line-height: 1.06;
+    }
+
+    .hero {
+      background: var(--card);
+      border: 2px solid #fff;
+      border-radius: 26px;
+      padding: 28px;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 24px 55px rgba(79, 50, 97, 0.12);
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero p { font-size: 1.07rem; }
+
+    .cta {
+      justify-self: start;
+      border: none;
+      border-radius: 999px;
+      color: white;
+      padding: 12px 18px;
+      font-weight: 700;
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .cards {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .tile {
+      min-height: 150px;
+      border-radius: 18px;
+      padding: 16px;
+      border: 2px solid #fff;
+      background: white;
+      box-shadow: 0 12px 26px rgba(90, 50, 100, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tile:nth-child(1) { border-color: #ffd166; }
+    .tile:nth-child(2) { border-color: #06d6a0; }
+    .tile:nth-child(3) { border-color: #118ab2; }
+
+    .tile::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      right: -22px;
+      bottom: -25px;
+      background: radial-gradient(circle, rgba(0,0,0,0.06), transparent 70%);
+    }
+
+    .steps {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .step {
+      background: #fff;
+      border-radius: 16px;
+      padding: 12px;
+      border: 1.5px solid #e6d4ea;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .step strong { color: var(--accent2); display: block; font-size: 1.4rem; }
+
+    @media (max-width: 900px) {
+      .cards, .steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="header">
+      <div class="badge">Работа, но с эмоцией и ритмом</div>
+      <h1>Лёгкий AI-помощник, который возвращает фокус команде.</h1>
+    </div>
+
+    <section class="hero">
+      <p>Не нужно учиться новой системе. Нужен всего один входной принцип: задача, источник, ответственный — дальше AI for Work собирает всё само.</p>
+      <a class="cta" href="#">Попробовать бесплатно</a>
+
+      <div class="cards">
+        <article class="tile"><h3>Собираем сигналы</h3><p>Каналы, канбан, документы — всё в одном экране.</p></article>
+        <article class="tile"><h3>Фильтруем шум</h3><p>AI выделяет важное и убирает лишнее.</p></article>
+        <article class="tile"><h3>Двигаем дело</h3><p>Формирует понятный план на день и неделю.</p></article>
+      </div>
+
+      <div class="steps">
+        <div class="step"><strong>01</strong>Подключить источники</div>
+        <div class="step"><strong>02</strong>Задать правила</div>
+        <div class="step"><strong>03</strong>Запустить автоматизацию</div>
+        <div class="step"><strong>04</strong>Проверить рост скорости</div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

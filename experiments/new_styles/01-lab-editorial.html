@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI For Work — Lab Editorial</title>
+  <style>
+    :root {
+      --bg: #f6f7f1;
+      --ink: #11130f;
+      --muted: #5f655c;
+      --line: #d7dccf;
+      --acid: #c8ff3d;
+      --coral: #ff5f4a;
+      --cyan: #44d7e8;
+      --panel: #ffffff;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(17, 19, 15, .06) 1px, transparent 1px),
+        linear-gradient(rgba(17, 19, 15, .05) 1px, transparent 1px),
+        var(--bg);
+      background-size: 48px 48px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page { min-height: 100vh; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px clamp(18px, 4vw, 56px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(246, 247, 241, .86);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .brand::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--acid);
+      border: 2px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color .18s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -5px;
+      height: 2px;
+      background: var(--ink);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .18s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--acid);
+      color: var(--ink);
+      font-weight: 850;
+      box-shadow: 4px 4px 0 var(--ink);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .button:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+      gap: clamp(26px, 5vw, 72px);
+      padding: clamp(54px, 8vw, 110px) clamp(18px, 4vw, 56px) 42px;
+      align-items: end;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 7px 10px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 920px;
+      font-size: clamp(58px, 10.5vw, 148px);
+      line-height: .82;
+      letter-spacing: 0;
+    }
+
+    h1 span {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--ink);
+      text-stroke: 2px var(--ink);
+    }
+
+    .lead {
+      max-width: 680px;
+      margin: 26px 0 0;
+      font-size: clamp(19px, 2.1vw, 28px);
+      line-height: 1.25;
+      font-weight: 650;
+    }
+
+    .hero-copy {
+      margin-top: 18px;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+      align-items: center;
+    }
+
+    .note {
+      max-width: 250px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .artifact {
+      position: relative;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 12px 12px 0 var(--ink);
+      overflow: hidden;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    .artifact:hover {
+      transform: translate(-3px, -3px) rotate(-.4deg);
+      box-shadow: 16px 16px 0 var(--ink);
+    }
+
+    .artifact-head {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--ink);
+      background: var(--acid);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 12px;
+      padding: 18px;
+      align-items: center;
+    }
+
+    .stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .file {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #f9faf5;
+      font-weight: 750;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .file:hover {
+      transform: translateX(4px);
+      border-color: var(--ink);
+      background: var(--acid);
+    }
+
+    .file small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-weight: 550;
+    }
+
+    .arrow {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--coral);
+      color: white;
+      font-weight: 900;
+    }
+
+    .section {
+      padding: 54px clamp(18px, 4vw, 56px);
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
+      gap: clamp(22px, 5vw, 70px);
+      align-items: start;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 68px);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .program-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      min-height: 190px;
+      padding: 18px;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 5px 5px 0 rgba(17, 19, 15, .92);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .card:hover,
+    .card:focus-within {
+      transform: translate(-3px, -3px);
+      box-shadow: 9px 9px 0 rgba(17, 19, 15, .92);
+      background: #fffde8;
+    }
+
+    .card h3 {
+      margin: 0 0 14px;
+      font-size: 21px;
+      line-height: 1.05;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .text-block {
+      max-width: 880px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .text-block strong {
+      color: var(--ink);
+    }
+
+    .card .label {
+      display: inline-flex;
+      margin: 0 0 10px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: var(--acid);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .card .result {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .module-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .module-tags span {
+      padding: 5px 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 8px 10px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--panel);
+      font-size: 14px;
+      font-weight: 750;
+      transition: transform .16s ease, background .16s ease, color .16s ease;
+    }
+
+    .tag:hover {
+      transform: translateY(-2px) rotate(-1deg);
+      background: var(--ink);
+      color: white;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .price-card {
+      padding: 22px;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: var(--panel);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .price-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 7px 7px 0 var(--ink);
+    }
+
+    .price-card:nth-child(2) {
+      background: var(--acid);
+      box-shadow: 8px 8px 0 var(--ink);
+    }
+
+    .price-card .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .price-card h4 {
+      margin: 16px 0 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 14px 0 0;
+      color: var(--muted);
+    }
+
+    li + li { margin-top: 7px; }
+
+    .faq {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .qa {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .72);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .qa:hover {
+      transform: translateY(-3px);
+      border-color: var(--ink);
+      background: white;
+    }
+
+    .qa strong { display: block; margin-bottom: 8px; }
+    .qa p { margin: 0; color: var(--muted); }
+
+    .final {
+      padding: clamp(58px, 8vw, 100px) clamp(18px, 4vw, 56px);
+      background: var(--ink);
+      color: white;
+    }
+
+    .final h2 { max-width: 880px; }
+    .final p { max-width: 760px; color: #d8ddcf; font-size: 19px; }
+    .final .button { background: var(--cyan); color: var(--ink); }
+
+    .lab-builder {
+      display: grid;
+      grid-template-columns: minmax(220px, 340px) minmax(0, 1fr);
+      gap: 14px;
+      padding: 0 clamp(18px, 4vw, 56px) 54px;
+    }
+
+    .lab-controls,
+    .lab-output {
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 7px 7px 0 var(--ink);
+      overflow: hidden;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .lab-controls:hover,
+    .lab-output:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 10px 10px 0 var(--ink);
+    }
+
+    .lab-title {
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--ink);
+      background: var(--acid);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .lab-buttons {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+    }
+
+    .lab-button {
+      min-height: 46px;
+      padding: 0 12px;
+      border: 1px solid var(--ink);
+      border-radius: 6px;
+      background: #f9faf5;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+      transition: transform .16s ease, background .16s ease, color .16s ease;
+    }
+
+    .lab-button:hover,
+    .lab-button:focus-visible {
+      transform: translateX(4px);
+      background: var(--acid);
+    }
+
+    .lab-button.is-active {
+      background: var(--ink);
+      color: white;
+    }
+
+    .lab-output-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+      gap: 14px;
+      padding: 18px;
+    }
+
+    .lab-output h3 {
+      margin: 0 0 10px;
+      font-size: clamp(26px, 4vw, 52px);
+      line-height: .96;
+    }
+
+    .lab-output p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .lab-checks {
+      display: grid;
+      gap: 8px;
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .lab-checks li {
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #f9faf5;
+      color: var(--muted);
+    }
+
+    .lab-checks li::before {
+      content: "✓ ";
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .lab-artifact {
+      display: grid;
+      place-items: center;
+      min-height: 190px;
+      padding: 18px;
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      background: var(--cyan);
+      text-align: center;
+      font-size: 24px;
+      font-weight: 950;
+      line-height: 1.05;
+      transform: rotate(-1deg);
+      transition: transform .22s ease, background .22s ease;
+    }
+
+    .lab-artifact.is-flipped {
+      transform: rotate(1deg) scale(1.02);
+      background: var(--coral);
+      color: white;
+    }
+
+    @media (max-width: 920px) {
+      .hero, .split, .section-head { grid-template-columns: 1fr; }
+      .cards, .program-cards, .pricing, .faq { grid-template-columns: 1fr 1fr; }
+      .workflow { grid-template-columns: 1fr; }
+      .lab-builder, .lab-output-body { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 620px) {
+      .cards, .program-cards, .pricing, .faq { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(52px, 18vw, 86px); }
+      .hero { padding-top: 42px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <a class="brand" href="#">AI For Work</a>
+      <div class="nav-links">
+        <a href="#program">Программа</a>
+        <a href="#format">Формат</a>
+        <a href="#pricing">Тарифы</a>
+      </div>
+      <a class="button" href="#cta">Узнать, подойдёт ли мне курс</a>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <div class="kicker">Практический курс по ИИ-агентам для не-разработчиков</div>
+        <h1>AI For <span>Work</span></h1>
+        <p class="lead">Для людей, у которых много ручной работы с информацией: таблицами, файлами, сайтами, Telegram, вакансиями, отчётами, презентациями и исследованиями.</p>
+        <p class="hero-copy">Учим использовать Codex / Claude Code, чтобы искать, читать, анализировать, преобразовывать, собирать и отправлять информацию. Без навыков разработки.</p>
+        <div class="hero-actions">
+          <a class="button" href="#cta">Хочу в первый поток</a>
+          <span class="note">6 недель, живые занятия, домашняя практика и финальный проект под вашу работу.</span>
+        </div>
+      </div>
+
+      <div class="artifact" aria-label="Пример рабочего процесса">
+        <div class="artifact-head"><span>agent run</span><span>done</span></div>
+        <div class="workflow">
+          <div class="stack">
+            <div class="file">выгрузка.csv<small>страшная таблица</small></div>
+            <div class="file">каналы Telegram<small>темы и инсайты</small></div>
+            <div class="file">HeadHunter<small>рынок и вакансии</small></div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="stack">
+            <div class="file">HTML-отчёт<small>структура и выводы</small></div>
+            <div class="file">презентация<small>в стиле компании</small></div>
+            <div class="file">уведомление<small>туда, где нужно</small></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="lab-builder" aria-label="Интерактивный конструктор сценариев">
+      <div class="lab-controls">
+        <div class="lab-title">выберите рабочий сценарий</div>
+        <div class="lab-buttons">
+          <button class="lab-button is-active" type="button" data-lab="0">Страшная таблица</button>
+          <button class="lab-button" type="button" data-lab="1">Ресёрч HeadHunter</button>
+          <button class="lab-button" type="button" data-lab="2">Telegram-сводка</button>
+          <button class="lab-button" type="button" data-lab="3">Browser use</button>
+        </div>
+      </div>
+      <div class="lab-output">
+        <div class="lab-title">agent output</div>
+        <div class="lab-output-body">
+          <div>
+            <h3 id="lab-heading">Из выгрузки в отчёт</h3>
+            <p id="lab-copy">Агент читает файл, находит структуру, собирает выводы и оформляет рабочий артефакт.</p>
+            <ul class="lab-checks" id="lab-checks"></ul>
+          </div>
+          <div class="lab-artifact" id="lab-artifact">HTML-отчёт</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="eyebrow">Узнаёте себя?</div>
+        <h2>Когда «быстрый ресёрч» снова занял полдня.</h2>
+      </div>
+      <div class="cards">
+        <article class="card"><h3>10 вкладок, 3 таблицы</h3><p>Потом из этого нужно собрать нормальный вывод, а не кашу из ссылок.</p></article>
+        <article class="card"><h3>Папки и выгрузки</h3><p>Файлы есть, данные есть, но дотрагиваться до них страшно.</p></article>
+        <article class="card"><h3>Быстрый ресёрч</h3><p>Постоянно делаете «быстрый ресёрч», который почему-то занимает полдня.</p></article>
+        <article class="card"><h3>Нужен результат</h3><p>Хотите не просто «спросить у нейронки», а дать ей задачу и получить готовый рабочий результат.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="eyebrow">Для кого</div>
+        <h2>Курс не привязан к одной профессии.</h2>
+      </div>
+      <p class="text-block">Он для всех, у кого работа завязана на информацию, ручной сбор данных, отчёты, исследования, таблицы, коммуникации и повторяющиеся процессы.</p>
+      <div class="split">
+        <div class="tags">
+          <span class="tag">маркетологи</span><span class="tag">аналитики</span><span class="tag">продакты</span><span class="tag">проджекты</span><span class="tag">HR и рекрутеры</span><span class="tag">сейлзы</span><span class="tag">операционные менеджеры</span><span class="tag">исследователи</span><span class="tag">редакторы</span><span class="tag">методисты</span><span class="tag">продюсеры курсов</span><span class="tag">фаундеры</span><span class="tag">аккаунт-менеджеры</span><span class="tag">customer success</span><span class="tag">people ops</span><span class="tag">SMM</span><span class="tag">PR</span><span class="tag">контент-команды</span><span class="tag">комьюнити-менеджеры</span>
+        </div>
+        <div class="tags">
+          <span class="tag">ресёрч</span><span class="tag">таблицы</span><span class="tag">отчёты</span><span class="tag">презентации</span><span class="tag">Telegram</span><span class="tag">вакансии</span><span class="tag">лидогенерация</span><span class="tag">анализ рынка</span><span class="tag">анализ конкурентов</span><span class="tag">поиск клиентов</span><span class="tag">обработка выгрузок</span><span class="tag">дашборды</span><span class="tag">брифы</span><span class="tag">сводки</span><span class="tag">контент-планы</span><span class="tag">заполнение форм</span><span class="tag">поиск инсайтов</span>
+        </div>
+      </div>
+      <p class="text-block">У нас нет цели забрать интересную часть работы. Наоборот, мы хотим показать, как отдать агенту рутину, которая обычно отнимает силы: собрать, разложить, проверить, сверить, оформить, перенести. Пока агент собирает данные, чистит таблицу, ищет ссылки или собирает черновик отчёта, вы занимаетесь смыслами, доменными решениями, выбором подхода и качеством результата.</p>
+    </section>
+
+    <section class="section" id="program">
+      <div class="section-head">
+        <div class="eyebrow">Программа</div>
+        <h2>4 практических модуля на реальных рабочих задачах.</h2>
+      </div>
+      <p class="text-block">Сначала знакомимся с ИИ-агентами: установка, настройка среды, первые практические задания. Дальше идут четыре модуля, где важны не только конкретные инструменты, но и подходы, применимые к любым данным, сервисам и процессам.</p>
+      <div class="program-cards">
+        <article class="card">
+          <span class="label">Модуль 1</span>
+          <h3>Как агент работает с вашими файлами: из страшной таблицы в презентацию</h3>
+          <p><strong>Что делаем:</strong> берём локальную таблицу или выгрузку и превращаем её в понятный рабочий артефакт: HTML-отчёт, презентацию или структурированный документ.</p>
+          <p class="result">Результат: умеем давать агенту файлы, таблицы и примеры оформления, чтобы вместо пересказа получать готовый материал в стиле вашей компании.</p>
+          <div class="module-tags"><span>файлы</span><span>таблицы</span><span>отчёт</span><span>презентация</span><span>преобразование данных</span></div>
+        </article>
+        <article class="card">
+          <span class="label">Модуль 2</span>
+          <h3>Ресёрч рынка на HeadHunter</h3>
+          <p><strong>Что делаем:</strong> используем HeadHunter как источник открытых данных: вакансии, компании, требования, роли, спрос на специалистов и паттерны рынка.</p>
+          <p class="result">Результат: умеем собирать информацию из открытых источников, формулировать критерии отбора и анализировать по смыслу, а не поверхностными фильтрами.</p>
+          <div class="module-tags"><span>ресёрч</span><span>вакансии</span><span>рынок</span><span>ссылки</span><span>лиды</span><span>поиск клиентов</span></div>
+        </article>
+        <article class="card">
+          <span class="label">Модуль 3</span>
+          <h3>Telegram без ручного копирования</h3>
+          <p><strong>Что делаем:</strong> собираем инфу из Telegram-каналов и чатов, анализируем сообщения, вытаскиваем темы, инсайты, триггеры для продажи и отправляем результаты туда, где они нужны.</p>
+          <p class="result">Результат: превращаем Telegram из бесконечной ленты в рабочий источник данных: мониторим каналы, собираем сводки, анализируем обсуждения, отправляем уведомления и дашборды.</p>
+          <div class="module-tags"><span>Telegram</span><span>каналы</span><span>чаты</span><span>сводки</span><span>мониторинг</span><span>боты</span></div>
+        </article>
+        <article class="card">
+          <span class="label">Модуль 4</span>
+          <h3>Рутина в браузере: формы, кабинеты, LinkedIn, Яндекс Метрика</h3>
+          <p><strong>Что делаем:</strong> разбираем задачи, где агенту нужно действовать как пользователю: открыть сайт, пройти интерфейс, заполнить форму, добавить людей в LinkedIn, настроить счётчик в Яндекс Метрике.</p>
+          <p class="result">Результат: browser use подключен к агенту и настроен, а вы знаете, где его применять, как это делать и как сделать, чтобы вас не забанили.</p>
+          <div class="module-tags"><span>browser use</span><span>формы</span><span>личные кабинеты</span><span>LinkedIn</span><span>Яндекс Метрика</span></div>
+        </article>
+      </div>
+      <p class="text-block"><strong>На фоне разберём:</strong> как эффективно ставить задачи, как сделать так, чтобы агент запоминал правильный путь, как расширять его возможности через skills/mcp, как создавать интерактивные артефакты, как получать обратную связь по взаимодействию с агентом и как сделать так, чтобы агент мог сам себя проверить.</p>
+    </section>
+
+    <section class="section" id="format">
+      <div class="section-head">
+        <div class="eyebrow">Формат</div>
+        <h2>6 недель: настройка, воркшопы, домашки, финальный проект.</h2>
+      </div>
+      <div class="program-cards">
+        <article class="card">
+          <h3>Финальный проект</h3>
+          <p>Частый кейс на курсах — занятия пройдены, примеры рассмотрены, а как применить это к своей работе непонятно. Поэтому в конце мы проводим вас через первый самостоятельный проект.</p>
+          <p class="result">Вы выберете один рабочий процесс из реальной жизни: отчёт, ресёрч, таблицу, мониторинг, поиск клиентов, работу с файлами или другой повторяющийся процесс. За неделю попробуете перестроить его с помощью ИИ-агента, а на финальной встрече покажете, что получилось.</p>
+        </article>
+        <article class="card">
+          <h3>Структура курса</h3>
+          <ul>
+            <li>неделя 0 — знакомство, настройка инструментов, первый простой шаг</li>
+            <li>4 практических воркшопа — каждый про отдельный тип рабочих задач</li>
+            <li>после каждого воркшопа — домашка</li>
+            <li>в начале следующего занятия — разбор частых ошибок и удачных решений</li>
+            <li>финальная неделя — подготовка своего проекта</li>
+            <li>финальная встреча — короткие презентации участников</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Практика</h3>
+          <p>Занятия проходят вживую, записи остаются. Основная практика — дома, чтобы вы могли спокойно пройти задачу на своём компьютере в своём темпе.</p>
+        </article>
+        <article class="card">
+          <h3>Комьюнити</h3>
+          <p>Помните, как в универе? Ценность обучения складывалась и из образования, и из социальных связей. Мы не хотим, чтобы вы проходили курс в одиночку.</p>
+          <ul>
+            <li>проще держать темп</li>
+            <li>видно, как думают другие</li>
+            <li>появляются рабочие знакомства</li>
+            <li>можно находить идеи и людей для своих задач</li>
+            <li>после курса остаются единомышленники</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="section-head">
+        <div class="eyebrow">Тарифы</div>
+        <h2>Можно идти самостоятельно, с проверкой или с личным разбором.</h2>
+      </div>
+      <div class="pricing">
+        <article class="price-card">
+          <h3>Базовый</h3>
+          <p class="muted">Для тех, кто хочет разобраться в подходе и попробовать самостоятельно.</p>
+          <h4>Входит</h4>
+          <ul><li>живые занятия</li><li>записи</li><li>материалы и задания</li><li>общий чат</li><li>участие в групповой динамике</li><li>финальная встреча</li></ul>
+          <h4>Не входит</h4>
+          <ul><li>проверка домашних заданий</li><li>персональная обратная связь</li><li>личные консультации</li></ul>
+        </article>
+        <article class="price-card">
+          <h3>С проверкой домашек</h3>
+          <p class="muted">Для тех, кто хочет пройти курс руками и получить обратную связь.</p>
+          <h4>Входит</h4>
+          <ul><li>всё из базового тарифа</li><li>проверка домашних заданий</li><li>фидбек и по результату, и по процессу работы с агентом</li><li>рекомендации, как можно было решить задачу проще, быстрее или аккуратнее</li><li>возможность задавать вопросы по домашкам</li></ul>
+        </article>
+        <article class="price-card">
+          <h3>VIP</h3>
+          <p class="muted">Для тех, кто хочет больше личного внимания.</p>
+          <h4>Входит</h4>
+          <ul><li>всё из тарифа с проверкой</li><li>2 личные консультации</li><li>помощь с выбором подхода под ваши рабочие задачи</li><li>обсуждение, как применить инструменты курса в вашей реальности</li></ul>
+          <p class="result">Консультации помогают разобрать задачу и выбрать направление, но не являются разработкой сложной автоматизации под ключ.</p>
+        </article>
+      </div>
+      <p class="text-block">Цены на лендинге не указываем. CTA под тарифами: «Узнать условия участия».</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="eyebrow">Кто ведёт</div>
+        <h2>Коля — про агентные подходы. Саша — про формат, структуру и комьюнити.</h2>
+      </div>
+      <p class="text-block">Курс ведут Саша и Коля. Коля отвечает за техническую часть, агентные подходы и реальные способы применять Codex / Claude Code в рабочих процессах. Саша отвечает за образовательный формат, структуру, комьюнити и то, чтобы курс не превратился в набор сложных программистских штук.</p>
+      <div class="split">
+        <article class="card"><h3>Коля Шейко</h3><ul><li>Фаундер агентства ИИ-автоматизации</li><li>Ко-фаундер entropy.talk</li><li>Автор канала «AI и грабли»</li></ul></article>
+        <article class="card"><h3>Саша Литская</h3><ul><li>Владелица керамической мастерской коворкинга</li><li>Основатель арт-пространства и оффлайн-сообщества в Академгородке</li><li>Продюсер и операционный директор в онлайн-школе керамики</li></ul></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="eyebrow">FAQ</div>
+        <h2>Коротко про частые вопросы.</h2>
+      </div>
+      <div class="faq">
+        <div class="qa"><strong>Нужно ли уметь программировать?</strong><p>Нет. Курс для не-разработчиков и рабочих задач с информацией.</p></div>
+        <div class="qa"><strong>Почему вы говорите про Codex / Claude Code? Это же инструменты для программистов?</strong><p>Изначально да, но они оказались применимы и для нормальных людей. Агенты могут работать с файлами, запускать действия на компьютере, помогать с таблицами, отчётами, сайтами, браузером и рабочими процессами.</p></div>
+        <div class="qa"><strong>А если у меня Claude Code, а не Codex?</strong><p>Можно. Мы пытаемся показать общие подходы, а не конкретные фишки какого-то сервиса. Codex будет основным примером, но логика постановки задач, проверки результата и работы с агентом применима и к Claude Code.</p></div>
+        <div class="qa"><strong>Я слышал, что Claude Code круче. Почему тогда Codex?</strong><p>Мы не делаем курс про религию одного сервиса. Codex удобен как базовый пример: доступен в обычной подписке ChatGPT, больше лимиты, доступна встроенная транскрибация на русском языке.</p></div>
+        <div class="qa"><strong>А если Codex / Claude Code поменяют условия подписки?</strong><p>Такое возможно, инструменты быстро меняются. Поэтому курс строится не вокруг кнопок в одном интерфейсе, а вокруг навыка: как ставить задачи агенту, давать контекст, проверять результат и переносить подход между инструментами.</p></div>
+        <div class="qa"><strong>Нужна ли платная подписка?</strong><p>Да, нужна подписка ChatGPT Plus. Их можно оплачивать через отдельные сервисы рублёвыми картами. Про это тоже расскажем в начале курса.</p></div>
+        <div class="qa"><strong>Будут ли записи?</strong><p>Да, записи занятий остаются у участников.</p></div>
+        <div class="qa"><strong>Сколько времени займут домашки?</strong><p>Мы проектируем задания как короткие практические задачи. Ориентир — 30-40 минут на базовое прохождение, но всегда можно потратить ночь, докручивая до идеала.</p></div>
+        <div class="qa"><strong>Ой а можно без домашек?</strong><p>Да, для этого есть базовый тариф. Вы сможете смотреть занятия, быть в чате и пробовать самостоятельно, но без проверки и персонального фидбека.</p></div>
+        <div class="qa"><strong>Как проходит проверка домашек?</strong><p>Мы смотрим не только итоговый результат, но и процесс: как ставили задачу агенту, где потеряли контекст, где можно было сделать проще, быстрее, точнее.</p></div>
+        <div class="qa"><strong>Можно ли прийти со своим кейсом?</strong><p>В финальном проекте вы будете применять навыки курса к своему рабочему процессу. В VIP-тарифе можно отдельно обсудить свою задачу на консультациях.</p></div>
+        <div class="qa"><strong>Можно оплатить иностранной картой?</strong><p>Стандартный способ оплаты пока через РФ. Если вам не подходит, напишите нам — подберём вариант вручную: перевод, крипта или что-то ещё.</p></div>
+      </div>
+    </section>
+
+    <section class="final" id="cta">
+      <h2>Если в вашей работе много ручной информационной рутины, часть её уже можно отдавать ИИ-агенту.</h2>
+      <p>Мы покажем, как это делать на понятных рабочих задачах — без программирования и без магии.</p>
+      <a class="button" href="#">Хочу в первый поток</a>
+    </section>
+  </div>
+  <script>
+    (() => {
+      const scenarios = [
+        ["Из выгрузки в отчёт", "Агент читает файл, находит структуру, собирает выводы и оформляет рабочий артефакт.", ["проверить колонки и дубли", "найти аномалии", "собрать выводы"], "HTML-отчёт"],
+        ["Рынок и вакансии без ручного перебора", "Агент собирает открытые данные, группирует требования и вытаскивает паттерны спроса.", ["собрать вакансии", "сгруппировать требования", "отобрать компании"], "таблица лидов"],
+        ["Telegram превращается в источник данных", "Агент читает каналы и чаты, вытаскивает темы, инсайты и готовит сводку.", ["прочитать сообщения", "найти темы", "подготовить уведомление"], "сводка в чат"],
+        ["Агент проходит интерфейс как пользователь", "Открывает сайт, проходит шаги, заполняет форму и фиксирует результат.", ["открыть кабинет", "пройти сценарий", "проверить итог"], "лог действий"]
+      ];
+
+      const buttons = Array.from(document.querySelectorAll("[data-lab]"));
+      const heading = document.getElementById("lab-heading");
+      const copy = document.getElementById("lab-copy");
+      const checks = document.getElementById("lab-checks");
+      const artifact = document.getElementById("lab-artifact");
+
+      function render(index) {
+        const [title, text, items, output] = scenarios[index];
+        buttons.forEach((button, buttonIndex) => button.classList.toggle("is-active", buttonIndex === index));
+        heading.textContent = title;
+        copy.textContent = text;
+        checks.innerHTML = items.map((item) => `<li>${item}</li>`).join("");
+        artifact.textContent = output;
+        artifact.classList.toggle("is-flipped");
+      }
+
+      buttons.forEach((button) => button.addEventListener("click", () => render(Number(button.dataset.lab))));
+      render(0);
+    })();
+  </script>
+</body>
+</html>

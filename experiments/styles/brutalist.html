@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI For Work — Brutalist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA;
+    --ink:#0B0B0B;
+    --accent:#FFE600;
+    --accent2:#FF4D2E;
+    --ok:#3BDC8A;
+    --mute:#555;
+    --card:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:16px;line-height:1.5}
+  .mono{font-family:'JetBrains Mono',monospace}
+  a{color:inherit}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+
+  nav{border-bottom:3px solid var(--ink);background:var(--bg);position:sticky;top:0;z-index:20}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;background:var(--ink);color:var(--accent);padding:6px 10px}
+  .logo::before{content:"▓ "}
+  nav ul{list-style:none;display:flex;gap:28px;font-family:'JetBrains Mono',monospace;font-size:13px}
+  nav ul a{text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
+  nav ul a:hover{border-color:var(--ink)}
+  nav .apply{background:var(--ink);color:var(--bg);padding:10px 16px;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--accent)}
+
+  .hero{border-bottom:3px solid var(--ink);padding:80px 0;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;right:-80px;top:40px;width:320px;height:320px;background:var(--accent);border:3px solid var(--ink);border-radius:50%;z-index:0}
+  .hero::after{content:"";position:absolute;right:140px;bottom:-40px;width:180px;height:180px;background:var(--accent2);border:3px solid var(--ink);z-index:0;transform:rotate(12deg)}
+  .hero .wrap{position:relative;z-index:1}
+  .tape{display:inline-block;background:var(--ink);color:var(--bg);padding:6px 12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px}
+  h1{font-size:clamp(56px,9vw,140px);line-height:.92;font-weight:700;letter-spacing:-.03em;margin-bottom:32px;max-width:14ch}
+  h1 mark{background:var(--accent);padding:0 .1em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  h1 s{text-decoration:line-through;text-decoration-thickness:6px;color:var(--mute);text-decoration-color:var(--accent2)}
+  .hero .sub{font-size:20px;max-width:52ch;margin-bottom:40px;line-height:1.5}
+  .hero .sub b{background:var(--ink);color:var(--bg);padding:1px 6px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:18px 24px;background:var(--ink);color:var(--bg);text-decoration:none;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--accent);transition:transform .1s,box-shadow .1s}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--accent)}
+  .btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--accent)}
+  .btn-alt{background:var(--bg);color:var(--ink);box-shadow:6px 6px 0 var(--ink);border:3px solid var(--ink);margin-left:16px}
+  .btn-alt:hover{box-shadow:8px 8px 0 var(--ink)}
+
+  .ticker{background:var(--ink);color:var(--accent);padding:14px 0;border-bottom:3px solid var(--ink);overflow:hidden;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+  .ticker span{display:inline-block;padding:0 40px;animation:slide 30s linear infinite}
+  .ticker span::after{content:" ⁕ "}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  section{border-bottom:3px solid var(--ink);padding:80px 0}
+  .sec-h{display:flex;align-items:baseline;gap:18px;margin-bottom:48px;flex-wrap:wrap}
+  .sec-h .tape{margin-bottom:0}
+  .sec-h h2{font-size:clamp(40px,6vw,88px);line-height:.95;letter-spacing:-.02em;flex:1;min-width:300px}
+  .sec-h h2 u{text-decoration:none;background:var(--accent);padding:0 .1em}
+
+  /* mirror */
+  .mirror{background:var(--bg)}
+  .mirror .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .m-item{border:3px solid var(--ink);padding:28px;background:var(--card);box-shadow:6px 6px 0 var(--ink);display:flex;gap:20px;transition:transform .15s,box-shadow .15s}
+  .m-item:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--accent)}
+  .m-item .n{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;color:var(--accent2);line-height:1}
+  .m-item p{font-size:17px;line-height:1.4}
+
+  /* audience */
+  .cloud{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .cloud span{border:2px solid var(--ink);padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--card)}
+  .cloud.yellow span{background:var(--accent)}
+  .cloud.red span{background:var(--accent2);color:#fff}
+  .lbl{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin:32px 0 0;color:var(--mute)}
+  .note{background:var(--ink);color:var(--bg);padding:32px;border:3px solid var(--ink);margin-top:48px;box-shadow:8px 8px 0 var(--accent2);font-size:20px;line-height:1.45;max-width:64ch}
+  .note::before{content:"// ";font-family:'JetBrains Mono',monospace;color:var(--accent)}
+
+  /* modules */
+  .mods{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  .mod{border:3px solid var(--ink);background:var(--card);padding:32px;position:relative;box-shadow:8px 8px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+  .mod:nth-child(1){background:var(--accent)}
+  .mod:nth-child(2){background:var(--card)}
+  .mod:nth-child(3){background:var(--ok)}
+  .mod:nth-child(4){background:var(--accent2);color:#fff}
+  .mod:hover{transform:translate(-4px,-4px);box-shadow:12px 12px 0 var(--ink)}
+  .mod .no{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;margin-bottom:12px}
+  .mod h3{font-size:30px;line-height:1.08;letter-spacing:-.01em;margin-bottom:16px;max-width:22ch}
+  .mod p{font-size:16px;line-height:1.45;margin-bottom:20px}
+  .mod .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .mod .tags b{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:11px;border:2px solid currentColor;padding:3px 8px;text-transform:lowercase}
+
+  .approach{margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:20px;border-top:3px solid var(--ink);padding-top:48px}
+  .approach h3{font-size:28px;line-height:1.1;margin-bottom:20px}
+  .approach ul{list-style:none;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.9}
+  .approach li::before{content:"➜ ";color:var(--accent2);font-weight:700}
+
+  /* format */
+  .format-grid{display:grid;grid-template-columns:2fr 1fr;gap:32px;align-items:stretch}
+  .fmt-card{background:var(--card);border:3px solid var(--ink);padding:32px;box-shadow:8px 8px 0 var(--ink)}
+  .fmt-card ol{list-style:none;counter-reset:n;font-family:'JetBrains Mono',monospace;font-size:14px}
+  .fmt-card li{counter-increment:n;padding:14px 0;border-bottom:2px dashed var(--ink);display:flex;gap:16px}
+  .fmt-card li::before{content:"[W"counter(n,decimal-leading-zero)"]";font-weight:700;color:var(--accent2);min-width:60px}
+  .fmt-card li:last-child{border:none}
+  .fmt-stats{display:grid;gap:16px}
+  .st{background:var(--accent);border:3px solid var(--ink);padding:24px;box-shadow:6px 6px 0 var(--ink)}
+  .st .big{font-size:56px;font-weight:700;line-height:1;letter-spacing:-.02em}
+  .st .t{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-top:8px}
+  .st:nth-child(2){background:var(--accent2);color:#fff}
+  .st:nth-child(3){background:var(--ok)}
+
+  /* hosts */
+  .hosts{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .host{background:var(--card);border:3px solid var(--ink);padding:0;box-shadow:8px 8px 0 var(--ink);overflow:hidden}
+  .host .photo{aspect-ratio:4/3;background:repeating-linear-gradient(45deg,#111,#111 10px,#222 10px,#222 20px);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;border-bottom:3px solid var(--ink);font-size:14px;letter-spacing:.2em}
+  .host:nth-child(2) .photo{background:repeating-linear-gradient(-45deg,var(--accent),var(--accent) 10px,var(--accent2) 10px,var(--accent2) 20px)}
+  .host .body{padding:28px}
+  .host h4{font-size:32px;margin-bottom:8px}
+  .host .role{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.12em;margin-bottom:16px}
+  .host ul{list-style:none;font-size:15px}
+  .host li{padding:8px 0;border-top:1px dashed var(--ink)}
+
+  /* cta */
+  .cta{background:var(--ink);color:var(--bg);border:none;padding:120px 0}
+  .cta .wrap{text-align:center;position:relative}
+  .cta h2{font-size:clamp(48px,8vw,128px);line-height:.95;letter-spacing:-.03em;max-width:18ch;margin:0 auto 24px}
+  .cta h2 mark{background:var(--accent);color:var(--ink);padding:0 .08em}
+  .cta p{color:#bbb;max-width:56ch;margin:0 auto 40px;font-size:18px}
+  .cta .btn{background:var(--accent);color:var(--ink);box-shadow:8px 8px 0 var(--accent2)}
+  .cta .btn:hover{box-shadow:12px 12px 0 var(--accent2)}
+
+  footer{padding:28px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mute)}
+  footer .wrap{display:flex;justify-content:space-between}
+
+  @media(max-width:800px){
+    .mirror .grid,.mods,.approach,.format-grid,.hosts{grid-template-columns:1fr}
+    h1{font-size:56px}
+    .hero::before{display:none}.hero::after{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a href="#" class="logo">AIFORWORK</a>
+  <ul>
+    <li><a href="#mirror">Для кого</a></li>
+    <li><a href="#program">Программа</a></li>
+    <li><a href="#format">Формат</a></li>
+    <li><a href="#hosts">Ведущие</a></li>
+  </ul>
+  <a href="#cta" class="apply">APPLY →</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="tape">// v.01 · cohort-01 · 2026</div>
+  <h1>Агенты делают рутину. Вы делаете <mark>смысл</mark>.</h1>
+  <p class="sub">Практический курс по ИИ-агентам для <b>не-разработчиков</b>. Учим использовать Codex и Claude Code, чтобы искать, читать, анализировать и собирать информацию — без единой строчки кода.</p>
+  <a href="#cta" class="btn">Узнать, подойдёт ли курс →</a>
+  <a href="#program" class="btn btn-alt">Программа →</a>
+</div></header>
+
+<div class="ticker"><span>6 недель · 4 модуля · 1 финальный проект · живые воркшопы · Codex + Claude Code · комьюнити · без программирования · для не-разработчиков · 6 недель · 4 модуля · 1 финальный проект · живые воркшопы · Codex + Claude Code · комьюнити · без программирования · для не-разработчиков · </span></div>
+
+<section id="mirror" class="mirror"><div class="wrap">
+  <div class="sec-h"><div class="tape">01 / mirror</div><h2>Узнаёте <u>себя</u>?</h2></div>
+  <div class="grid">
+    <div class="m-item"><div class="n">01</div><p>Регулярно открываете 10 вкладок и 3 таблицы, чтобы собрать из этого нормальный вывод.</p></div>
+    <div class="m-item"><div class="n">02</div><p>У вас есть папки и выгрузки, до которых страшно дотрагиваться.</p></div>
+    <div class="m-item"><div class="n">03</div><p>«Быстрый ресёрч» почему-то занимает полдня.</p></div>
+    <div class="m-item"><div class="n">04</div><p>Руками переносите информацию между сервисами.</p></div>
+    <div class="m-item"><div class="n">05</div><p>Хотите не «спросить у нейронки», а дать ей задачу и получить готовый рабочий результат.</p></div>
+    <div class="m-item"><div class="n">06</div><p>Чувствуете, что живёте в табличках, а не работаете.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-h"><div class="tape">02 / audience</div><h2>Курс — для всех, у кого работа <u>на информации</u>.</h2></div>
+  <div class="lbl">// roles</div>
+  <div class="cloud yellow">
+    <span>маркетологи</span><span>аналитики</span><span>продакты</span><span>проджекты</span><span>HR / рекрутеры</span><span>сейлзы</span><span>операционные менеджеры</span><span>исследователи</span><span>редакторы</span><span>методисты</span><span>продюсеры курсов</span><span>фаундеры</span><span>account managers</span><span>customer success</span><span>people ops</span><span>SMM</span><span>PR</span><span>контент-команды</span>
+  </div>
+  <div class="lbl">// tasks</div>
+  <div class="cloud red">
+    <span>ресёрч</span><span>таблицы</span><span>отчёты</span><span>презентации</span><span>Telegram</span><span>вакансии</span><span>лидогенерация</span><span>анализ рынка</span><span>анализ конкурентов</span><span>поиск клиентов</span><span>обработка выгрузок</span><span>дашборды</span><span>брифы</span><span>сводки</span><span>контент-планы</span><span>формы</span><span>инсайты</span>
+  </div>
+  <div class="note">Мы не забираем интересную часть работы. Наоборот — показываем, как отдать агенту рутину: собрать, разложить, проверить, оформить, перенести. А вы занимаетесь смыслами и решениями.</div>
+</div></section>
+
+<section id="program"><div class="wrap">
+  <div class="sec-h"><div class="tape">03 / program</div><h2>Четыре модуля. Никакой <u>воды</u>.</h2></div>
+  <div class="mods">
+    <div class="mod"><div class="no">[MOD.01]</div><h3>Из страшной таблицы — в презентацию</h3><p>Берём локальную выгрузку и превращаем в рабочий артефакт: HTML-отчёт, слайды или документ в стиле вашей компании.</p><div class="tags"><b>файлы</b><b>таблицы</b><b>отчёт</b><b>презентация</b></div></div>
+    <div class="mod"><div class="no">[MOD.02]</div><h3>Ресёрч рынка на HeadHunter</h3><p>Вакансии и компании как источник открытых данных. Учимся фильтровать по смыслу, а не по чекбоксам.</p><div class="tags"><b>ресёрч</b><b>вакансии</b><b>рынок</b><b>лиды</b></div></div>
+    <div class="mod"><div class="no">[MOD.03]</div><h3>Telegram без ручного копирования</h3><p>Мониторинг каналов, сводки, инсайты, триггеры — и автоматическая доставка в нужное место.</p><div class="tags"><b>telegram</b><b>сводки</b><b>мониторинг</b><b>дашборды</b></div></div>
+    <div class="mod"><div class="no">[MOD.04]</div><h3>Рутина в браузере</h3><p>Агент как пользователь: формы, кабинеты, LinkedIn, Метрика. И как сделать так, чтобы вас не забанили.</p><div class="tags"><b>browser</b><b>формы</b><b>linkedin</b><b>метрика</b></div></div>
+  </div>
+
+  <div class="approach">
+    <div>
+      <h3>На фоне — общие подходы:</h3>
+      <ul>
+        <li>как эффективно ставить задачи</li>
+        <li>как заставить агента запоминать путь</li>
+        <li>как расширять его возможности через skills/mcp</li>
+        <li>как делать интерактивные артефакты</li>
+        <li>как получать обратную связь от самого агента</li>
+        <li>как заставить агента проверить самого себя</li>
+      </ul>
+    </div>
+    <div class="note" style="margin:0">Суть модулей — не в конкретных инструментах, а в <u style="background:var(--accent);color:var(--ink);text-decoration:none">подходах</u>, применимых к любым данным, сервисам и процессам.</div>
+  </div>
+</div></section>
+
+<section id="format"><div class="wrap">
+  <div class="sec-h"><div class="tape">04 / format</div><h2>6 недель. Живо. <u>Практично.</u></h2></div>
+  <div class="format-grid">
+    <div class="fmt-card">
+      <ol>
+        <li>Неделя 0 — знакомство, настройка инструментов, первый простой шаг</li>
+        <li>4 практических воркшопа, каждый про отдельный тип задач</li>
+        <li>После каждого воркшопа — домашка</li>
+        <li>В начале следующего занятия — разбор ошибок и удачных решений</li>
+        <li>Финальная неделя — свой проект на своём рабочем процессе</li>
+        <li>Финальная встреча — короткие презентации участников</li>
+      </ol>
+    </div>
+    <div class="fmt-stats">
+      <div class="st"><div class="big">6</div><div class="t">недель курса</div></div>
+      <div class="st"><div class="big">4</div><div class="t">практических модуля</div></div>
+      <div class="st"><div class="big">1</div><div class="t">свой рабочий кейс</div></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="hosts"><div class="wrap">
+  <div class="sec-h"><div class="tape">05 / hosts</div><h2>Курс ведут <u>Коля и Саша</u>.</h2></div>
+  <div class="hosts">
+    <div class="host">
+      <div class="photo">PHOTO · NKS</div>
+      <div class="body">
+        <h4>Коля Шейко</h4>
+        <div class="role">технология · агенты · codex</div>
+        <ul>
+          <li>Фаундер агентства ИИ-автоматизации</li>
+          <li>Ко-фаундер конференций entropy.talk</li>
+          <li>Автор канала «AI и грабли»</li>
+        </ul>
+      </div>
+    </div>
+    <div class="host">
+      <div class="photo">PHOTO · SLT</div>
+      <div class="body">
+        <h4>Саша Литская</h4>
+        <div class="role">формат · комьюнити · смысл</div>
+        <ul>
+          <li>Владелица керамической мастерской-коворкинга</li>
+          <li>Основатель арт-пространства в Академгородке</li>
+          <li>Продюсер и операционный директор онлайн-школы</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="cta" class="cta"><div class="wrap">
+  <h2>Хотите <mark>в первый</mark> поток?</h2>
+  <p>Если в вашей работе много ручной информационной рутины — часть её уже можно отдать агенту. Мы покажем, как именно.</p>
+  <a href="#" class="btn">Оставить заявку →</a>
+</div></section>
+
+<footer><div class="wrap"><span>© 2026 AI FOR WORK</span><span>hello@aiforwork.ru</span></div></footer>
+
+</body>
+</html>
