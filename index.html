@@ -1185,25 +1185,16 @@
 
   .pricing-tail {
     margin-top: 56px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 36px;
-    align-items: center;
     padding-top: 32px;
     border-top: 1px solid var(--rule);
-  }
-  .pricing-tail p {
-    margin: 0;
-    font-size: 15.5px;
-    color: var(--ink-2);
-    line-height: 1.55;
-    max-width: 56ch;
+    display: flex;
+    justify-content: center;
   }
   @media (max-width: 900px) {
     .pricing { grid-template-columns: 1fr; }
     .tier { border-right: none; border-bottom: 1px solid var(--rule); }
     .tier:last-child { border-bottom: none; }
-    .pricing-tail { grid-template-columns: 1fr; }
+    .pricing-tail { padding-top: 28px; }
   }
 
   /* ==================== AUTHORS ==================== */
@@ -1456,10 +1447,15 @@
     font-size: 13.5px;
   }
   footer .foot-top {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 24px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    gap: 24px;
+  }
+  footer .brand-line {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 14px;
   }
   footer .brand-mini {
     font-family: var(--display);
@@ -1468,12 +1464,11 @@
     color: var(--bg);
     letter-spacing: -0.02em;
   }
-  footer .mid {
+  footer .year {
     font-family: var(--mono);
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    text-align: center;
     color: color-mix(in srgb, var(--bg) 45%, transparent);
   }
   footer .links { display: flex; gap: 24px; justify-self: end; }
@@ -1500,11 +1495,10 @@
   footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
   @media (max-width: 720px) {
     footer .foot-top {
-      grid-template-columns: 1fr;
+      flex-direction: column;
+      align-items: flex-start;
       gap: 14px;
-      text-align: left;
     }
-    footer .mid { text-align: left; }
     footer .links { justify-self: start; }
     footer .foot-legal {
       grid-template-columns: 1fr;
@@ -2070,6 +2064,9 @@
         </div>
       </div>
 
+      <div class="pricing-tail reveal">
+        <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать условия <span class="arr">→</span></a>
+      </div>
     </div>
   </section>
 
@@ -2204,10 +2201,9 @@
 <footer>
   <div class="wrap">
     <div class="foot-top">
-      <div><span class="brand-mini">AI&nbsp;For&nbsp;Work</span></div>
-      <div class="mid">© 2026 · Stream 01 · Made with care</div>
+      <div class="brand-line"><span class="brand-mini">AI&nbsp;For&nbsp;Work</span></div>
       <div class="links">
-        <a href="mailto:hello@example.com">hello@example.com</a>
+        <a href="mailto:nickolay.sheyko@gmail.com">nickolay.sheyko@gmail.com</a>
         <a href="https://t.me/ai_grably" target="_blank" rel="noopener">Telegram</a>
       </div>
     </div>
