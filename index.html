@@ -225,6 +225,18 @@
   @media (prefers-reduced-motion: reduce) {
     .marquee-inner { animation: none; }
   }
+  @media (max-width: 640px) {
+    .marquee { padding: 10px 0; }
+    .marquee-inner {
+      gap: 28px;
+      animation-duration: 26s;
+    }
+    .marquee-inner span {
+      font-size: 12px;
+      gap: 28px;
+    }
+    .marquee-inner span::after { font-size: 9px; }
+  }
 
   /* ==================== TYPE ==================== */
   h1, h2, h3, h4 {
@@ -1437,13 +1449,13 @@
 
   /* ==================== FOOTER ==================== */
   footer {
-    padding: 40px 0;
+    padding: 40px 0 32px;
     background: var(--ink);
     color: color-mix(in srgb, var(--bg) 55%, transparent);
     border-top: 1px solid color-mix(in srgb, var(--bg) 12%, transparent);
     font-size: 13.5px;
   }
-  footer .wrap {
+  footer .foot-top {
     display: grid;
     grid-template-columns: auto 1fr auto;
     gap: 24px;
@@ -1471,6 +1483,35 @@
     transition: color .2s;
   }
   footer a:hover { color: var(--accent-hot); }
+  footer .foot-legal {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid color-mix(in srgb, var(--bg) 10%, transparent);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px 32px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: color-mix(in srgb, var(--bg) 40%, transparent);
+  }
+  footer .foot-legal .legal-info span { display: inline-block; margin-right: 18px; }
+  footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
+  @media (max-width: 720px) {
+    footer .foot-top {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      text-align: left;
+    }
+    footer .mid { text-align: left; }
+    footer .links { justify-self: start; }
+    footer .foot-legal {
+      grid-template-columns: 1fr;
+    }
+    footer .foot-legal .legal-info span { display: block; margin: 0 0 4px; }
+    footer .foot-legal .legal-links { justify-self: start; flex-wrap: wrap; }
+  }
 
   /* ==================== REVEAL ==================== */
   .reveal {
@@ -1508,7 +1549,7 @@
       <a href="#faq">FAQ</a>
     </nav>
     <span class="status-badge"><span class="status-dot"></span>Идёт набор · поток 01</span>
-    <a class="btn btn-primary btn-sm" href="#final">Записаться <span class="arr">→</span></a>
+    <a class="btn btn-primary btn-sm" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Записаться <span class="arr">→</span></a>
   </div>
 </header>
 
@@ -1521,7 +1562,7 @@
         <div class="dateline">
           <span>Поток 01 — Весна 2026</span>
           <span>6 недель</span>
-          <span>Онлайн, живьём</span>
+          <span>Онлайн</span>
           <span>Без кода</span>
         </div>
       </div>
@@ -1543,7 +1584,7 @@
             Учим использовать кодинговых агентов — Codex и Claude Code — чтобы искать, читать, анализировать, преобразовывать, собирать и отправлять информацию. Без навыков разработки.
           </p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="#final">Узнать, подойдёт ли мне <span class="arr">→</span></a>
+            <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать, подойдёт ли мне <span class="arr">→</span></a>
             <a class="btn btn-ghost" href="#program">Посмотреть программу</a>
           </div>
         </div>
@@ -1557,13 +1598,13 @@
             <div class="spec-row"><span class="k">Старт</span><span class="v">Весна 2026</span></div>
             <div class="spec-row"><span class="k">Поток</span><span class="v">№ 01</span></div>
             <div class="spec-row"><span class="k">Длительность</span><span class="v">6 недель</span></div>
-            <div class="spec-row"><span class="k">Формат</span><span class="v">Онлайн + записи</span></div>
+            <div class="spec-row"><span class="k">Формат</span><span class="v">Онлайн + записи + домашки</span></div>
             <div class="spec-row"><span class="k">Модули</span><span class="v">4 практики</span></div>
             <div class="spec-row"><span class="k">Уровень</span><span class="v">Не-разработчики</span></div>
             <div class="spec-row"><span class="k">Нужно</span><span class="v">ChatGPT Plus</span></div>
           </div>
           <div class="spec-foot">
-            <a href="#final" class="btn btn-solid">Записаться в поток <span class="arr">→</span></a>
+            <a href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener" class="btn btn-solid">Записаться в поток <span class="arr">→</span></a>
           </div>
         </aside>
       </div>
@@ -1700,7 +1741,7 @@
           <strong>Неделя 0</strong> — знакомство с ИИ-агентами: установка, настройка среды, первые практические задания. Дальше — 4 модуля, где на каждом берём реальный тип работы и перестраиваем его вокруг агента.
         </p>
         <p class="dim">
-          Суть не только в том, чтобы освоить конкретные инструменты, но и в том, чтобы через эти примеры разобрать подходы, применимые к работе с любыми данными, сервисами и процессами.
+          Осваиваем конкретные инструменты, разбираем подходы, применимые к работе с любыми данными, сервисами и процессами.
         </p>
       </div>
 
@@ -1755,7 +1796,7 @@
             </div>
             <div class="mod-field">
               <div class="k">Результат</div>
-              <div class="v">Умеем собирать информацию из открытых источников, формулировать критерии отбора, анализировать по смыслу вместо поверхностных фильтров. Применим для поиска работы, анализа рынка, найма, продаж и bizdev.</div>
+              <div class="v">Умеем собирать информацию из открытых источников, формулировать критерии отбора, анализировать по смыслу вместо поверхностных фильтров. Понимаем, как использовать подход для разных задач: поиска работы, анализа рынка, найма, продаж и bizdev.</div>
             </div>
           </div>
         </article>
@@ -1840,7 +1881,7 @@
           <span class="sec-label">Финальный проект</span>
           <h2 class="sec-title">Первый собранный кейс под <span class="hl italic">вашу работу</span>.</h2>
           <p class="sec-intro">
-            Частый кейс на курсах — занятия пройдены, примеры рассмотрены, а как применить это к своей работе непонятно. Поэтому в конце мы проводим вас через первый самостоятельный проект.
+            Частый кейс на курсах — занятия пройдены, примеры рассмотрены, а как применить это к своей работе непонятно. Поэтому в конце мы проводим вас через самостоятельный проект.
           </p>
         </div>
       </div>
@@ -1860,7 +1901,7 @@
           </p>
           <div class="proj-result">
             <span class="label">Результат</span>
-            <p>У вас останется не набор учебных демо, а первый собранный кейс под вашу нишу, вашу работу и ваши задачи — который уже можно использовать.</p>
+            <p>У вас останется не только набор учебных демо, но и первый собранный кейс под вашу нишу, вашу работу и ваши задачи — который можно сразу использовать в работе.</p>
           </div>
         </div>
       </div>
@@ -2029,12 +2070,6 @@
         </div>
       </div>
 
-      <div class="pricing-tail reveal">
-        <p>
-          Цены на лендинге не указываем — зависит от потока и нагрузки менторов. Напишите, и мы ответим точным прайсом и свободными местами.
-        </p>
-        <a class="btn btn-primary" href="#final">Узнать условия <span class="arr">→</span></a>
-      </div>
     </div>
   </section>
 
@@ -2045,7 +2080,7 @@
         <div class="sec-num-big">08<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Кто ведёт</span>
-          <h2 class="sec-title">Курс ведут <span class="hl italic">Саша и Коля</span>.</h2>
+          <h2 class="sec-title"><span class="hl italic">Саша и Коля</span>.</h2>
           <p class="auth-intro">
             Коля отвечает за техническую часть, агентные подходы и реальные способы применять Codex и Claude Code. Саша — за образовательный формат, структуру, комьюнити и за то, чтобы курс не превратился в набор сложных программистских штук.
           </p>
@@ -2060,7 +2095,7 @@
             <div class="role">Техника · Агенты</div>
             <ul>
               <li>Фаундер агентства ИИ-автоматизации</li>
-              <li>Ко-фаундер ИИ-конференций entropy.talk</li>
+              <li>Ко-фаундер ИИ-конференций <a href="https://entropy.talk" target="_blank" rel="noopener">entropy.talk</a></li>
               <li>Автор тг-канала <a href="https://t.me/ai_grably" rel="nofollow noopener" target="_blank">AI и грабли</a></li>
             </ul>
           </div>
@@ -2072,8 +2107,8 @@
             <h4>Саша Литская</h4>
             <div class="role">Формат · Комьюнити</div>
             <ul>
-              <li>Владелица керамической мастерской-коворкинга</li>
-              <li>Основатель арт-пространства в Академгородке</li>
+              <li>Владелица студии керамики ArtChaos</li>
+              <li>Основатель арт-пространства и оффлайн-комьюнити в Академгородке</li>
               <li>Продюсер и операционный директор онлайн-школы керамики</li>
             </ul>
           </div>
@@ -2132,7 +2167,8 @@
         </details>
         <details>
           <summary>Как проходит проверка домашек?</summary>
-          <p>Смотрим не только итоговый результат, но и процесс: как ставили задачу агенту, где потеряли контекст, где можно было сделать проще, быстрее, точнее.</p>
+          <p>В течение недели мы смотрим ваши решения и даём фидбек. В начале следующего занятия — общий разбор выполнения домашек.</p>
+          <p>Смотрим не столько на итоговый результат, сколько на процесс: как ставили задачу агенту, где потеряли контекст, где можно было сделать проще, быстрее, точнее.</p>
         </details>
         <details>
           <summary>Можно ли прийти со своим кейсом?</summary>
@@ -2158,7 +2194,7 @@
         Мы покажем, как это делать на понятных рабочих задачах. Без программирования и без магии.
       </p>
       <div class="hero-cta reveal">
-        <a class="btn btn-primary" href="#">Хочу в первый поток <span class="arr">→</span></a>
+        <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Хочу в первый поток <span class="arr">→</span></a>
         <a class="btn btn-ghost" href="#program">Ещё раз про программу</a>
       </div>
     </div>
@@ -2167,11 +2203,24 @@
 
 <footer>
   <div class="wrap">
-    <div><span class="brand-mini">AI&nbsp;For&nbsp;Work</span></div>
-    <div class="mid">© 2026 · Stream 01 · Made with care</div>
-    <div class="links">
-      <a href="mailto:hello@example.com">hello@example.com</a>
-      <a href="https://t.me/ai_grably" target="_blank" rel="noopener">Telegram</a>
+    <div class="foot-top">
+      <div><span class="brand-mini">AI&nbsp;For&nbsp;Work</span></div>
+      <div class="mid">© 2026 · Stream 01 · Made with care</div>
+      <div class="links">
+        <a href="mailto:hello@example.com">hello@example.com</a>
+        <a href="https://t.me/ai_grably" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <div class="legal-info">
+        <span>ИП Шейко Николай Евгеньевич</span>
+        <span>ИНН 540131220129</span>
+        <span>ОГРНИП 325547600180270</span>
+      </div>
+      <div class="legal-links">
+        <a href="/privacy/">Политика обработки персональных данных</a>
+        <a href="/offer/">Оферта</a>
+      </div>
     </div>
   </div>
 </footer>
