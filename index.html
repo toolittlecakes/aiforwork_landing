@@ -627,27 +627,19 @@
     color: #fff;
   }
 
-  /* Mobile chip marquee inside the audience section */
-  .chip-group-wrap {
-    position: relative;
+  /* Chip marquee in the audience section (all viewports) */
+  #audience .chip-block.chip-block-marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%);
   }
-  @media (max-width: 640px) {
-    #audience .chip-group {
-      margin: 0 calc(-1 * var(--pad-x, 24px));
-    }
-    #audience .chip-group.chip-group-marquee {
-      flex-wrap: nowrap;
-      width: max-content;
-      gap: 8px;
-      animation: chip-scroll 50s linear infinite;
-    }
-    #audience .chip-group.chip-group-marquee .chip { white-space: nowrap; }
-    #audience .chip-block {
-      overflow: hidden;
-      mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
-    }
+  #audience .chip-group.chip-group-marquee {
+    flex-wrap: nowrap;
+    width: max-content;
+    gap: 10px;
+    animation: chip-scroll 60s linear infinite;
   }
+  #audience .chip-group.chip-group-marquee .chip { white-space: nowrap; flex: 0 0 auto; }
   @keyframes chip-scroll {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
@@ -2282,36 +2274,16 @@
   }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-  // On small screens, convert chip groups in the audience section into a horizontal marquee.
+  // Convert chip groups in the audience section into a horizontal marquee (all viewports).
   (function setupChipMarquee() {
-    const mq = window.matchMedia("(max-width: 640px)");
     const groups = document.querySelectorAll("#audience .chip-group");
-    if (!groups.length) return;
-
-    const apply = (on) => {
-      groups.forEach(g => {
-        if (on) {
-          if (!g.dataset.marquee) {
-            const half = g.innerHTML;
-            g.innerHTML = half + half; // duplicate for seamless loop
-            g.dataset.marquee = "1";
-          }
-          g.classList.add("chip-group-marquee");
-        } else {
-          if (g.dataset.marquee) {
-            // restore single set
-            const children = Array.from(g.children);
-            const half = children.length / 2;
-            for (let i = children.length - 1; i >= half; i--) g.removeChild(children[i]);
-            delete g.dataset.marquee;
-          }
-          g.classList.remove("chip-group-marquee");
-        }
-      });
-    };
-
-    apply(mq.matches);
-    mq.addEventListener("change", e => apply(e.matches));
+    groups.forEach(g => {
+      const half = g.innerHTML;
+      g.innerHTML = half + half; // duplicate for seamless loop
+      g.classList.add("chip-group-marquee");
+      const block = g.closest(".chip-block");
+      if (block) block.classList.add("chip-block-marquee");
+    });
   })();
 </script>
 
