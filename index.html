@@ -627,6 +627,35 @@
     color: #fff;
   }
 
+  /* Mobile chip marquee inside the audience section */
+  .chip-group-wrap {
+    position: relative;
+  }
+  @media (max-width: 640px) {
+    #audience .chip-group {
+      margin: 0 calc(-1 * var(--pad-x, 24px));
+    }
+    #audience .chip-group.chip-group-marquee {
+      flex-wrap: nowrap;
+      width: max-content;
+      gap: 8px;
+      animation: chip-scroll 50s linear infinite;
+    }
+    #audience .chip-group.chip-group-marquee .chip { white-space: nowrap; }
+    #audience .chip-block {
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+    }
+  }
+  @keyframes chip-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #audience .chip-group.chip-group-marquee { animation: none; }
+  }
+
   .aud-note {
     margin-top: 72px;
     padding: 40px 44px;
@@ -1576,7 +1605,7 @@
     <div class="wrap hero-grid">
       <div class="hero-top">
         <div class="dateline">
-          <span>Поток 01 — Весна 2026</span>
+          <span>Весна 2026</span>
           <span>6 недель</span>
           <span>Онлайн</span>
           <span>Без кода</span>
@@ -1612,7 +1641,6 @@
           </div>
           <div class="spec-rows">
             <div class="spec-row"><span class="k">Старт</span><span class="v">Весна 2026</span></div>
-            <div class="spec-row"><span class="k">Поток</span><span class="v">№ 01</span></div>
             <div class="spec-row"><span class="k">Длительность</span><span class="v">6 недель</span></div>
             <div class="spec-row"><span class="k">Формат</span><span class="v">Онлайн + записи + домашки</span></div>
             <div class="spec-row"><span class="k">Модули</span><span class="v">4 практики</span></div>
@@ -2205,7 +2233,7 @@
   <section class="final" id="final">
     <span class="bg-big" aria-hidden="true">2026</span>
     <div class="wrap">
-      <span class="eyebrow reveal">Поток 01 · Весна 2026</span>
+      <span class="eyebrow reveal">Весна 2026</span>
       <h2 class="reveal">
         Если в вашей работе много ручной информационной рутины — часть её уже можно <span class="box italic">отдать агенту</span>.
       </h2>
@@ -2253,6 +2281,38 @@
     }
   }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // On small screens, convert chip groups in the audience section into a horizontal marquee.
+  (function setupChipMarquee() {
+    const mq = window.matchMedia("(max-width: 640px)");
+    const groups = document.querySelectorAll("#audience .chip-group");
+    if (!groups.length) return;
+
+    const apply = (on) => {
+      groups.forEach(g => {
+        if (on) {
+          if (!g.dataset.marquee) {
+            const half = g.innerHTML;
+            g.innerHTML = half + half; // duplicate for seamless loop
+            g.dataset.marquee = "1";
+          }
+          g.classList.add("chip-group-marquee");
+        } else {
+          if (g.dataset.marquee) {
+            // restore single set
+            const children = Array.from(g.children);
+            const half = children.length / 2;
+            for (let i = children.length - 1; i >= half; i--) g.removeChild(children[i]);
+            delete g.dataset.marquee;
+          }
+          g.classList.remove("chip-group-marquee");
+        }
+      });
+    };
+
+    apply(mq.matches);
+    mq.addEventListener("change", e => apply(e.matches));
+  })();
 </script>
 
 </body>
