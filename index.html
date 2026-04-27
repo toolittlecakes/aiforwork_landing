@@ -2267,9 +2267,9 @@
   }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-  // Audience chip groups → horizontal marquee, JS-driven via requestAnimationFrame.
-  // We avoid CSS @keyframes here because some browser/OS combinations (reduced-motion etc.)
-  // throttle CSS animations to a stop. rAF is unaffected.
+  // Audience chip groups → horizontal marquee, driven by setInterval.
+  // We avoid CSS @keyframes and requestAnimationFrame because both can be paused
+  // by OS-level reduce-motion settings; setInterval keeps ticking regardless.
   (function setupChipMarquee() {
     const groups = document.querySelectorAll("#audience .chip-group");
     groups.forEach((g, idx) => {
@@ -2283,21 +2283,18 @@
       const measure = () => { halfWidth = g.scrollWidth / 2; };
       window.addEventListener("resize", measure);
 
-      const speed = 40; // pixels per second; opposite directions for visual variety
+      const fps = 50;                       // ticks per second
+      const pxPerSec = 40;                  // marquee speed
+      const step = pxPerSec / fps;          // pixels per tick
       const direction = idx % 2 === 0 ? -1 : 1;
       let pos = direction === -1 ? 0 : -halfWidth;
-      let last = performance.now();
 
-      function tick(now) {
-        const dt = Math.min(0.05, (now - last) / 1000); // cap dt to avoid huge jumps after tab inactivity
-        last = now;
-        pos += direction * speed * dt;
+      setInterval(() => {
+        pos += direction * step;
         if (direction === -1 && pos <= -halfWidth) pos += halfWidth;
         if (direction === 1 && pos >= 0) pos -= halfWidth;
         g.style.transform = "translateX(" + pos.toFixed(2) + "px)";
-        requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
+      }, 1000 / fps);
     });
   })();
 </script>
