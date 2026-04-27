@@ -627,7 +627,7 @@
     color: #fff;
   }
 
-  /* Chip marquee in the audience section (all viewports) */
+  /* Chip marquee in the audience section (JS-driven via rAF) */
   #audience .chip-block.chip-block-marquee {
     overflow: hidden;
     mask-image: linear-gradient(to right, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%);
@@ -637,13 +637,9 @@
     flex-wrap: nowrap;
     width: max-content;
     gap: 10px;
-    animation: chip-scroll 60s linear infinite;
+    will-change: transform;
   }
   #audience .chip-group.chip-group-marquee .chip { white-space: nowrap; flex: 0 0 auto; }
-  @keyframes chip-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
 
   .aud-note {
     margin-top: 72px;
@@ -2271,15 +2267,37 @@
   }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-  // Convert chip groups in the audience section into a horizontal marquee (all viewports).
+  // Audience chip groups → horizontal marquee, JS-driven via requestAnimationFrame.
+  // We avoid CSS @keyframes here because some browser/OS combinations (reduced-motion etc.)
+  // throttle CSS animations to a stop. rAF is unaffected.
   (function setupChipMarquee() {
     const groups = document.querySelectorAll("#audience .chip-group");
-    groups.forEach(g => {
+    groups.forEach((g, idx) => {
       const half = g.innerHTML;
       g.innerHTML = half + half; // duplicate for seamless loop
       g.classList.add("chip-group-marquee");
       const block = g.closest(".chip-block");
       if (block) block.classList.add("chip-block-marquee");
+
+      let halfWidth = g.scrollWidth / 2;
+      const measure = () => { halfWidth = g.scrollWidth / 2; };
+      window.addEventListener("resize", measure);
+
+      const speed = 40; // pixels per second; opposite directions for visual variety
+      const direction = idx % 2 === 0 ? -1 : 1;
+      let pos = direction === -1 ? 0 : -halfWidth;
+      let last = performance.now();
+
+      function tick(now) {
+        const dt = Math.min(0.05, (now - last) / 1000); // cap dt to avoid huge jumps after tab inactivity
+        last = now;
+        pos += direction * speed * dt;
+        if (direction === -1 && pos <= -halfWidth) pos += halfWidth;
+        if (direction === 1 && pos >= 0) pos -= halfWidth;
+        g.style.transform = "translateX(" + pos.toFixed(2) + "px)";
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     });
   })();
 </script>
