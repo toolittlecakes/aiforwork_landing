@@ -515,6 +515,21 @@
     .hero-top { grid-template-columns: 1fr; align-items: flex-start; }
   }
 
+  .hero-kicker {
+    margin: 18px 0 -8px;
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(15px, 1.55vw, 19px);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--ink-2);
+    max-width: 32ch;
+  }
+  @media (max-width: 720px) {
+    .hero-kicker { margin: 12px 0 4px; font-size: 15px; }
+  }
+
   .hero-hooks {
     margin-top: 56px;
     display: grid;
@@ -762,6 +777,59 @@
     .usecase-row { grid-template-columns: 1fr; }
     .usecase-role { border-right: none; border-bottom: 1px solid var(--rule-soft); }
     .usecase-task { padding-top: 22px; }
+  }
+
+  /* ==================== NOT IN COURSE ==================== */
+  .not-lede {
+    font-family: var(--display);
+    font-size: clamp(20px, 2.3vw, 28px);
+    line-height: 1.22;
+    letter-spacing: -0.025em;
+    max-width: 36ch;
+    margin: 0 0 44px;
+    font-weight: 500;
+  }
+  .not-grid {
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .not-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--rule);
+  }
+  .not-row > div {
+    padding: 24px 28px;
+    border-right: 1px solid var(--rule);
+    font-size: clamp(16px, 1.65vw, 19px);
+    line-height: 1.4;
+    color: var(--ink-2);
+  }
+  .not-row > div + div { color: var(--ink); }
+  .not-row-head > div {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  .not-row-head > div + div { color: var(--accent); }
+  .not-close {
+    margin: 36px 0 0;
+    font-family: var(--display);
+    font-size: clamp(18px, 2vw, 24px);
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--ink-2);
+    max-width: 44ch;
+  }
+  @media (max-width: 720px) {
+    .not-row { grid-template-columns: 1fr; }
+    .not-row > div { border-right: none; }
+    .not-row > div:first-child { border-bottom: 1px solid var(--rule-soft); }
   }
 
   /* ==================== PROGRAM ==================== */
@@ -1823,6 +1891,8 @@
         </div>
       </div>
 
+      <p class="hero-kicker reveal">Перестаньте делать руками то, что ИИ делает быстрее.</p>
+
       <div class="reveal">
         <h1>
           <span class="block">Практический курс</span>
@@ -2047,11 +2117,59 @@
     </div>
   </section>
 
+  <!-- NOT IN COURSE -->
+  <section id="not-in-course">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">04<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Антивайбкодинг</span>
+          <h2 class="sec-title wide">Это не курс по разработке и не <span class="hl italic">автоматизация под ключ</span>.</h2>
+        </div>
+      </div>
+
+      <p class="not-lede reveal">
+        Рынок смешал в одну кучу вайбкодинг, n8n, AI-агентов, запуск стартапов и автоматизацию бизнеса. Здесь нужно прямо: ничего этого не будет.
+      </p>
+
+      <div class="not-grid reveal">
+        <div class="not-row not-row-head">
+          <div>Не будем</div>
+          <div>Будем</div>
+        </div>
+        <div class="not-row">
+          <div>Вайбкодить приложения и MVP</div>
+          <div>Снимать рутину из вашей работы</div>
+        </div>
+        <div class="not-row">
+          <div>Собирать n8n-схемы из десятков блоков</div>
+          <div>Начинать с файла, таблицы и понятной инструкции</div>
+        </div>
+        <div class="not-row">
+          <div>Разбираться в API «на всякий случай»</div>
+          <div>Использовать простой путь там, где он решает задачу</div>
+        </div>
+        <div class="not-row">
+          <div>Учить инструменты ради инструментов</div>
+          <div>Проверять, где это экономит время именно вам</div>
+        </div>
+        <div class="not-row">
+          <div>Обещать магию без ошибок</div>
+          <div>Учиться проверять результат и ловить сбои</div>
+        </div>
+      </div>
+
+      <p class="not-close reveal">
+        Если вам не нужен продукт для других, а нужна помощь в своей работе, вы по адресу.
+      </p>
+    </div>
+  </section>
+
   <!-- PROGRAM -->
   <section id="program">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">04<span class="slash">/</span></div>
+        <div class="sec-num-big">05<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Программа</span>
           <h2 class="sec-title wide">4 практических модуля + <span class="hl italic">неделя знакомства</span>.</h2>
@@ -2198,7 +2316,7 @@
   <section id="project" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">05<span class="slash">/</span></div>
+        <div class="sec-num-big">06<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Финальный проект</span>
           <h2 class="sec-title">Первый собранный кейс под <span class="hl italic">вашу работу</span>.</h2>
@@ -2240,7 +2358,7 @@
   <section id="quality" class="dark">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">06<span class="slash">/</span></div>
+        <div class="sec-num-big">07<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Проверка результата</span>
           <h2 class="sec-title wide">Мы не учим слепо <span class="hl italic">доверять агенту</span>.</h2>
@@ -2271,7 +2389,7 @@
   <section id="launch" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">07<span class="slash">/</span></div>
+        <div class="sec-num-big">08<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Первый запуск</span>
           <h2 class="sec-title">Помогаем пройти самый <span class="hl italic">неприятный шаг</span>.</h2>
@@ -2298,7 +2416,7 @@
   <section id="format">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">08<span class="slash">/</span></div>
+        <div class="sec-num-big">09<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Формат и длительность</span>
           <h2 class="sec-title wide">~6 недель. Живые занятия, <span class="hl italic">основная практика</span> — дома.</h2>
@@ -2371,7 +2489,7 @@
   <section id="community" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">09<span class="slash">/</span></div>
+        <div class="sec-num-big">10<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Комьюнити</span>
           <h2 class="sec-title">Все говорят про комьюнити — <span class="hl italic">мы делаем</span>.</h2>
@@ -2399,7 +2517,7 @@
   <section id="pricing">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">10<span class="slash">/</span></div>
+        <div class="sec-num-big">11<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Тарифы</span>
           <h2 class="sec-title">Выберите <span class="hl italic">свой режим</span>.</h2>
@@ -2466,7 +2584,7 @@
   <section id="authors" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">11<span class="slash">/</span></div>
+        <div class="sec-num-big">12<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Кто ведёт</span>
           <h2 class="sec-title"><span class="hl italic">Саша и Коля</span>.</h2>
@@ -2510,7 +2628,7 @@
   <section id="faq">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">12<span class="slash">/</span></div>
+        <div class="sec-num-big">13<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">FAQ</span>
           <h2 class="sec-title">Частые <span class="hl italic">вопросы</span>.</h2>
