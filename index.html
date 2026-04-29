@@ -381,6 +381,10 @@
     margin-right: 18px;
     color: var(--ink-3);
   }
+  @media (max-width: 640px) {
+    .hero-top .dateline { gap: 12px 18px; }
+    .hero-top .dateline span + span::before { content: none; margin-right: 0; }
+  }
 
   .hero h1 {
     font-size: clamp(48px, 9.5vw, 144px);
@@ -509,6 +513,47 @@
   @media (max-width: 900px) {
     .hero-meta { grid-template-columns: 1fr; gap: 36px; }
     .hero-top { grid-template-columns: 1fr; align-items: flex-start; }
+  }
+
+  .hero-hooks {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .hero-hook {
+    padding: 26px 24px 28px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-hook .k {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .hero-hook strong {
+    display: block;
+    font-family: var(--display);
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .hero-hook p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  @media (max-width: 860px) {
+    .hero-hooks { grid-template-columns: 1fr; margin-top: 40px; }
   }
 
   /* ==================== RECOGNIZE ==================== */
@@ -661,6 +706,62 @@
     font-style: italic;
     color: var(--accent-hot);
     font-weight: 500;
+  }
+
+  /* ==================== USE CASES ==================== */
+  .usecase-intro {
+    font-family: var(--display);
+    font-size: clamp(20px, 2.3vw, 28px);
+    line-height: 1.22;
+    letter-spacing: -0.025em;
+    max-width: 34ch;
+    margin: 0 0 44px;
+    font-weight: 500;
+  }
+  .usecase-grid {
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .usecase-row {
+    display: grid;
+    grid-template-columns: minmax(220px, .8fr) 1.4fr;
+    min-height: 132px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .usecase-role,
+  .usecase-task {
+    padding: 28px 30px;
+    border-right: 1px solid var(--rule);
+  }
+  .usecase-role {
+    font-family: var(--display);
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+  }
+  .usecase-role span {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .usecase-task {
+    border-right: none;
+    display: flex;
+    align-items: center;
+    font-size: clamp(17px, 1.7vw, 20px);
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+  @media (max-width: 720px) {
+    .usecase-row { grid-template-columns: 1fr; }
+    .usecase-role { border-right: none; border-bottom: 1px solid var(--rule-soft); }
+    .usecase-task { padding-top: 22px; }
   }
 
   /* ==================== PROGRAM ==================== */
@@ -914,10 +1015,149 @@
     line-height: 1.55;
     color: var(--ink-2);
   }
+  .wins-list {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .wins-list li {
+    border: 1px solid var(--rule-soft);
+    background: var(--bg);
+    padding: 16px 18px;
+    font-size: 14.5px;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+  .wins-list strong {
+    display: block;
+    font-family: var(--display);
+    color: var(--ink);
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    margin-bottom: 4px;
+  }
   @media (max-width: 900px) {
     .proj-block { grid-template-columns: 1fr; }
     .proj-tag-box { border-right: none; border-bottom: 1px solid var(--rule); padding: 36px 28px; }
     .proj-content { padding: 32px 28px; }
+  }
+  @media (max-width: 640px) {
+    .wins-list { grid-template-columns: 1fr; }
+  }
+
+  /* ==================== QUALITY ==================== */
+  .quality-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .quality-copy {
+    font-family: var(--display);
+    font-size: clamp(24px, 3vw, 38px);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+    margin: 0;
+  }
+  .quality-copy em {
+    color: var(--accent-hot);
+    font-style: italic;
+  }
+  .quality-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid color-mix(in srgb, var(--bg) 22%, transparent);
+  }
+  .quality-list li {
+    padding: 18px 0 18px 42px;
+    border-bottom: 1px solid color-mix(in srgb, var(--bg) 22%, transparent);
+    position: relative;
+    color: color-mix(in srgb, var(--bg) 78%, transparent);
+    line-height: 1.55;
+  }
+  .quality-list li::before {
+    content: counter(q, decimal-leading-zero);
+    counter-increment: q;
+    position: absolute;
+    left: 0;
+    top: 20px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent-hot);
+  }
+  .quality-list { counter-reset: q; }
+  .safety-note {
+    margin-top: 36px;
+    padding: 24px 28px;
+    border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent);
+    color: color-mix(in srgb, var(--bg) 75%, transparent);
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+  @media (max-width: 860px) {
+    .quality-grid { grid-template-columns: 1fr; gap: 34px; }
+  }
+
+  /* ==================== LAUNCH ==================== */
+  .launch-card {
+    display: grid;
+    grid-template-columns: .75fr 1.25fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .launch-card .label {
+    background: var(--lime);
+    padding: 40px 36px;
+    border-right: 1px solid var(--rule);
+    font-family: var(--display);
+    font-size: clamp(32px, 4vw, 54px);
+    line-height: .95;
+    letter-spacing: -0.045em;
+    font-weight: 500;
+  }
+  .launch-card .body {
+    padding: 40px 42px;
+  }
+  .launch-card .body p {
+    margin: 0 0 18px;
+    font-size: clamp(17px, 1.8vw, 20px);
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .launch-card .body p:first-child {
+    font-family: var(--display);
+    color: var(--ink);
+    font-size: clamp(20px, 2.2vw, 28px);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+  }
+  .launch-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .launch-steps span {
+    border: 1px solid var(--rule);
+    padding: 7px 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--bg);
+  }
+  @media (max-width: 860px) {
+    .launch-card { grid-template-columns: 1fr; }
+    .launch-card .label { border-right: none; border-bottom: 1px solid var(--rule); }
+    .launch-card .body { padding: 32px 28px; }
   }
 
   /* ==================== FORMAT ==================== */
@@ -1557,6 +1797,7 @@
       <span>AI&nbsp;For&nbsp;Work</span>
     </a>
     <nav class="top">
+      <a href="#usecases">Задачи</a>
       <a href="#program">Программа</a>
       <a href="#format">Формат</a>
       <a href="#pricing">Тарифы</a>
@@ -1596,7 +1837,7 @@
             Для людей, у которых много ручной работы с информацией: таблицами, файлами, сайтами, Telegram, вакансиями, отчётами, презентациями, исследованиями и рабочими процессами.
           </p>
           <p class="hero-sub">
-            Учим использовать кодинговых агентов — Codex и Claude Code — чтобы искать, читать, анализировать, преобразовывать, собирать и отправлять информацию. Без навыков разработки.
+            Учим использовать Codex и Claude Code, чтобы искать, читать, анализировать, преобразовывать и отправлять информацию. За 6 недель собираете первый рабочий сценарий под свою задачу — без навыков разработки.
           </p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать, подойдёт ли мне <span class="arr">→</span></a>
@@ -1614,6 +1855,7 @@
             <div class="spec-row"><span class="k">Длительность</span><span class="v">6 недель</span></div>
             <div class="spec-row"><span class="k">Формат</span><span class="v">Онлайн + записи + домашки</span></div>
             <div class="spec-row"><span class="k">Модули</span><span class="v">4 практики</span></div>
+            <div class="spec-row"><span class="k">Результат</span><span class="v">Кейс на ваших данных</span></div>
             <div class="spec-row"><span class="k">Уровень</span><span class="v">Не-разработчики</span></div>
             <div class="spec-row"><span class="k">Нужно</span><span class="v">ChatGPT Plus</span></div>
           </div>
@@ -1621,6 +1863,24 @@
             <a href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener" class="btn btn-solid">Записаться в поток <span class="arr">→</span></a>
           </div>
         </aside>
+      </div>
+
+      <div class="hero-hooks reveal">
+        <div class="hero-hook">
+          <span class="k">Результат</span>
+          <strong>Первый кейс на ваших данных</strong>
+          <p>Берёте реальную рабочую задачу и собираете сценарий, который можно повторять после курса.</p>
+        </div>
+        <div class="hero-hook">
+          <span class="k">Старт</span>
+          <strong>Первый запуск вместе</strong>
+          <p>Подписка, установка, первая задача и базовая настройка не остаются на вас в одиночку.</p>
+        </div>
+        <div class="hero-hook">
+          <span class="k">Границы</span>
+          <strong>Без программирования</strong>
+          <p>Начинаем с файлов, таблиц, папок и понятных инструкций, а не со сложных интеграций.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1640,30 +1900,42 @@
         <div class="sec-num-big">01<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Узнаёте себя?</span>
-          <h2 class="sec-title">Если хоть один пункт про <span class="hl italic">вас</span> — вам сюда.</h2>
+          <h2 class="sec-title wide">Если вы пробовали ИИ, но рабочие задачи всё равно делаете <span class="hl italic">руками</span>.</h2>
         </div>
       </div>
 
       <div class="rec-grid reveal">
         <div class="rec-item">
-          <span class="num">01 / 05</span>
+          <span class="num">01 / 08</span>
           <p>Регулярно открываете <em>10 вкладок</em>, 3 таблицы и собираете из этого «нормальный вывод».</p>
         </div>
         <div class="rec-item">
-          <span class="num">02 / 05</span>
+          <span class="num">02 / 08</span>
           <p>Есть папки, файлы, выгрузки и документы, до которых <em>страшно дотрагиваться</em>.</p>
         </div>
         <div class="rec-item">
-          <span class="num">03 / 05</span>
+          <span class="num">03 / 08</span>
           <p>Постоянно делаете «быстрый ресёрч», который почему-то занимает <em>полдня</em>.</p>
         </div>
         <div class="rec-item">
-          <span class="num">04 / 05</span>
+          <span class="num">04 / 08</span>
           <p>Руками переносите информацию <em>между сервисами</em>.</p>
         </div>
-        <div class="rec-item full">
-          <span class="num">05 / 05</span>
+        <div class="rec-item">
+          <span class="num">05 / 08</span>
           <p>Хотите не просто «спросить у нейронки», а дать ей задачу и получить <em>готовый рабочий результат</em>.</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">06 / 08</span>
+          <p>Видите ИИ только как чат и не знали, что ему можно отдавать <em>файлы и действия</em>.</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">07 / 08</span>
+          <p>Тонете в подписках, агентах и инструментах, но не понимаете, <em>с чего начать</em>.</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">08 / 08</span>
+          <p>Боитесь, что ИИ красиво ошибётся, а вы <em>этого не заметите</em>.</p>
         </div>
       </div>
     </div>
@@ -1739,11 +2011,47 @@
     </div>
   </section>
 
+  <!-- USE CASES -->
+  <section id="usecases">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">03<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">С чем приходить</span>
+          <h2 class="sec-title wide">Берите задачу, которая уже есть в вашей <span class="hl italic">работе</span>.</h2>
+        </div>
+      </div>
+
+      <p class="usecase-intro reveal">
+        Не нужно заранее придумывать идеальный проект. Достаточно процесса, который повторяется, занимает время и имеет понятный результат: файл, таблицу, отчёт, список, сводку, презентацию или инструкцию.
+      </p>
+
+      <div class="usecase-grid reveal">
+        <div class="usecase-row">
+          <div class="usecase-role"><span>01</span>HR и найм</div>
+          <div class="usecase-task">Анализ вакансий, профиль роли, отчёт по рынку труда, таблица кандидатов или компаний.</div>
+        </div>
+        <div class="usecase-row">
+          <div class="usecase-role"><span>02</span>Финансы и операционка</div>
+          <div class="usecase-task">Сопоставление выгрузок, поиск дублей и странных строк, подготовка данных, сбор нескольких отчётов в один файл.</div>
+        </div>
+        <div class="usecase-row">
+          <div class="usecase-role"><span>03</span>Маркетинг и ресёрч</div>
+          <div class="usecase-task">Анализ конкурентов, мониторинг сайтов и Telegram, сбор источников, таблица выводов.</div>
+        </div>
+        <div class="usecase-row">
+          <div class="usecase-role"><span>04</span>Руководство и проекты</div>
+          <div class="usecase-task">Сводка по материалам, подготовка отчёта, разбор документов, список решений и следующих шагов.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PROGRAM -->
   <section id="program">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">03<span class="slash">/</span></div>
+        <div class="sec-num-big">04<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Программа</span>
           <h2 class="sec-title wide">4 практических модуля + <span class="hl italic">неделя знакомства</span>.</h2>
@@ -1890,7 +2198,7 @@
   <section id="project" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">04<span class="slash">/</span></div>
+        <div class="sec-num-big">05<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Финальный проект</span>
           <h2 class="sec-title">Первый собранный кейс под <span class="hl italic">вашу работу</span>.</h2>
@@ -1917,6 +2225,70 @@
             <span class="label">Результат</span>
             <p>У вас останется не только набор учебных демо, но и первый собранный кейс под вашу нишу, вашу работу и ваши задачи — который можно сразу использовать в работе.</p>
           </div>
+          <ul class="wins-list">
+            <li><strong>Кейс под вашу нишу</strong>Не учебный пример, а сценарий из вашей работы.</li>
+            <li><strong>Нужный артефакт</strong>Отчёт, таблица, сводка, ресёрч или мониторинг.</li>
+            <li><strong>Понимание границ</strong>Где агент полезен, а где проще сделать руками.</li>
+            <li><strong>Шаблон для следующих задач</strong>Подход можно повторять на похожих процессах.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUALITY -->
+  <section id="quality" class="dark">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">06<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Проверка результата</span>
+          <h2 class="sec-title wide">Мы не учим слепо <span class="hl italic">доверять агенту</span>.</h2>
+        </div>
+      </div>
+
+      <div class="quality-grid reveal">
+        <p class="quality-copy">
+          Агент ошибается. Нормальный навык — не верить красивому ответу, а <em>проверять путь</em>, источники и данные.
+        </p>
+        <div>
+          <ul class="quality-list">
+            <li>Задаём критерии качества до запуска задачи.</li>
+            <li>Проверяем источники и ссылки в ресёрче.</li>
+            <li>Сверяем цифры, суммы, дубли и пропуски в таблицах.</li>
+            <li>Просим промежуточные шаги и проверяем логику вывода.</li>
+            <li>Фиксируем повторяемый процесс, а не разовый удачный ответ.</li>
+          </ul>
+          <div class="safety-note">
+            Отдельно разбираем безопасность данных: какие файлы можно загружать, что обезличивать, где работать на учебных примерах и какие задачи не стоит отдавать агенту без согласования внутри компании.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAUNCH -->
+  <section id="launch" class="paper">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">07<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Первый запуск</span>
+          <h2 class="sec-title">Помогаем пройти самый <span class="hl italic">неприятный шаг</span>.</h2>
+        </div>
+      </div>
+
+      <div class="launch-card reveal">
+        <div class="label">Стартуем вместе.</div>
+        <div class="body">
+          <p>Подписка, установка, первый запуск и первая простая задача проходят вместе.</p>
+          <p>Этот блок нужен, чтобы курс начался не с «я не смогла настроить», а с первого рабочего результата на вашем компьютере.</p>
+          <div class="launch-steps" aria-label="Что проходим на старте">
+            <span>Подписка</span>
+            <span>Установка</span>
+            <span>Первая задача</span>
+            <span>Проверка результата</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1926,7 +2298,7 @@
   <section id="format">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">05<span class="slash">/</span></div>
+        <div class="sec-num-big">08<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Формат и длительность</span>
           <h2 class="sec-title wide">~6 недель. Живые занятия, <span class="hl italic">основная практика</span> — дома.</h2>
@@ -1999,7 +2371,7 @@
   <section id="community" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">06<span class="slash">/</span></div>
+        <div class="sec-num-big">09<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Комьюнити</span>
           <h2 class="sec-title">Все говорят про комьюнити — <span class="hl italic">мы делаем</span>.</h2>
@@ -2027,7 +2399,7 @@
   <section id="pricing">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">07<span class="slash">/</span></div>
+        <div class="sec-num-big">10<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Тарифы</span>
           <h2 class="sec-title">Выберите <span class="hl italic">свой режим</span>.</h2>
@@ -2094,12 +2466,12 @@
   <section id="authors" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">08<span class="slash">/</span></div>
+        <div class="sec-num-big">11<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Кто ведёт</span>
           <h2 class="sec-title"><span class="hl italic">Саша и Коля</span>.</h2>
           <p class="auth-intro">
-            Коля отвечает за техническую часть, агентные подходы и реальные способы применять Codex и Claude Code. Саша — за образовательный формат, структуру, комьюнити и за то, чтобы курс не превратился в набор сложных программистских штук.
+            Коля отвечает за техническую применимость: где агент реально помогает, где у него ограничения и как проверить результат. Саша — за образовательный формат, структуру, комьюнити и за то, чтобы курс довёл участников до рабочего кейса.
           </p>
         </div>
       </div>
@@ -2109,7 +2481,7 @@
           <div class="portrait"><img src="/images/kolya.jpg" alt="Коля Шейко" loading="lazy"></div>
           <div>
             <h4>Коля Шейко</h4>
-            <div class="role">Техника · Агенты</div>
+            <div class="role">Техническая применимость</div>
             <ul>
               <li>Фаундер <a href="https://grably.tech" target="_blank" rel="noopener">grably.tech</a> — кастомная ИИ-разработка</li>
               <li>Ко-фаундер ИИ-конференций <a href="https://entropy.talk" target="_blank" rel="noopener">entropy.talk</a></li>
@@ -2122,7 +2494,7 @@
           <div class="portrait"><img src="/images/sasha.jpg" alt="Саша Литская" class="crop-top" loading="lazy"></div>
           <div>
             <h4>Саша Литская</h4>
-            <div class="role">Формат · Комьюнити</div>
+            <div class="role">Формат · Комьюнити · Доведение</div>
             <ul>
               <li>Владелица открытой мастерской ArtChaos</li>
               <li>Основатель арт-пространства и оффлайн-комьюнити в Академгородке</li>
@@ -2138,7 +2510,7 @@
   <section id="faq">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">09<span class="slash">/</span></div>
+        <div class="sec-num-big">12<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">FAQ</span>
           <h2 class="sec-title">Частые <span class="hl italic">вопросы</span>.</h2>
@@ -2167,8 +2539,20 @@
           <p>Такое возможно — инструменты быстро меняются. Поэтому курс строится не вокруг кнопок в одном интерфейсе, а вокруг навыка: как ставить задачи агенту, давать контекст, проверять результат и переносить подход между инструментами.</p>
         </details>
         <details>
+          <summary>Я никогда не покупала подписку на ChatGPT и не хочу сама разбираться с настройкой.</summary>
+          <p>Для этого есть вводная неделя. Поможем пройти неприятный первый шаг: что поставить, где зарегистрироваться, как оформить доступ, как запустить инструмент и как дать первую простую задачу.</p>
+        </details>
+        <details>
           <summary>Нужна ли платная подписка?</summary>
           <p>Да, нужна подписка ChatGPT Plus. Её, кстати, можно оплачивать через отдельные сервисы рублёвыми картами — про это тоже расскажем в начале курса.</p>
+        </details>
+        <details>
+          <summary>А если у меня рабочие данные, финансы, клиенты или производственные выгрузки?</summary>
+          <p>Мы не предлагаем бездумно загружать в ИИ всё подряд. Разберём, как обезличивать данные, как выбирать безопасный пример для обучения, какие данные лучше не использовать и как обсуждать это внутри компании.</p>
+        </details>
+        <details>
+          <summary>Можно будет подключить WhatsApp, Instagram, 1С, маркетплейсы или другие рабочие сервисы?</summary>
+          <p>Иногда да, но мы не обещаем магическую интеграцию со всем подряд. Начинаем с простого пути: выгрузки, файлы, таблицы, папки и понятные инструкции агенту. Если для задачи нужна сложная интеграция, API или доступ к закрытому кабинету, разберём границы и разумный путь.</p>
         </details>
         <details>
           <summary>Будут ли записи?</summary>
@@ -2208,7 +2592,7 @@
         Если в вашей работе много ручной информационной рутины — часть её уже можно <span class="box italic">отдать агенту</span>.
       </h2>
       <p class="reveal">
-        Мы покажем, как это делать на понятных рабочих задачах. Без программирования и без магии.
+        Мы покажем, как это делать на понятных рабочих задачах, и доведём до первого кейса на ваших данных. Без программирования и без магии.
       </p>
       <div class="hero-cta reveal">
         <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Хочу в первый поток <span class="arr">→</span></a>
