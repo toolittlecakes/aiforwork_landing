@@ -1370,7 +1370,7 @@
     padding: 16px 0;
     border-bottom: 1px solid var(--rule);
     display: grid;
-    grid-template-columns: 40px 1fr auto;
+    grid-template-columns: 40px 1fr;
     gap: 12px;
     align-items: baseline;
     font-family: var(--display);
@@ -1389,12 +1389,6 @@
     letter-spacing: 0.06em;
   }
   .com-reasons { counter-reset: c; }
-  .com-reasons li::after {
-    content: "→";
-    color: var(--accent);
-    font-family: var(--display);
-    font-weight: 400;
-  }
   @media (max-width: 860px) {
     .com-grid { grid-template-columns: 1fr; gap: 48px; }
   }
@@ -1600,6 +1594,11 @@
     color: var(--accent);
     text-decoration: none;
     border-bottom: 1px solid var(--accent);
+    transition: color .15s, border-color .15s;
+  }
+  .author a:hover {
+    color: var(--accent-hot);
+    border-bottom-color: var(--accent-hot);
   }
   @media (max-width: 900px) {
     .authors { grid-template-columns: 1fr; }
