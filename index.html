@@ -709,6 +709,22 @@
     color: var(--accent-hot);
     font-weight: 500;
   }
+  #audience {
+    padding: 82px 0 92px;
+  }
+  #audience .sec-head {
+    margin-bottom: 34px;
+    padding-bottom: 24px;
+  }
+  #audience .sec-num-big {
+    font-size: clamp(76px, 9vw, 120px);
+  }
+  #audience .aud-lede {
+    margin-bottom: 30px;
+  }
+  #audience .chip-block {
+    margin-top: 24px;
+  }
 
   /* ==================== USE CASES ==================== */
   .usecase-intro {
@@ -770,10 +786,90 @@
   .usecase-task li {
     margin: 0;
   }
+  .segment-list {
+    display: grid;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .segment-card {
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .segment-card summary {
+    list-style: none;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 52px minmax(220px, .9fr) minmax(0, 1.4fr) 24px;
+    gap: 18px;
+    align-items: center;
+    padding: 18px 24px;
+  }
+  .segment-card summary::-webkit-details-marker { display: none; }
+  .segment-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .segment-title {
+    font-family: var(--display);
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+  }
+  .segment-teaser {
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  .segment-icon {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--rule);
+    display: inline-grid;
+    place-items: center;
+    font-family: var(--display);
+    font-size: 18px;
+    line-height: 1;
+    justify-self: end;
+  }
+  .segment-icon::before { content: "+"; transform: translateY(-1px); }
+  .segment-card[open] .segment-icon::before { content: "–"; }
+  .segment-detail {
+    margin: 0;
+    padding: 0 24px 24px 94px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    list-style: none;
+  }
+  .segment-detail li {
+    border: 1px solid var(--rule-soft);
+    background: var(--bg);
+    padding: 12px 14px;
+    font-size: 13.5px;
+    line-height: 1.35;
+    color: var(--ink-2);
+  }
   @media (max-width: 720px) {
     .usecase-row { grid-template-columns: 1fr; }
     .usecase-role { border-right: none; border-bottom: 1px solid var(--rule-soft); }
     .usecase-task { padding-top: 22px; }
+    .segment-card summary {
+      grid-template-columns: 44px 1fr 24px;
+      gap: 12px;
+      padding: 20px;
+    }
+    .segment-teaser {
+      grid-column: 2 / -1;
+    }
+    .segment-detail {
+      grid-template-columns: 1fr;
+      padding: 0 20px 20px 76px;
+    }
   }
 
   /* ==================== NOT IN COURSE ==================== */
@@ -837,9 +933,48 @@
   }
   @media (max-width: 720px) {
     .not-lede-grid { grid-template-columns: 1fr; gap: 18px; }
-    .not-row { grid-template-columns: 1fr; }
-    .not-row > div { border-right: none; }
-    .not-row > div:first-child { border-bottom: 1px solid var(--rule-soft); }
+    .not-grid {
+      display: grid;
+      gap: 14px;
+      border: none;
+      background: transparent;
+    }
+    .not-row-head { display: none; }
+    .not-row {
+      grid-template-columns: 1fr;
+      border: 1px solid var(--rule);
+      background: var(--paper);
+    }
+    .not-row > div {
+      border-right: none;
+      padding: 18px 20px 20px;
+      font-size: 16.5px;
+      line-height: 1.35;
+    }
+    .not-row > div:first-child {
+      border-bottom: 1px solid var(--rule);
+      background: var(--bg);
+      color: var(--ink-2);
+    }
+    .not-row > div + div {
+      color: var(--ink);
+    }
+    .not-row:not(.not-row-head) > div::before {
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .not-row:not(.not-row-head) > div:first-child::before {
+      content: "Не будем";
+      color: var(--ink-3);
+    }
+    .not-row:not(.not-row-head) > div + div::before {
+      content: "Будем";
+      color: var(--accent);
+    }
   }
 
   /* ==================== PROGRAM ==================== */
@@ -2043,56 +2178,72 @@
         <div class="chip-label">Пять основных сегментов и кейсы из наших B2B курсов</div>
       </div>
 
-      <div class="usecase-grid reveal">
-        <div class="usecase-row">
-          <div class="usecase-role"><span>01</span>Маркетинг, ресёрч и контент</div>
-          <div class="usecase-task">
-            <ul>
-              <li>Транскрибации залетевших YouTube / Reels / Shorts → темы и структура вебинара.</li>
-              <li>Парсинг Telegram-каналов → подбор и скоринг площадок для посевов под конкретный креатив.</li>
-              <li>Анализ конкурентов → таблица заходов, офферов, болей и формулировок, которые можно забрать в контент.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="usecase-row">
-          <div class="usecase-role"><span>02</span>Sales и bizdev</div>
-          <div class="usecase-task">
-            <ul>
-              <li>HeadHunter, сайты компаний, каталоги, тендерные площадки → список релевантных компаний и ЛПР.</li>
-              <li>Парсинг Telegram-чатов и каналов → триггеры продаж: ищет подрядчика, жалуется на проблему, нанимает команду или запускает новый продукт.</li>
-              <li>Скоринг лидов и тендеров → таблица «кому писать, почему сейчас и с каким заходом».</li>
-            </ul>
-          </div>
-        </div>
-        <div class="usecase-row">
-          <div class="usecase-role"><span>03</span>Операционка, финансы и внедрение</div>
-          <div class="usecase-task">
-            <ul>
-              <li>Выгрузки из CRM, кабинетов, таблиц и клиентских файлов → поиск дублей, странных строк, пропусков и расхождений.</li>
-              <li>Несколько отчётов → один нормальный файл.</li>
-              <li>Клиентские данные для внедрения → агент сам приводит параметры к нужному формату, чтобы не гонять файл туда-сюда с просьбой «переделайте».</li>
-            </ul>
-          </div>
-        </div>
-        <div class="usecase-row">
-          <div class="usecase-role"><span>04</span>Руководители, фаундеры и проектные менеджеры</div>
-          <div class="usecase-task">
-            <ul>
-              <li>Расшифровки звонков, переписки, заметки и статусы → один запрос к агенту: где сейчас пожар, кто застрял, какие решения уже приняты, что обещали клиенту, где нужна ваша включённость.</li>
-              <li>Сырой контекст разговоров и переписок → меньше глухого телефона и потерь информации между людьми и слоями управления.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="usecase-row">
-          <div class="usecase-role"><span>05</span>HR и рекрутинг</div>
-          <div class="usecase-task">
-            <ul>
-              <li>Парсинг вакансий на HeadHunter → карта рынка, требований, вилок и повторяющихся формулировок.</li>
-              <li>Резюме и профили кандидатов → фильтрация по качественным признакам, рискам и совпадениям с ролью.</li>
-              <li>Результат → не «ИИ выбрал за вас», а короткий список и таблица для ручного решения.</li>
-            </ul>
-          </div>
-        </div>
+      <div class="segment-list reveal">
+        <details class="segment-card">
+          <summary>
+            <span class="segment-num">01</span>
+            <span class="segment-title">Маркетинг, ресёрч и контент</span>
+            <span class="segment-teaser">Видео, Telegram и конкуренты → темы, посевы и контент.</span>
+            <span class="segment-icon" aria-hidden="true"></span>
+          </summary>
+          <ul class="segment-detail">
+            <li>Видео-транскрибации → темы и структура вебинара.</li>
+            <li>Telegram-каналы → скоринг посевов под конкретный креатив.</li>
+            <li>Конкуренты → таблица офферов, болей и заходов.</li>
+          </ul>
+        </details>
+        <details class="segment-card">
+          <summary>
+            <span class="segment-num">02</span>
+            <span class="segment-title">Sales и bizdev</span>
+            <span class="segment-teaser">Открытые источники и Telegram → лиды, триггеры и заходы.</span>
+            <span class="segment-icon" aria-hidden="true"></span>
+          </summary>
+          <ul class="segment-detail">
+            <li>HH, сайты, каталоги, тендеры → компании и ЛПР.</li>
+            <li>Telegram-чаты и каналы → триггеры продаж.</li>
+            <li>Лиды и тендеры → таблица «кому писать и почему сейчас».</li>
+          </ul>
+        </details>
+        <details class="segment-card">
+          <summary>
+            <span class="segment-num">03</span>
+            <span class="segment-title">Операционка, финансы и внедрение</span>
+            <span class="segment-teaser">Выгрузки и клиентские файлы → чистые данные и нормальный формат.</span>
+            <span class="segment-icon" aria-hidden="true"></span>
+          </summary>
+          <ul class="segment-detail">
+            <li>Выгрузки из CRM, кабинетов и таблиц → дубли, пропуски, странные строки.</li>
+            <li>Несколько отчётов → один нормальный файл.</li>
+            <li>Клиентские данные → нужный формат без переписки «переделайте».</li>
+          </ul>
+        </details>
+        <details class="segment-card">
+          <summary>
+            <span class="segment-num">04</span>
+            <span class="segment-title">Руководители, фаундеры и проектные менеджеры</span>
+            <span class="segment-teaser">Звонки, переписки и статусы → где пожар и куда включиться.</span>
+            <span class="segment-icon" aria-hidden="true"></span>
+          </summary>
+          <ul class="segment-detail">
+            <li>Расшифровки звонков → обещания, решения, риски.</li>
+            <li>Переписки и статусы → кто застрял и где нужна помощь.</li>
+            <li>Сырой контекст → меньше глухого телефона.</li>
+          </ul>
+        </details>
+        <details class="segment-card">
+          <summary>
+            <span class="segment-num">05</span>
+            <span class="segment-title">HR и рекрутинг</span>
+            <span class="segment-teaser">HH и резюме → карта рынка и короткий список кандидатов.</span>
+            <span class="segment-icon" aria-hidden="true"></span>
+          </summary>
+          <ul class="segment-detail">
+            <li>HeadHunter → карта требований, вилок и формулировок.</li>
+            <li>Резюме и профили → фильтр по рискам и совпадениям.</li>
+            <li>Результат → таблица для ручного решения.</li>
+          </ul>
+        </details>
       </div>
 
       <div class="chip-block reveal">
@@ -2306,13 +2457,12 @@
         <span class="tag">На полях</span>
         <h4>Общие особенности работы с агентами — на фоне всех модулей</h4>
         <ul>
-          <li>Как эффективно ставить задачи</li>
-          <li>Как давать контекст и критерии результата</li>
-          <li>Как сделать так, чтобы агент запоминал правильный путь</li>
-          <li>Как расширять возможности через skills и MCP</li>
-          <li>Как создавать интерактивные артефакты</li>
-          <li>Как получать от агента обратную связь</li>
-          <li>Как сделать так, чтобы агент сам себя проверял</li>
+          <li>Ставить задачи: контекст, входные данные и критерии результата</li>
+          <li>Настраивать память агента на правильный путь</li>
+          <li>Расширять возможности через skills и MCP</li>
+          <li>Создавать интерактивные артефакты</li>
+          <li>Получать от агента обратную связь</li>
+          <li>Запускать самопроверку результата</li>
         </ul>
       </div>
     </div>
@@ -2411,7 +2561,6 @@
           <div class="launch-steps" aria-label="Что проходим на старте">
             <span>Подписка</span>
             <span>Установка</span>
-            <span>VPN, если нужен</span>
             <span>Первая задача</span>
             <span>Проверка результата</span>
           </div>
