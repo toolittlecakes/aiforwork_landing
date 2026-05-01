@@ -760,6 +760,16 @@
     line-height: 1.45;
     color: var(--ink-2);
   }
+  .usecase-task ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .usecase-task li {
+    margin: 0;
+  }
   @media (max-width: 720px) {
     .usecase-row { grid-template-columns: 1fr; }
     .usecase-role { border-right: none; border-bottom: 1px solid var(--rule-soft); }
@@ -1872,7 +1882,7 @@
       <span>AI&nbsp;For&nbsp;Work</span>
     </a>
     <nav class="top">
-      <a href="#usecases">Задачи</a>
+      <a href="#audience">Кейсы</a>
       <a href="#program">Программа</a>
       <a href="#format">Формат</a>
       <a href="#pricing">Тарифы</a>
@@ -1908,10 +1918,10 @@
             <span class="block">презентации, отчёты</span>
           </h1>
           <p class="hero-lede">
-            Для не разработчиков. Начинаем вместе: подписка, настройка, первый запуск.
+            Для не-разработчиков. Начинаем вместе: подписка, настройка, первый запуск.
           </p>
           <p class="hero-sub">
-            За 6 недель соберём автоматизацию под вашу ненавистную задачу.
+            За 6 недель вы соберёте 5 автоматизаций для вашей рутины.
           </p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать, подойдёт ли мне <span class="arr">→</span></a>
@@ -1928,9 +1938,9 @@
             <div class="spec-row"><span class="k">Старт</span><span class="v">Май 2026</span></div>
             <div class="spec-row"><span class="k">Длительность</span><span class="v">6 недель</span></div>
             <div class="spec-row"><span class="k">Формат</span><span class="v">Онлайн + записи + домашки</span></div>
-            <div class="spec-row"><span class="k">Модули</span><span class="v">6 модулей практики</span></div>
-            <div class="spec-row"><span class="k">Бонус</span><span class="v">Подключим ChatGPT Plus, выдадим VPN</span></div>
-            <div class="spec-row"><span class="k">Результат</span><span class="v">Кейс на ваших данных</span></div>
+            <div class="spec-row"><span class="k">Практика</span><span class="v">4 модуля + настройка + проект</span></div>
+            <div class="spec-row"><span class="k">Результат</span><span class="v">Первая автоматизация на ваших данных</span></div>
+            <div class="spec-row"><span class="k">Уровень</span><span class="v">Без навыков разработки</span></div>
           </div>
           <div class="spec-foot">
             <a href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener" class="btn btn-solid">Записаться в поток <span class="arr">→</span></a>
@@ -1941,7 +1951,7 @@
       <div class="hero-hooks reveal">
         <div class="hero-hook">
           <span class="k">Результат</span>
-          <strong>Первый кейс на ваших данных</strong>
+          <strong>Первая автоматизация на ваших данных</strong>
           <p>Берёте реальную рабочую задачу и собираете сценарий, который можно повторять после курса.</p>
         </div>
         <div class="hero-hook">
@@ -1952,7 +1962,7 @@
         <div class="hero-hook">
           <span class="k">Границы</span>
           <strong>Без программирования</strong>
-          <p>Начинаем с файлов, таблиц, папок и понятных инструкций, а не со сложных интеграций.</p>
+          <p>Начинаем с файлов, таблиц, папок и понятных инструкций, а не со сложных интеграций и разработки.</p>
         </div>
       </div>
     </div>
@@ -1996,15 +2006,15 @@
         </div>
         <div class="rec-item">
           <span class="num">05 / 08</span>
-          <p>Ощущаете, что вроде бы можно самим разобраться, но это займет <em>неопределенно много времени</em> и не факт что принесет результат.</p>
+          <p>Ощущаете, что можно разобраться самим, но непонятно, <em>с чего начать</em>, сколько времени это съест и будет ли результат.</p>
         </div>
         <div class="rec-item">
           <span class="num">06 / 08</span>
-          <p>Хотите, чтобы ИИ сам находил нужные файлы на вашем компе и делал с ними <em>ТОЛЬКО то, что нужно</em>.</p>
+          <p>Видите ИИ как чат, но хотите, чтобы он работал с файлами, таблицами, сайтами и <em>последовательностью действий</em>.</p>
         </div>
         <div class="rec-item">
           <span class="num">07 / 08</span>
-          <p>Тонете в подписках, агентах и инструментах, но не понимаете, <em>с чего начать</em>.</p>
+          <p>Тонете в подписках, агентах и инструментах, но не понимаете, что реально применимо <em>в вашей работе</em>.</p>
         </div>
         <div class="rec-item">
           <span class="num">08 / 08</span>
@@ -2021,7 +2031,7 @@
         <div class="sec-num-big">02<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Для кого</span>
-          <h2 class="sec-title">Курс не привязан к одной <span class="hl italic">профессии</span>.</h2>
+          <h2 class="sec-title">Курс для тех, чья работа держится на <span class="hl italic">информации</span>.</h2>
         </div>
       </div>
 
@@ -2030,50 +2040,76 @@
       </p>
 
       <div class="chip-block reveal">
-        <div class="chip-label">Роли <span class="count">/ 19</span></div>
+        <div class="chip-label">Пять основных сегментов и кейсы из наших B2B курсов</div>
+      </div>
+
+      <div class="usecase-grid reveal">
+        <div class="usecase-row">
+          <div class="usecase-role"><span>01</span>Маркетинг, ресёрч и контент</div>
+          <div class="usecase-task">
+            <ul>
+              <li>Транскрибации залетевших YouTube / Reels / Shorts → темы и структура вебинара.</li>
+              <li>Парсинг Telegram-каналов → подбор и скоринг площадок для посевов под конкретный креатив.</li>
+              <li>Анализ конкурентов → таблица заходов, офферов, болей и формулировок, которые можно забрать в контент.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="usecase-row">
+          <div class="usecase-role"><span>02</span>Sales и bizdev</div>
+          <div class="usecase-task">
+            <ul>
+              <li>HeadHunter, сайты компаний, каталоги, тендерные площадки → список релевантных компаний и ЛПР.</li>
+              <li>Парсинг Telegram-чатов и каналов → триггеры продаж: ищет подрядчика, жалуется на проблему, нанимает команду или запускает новый продукт.</li>
+              <li>Скоринг лидов и тендеров → таблица «кому писать, почему сейчас и с каким заходом».</li>
+            </ul>
+          </div>
+        </div>
+        <div class="usecase-row">
+          <div class="usecase-role"><span>03</span>Операционка, финансы и внедрение</div>
+          <div class="usecase-task">
+            <ul>
+              <li>Выгрузки из CRM, кабинетов, таблиц и клиентских файлов → поиск дублей, странных строк, пропусков и расхождений.</li>
+              <li>Несколько отчётов → один нормальный файл.</li>
+              <li>Клиентские данные для внедрения → агент сам приводит параметры к нужному формату, чтобы не гонять файл туда-сюда с просьбой «переделайте».</li>
+            </ul>
+          </div>
+        </div>
+        <div class="usecase-row">
+          <div class="usecase-role"><span>04</span>Руководители, фаундеры и проектные менеджеры</div>
+          <div class="usecase-task">
+            <ul>
+              <li>Расшифровки звонков, переписки, заметки и статусы → один запрос к агенту: где сейчас пожар, кто застрял, какие решения уже приняты, что обещали клиенту, где нужна ваша включённость.</li>
+              <li>Сырой контекст разговоров и переписок → меньше глухого телефона и потерь информации между людьми и слоями управления.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="usecase-row">
+          <div class="usecase-role"><span>05</span>HR и рекрутинг</div>
+          <div class="usecase-task">
+            <ul>
+              <li>Парсинг вакансий на HeadHunter → карта рынка, требований, вилок и повторяющихся формулировок.</li>
+              <li>Резюме и профили кандидатов → фильтрация по качественным признакам, рискам и совпадениям с ролью.</li>
+              <li>Результат → не «ИИ выбрал за вас», а короткий список и таблица для ручного решения.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="chip-block reveal">
+        <div class="chip-label">Тоже будет полезно</div>
         <div class="chip-group">
-          <span class="chip">Маркетологи</span>
           <span class="chip">Аналитики</span>
           <span class="chip">Продакты</span>
           <span class="chip">Проджекты</span>
-          <span class="chip">HR и рекрутеры</span>
-          <span class="chip">Сейлзы</span>
-          <span class="chip">Операционные менеджеры</span>
-          <span class="chip">Исследователи</span>
-          <span class="chip">Редакторы</span>
-          <span class="chip">Методисты</span>
-          <span class="chip">Продюсеры курсов</span>
-          <span class="chip">Фаундеры</span>
           <span class="chip">Аккаунт-менеджеры</span>
           <span class="chip">Customer Success</span>
           <span class="chip">People Ops</span>
           <span class="chip">SMM</span>
           <span class="chip">PR</span>
-          <span class="chip">Контент-команды</span>
+          <span class="chip">Редакторы</span>
+          <span class="chip">Методисты</span>
+          <span class="chip">Продюсеры курсов</span>
           <span class="chip">Комьюнити-менеджеры</span>
-        </div>
-      </div>
-
-      <div class="chip-block reveal">
-        <div class="chip-label">Задачи <span class="count">/ 17</span></div>
-        <div class="chip-group">
-          <span class="chip">Ресёрч</span>
-          <span class="chip">Таблицы</span>
-          <span class="chip">Отчёты</span>
-          <span class="chip">Презентации</span>
-          <span class="chip">Telegram</span>
-          <span class="chip">Вакансии</span>
-          <span class="chip">Лидогенерация</span>
-          <span class="chip">Анализ рынка</span>
-          <span class="chip">Анализ конкурентов</span>
-          <span class="chip">Поиск клиентов</span>
-          <span class="chip">Обработка выгрузок</span>
-          <span class="chip">Дашборды</span>
-          <span class="chip">Брифы</span>
-          <span class="chip">Сводки</span>
-          <span class="chip">Контент-планы</span>
-          <span class="chip">Заполнение форм</span>
-          <span class="chip">Поиск инсайтов</span>
         </div>
       </div>
 
@@ -2084,47 +2120,11 @@
     </div>
   </section>
 
-  <!-- USE CASES -->
-  <section id="usecases">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num-big">03<span class="slash">/</span></div>
-        <div class="right">
-          <span class="sec-label">С чем приходить</span>
-          <h2 class="sec-title wide">Берите задачу, которая уже есть в вашей <span class="hl italic">работе</span>.</h2>
-        </div>
-      </div>
-
-      <p class="usecase-intro reveal">
-        Берём процесс, который повторяется и занимает время: список, сводка, презентация, отчёт и т.д.
-      </p>
-
-      <div class="usecase-grid reveal">
-        <div class="usecase-row">
-          <div class="usecase-role"><span>01</span>HR и найм</div>
-          <div class="usecase-task">Анализ вакансий, профиль роли, отчёт по рынку труда, таблица кандидатов или компаний.</div>
-        </div>
-        <div class="usecase-row">
-          <div class="usecase-role"><span>02</span>Финансы и операционка</div>
-          <div class="usecase-task">Сопоставление выгрузок, поиск дублей и странных строк, подготовка данных, сбор нескольких отчётов в один файл.</div>
-        </div>
-        <div class="usecase-row">
-          <div class="usecase-role"><span>03</span>Маркетинг и ресёрч</div>
-          <div class="usecase-task">Анализ конкурентов, мониторинг сайтов и Telegram, сбор источников, таблица выводов.</div>
-        </div>
-        <div class="usecase-row">
-          <div class="usecase-role"><span>04</span>Руководство и проекты</div>
-          <div class="usecase-task">Сводка по материалам, подготовка отчёта, разбор документов, список решений и следующих шагов.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- NOT IN COURSE -->
   <section id="not-in-course">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">04<span class="slash">/</span></div>
+        <div class="sec-num-big">03<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Антивайбкодинг</span>
           <h2 class="sec-title wide">Это не курс по разработке и не <span class="hl italic">автоматизация под ключ</span>.</h2>
@@ -2163,7 +2163,7 @@
         </div>
         <div class="not-row">
           <div>Обещать магию без ошибок</div>
-          <div>Составлять сценарий для работы "без галлюцинаций"</div>
+          <div>Учиться ловить ошибки, сверять источники и проверять результат</div>
         </div>
       </div>
 
@@ -2174,19 +2174,19 @@
   <section id="program">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">05<span class="slash">/</span></div>
+        <div class="sec-num-big">04<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Программа</span>
-          <h2 class="sec-title wide">4 практических модуля + <span class="hl italic">самостоятельный проект</span>.</h2>
+          <h2 class="sec-title wide">4 практических модуля + <span class="hl italic">старт и проект</span>.</h2>
         </div>
       </div>
 
       <div class="program-intro reveal">
         <p>
-          <strong>С первого занятия ищем применение в вашей работе.</strong><br><br>Неделя 0 — что такое эти ваши агенты: установка, настройка среды, подключения, первые касания. Проведём за руку, поможем с подпиской и vpn.
+          <strong>С первого занятия ищем применение в вашей работе.</strong><br><br>Неделя 0 — что такое агенты, как запустить инструменты, что поставить, как оформить доступ, как дать первую простую задачу и не застрять на настройке.
         </p>
         <p class="dim">
-          Далее — 4 практических модуля. На каждом берём один класс задач, решаем на ярком примере, ищем такие же задачи в своей работе.
+          Дальше — 4 практических модуля. На каждом берём один класс задач, решаем на понятном примере и ищем похожие процессы в вашей работе.
         </p>
       </div>
 
@@ -2209,11 +2209,11 @@
           <div class="mod-detail">
             <div class="mod-field">
               <div class="k">Что делаем</div>
-              <div class="v">Берём локальную таблицу или выгрузку и превращаем её в понятный рабочий артефакт: HTML-отчёт, презентацию или структурированный документ.</div>
+              <div class="v">Берём локальную таблицу или выгрузку и превращаем её в понятный рабочий артефакт: HTML-отчёт, презентацию, структурированный документ или сводную таблицу.</div>
             </div>
             <div class="mod-field">
               <div class="k">Результат</div>
-              <div class="v">Умеем отдавать агенту файлы, таблицы, примеры оформления, чтобы получать готовый материал без пересказа: визуализацию, отчёт, презентацию, сводную таблицу.</div>
+              <div class="v">Умеем отдавать агенту файлы, таблицы и примеры оформления, чтобы получать готовый материал без ручного пересказа.</div>
             </div>
           </div>
         </article>
@@ -2241,7 +2241,7 @@
             </div>
             <div class="mod-field">
               <div class="k">Результат</div>
-              <div class="v">Умеем собирать информацию из открытых источников, формулировать критерии отбора, анализировать по смыслу вместо поверхностных фильтров. Понимаем, как использовать подход для разных задач: поиска работы, анализа рынка, найма, продаж и bizdev.</div>
+              <div class="v">Умеем собирать информацию из открытых источников, формулировать критерии отбора и анализировать по смыслу вместо поверхностных фильтров. Понимаем, как переносить подход на поиск работы, анализ рынка, найм, продажи и bizdev.</div>
             </div>
           </div>
         </article>
@@ -2265,7 +2265,7 @@
           <div class="mod-detail">
             <div class="mod-field">
               <div class="k">Что делаем</div>
-              <div class="v">Собираем информацию из Telegram-каналов и чатов — анализируем сообщения, вытаскиваем темы, инсайты, триггеры. Отправляем результаты туда, где они нужны.</div>
+              <div class="v">Собираем информацию из Telegram-каналов и чатов: анализируем сообщения, вытаскиваем темы, инсайты, триггеры и отправляем результат туда, где он нужен.</div>
             </div>
             <div class="mod-field">
               <div class="k">Результат</div>
@@ -2296,7 +2296,7 @@
             </div>
             <div class="mod-field">
               <div class="k">Результат</div>
-              <div class="v">Browser use подключён к агенту и настроен, а вы знаете, где его применять, как это делать — и как сделать, чтобы вас не забанили.</div>
+              <div class="v">Browser use подключён к агенту и настроен, а вы понимаете, где его применять, как это делать и как сделать, чтобы вас не забанили.</div>
             </div>
           </div>
         </article>
@@ -2307,7 +2307,8 @@
         <h4>Общие особенности работы с агентами — на фоне всех модулей</h4>
         <ul>
           <li>Как эффективно ставить задачи</li>
-          <li>Как сделать так, чтобы агент запоминал путь</li>
+          <li>Как давать контекст и критерии результата</li>
+          <li>Как сделать так, чтобы агент запоминал правильный путь</li>
           <li>Как расширять возможности через skills и MCP</li>
           <li>Как создавать интерактивные артефакты</li>
           <li>Как получать от агента обратную связь</li>
@@ -2321,12 +2322,12 @@
   <section id="project" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">06<span class="slash">/</span></div>
+        <div class="sec-num-big">05<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Финальный проект</span>
-          <h2 class="sec-title">Первый собранный кейс под <span class="hl italic">вашу работу</span>.</h2>
+          <h2 class="sec-title">Первая самостоятельная автоматизация под <span class="hl italic">вашу задачу</span>.</h2>
           <p class="sec-intro">
-            На курсах так бывает: занятия пройдены, примеры рассмотрены, а как применить в своей работе — непонятно. Поэтому в конце мы проводим вас через самостоятельный проект.
+            На курсах часто бывает: занятия пройдены, примеры понятны, а как применить к своей работе — неясно. Поэтому в конце мы проводим вас через самостоятельный проект.
           </p>
         </div>
       </div>
@@ -2342,17 +2343,17 @@
         </div>
         <div class="proj-content">
           <p>
-            Вы выберете один рабочий процесс из своей реальной жизни: отчёт, ресёрч, таблицу, мониторинг, поиск клиентов, работу с файлами или другой повторяющийся процесс. За неделю попробуете перестроить его с помощью ИИ-агента, а на финальной встрече покажете, что получилось.
+            Выбираем один рабочий процесс из своей реальной жизни: отчёт, ресёрч, таблицу, мониторинг, поиск клиентов, работу с файлами, подготовку данных или другую рутину. За неделю перестраиваем его с помощью ИИ-агента, а на финальной встрече показываем, что получилось.
           </p>
           <div class="proj-result">
             <span class="label">Результат</span>
-            <p>У вас останется не только набор учебных демо, но и первый собранный кейс под вашу нишу, вашу работу и ваши задачи — который можно сразу использовать в работе.</p>
+            <p>У вас останется не только набор учебных демо, но и первый собранный сценарий под ваши задачи и контекст. Его можно использовать дальше, докручивать и делиться с командой.</p>
           </div>
           <ul class="wins-list">
             <li><strong>Кейс под вашу нишу</strong>Не учебный пример, а сценарий из вашей работы.</li>
-            <li><strong>Нужный артефакт</strong>Отчёт, таблица, сводка, ресёрч или мониторинг.</li>
-            <li><strong>Понимание границ</strong>Где агент полезен, а где проще сделать руками.</li>
-            <li><strong>«Шаблон» для следующих задач</strong>Подход можно повторять на похожих процессах.</li>
+            <li><strong>Нужный артефакт</strong>Отчёт, таблица, сводка, ресёрч, мониторинг, список или подготовленный файл.</li>
+            <li><strong>Понимание границ</strong>Где агент полезен, где опасен, а где проще сделать руками.</li>
+            <li><strong>Шаблон для следующих задач</strong>Подход можно повторять на похожих процессах.</li>
           </ul>
         </div>
       </div>
@@ -2363,7 +2364,7 @@
   <section id="quality" class="dark">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">07<span class="slash">/</span></div>
+        <div class="sec-num-big">06<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Проверка результата</span>
           <h2 class="sec-title wide">Мы не учим слепо <span class="hl italic">доверять агенту</span>.</h2>
@@ -2395,7 +2396,7 @@
   <section id="launch" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">08<span class="slash">/</span></div>
+        <div class="sec-num-big">07<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Первый запуск</span>
           <h2 class="sec-title">Помогаем <span class="hl italic">на старте</span>.</h2>
@@ -2405,11 +2406,12 @@
       <div class="launch-card reveal">
         <div class="label">Стартуем вместе.</div>
         <div class="body">
-          <p>Знаю, что у некоторых из вас не было времени разбираться с подписками, что нужно скачать, как что установить. Поэтому на старте мы пройдем этот путь с вами.</p>
-          <p>(Если нужно) сможете начать со всеми вместе, даже если до этого пользовались только бесплатным чатом, и у вас вечно отлетает VPN.</p>
+          <p>Если вы пользовались только бесплатным чатом, не покупали подписку, не ставили Codex или Claude Code и не хотите разбираться с настройкой в одиночку, это нормально.</p>
+          <p>На старте мы пройдём этот путь вместе.</p>
           <div class="launch-steps" aria-label="Что проходим на старте">
             <span>Подписка</span>
             <span>Установка</span>
+            <span>VPN, если нужен</span>
             <span>Первая задача</span>
             <span>Проверка результата</span>
           </div>
@@ -2422,10 +2424,10 @@
   <section id="format">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">09<span class="slash">/</span></div>
+        <div class="sec-num-big">08<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Формат и длительность</span>
-          <h2 class="sec-title wide">~6 недель. Живые занятия, <span class="hl italic">основная практика</span> — дома.</h2>
+          <h2 class="sec-title wide">6 недель. Живые занятия, <span class="hl italic">основная практика</span> — дома.</h2>
           <p class="sec-intro">
             Неделя знакомства и настройки, 4 недели практических воркшопов с домашками, неделя на финальный проект.
           </p>
@@ -2475,7 +2477,7 @@
           <div class="stat">
             <div class="txt">
               <h4>Базовая домашка</h4>
-              <p>Ориентир — 30–40 минут. Всегда можно потратить ночь, докручивая до идеала.</p>
+              <p>Ориентир — 30–40 минут. Можно сделать минимум, а можно потратить вечер и докрутить результат под себя.</p>
             </div>
             <div class="big">30′<small>~40 мин</small></div>
           </div>
@@ -2495,7 +2497,7 @@
   <section id="community" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">10<span class="slash">/</span></div>
+        <div class="sec-num-big">09<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Комьюнити</span>
           <h2 class="sec-title">Все говорят про комьюнити — <span class="hl italic">мы делаем</span>.</h2>
@@ -2523,7 +2525,7 @@
   <section id="pricing">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">11<span class="slash">/</span></div>
+        <div class="sec-num-big">10<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Тарифы</span>
           <h2 class="sec-title">Выберите <span class="hl italic">свой режим</span>.</h2>
@@ -2590,7 +2592,7 @@
   <section id="authors" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">12<span class="slash">/</span></div>
+        <div class="sec-num-big">11<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Кто ведёт</span>
           <h2 class="sec-title"><span class="hl italic">Саша и Коля</span>.</h2>
@@ -2634,7 +2636,7 @@
   <section id="faq">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">13<span class="slash">/</span></div>
+        <div class="sec-num-big">12<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">FAQ</span>
           <h2 class="sec-title">Частые <span class="hl italic">вопросы</span>.</h2>
@@ -2648,7 +2650,7 @@
         </details>
         <details>
           <summary>Почему вы говорите про Codex и Claude Code? Это же инструменты для программистов?</summary>
-          <p>Изначально да, но они оказались применимы и для нормальных людей. Агенты могут работать с файлами, запускать действия на компьютере, помогать с таблицами, отчётами, сайтами, браузером и рабочими процессами.</p>
+          <p>Изначально да, но они оказались применимы и для рабочих задач без разработки. Агенты умеют работать с файлами, запускать действия на компьютере, помогать с таблицами, отчётами, сайтами, браузером и рабочими процессами.</p>
         </details>
         <details>
           <summary>А если у меня Claude Code, а не Codex?</summary>
@@ -2680,7 +2682,7 @@
         </details>
         <details>
           <summary>Сколько времени займут домашки?</summary>
-          <p>Задания спроектированы как короткие практические задачи. Ориентир — 30–40 минут на базовое прохождение, но всегда можно потратить ночь, докручивая до идеала.</p>
+          <p>Ориентир — 30–40 минут на базовое прохождение. Если захотите докрутить результат под свою задачу, можно потратить больше времени.</p>
         </details>
         <details>
           <summary>Можно без домашек?</summary>
@@ -2697,7 +2699,7 @@
         </details>
         <details>
           <summary>Можно оплатить иностранной картой?</summary>
-          <p>Стандартный способ оплаты пока через РФ. Если вам не подходит — напишите, подберём вариант вручную: перевод, крипта или что-то ещё.</p>
+          <p>Стандартный способ оплаты пока через РФ. Если он вам не подходит, напишите — подберём удобный вариант вручную.</p>
         </details>
       </div>
     </div>
@@ -2709,10 +2711,10 @@
     <div class="wrap">
       <span class="eyebrow reveal">Весна 2026</span>
       <h2 class="reveal">
-        Если в вашей работе много ручной информационной рутины — часть её уже можно <span class="box italic">отдать агенту</span>.
+        Если в вашей работе много ручной информационной рутины — часть её уже можно <span class="box italic">автоматизировать</span>.
       </h2>
       <p class="reveal">
-        Мы покажем, как это делать на понятных рабочих задачах, и доведём до первого кейса на ваших данных. Без программирования и без магии.
+        Мы покажем, как это делать на понятных рабочих задачах, и доведём до первой автоматизации на ваших данных. Без программирования, без магии и без обещания «мы всё сделаем за вас».
       </p>
       <div class="hero-cta reveal">
         <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Хочу в первый поток <span class="arr">→</span></a>
