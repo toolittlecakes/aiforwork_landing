@@ -387,11 +387,11 @@
   }
 
   .hero h1 {
-    font-size: clamp(48px, 9.5vw, 144px);
-    line-height: 0.88;
-    letter-spacing: -0.055em;
+    font-size: clamp(46px, 5.2vw, 76px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
     font-weight: 500;
-    margin-bottom: 44px;
+    margin-bottom: 28px;
   }
   .hero h1 .block {
     display: block;
@@ -415,8 +415,8 @@
 
   .hero-meta {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 56px;
+    grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.75fr);
+    gap: 64px;
     align-items: start;
   }
   .hero-lede {
@@ -1898,17 +1898,15 @@
         </div>
       </div>
 
-      <div class="reveal">
-        <h1>
-          <span class="block">Как отдавать ИИ</span>
-          <span class="block"><span class="box italic">рутину</span> и получать</span>
-          <span class="block">результат: файлы, таблицы,</span>
-          <span class="block">презентации, отчёты</span>
-        </h1>
-      </div>
-
       <div class="hero-meta">
         <div class="reveal">
+          <h1>
+            <span class="block">Как отдавать ИИ</span>
+            <span class="block"><span class="box italic">рутину</span> и получать</span>
+            <span class="block">результат:</span>
+            <span class="block">файлы, таблицы,</span>
+            <span class="block">презентации, отчёты</span>
+          </h1>
           <p class="hero-lede">
             Для не разработчиков. Начинаем вместе: подписка, настройка, первый запуск.
           </p>
