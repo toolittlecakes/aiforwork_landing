@@ -795,16 +795,13 @@
     border-right: 1px solid var(--rule);
     border-bottom: 1px solid var(--rule);
   }
-  .segment-card summary {
-    list-style: none;
-    cursor: pointer;
+  .segment-card .segment-row {
     display: grid;
-    grid-template-columns: 52px minmax(220px, .9fr) minmax(0, 1.4fr) 24px;
+    grid-template-columns: 52px minmax(220px, .9fr) minmax(0, 1.4fr);
     gap: 18px;
     align-items: center;
     padding: 18px 24px;
   }
-  .segment-card summary::-webkit-details-marker { display: none; }
   .segment-num {
     font-family: var(--mono);
     font-size: 11px;
@@ -824,50 +821,17 @@
     font-size: 15.5px;
     line-height: 1.45;
   }
-  .segment-icon {
-    width: 24px;
-    height: 24px;
-    border: 1px solid var(--rule);
-    display: inline-grid;
-    place-items: center;
-    font-family: var(--display);
-    font-size: 18px;
-    line-height: 1;
-    justify-self: end;
-  }
-  .segment-icon::before { content: "+"; transform: translateY(-1px); }
-  .segment-card[open] .segment-icon::before { content: "–"; }
-  .segment-detail {
-    margin: 0;
-    padding: 0 24px 24px 94px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    list-style: none;
-  }
-  .segment-detail li {
-    border: 1px solid var(--rule);
-    background: var(--paper);
-    padding: 14px 16px;
-    font-size: 14.5px;
-    line-height: 1.45;
-    color: var(--ink);
-  }
   @media (max-width: 720px) {
     .usecase-row { grid-template-columns: 1fr; }
     .usecase-role { border-right: none; border-bottom: 1px solid var(--rule-soft); }
     .usecase-task { padding-top: 22px; }
-    .segment-card summary {
-      grid-template-columns: 44px 1fr 24px;
+    .segment-card .segment-row {
+      grid-template-columns: 44px 1fr;
       gap: 12px;
       padding: 20px;
     }
     .segment-teaser {
       grid-column: 2 / -1;
-    }
-    .segment-detail {
-      grid-template-columns: 1fr;
-      padding: 0 20px 20px 76px;
     }
   }
 
@@ -2070,7 +2034,7 @@
             <span class="block"><span class="box italic">отдать ИИ-агенту</span></span>
           </h1>
           <p class="hero-lede">
-            Покажем, как это делать на понятных рабочих задачах, и доведём до первой автоматизации на ваших данных. Без программирования, без магии и без обещания «мы всё сделаем за вас».
+            Покажем, как это делать на понятных рабочих задачах, и доведём до первой автоматизации на ваших данных. Без программирования и без магии
           </p>
           <p class="hero-sub">
             За 6 недель вы соберёте 5 кейсов автоматизации рабочих задач
@@ -2192,75 +2156,45 @@
       </p>
 
       <div class="chip-block reveal">
-        <div class="chip-label">Пять основных сегментов и кейсы из наших B2B курсов</div>
+        <div class="chip-label">Основные сегменты и кейсы из наших B2B курсов</div>
       </div>
 
       <div class="segment-list reveal">
-        <details class="segment-card">
-          <summary>
+        <div class="segment-card">
+          <div class="segment-row">
             <span class="segment-num">01</span>
             <span class="segment-title">Маркетинг, ресёрч и контент</span>
-            <span class="segment-teaser">Видео, Telegram и конкуренты → темы, посевы и контент.</span>
-            <span class="segment-icon" aria-hidden="true"></span>
-          </summary>
-          <ul class="segment-detail">
-            <li>Видео-транскрибации → темы и структура вебинара.</li>
-            <li>Telegram-каналы → скоринг посевов под конкретный креатив.</li>
-            <li>Конкуренты → таблица офферов, болей и заходов.</li>
-          </ul>
-        </details>
-        <details class="segment-card">
-          <summary>
+            <span class="segment-teaser">Видео, Telegram и конкуренты → темы, посевы и контент</span>
+          </div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-row">
             <span class="segment-num">02</span>
             <span class="segment-title">Sales и bizdev</span>
-            <span class="segment-teaser">Открытые источники и Telegram → лиды, триггеры и заходы.</span>
-            <span class="segment-icon" aria-hidden="true"></span>
-          </summary>
-          <ul class="segment-detail">
-            <li>HH, сайты, каталоги, тендеры → компании и ЛПР.</li>
-            <li>Telegram-чаты и каналы → триггеры продаж.</li>
-            <li>Лиды и тендеры → таблица «кому писать и почему сейчас».</li>
-          </ul>
-        </details>
-        <details class="segment-card">
-          <summary>
+            <span class="segment-teaser">Открытые источники и Telegram → лиды, триггеры и заходы</span>
+          </div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-row">
             <span class="segment-num">03</span>
             <span class="segment-title">Операционка, финансы и внедрение</span>
-            <span class="segment-teaser">Выгрузки и клиентские файлы → чистые данные и нормальный формат.</span>
-            <span class="segment-icon" aria-hidden="true"></span>
-          </summary>
-          <ul class="segment-detail">
-            <li>Выгрузки из CRM, кабинетов и таблиц → дубли, пропуски, странные строки.</li>
-            <li>Несколько отчётов → один нормальный файл.</li>
-            <li>Клиентские данные → нужный формат без переписки «переделайте».</li>
-          </ul>
-        </details>
-        <details class="segment-card">
-          <summary>
+            <span class="segment-teaser">CRM, выгрузки и клиентские файлы → отчёты, чистые данные и нормальный формат</span>
+          </div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-row">
             <span class="segment-num">04</span>
             <span class="segment-title">Руководители, фаундеры и проектные менеджеры</span>
-            <span class="segment-teaser">Звонки, переписки и статусы → где пожар и куда включиться.</span>
-            <span class="segment-icon" aria-hidden="true"></span>
-          </summary>
-          <ul class="segment-detail">
-            <li>Расшифровки звонков → обещания, решения, риски.</li>
-            <li>Переписки и статусы → кто застрял и где нужна помощь.</li>
-            <li>Сырой контекст → меньше глухого телефона.</li>
-          </ul>
-        </details>
-        <details class="segment-card">
-          <summary>
+            <span class="segment-teaser">Звонки, переписки и статусы → обещания, решения, риски без глухого телефона</span>
+          </div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-row">
             <span class="segment-num">05</span>
             <span class="segment-title">HR и рекрутинг</span>
-            <span class="segment-teaser">HH и резюме → карта рынка и короткий список кандидатов.</span>
-            <span class="segment-icon" aria-hidden="true"></span>
-          </summary>
-          <ul class="segment-detail">
-            <li>HeadHunter → карта требований, вилок и формулировок.</li>
-            <li>Резюме и профили → фильтр по рискам и совпадениям.</li>
-            <li>Результат → таблица для ручного решения.</li>
-          </ul>
-        </details>
+            <span class="segment-teaser">HH и резюме → карта рынка и точечный подбор кандидатов</span>
+          </div>
+        </div>
       </div>
 
       <div class="chip-block reveal">
@@ -2464,7 +2398,7 @@
             </div>
             <div class="mod-field">
               <div class="k">Результат</div>
-              <div class="v">Browser use подключён к агенту и настроен, а вы понимаете, где его применять, как это делать и как сделать, чтобы вас не забанили.</div>
+              <div class="v">Browser use подключён к агенту и настроен, а вы понимаете, где и как его применять и как сделать, чтобы вас не забанили.</div>
             </div>
           </div>
         </article>
@@ -2571,7 +2505,7 @@
       </div>
 
       <div class="launch-card reveal">
-        <div class="label">Стартуем вместе.</div>
+        <div class="label">Стартуем вместе</div>
         <div class="body">
           <p>Если вы пользовались только бесплатным чатом, не покупали подписку, не ставили Codex или Claude Code и не хотите разбираться с настройкой в одиночку, это нормально.</p>
           <p>На старте мы пройдём этот путь вместе.</p>
