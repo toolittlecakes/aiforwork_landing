@@ -986,13 +986,6 @@
   .program-project-head {
     grid-template-columns: 1fr;
   }
-  .program-check {
-    margin-top: 48px;
-  }
-  .program-check .safety-note {
-    color: var(--ink-2);
-    border-color: var(--rule);
-  }
 
   .modules {
     display: grid;
@@ -1140,6 +1133,10 @@
     font-weight: 500;
   }
   .meta-strip ul { counter-reset: ms; }
+  .meta-strip .safety-note {
+    color: var(--ink-2);
+    border-color: var(--rule);
+  }
   @media (max-width: 640px) {
     .meta-strip ul { grid-template-columns: 1fr; }
     .meta-strip { padding: 32px 24px; }
@@ -2434,18 +2431,6 @@
           <li>Создавать интерактивные артефакты</li>
           <li>Получать от агента обратную связь</li>
           <li>Запускать самопроверку результата</li>
-        </ul>
-      </div>
-
-      <div class="meta-strip program-check reveal">
-        <span class="tag">Проверка результата</span>
-        <h4>Мы не учим слепо доверять агенту. На каждом модуле учимся проверять результат через:</h4>
-        <ul>
-          <li>Критерии качества</li>
-          <li>Промежуточные шаги</li>
-          <li>Сверку источников</li>
-          <li>Воспроизводимость</li>
-          <li>Границы применения</li>
         </ul>
         <p class="safety-note">
           Отдельно разбираем безопасность данных: какие файлы можно загружать, что обезличивать, где работать на учебных примерах и какие задачи не стоит отдавать агенту без согласования внутри компании.
