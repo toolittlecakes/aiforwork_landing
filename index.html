@@ -24,7 +24,6 @@
 
     --accent: #1c2ce5;
     --accent-hot: #3445ff;
-    --lime: #d8ff3a;
     --sage: #889776;
 
     --display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
@@ -821,9 +820,9 @@
     font-weight: 500;
   }
   .segment-teaser {
-    color: var(--ink-2);
-    font-size: 15px;
-    line-height: 1.4;
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.45;
   }
   .segment-icon {
     width: 24px;
@@ -847,12 +846,12 @@
     list-style: none;
   }
   .segment-detail li {
-    border: 1px solid var(--rule-soft);
-    background: var(--bg);
-    padding: 12px 14px;
-    font-size: 13.5px;
-    line-height: 1.35;
-    color: var(--ink-2);
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 14px 16px;
+    font-size: 14.5px;
+    line-height: 1.45;
+    color: var(--ink);
   }
   @media (max-width: 720px) {
     .usecase-row { grid-template-columns: 1fr; }
@@ -914,14 +913,29 @@
   .not-row > div + div { color: var(--ink); }
   .not-row-head > div {
     font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
+    font-size: 12px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink-3);
-    padding-top: 18px;
-    padding-bottom: 18px;
+    font-weight: 500;
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
-  .not-row-head > div + div { color: var(--accent); }
+  .not-row-head > div span {
+    display: inline-block;
+    padding: 4px 8px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    color: var(--ink-2);
+  }
+  .not-row-head > div + div {
+    color: var(--ink);
+  }
+  .not-row-head > div + div span {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
   .not-close {
     margin: 36px 0 0;
     font-family: var(--display);
@@ -961,19 +975,21 @@
     }
     .not-row:not(.not-row-head) > div::before {
       display: block;
-      margin-bottom: 8px;
+      width: fit-content;
+      margin-bottom: 10px;
       font-family: var(--mono);
-      font-size: 10.5px;
-      letter-spacing: 0.14em;
+      font-size: 11px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 500;
     }
     .not-row:not(.not-row-head) > div:first-child::before {
       content: "Не будем";
-      color: var(--ink-3);
     }
     .not-row:not(.not-row-head) > div + div::before {
       content: "Будем";
-      color: var(--accent);
+      color: var(--ink);
     }
   }
 
@@ -1073,7 +1089,8 @@
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ink-3);
+    color: var(--ink);
+    font-weight: 500;
   }
   .mod-field .v { color: var(--ink); }
 
@@ -1088,7 +1105,7 @@
 
   .meta-strip {
     margin-top: 72px;
-    background: var(--lime);
+    background: var(--paper);
     padding: 44px 40px;
     border: 1px solid var(--ink);
     position: relative;
@@ -1112,7 +1129,7 @@
     display: inline-block;
     padding: 4px 8px;
     background: var(--ink);
-    color: var(--lime);
+    color: var(--bg);
   }
   .meta-strip h4 {
     font-size: clamp(22px, 2.4vw, 28px);
@@ -1334,7 +1351,7 @@
     background: var(--paper);
   }
   .launch-card .label {
-    background: var(--lime);
+    background: var(--bg-deep);
     padding: 40px 36px;
     border-right: 1px solid var(--rule);
     font-family: var(--display);
@@ -2036,7 +2053,7 @@
     <div class="wrap hero-grid">
       <div class="hero-top">
         <div class="dateline">
-          <span>Весна 2026</span>
+          <span>Май 2026</span>
           <span>6 недель</span>
           <span>Онлайн</span>
           <span>Без кода</span>
@@ -2293,8 +2310,8 @@
 
       <div class="not-grid reveal">
         <div class="not-row not-row-head">
-          <div>Не будем</div>
-          <div>Будем</div>
+          <div><span>Не будем</span></div>
+          <div><span>Будем</span></div>
         </div>
         <div class="not-row">
           <div>Вайбкодить приложения и MVP</div>
@@ -2744,7 +2761,7 @@
         <div class="sec-num-big">11<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Кто ведёт</span>
-          <h2 class="sec-title"><span class="hl italic">Саша и Коля</span>.</h2>
+          <h2 class="sec-title"><span class="hl italic">Коля и Саша</span>.</h2>
           <p class="auth-intro">
             Коля отвечает за техническую применимость: где агент реально помогает, где ограничения, как не сломать процесс и как проверить результат.<br><br>Саша отвечает за образовательный формат, структуру и комьюнити — чтобы было не стыдно спросить, и чтобы курс не превратился в набор сложных программистских штук.
           </p>
@@ -2858,7 +2875,7 @@
   <section class="final" id="final">
     <span class="bg-big" aria-hidden="true">2026</span>
     <div class="wrap">
-      <span class="eyebrow reveal">Весна 2026</span>
+      <span class="eyebrow reveal">Май 2026</span>
       <h2 class="reveal">
         Если в вашей работе много ручной информационной рутины — часть её уже можно <span class="box italic">автоматизировать</span>.
       </h2>
