@@ -495,24 +495,25 @@
     border-bottom: 1px solid color-mix(in srgb, var(--bg) 25%, transparent);
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 12px;
     background: color-mix(in srgb, var(--bg) 4%, transparent);
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
   }
-  .why-card .num {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    color: var(--accent-hot);
+  .why-card:hover {
+    background: color-mix(in srgb, var(--bg) 9%, transparent);
+    border-right-color: color-mix(in srgb, var(--accent-hot) 55%, transparent);
+    border-bottom-color: color-mix(in srgb, var(--accent-hot) 55%, transparent);
+    transform: translateY(-2px);
   }
   .why-card h3 {
     font-size: clamp(22px, 2.2vw, 30px);
     line-height: 1.04;
     letter-spacing: -0.028em;
     font-weight: 500;
-    max-width: 13ch;
+    max-width: 22ch;
   }
   .why-card p {
-    margin: auto 0 0;
+    margin: 0;
     color: color-mix(in srgb, var(--bg) 72%, transparent);
     font-size: 15.5px;
     line-height: 1.55;
@@ -679,9 +680,6 @@
   #audience .sec-head {
     margin-bottom: 34px;
     padding-bottom: 24px;
-  }
-  #audience .sec-num-big {
-    font-size: clamp(76px, 9vw, 120px);
   }
   #audience .aud-lede {
     margin-bottom: 30px;
@@ -1976,30 +1974,26 @@
         <div class="sec-num-big">01<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Почему сейчас</span>
-          <h2 class="sec-title">Что <span class="hl italic">изменилось</span>.</h2>
+          <h2 class="sec-title">Что <span class="hl italic">изменилось</span></h2>
         </div>
       </div>
 
       <div class="why-grid reveal">
         <article class="why-card">
-          <span class="num">01</span>
-          <h3>Зрелость инструментов</h3>
-          <p>ИИ-агенты резко стали более автономными, а интерфейс стал удобным не только для разработчиков.</p>
+          <h3>ИИ-агенты стали достаточно зрелыми</h3>
+          <p>ИИ-агенты резко стали автономнее, а интерфейс стал понятен не только разработчикам</p>
         </article>
         <article class="why-card">
-          <span class="num">02</span>
-          <h3>Настройка текстом</h3>
-          <p>Теперь, чтобы настроить агента, не нужно писать код. Достаточно просто текста с описанием вашего процесса.</p>
+          <h3>Агента можно настроить текстом</h3>
+          <p>Теперь не нужно писать код: достаточно текста с описанием вашего процесса</p>
         </article>
         <article class="why-card">
-          <span class="num">03</span>
           <h3>Самостоятельно разобраться становится сложнее</h3>
-          <p>Инструментов много, они меняются каждую неделю и непонятно, от чего будет результат. На курсе мы ведём через универсальные инструменты.</p>
+          <p>Инструментов много, они меняются каждую неделю, и непонятно, что даст результат: на курсе ведём через универсальные инструменты</p>
         </article>
         <article class="why-card">
-          <span class="num">04</span>
           <h3>Окно "я потом разберусь" закрывается</h3>
-          <p>Навыки работы с ИИ — с накопительным эффектом. Тех, кто сегодня только начинают внедрять ИИ в свою работу, через год будет сложно нагнать.</p>
+          <p>Навыки работы с ИИ имеют накопительный эффект: тех, кто сегодня только начинает внедрять ИИ в свою работу, через год будет сложно нагнать</p>
         </article>
       </div>
     </div>
