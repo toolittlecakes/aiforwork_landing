@@ -493,7 +493,7 @@
   /* ==================== WHY NOW ==================== */
   .why-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     border-top: 1px solid color-mix(in srgb, var(--bg) 25%, transparent);
     border-left: 1px solid color-mix(in srgb, var(--bg) 25%, transparent);
   }
@@ -525,9 +525,6 @@
     color: color-mix(in srgb, var(--bg) 72%, transparent);
     font-size: 15.5px;
     line-height: 1.55;
-  }
-  @media (max-width: 980px) {
-    .why-grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 640px) {
     .why-grid { grid-template-columns: 1fr; }
@@ -954,9 +951,6 @@
   @media (max-width: 820px) {
     .program-intro { grid-template-columns: 1fr; gap: 24px; }
   }
-  .program-launch {
-    margin-bottom: 28px;
-  }
   .program-schedule {
     margin-bottom: 56px;
   }
@@ -1043,6 +1037,18 @@
     font-weight: 500;
   }
   .mod-field .v { color: var(--ink); }
+  .launch-module .launch-label {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(24px, 3vw, 42px);
+    line-height: .95;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+    max-width: 7ch;
+  }
+  .launch-module .mod-title h3 {
+    max-width: 18ch;
+  }
 
   @media (max-width: 1020px) {
     .module { grid-template-columns: 140px 1fr; }
@@ -1267,62 +1273,6 @@
   }
   @media (max-width: 860px) {
     .quality-grid { grid-template-columns: 1fr; gap: 34px; }
-  }
-
-  /* ==================== LAUNCH ==================== */
-  .launch-card {
-    display: grid;
-    grid-template-columns: .75fr 1.25fr;
-    gap: 0;
-    border: 1px solid var(--rule);
-    background: var(--paper);
-  }
-  .launch-card .label {
-    background: var(--bg-deep);
-    padding: 40px 36px;
-    border-right: 1px solid var(--rule);
-    font-family: var(--display);
-    font-size: clamp(32px, 4vw, 54px);
-    line-height: .95;
-    letter-spacing: -0.045em;
-    font-weight: 500;
-  }
-  .launch-card .body {
-    padding: 40px 42px;
-  }
-  .launch-card .body p {
-    margin: 0 0 18px;
-    font-size: clamp(17px, 1.8vw, 20px);
-    line-height: 1.55;
-    color: var(--ink-2);
-  }
-  .launch-card .body p:first-child {
-    font-family: var(--display);
-    color: var(--ink);
-    font-size: clamp(20px, 2.2vw, 28px);
-    line-height: 1.2;
-    letter-spacing: -0.025em;
-    font-weight: 500;
-  }
-  .launch-steps {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 24px;
-  }
-  .launch-steps span {
-    border: 1px solid var(--rule);
-    padding: 7px 12px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: var(--bg);
-  }
-  @media (max-width: 860px) {
-    .launch-card { grid-template-columns: 1fr; }
-    .launch-card .label { border-right: none; border-bottom: 1px solid var(--rule); }
-    .launch-card .body { padding: 32px 28px; }
   }
 
   /* ==================== FORMAT ==================== */
@@ -1983,7 +1933,7 @@
           <span>Май 2026</span>
           <span>6 недель</span>
           <span>Онлайн</span>
-          <span>Для НЕ-программистов</span>
+          <span>Для не-программистов</span>
           <span>Живые занятия + записи</span>
         </div>
       </div>
@@ -1997,10 +1947,10 @@
             <span class="block"><span class="box italic">ИИ-агенту</span></span>
           </h1>
           <p class="hero-lede">
-            Покажем, как это делать на понятных рабочих задачах, и доведём до первой автоматизации на ваших данных. Без программирования и без магии
+            Покажем, как это делать на понятных рабочих задачах, и доведём до первой автоматизации на ваших данных
           </p>
           <p class="hero-sub">
-            Курс для НЕ-программистов. Живые занятия + записи.
+            Курс для не-программистов. Живые занятия + записи.
           </p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать, подойдёт ли мне <span class="arr">→</span></a>
@@ -2021,7 +1971,7 @@
           <p>На примерах из B2B-воркшопов разбираем основные подходы и подводные камни в использовании ИИ-агентов.</p>
         </div>
         <div class="hero-hook">
-          <span class="k">Результат</span>
+          <span class="k">Финальный проект</span>
           <strong>Агент решил задачу на ваших данных</strong>
           <p>Берёте реальную рабочую задачу и собираете сценарий, который можно повторять после курса.</p>
         </div>
@@ -2063,7 +2013,7 @@
         </article>
         <article class="why-card">
           <span class="num">04</span>
-          <h3>Окно «я потом разберусь» закрывается</h3>
+          <h3>Окно "я потом разберусь" закрывается</h3>
           <p>Навыки работы с ИИ — с накопительным эффектом. Тех, кто сегодня только начинают внедрять ИИ в свою работу, через год будет сложно нагнать.</p>
         </article>
       </div>
@@ -2084,7 +2034,7 @@
       <div class="rec-grid reveal">
         <div class="rec-item">
           <span class="num">01 / 08</span>
-          <p>Регулярно открываете <em>10 вкладок</em>, 3 таблицы и собираете из этого «нормальный вывод».</p>
+          <p>Регулярно открываете <em>10 вкладок</em>, 3 таблицы и собираете из этого "нормальный вывод".</p>
         </div>
         <div class="rec-item">
           <span class="num">02 / 08</span>
@@ -2092,7 +2042,7 @@
         </div>
         <div class="rec-item">
           <span class="num">03 / 08</span>
-          <p>Постоянно делаете «быстрый ресёрч», который почему-то занимает <em>полдня</em>.</p>
+          <p>Постоянно делаете "быстрый ресёрч", который почему-то занимает <em>полдня</em>.</p>
         </div>
         <div class="rec-item">
           <span class="num">04 / 08</span>
@@ -2104,7 +2054,7 @@
         </div>
         <div class="rec-item">
           <span class="num">06 / 08</span>
-          <p>Для вас ИИ — это переписка в чате, а нужен <em>«работник»</em> с файлами, таблицами и сайтами.</p>
+          <p>Для вас ИИ — это переписка в чате, а нужен <em>"работник"</em> с файлами, таблицами и сайтами.</p>
         </div>
         <div class="rec-item">
           <span class="num">07 / 08</span>
@@ -2208,7 +2158,7 @@
 
       <div class="not-lede-grid reveal">
         <p class="not-lede">
-          Чаты, агенты, вайбкодинг, n8n, «революционные» инструменты — шума много, что делать непонятно.
+          Чаты, агенты, вайбкодинг, n8n, "революционные" инструменты — шума много, что делать непонятно.
         </p>
         <p class="not-lede">
           На курсе отсекаем лишнее и учим работать с универсальным инструментом: задача, данные на входе, результат и проверка.
@@ -2258,20 +2208,6 @@
         </p>
       </div>
 
-      <div class="launch-card program-launch reveal">
-        <div class="label">Стартуем вместе</div>
-        <div class="body">
-          <p>Это нормально, если вы пользовались только бесплатным чатом и не хотите разбираться с программами в одиночку.</p>
-          <p>На курсе пройдём этот путь вместе.</p>
-          <div class="launch-steps" aria-label="Что проходим на старте">
-            <span>Подписка</span>
-            <span>Установка</span>
-            <span>Первое применение</span>
-            <span>Ведём за руку</span>
-          </div>
-        </div>
-      </div>
-
       <div class="format-grid program-schedule reveal">
         <ol class="timeline">
           <li>
@@ -2318,6 +2254,31 @@
       </div>
 
       <div class="modules">
+        <article class="module launch-module reveal">
+          <div class="mod-index">
+            <div class="launch-label">Стартуем вместе</div>
+          </div>
+          <div class="mod-title">
+            <h3>Начинаем <em>с нуля</em>.</h3>
+            <div class="chip-group" aria-label="Что проходим на старте">
+              <span class="chip mod">Подписка</span>
+              <span class="chip mod">Установка</span>
+              <span class="chip mod">Первое применение</span>
+              <span class="chip mod">Ведём за руку</span>
+            </div>
+          </div>
+          <div class="mod-detail">
+            <div class="mod-field">
+              <div class="k">Для кого</div>
+              <div class="v">Это нормально, если вы пользовались только бесплатным чатом и не хотите разбираться с программами в одиночку.</div>
+            </div>
+            <div class="mod-field">
+              <div class="k">Как идём</div>
+              <div class="v">На курсе пройдём этот путь вместе.</div>
+            </div>
+          </div>
+        </article>
+
         <article class="module reveal">
           <div class="mod-index">
             <div class="n">01<em>.</em></div>
@@ -2466,9 +2427,9 @@
 
       <div class="meta-strip reveal">
         <span class="tag">Безопасность</span>
-        <h4>Отдельно разбираем работу с данными</h4>
+        <h4>Отдельно разбираем безопасность данных</h4>
         <p class="safety-note">
-          Отдельно разбираем безопасность данных: какие файлы можно загружать, что обезличивать, где работать на учебных примерах и какие задачи не стоит отдавать агенту без согласования внутри компании.
+          Какие файлы можно загружать, что обезличивать, где работать на учебных примерах и какие задачи не стоит отдавать агенту без согласования внутри компании.
         </p>
       </div>
     </div>
@@ -2517,7 +2478,7 @@
         <div class="tier">
           <div class="t-num">Plan 01</div>
           <h4>Базовый</h4>
-          <p class="for">Без проверки домашек.</p>
+          <p class="for">Без проверки домашек</p>
           <ul>
             <li>Живые занятия + записи</li>
             <li>Материалы и задания</li>
@@ -2536,7 +2497,7 @@
           <span class="tag-top">★ Выбор</span>
           <div class="t-num">Plan 02</div>
           <h4>С проверкой</h4>
-          <p class="for">Проверяем процесс решения, помогаем стать эффективнее.</p>
+          <p class="for">Проверяем процесс решения, помогаем стать эффективнее</p>
           <ul>
             <li>Всё из базового тарифа</li>
             <li>Проверка домашних заданий</li>
@@ -2549,7 +2510,7 @@
         <div class="tier">
           <div class="t-num">Plan 03</div>
           <h4>VIP</h4>
-          <p class="for">2 консультации 1 на 1.</p>
+          <p class="for">2 консультации 1 на 1</p>
           <ul>
             <li>Всё из тарифа с проверкой</li>
             <li>2 личные консультации</li>
@@ -2557,7 +2518,7 @@
             <li>Разбор применения в вашей реальности</li>
           </ul>
           <div class="split">Формат консультаций</div>
-          <p class="for" style="padding: 0; border: none; margin: 4px 0 0;">Консультации помогают разобрать задачу и выбрать направление. Это не разработка сложной автоматизации под ключ.</p>
+          <p class="for" style="padding: 0; border: none; margin: 4px 0 0;">Консультации помогают разобрать задачу и выбрать направление. Это не разработка сложной автоматизации под ключ</p>
         </div>
       </div>
 
