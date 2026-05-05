@@ -414,7 +414,7 @@
 
   .hero-meta {
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.75fr);
     gap: 64px;
     align-items: start;
   }
@@ -978,6 +978,9 @@
     .program-intro { grid-template-columns: 1fr; gap: 24px; }
   }
   .program-launch {
+    margin-bottom: 28px;
+  }
+  .program-schedule {
     margin-bottom: 56px;
   }
   .program-project {
@@ -1107,38 +1110,11 @@
     font-weight: 500;
     max-width: 28ch;
   }
-  .meta-strip ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px 40px;
-  }
-  .meta-strip li {
-    font-size: 15.5px;
-    line-height: 1.5;
-    color: var(--ink);
-    display: grid;
-    grid-template-columns: 32px 1fr;
-    gap: 8px;
-    align-items: baseline;
-  }
-  .meta-strip li::before {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--ink);
-    content: counter(ms, decimal-leading-zero);
-    counter-increment: ms;
-    font-weight: 500;
-  }
-  .meta-strip ul { counter-reset: ms; }
   .meta-strip .safety-note {
     color: var(--ink-2);
     border-color: var(--rule);
   }
   @media (max-width: 640px) {
-    .meta-strip ul { grid-template-columns: 1fr; }
     .meta-strip { padding: 32px 24px; }
   }
 
@@ -2010,7 +1986,6 @@
     <nav class="top">
       <a href="#audience">Кейсы</a>
       <a href="#program">Программа</a>
-      <a href="#format">Формат</a>
       <a href="#pricing">Тарифы</a>
       <a href="#authors">Ведут</a>
       <a href="#faq">FAQ</a>
@@ -2030,7 +2005,8 @@
           <span>Май 2026</span>
           <span>6 недель</span>
           <span>Онлайн</span>
-          <span>Без кода</span>
+          <span>Для НЕ-программистов</span>
+          <span>Живые занятия + записи</span>
         </div>
       </div>
 
@@ -2045,11 +2021,32 @@
           <p class="hero-lede">
             Покажем, как это делать на понятных рабочих задачах, и доведём до первой автоматизации на ваших данных. Без программирования и без магии
           </p>
+          <p class="hero-sub">
+            Курс для НЕ-программистов. Живые занятия + записи.
+          </p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать, подойдёт ли мне <span class="arr">→</span></a>
             <a class="btn btn-ghost" href="#program">Посмотреть программу</a>
           </div>
         </div>
+
+        <aside class="spec-card reveal">
+          <div class="spec-head">
+            <span>Спецификация</span>
+            <span class="badge"><span class="status-dot" style="background: var(--accent);"></span>live</span>
+          </div>
+          <div class="spec-rows">
+            <div class="spec-row"><span class="k">Старт</span><span class="v">Май 2026</span></div>
+            <div class="spec-row"><span class="k">Длительность</span><span class="v">6 недель</span></div>
+            <div class="spec-row"><span class="k">Формат</span><span class="v">Живые занятия + записи + домашки</span></div>
+            <div class="spec-row"><span class="k">Практика</span><span class="v">онбординг + 4 модуля + свой проект</span></div>
+            <div class="spec-row"><span class="k">Результат</span><span class="v">Первая автоматизация на ваших данных</span></div>
+            <div class="spec-row"><span class="k">Уровень</span><span class="v">Для НЕ-программистов</span></div>
+          </div>
+          <div class="spec-foot">
+            <a href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener" class="btn btn-solid">Записаться в поток <span class="arr">→</span></a>
+          </div>
+        </aside>
       </div>
 
       <div class="hero-hooks reveal">
@@ -2060,13 +2057,13 @@
         </div>
         <div class="hero-hook">
           <span class="k">Старт</span>
-          <strong>Первый запуск вместе</strong>
-          <p>Подписка, установка, первая задача и базовая настройка не остаются на вас в одиночку.</p>
+          <strong>Начинаем с нуля</strong>
+          <p>Подписка, установка, первая простая задача и базовая настройка не остаются на вас в одиночку.</p>
         </div>
         <div class="hero-hook">
           <span class="k">Границы</span>
           <strong>Без программирования</strong>
-          <p>Начинаем с файлов, таблиц, папок и понятных инструкций, а не со сложных интеграций и разработки.</p>
+          <p>Работаем с файлами, таблицами, папками, сайтами и понятными инструкциями.</p>
         </div>
       </div>
     </div>
@@ -2102,11 +2099,11 @@
         </div>
         <div class="rec-item">
           <span class="num">05 / 08</span>
-          <p>Ощущаете, что можно разобраться самим, но непонятно, <em>с чего начать</em>, сколько времени это съест и будет ли результат.</p>
+          <p>Можете разобраться сами, но почему-то <em>опять откладываете</em>.</p>
         </div>
         <div class="rec-item">
           <span class="num">06 / 08</span>
-          <p>Видите ИИ как чат, но хотите, чтобы он работал с файлами, таблицами, сайтами и <em>понятной последовательностью действий</em>.</p>
+          <p>Для вас ИИ — это переписка в чате, а нужен <em>«работник»</em> с файлами, таблицами и сайтами.</p>
         </div>
         <div class="rec-item">
           <span class="num">07 / 08</span>
@@ -2210,10 +2207,10 @@
 
       <div class="not-lede-grid reveal">
         <p class="not-lede">
-          Вокруг ИИ столько шума, что непонятно, чему доверять: чатам, агентам, вайбкодингу, n8n, очередному «революционному» инструменту.
+          Чаты, агенты, вайбкодинг, n8n, «революционные» инструменты — шума много, что делать непонятно.
         </p>
         <p class="not-lede">
-          На курсе отсекаем лишнее, начинаем с простого: какая задача, какие данные на входе, какой результат нужен, как его проверить.
+          На курсе отсекаем лишнее и учим работать с универсальным инструментом: задача, данные на входе, результат и проверка.
         </p>
       </div>
 
@@ -2228,11 +2225,11 @@
         </div>
         <div class="not-row">
           <div>Собирать n8n-схемы из десятков блоков</div>
-          <div>Пользоваться помощником без кодинга</div>
+          <div>Автоматизировать рутину без работы с кодом</div>
         </div>
         <div class="not-row">
-          <div>Учить инструменты ради инструментов</div>
-          <div>Проверять, где это экономит время именно вам</div>
+          <div>Перебирать 50 программ, чтобы закрыть одну задачу</div>
+          <div>Брать один инструмент, который экономит время</div>
         </div>
         <div class="not-row">
           <div>Обещать магию без ошибок</div>
@@ -2250,7 +2247,7 @@
         <div class="sec-num-big">04<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Программа</span>
-          <h2 class="sec-title wide">4 практических модуля + старт + <span class="hl italic">самостоятельный проект</span>.</h2>
+          <h2 class="sec-title wide">Онбординг + 4 практических модуля + <span class="hl italic">свой проект</span>.</h2>
         </div>
       </div>
 
@@ -2263,201 +2260,22 @@
       <div class="launch-card program-launch reveal">
         <div class="label">Стартуем вместе</div>
         <div class="body">
-          <p>Если вы пользовались только бесплатным чатом, не покупали подписку, не ставили Codex или Claude Code и не хотите разбираться с настройкой в одиночку, это нормально.</p>
-          <p>На старте мы пройдём этот путь вместе.</p>
+          <p>Это нормально, если вы пользовались только бесплатным чатом и не хотите разбираться с программами в одиночку.</p>
+          <p>На курсе пройдём этот путь вместе.</p>
           <div class="launch-steps" aria-label="Что проходим на старте">
             <span>Подписка</span>
             <span>Установка</span>
-            <span>Первая задача</span>
-            <span>Проверка результата</span>
+            <span>Первое применение</span>
+            <span>Ведём за руку</span>
           </div>
         </div>
       </div>
 
-      <div class="modules">
-        <article class="module reveal">
-          <div class="mod-index">
-            <div class="n">01<em>.</em></div>
-            <div class="lbl">Модуль</div>
-          </div>
-          <div class="mod-title">
-            <h3>Из страшной таблицы — <em>в отчёт или презентацию</em>.</h3>
-            <div class="chip-group">
-              <span class="chip mod">Файлы</span>
-              <span class="chip mod">Таблицы</span>
-              <span class="chip mod">Отчёт</span>
-              <span class="chip mod">Презентация</span>
-              <span class="chip mod">Преобразование</span>
-            </div>
-          </div>
-          <div class="mod-detail">
-            <div class="mod-field">
-              <div class="k">Что делаем</div>
-              <div class="v">Берём локальную таблицу или выгрузку и превращаем её в понятный рабочий артефакт: HTML-отчёт, презентацию, структурированный документ или сводную таблицу.</div>
-            </div>
-            <div class="mod-field">
-              <div class="k">Результат</div>
-              <div class="v">Умеем отдавать агенту файлы, таблицы и примеры оформления, чтобы получать готовый материал без ручного пересказа.</div>
-            </div>
-          </div>
-        </article>
-
-        <article class="module reveal">
-          <div class="mod-index">
-            <div class="n">02<em>.</em></div>
-            <div class="lbl">Модуль</div>
-          </div>
-          <div class="mod-title">
-            <h3>Ресёрч рынка <em>на HeadHunter</em>.</h3>
-            <div class="chip-group">
-              <span class="chip mod">Ресёрч</span>
-              <span class="chip mod">Вакансии</span>
-              <span class="chip mod">Рынок</span>
-              <span class="chip mod">Фильтрация</span>
-              <span class="chip mod">Лиды</span>
-              <span class="chip mod">Поиск клиентов</span>
-            </div>
-          </div>
-          <div class="mod-detail">
-            <div class="mod-field">
-              <div class="k">Что делаем</div>
-              <div class="v">Используем HeadHunter как понятный источник открытых данных: вакансии, компании, требования, роли, спрос на специалистов и паттерны рынка.</div>
-            </div>
-            <div class="mod-field">
-              <div class="k">Результат</div>
-              <div class="v">Умеем собирать информацию из открытых источников, формулировать критерии отбора и анализировать по смыслу вместо поверхностных фильтров. Понимаем, как переносить подход на поиск работы, анализ рынка, найм, продажи и bizdev.</div>
-            </div>
-          </div>
-        </article>
-
-        <article class="module reveal">
-          <div class="mod-index">
-            <div class="n">03<em>.</em></div>
-            <div class="lbl">Модуль</div>
-          </div>
-          <div class="mod-title">
-            <h3>Telegram <em>без ручного копирования</em>.</h3>
-            <div class="chip-group">
-              <span class="chip mod">Telegram</span>
-              <span class="chip mod">Каналы</span>
-              <span class="chip mod">Сводки</span>
-              <span class="chip mod">Мониторинг</span>
-              <span class="chip mod">Боты</span>
-              <span class="chip mod">Уведомления</span>
-            </div>
-          </div>
-          <div class="mod-detail">
-            <div class="mod-field">
-              <div class="k">Что делаем</div>
-              <div class="v">Собираем информацию из Telegram-каналов и чатов: анализируем сообщения, вытаскиваем темы, инсайты, триггеры и отправляем результат туда, где он нужен.</div>
-            </div>
-            <div class="mod-field">
-              <div class="k">Результат</div>
-              <div class="v">Превращаем Telegram из бесконечной ленты в рабочий источник данных: мониторим каналы, собираем сводки, анализируем обсуждения, отправляем уведомления и дашборды.</div>
-            </div>
-          </div>
-        </article>
-
-        <article class="module reveal">
-          <div class="mod-index">
-            <div class="n">04<em>.</em></div>
-            <div class="lbl">Модуль</div>
-          </div>
-          <div class="mod-title">
-            <h3>Рутина в браузере: <em>формы, кабинеты, LinkedIn</em>.</h3>
-            <div class="chip-group">
-              <span class="chip mod">Browser use</span>
-              <span class="chip mod">Формы</span>
-              <span class="chip mod">LinkedIn</span>
-              <span class="chip mod">Яндекс Метрика</span>
-              <span class="chip mod">Кабинеты</span>
-            </div>
-          </div>
-          <div class="mod-detail">
-            <div class="mod-field">
-              <div class="k">Что делаем</div>
-              <div class="v">Разбираем задачи, где агенту нужно действовать как пользователю: открыть сайт, пройти интерфейс, заполнить форму, добавить людей в LinkedIn, настроить счётчик в Яндекс Метрике.</div>
-            </div>
-            <div class="mod-field">
-              <div class="k">Результат</div>
-              <div class="v">Browser use подключён к агенту и настроен, а вы понимаете, где и как его применять и как сделать, чтобы вас не забанили.</div>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div id="project" class="program-project">
-        <div class="sec-head program-project-head reveal">
-          <div class="right">
-            <span class="sec-label">Финальный проект</span>
-            <h2 class="sec-title">Первая самостоятельная автоматизация под <span class="hl italic">вашу задачу</span>.</h2>
-          </div>
-        </div>
-
-        <div class="proj-block reveal">
-          <div class="proj-tag-box">
-            <div class="top">Week 06</div>
-            <h3><em>Final</em><br>Project</h3>
-            <div class="meta">
-              <span>7 days</span>
-              <span>Your case</span>
-            </div>
-          </div>
-          <div class="proj-content">
-            <p>
-              Выбираем один рабочий процесс из своей реальной жизни: отчёт, ресёрч, таблицу, мониторинг, поиск клиентов, работу с файлами, подготовку данных или другую рутину. За неделю перестраиваем его с помощью ИИ-агента, а на финальной встрече показываем, что получилось.
-            </p>
-            <div class="proj-result">
-              <span class="label">Результат</span>
-              <p>У вас останется не только набор учебных демо, но и первый собранный сценарий под ваши задачи и контекст. Его можно использовать дальше, докручивать и делиться с командой.</p>
-            </div>
-            <ul class="wins-list">
-              <li><strong>Кейс под вашу нишу</strong>Не учебный пример, а сценарий из вашей работы.</li>
-              <li><strong>Нужный артефакт</strong>Отчёт, таблица, сводка, ресёрч, мониторинг, список или подготовленный файл.</li>
-              <li><strong>Понимание границ</strong>Где агент полезен, где опасен, а где проще сделать руками.</li>
-              <li><strong>Шаблон для следующих задач</strong>Подход можно повторять на похожих процессах.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="meta-strip reveal">
-        <span class="tag">На полях</span>
-        <h4>Общие особенности работы с агентами — на фоне всех модулей</h4>
-        <ul>
-          <li>Ставить задачи: контекст, входные данные и критерии результата</li>
-          <li>Настраивать память агента на правильный путь</li>
-          <li>Расширять возможности через skills и MCP</li>
-          <li>Создавать интерактивные артефакты</li>
-          <li>Получать от агента обратную связь</li>
-          <li>Запускать самопроверку результата</li>
-        </ul>
-        <p class="safety-note">
-          Отдельно разбираем безопасность данных: какие файлы можно загружать, что обезличивать, где работать на учебных примерах и какие задачи не стоит отдавать агенту без согласования внутри компании.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FORMAT -->
-  <section id="format">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num-big">05<span class="slash">/</span></div>
-        <div class="right">
-          <span class="sec-label">Формат и длительность</span>
-          <h2 class="sec-title wide">6 недель. Живые занятия, <span class="hl italic">основная практика</span> — дома.</h2>
-          <p class="sec-intro">
-            Неделя знакомства и настройки, 4 недели практических воркшопов с домашками, неделя на финальный проект.
-          </p>
-        </div>
-      </div>
-
-      <div class="format-grid reveal">
+      <div class="format-grid program-schedule reveal">
         <ol class="timeline">
           <li>
             <span class="idx">01</span>
-            <div><strong>Неделя 0</strong><span class="desc">Настройка и первый запуск.</span></div>
+            <div><strong>Неделя 0</strong><span class="desc">Онбординг и первое применение.</span></div>
           </li>
           <li>
             <span class="idx">02</span>
@@ -2465,7 +2283,7 @@
           </li>
           <li>
             <span class="idx">03</span>
-            <div><strong>Неделя 5</strong><span class="desc">Финальный проект.</span></div>
+            <div><strong>Неделя 5</strong><span class="desc">Свой проект.</span></div>
           </li>
           <li>
             <span class="idx">04</span>
@@ -2490,12 +2308,167 @@
           </div>
           <div class="stat">
             <div class="txt">
-              <h4>Записи</h4>
+              <h4>Живые занятия + записи</h4>
               <p>Занятия проходят вживую, записи остаются участникам.</p>
             </div>
             <div class="big">∞<small>доступ</small></div>
           </div>
         </div>
+      </div>
+
+      <div class="modules">
+        <article class="module reveal">
+          <div class="mod-index">
+            <div class="n">01<em>.</em></div>
+            <div class="lbl">Модуль</div>
+          </div>
+          <div class="mod-title">
+            <h3>Документ или таблица — <em>в рабочий артефакт</em>.</h3>
+            <div class="chip-group">
+              <span class="chip mod">Файлы</span>
+              <span class="chip mod">Таблицы</span>
+              <span class="chip mod">Отчёт</span>
+              <span class="chip mod">Презентация</span>
+              <span class="chip mod">Документ</span>
+            </div>
+          </div>
+          <div class="mod-detail">
+            <div class="mod-field">
+              <div class="k">Что делаем</div>
+              <div class="v">Берём документ или таблицу и превращаем в рабочий артефакт: отчёт, презентацию, структурированный документ или сводную таблицу.</div>
+            </div>
+            <div class="mod-field">
+              <div class="k">Результат</div>
+              <div class="v">Получаем контролируемый результат без ручного пересказа и галлюцинаций.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="module reveal">
+          <div class="mod-index">
+            <div class="n">02<em>.</em></div>
+            <div class="lbl">Модуль</div>
+          </div>
+          <div class="mod-title">
+            <h3>Сбор информации <em>из открытых источников</em>.</h3>
+            <div class="chip-group">
+              <span class="chip mod">Ресёрч</span>
+              <span class="chip mod">HeadHunter</span>
+              <span class="chip mod">Рынок</span>
+              <span class="chip mod">Фильтрация</span>
+              <span class="chip mod">Лиды</span>
+              <span class="chip mod">Поиск клиентов</span>
+            </div>
+          </div>
+          <div class="mod-detail">
+            <div class="mod-field">
+              <div class="k">Что делаем</div>
+              <div class="v">На примере HeadHunter собираем вакансии, компании, требования, роли, спрос на специалистов и паттерны рынка.</div>
+            </div>
+            <div class="mod-field">
+              <div class="k">Результат</div>
+              <div class="v">Умеем собирать открытые данные по критериям, чистить выдачу и превращать её в выводы для найма, продаж, bizdev или анализа рынка.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="module reveal">
+          <div class="mod-index">
+            <div class="n">03<em>.</em></div>
+            <div class="lbl">Модуль</div>
+          </div>
+          <div class="mod-title">
+            <h3>Сбор информации <em>из закрытых источников</em>.</h3>
+            <div class="chip-group">
+              <span class="chip mod">Telegram</span>
+              <span class="chip mod">Каналы</span>
+              <span class="chip mod">Чаты</span>
+              <span class="chip mod">Сводки</span>
+              <span class="chip mod">Мониторинг</span>
+              <span class="chip mod">Уведомления</span>
+            </div>
+          </div>
+          <div class="mod-detail">
+            <div class="mod-field">
+              <div class="k">Что делаем</div>
+              <div class="v">Делаем выгрузку, обработку и ресёрч по Telegram: каналы, чаты, обсуждения, темы, инсайты и триггеры.</div>
+            </div>
+            <div class="mod-field">
+              <div class="k">Результат</div>
+              <div class="v">Мониторим каналы и чаты, собираем сводки, анализируем обсуждения, отправляем уведомления и дашборды.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="module reveal">
+          <div class="mod-index">
+            <div class="n">04<em>.</em></div>
+            <div class="lbl">Модуль</div>
+          </div>
+          <div class="mod-title">
+            <h3>Рутина в браузере: <em>формы, кабинеты, LinkedIn</em>.</h3>
+            <div class="chip-group">
+              <span class="chip mod">Браузер</span>
+              <span class="chip mod">Формы</span>
+              <span class="chip mod">LinkedIn</span>
+              <span class="chip mod">Яндекс Метрика</span>
+              <span class="chip mod">Кабинеты</span>
+            </div>
+          </div>
+          <div class="mod-detail">
+            <div class="mod-field">
+              <div class="k">Что делаем</div>
+              <div class="v">Даём агенту доступ к личному браузеру: заполнить форму, добавить людей в LinkedIn, настроить счётчик в Яндекс Метрике.</div>
+            </div>
+            <div class="mod-field">
+              <div class="k">Результат</div>
+              <div class="v">Браузер подключён к агенту и настроен, а вы понимаете, где и как его применять, чтобы вас не забанили.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div id="project" class="program-project">
+        <div class="sec-head program-project-head reveal">
+          <div class="right">
+            <span class="sec-label">Финальный проект</span>
+            <h2 class="sec-title">Первая самостоятельная автоматизация под <span class="hl italic">вашу задачу</span>.</h2>
+          </div>
+        </div>
+
+        <div class="proj-block reveal">
+          <div class="proj-tag-box">
+            <div class="top">Week 06</div>
+            <h3><em>Final</em><br>Project</h3>
+            <div class="meta">
+              <span>7 days</span>
+              <span>Your case</span>
+            </div>
+          </div>
+          <div class="proj-content">
+            <p>
+              Вы берёте один свой процесс: отчёт, ресёрч, таблицу, мониторинг, поиск клиентов, подготовку файлов или другую рутину. Перестраиваем его с помощью ИИ-агента, на финальной встрече — презентуем.
+            </p>
+            <div class="proj-result">
+              <span class="label">Результат</span>
+              <p>У вас остаётся первый собранный сценарий под ваши задачи и контекст.</p>
+            </div>
+            <ul class="wins-list">
+              <li><strong>Кейс под вашу нишу</strong>Не учебный пример, а сценарий из вашей работы.</li>
+              <li><strong>Шаблон для следующих задач</strong>Подход можно повторять на похожих процессах.</li>
+              <li><strong>Нужный артефакт</strong>Отчёт, таблица, сводка, ресёрч, мониторинг, список или подготовленный файл.</li>
+              <li><strong>Понимание границ</strong>Где агент полезен, где опасен, а где проще сделать руками.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="meta-strip reveal">
+        <span class="tag">Безопасность</span>
+        <h4>Отдельно разбираем работу с данными</h4>
+        <p class="safety-note">
+          Отдельно разбираем безопасность данных: какие файлы можно загружать, что обезличивать, где работать на учебных примерах и какие задачи не стоит отдавать агенту без согласования внутри компании.
+        </p>
       </div>
     </div>
   </section>
@@ -2504,24 +2477,24 @@
   <section id="community" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">06<span class="slash">/</span></div>
+        <div class="sec-num-big">05<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Комьюнити</span>
-          <h2 class="sec-title">Все говорят про комьюнити — <span class="hl italic">мы делаем</span>.</h2>
+          <h2 class="sec-title"><span class="hl italic">Нетворкинг</span>.</h2>
         </div>
       </div>
 
       <div class="com-grid">
         <div class="com-text reveal">
-          <p class="big">Помните, как в универе? Ценность обучения складывалась и из образования, и из социальных связей.</p>
-          <p class="dim">Мы будем делать так, чтобы незнакомые друг другу люди обсуждали подходы, делились находками, сверялись друг с другом и видели, как похожие задачи решают люди с разным бэкграундом.</p>
+          <p class="big">Если вы попали на этот курс, у вас уже есть что-то общее.</p>
+          <p class="dim">Мы будем помогать вам знакомиться, общаться, обсуждать подходы, делиться находками и смотреть, как похожие задачи решают люди с разным бэкграундом. А ещё поможем не потерять связь после курса.</p>
         </div>
         <ul class="com-reasons reveal">
+          <li>Близкие по вайбу люди</li>
+          <li>Рабочие знакомства</li>
+          <li>Остаются единомышленники</li>
           <li>Проще держать темп</li>
           <li>Видно, как думают другие</li>
-          <li>Появляются рабочие знакомства</li>
-          <li>Находишь идеи и людей</li>
-          <li>Остаются единомышленники</li>
           <li>Это весело</li>
         </ul>
       </div>
@@ -2532,7 +2505,7 @@
   <section id="pricing">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">07<span class="slash">/</span></div>
+        <div class="sec-num-big">06<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Тарифы</span>
           <h2 class="sec-title">Выберите <span class="hl italic">свой режим</span>.</h2>
@@ -2543,10 +2516,9 @@
         <div class="tier">
           <div class="t-num">Plan 01</div>
           <h4>Базовый</h4>
-          <p class="for">Для тех, кто хочет разобраться в подходе и попробовать самостоятельно.</p>
+          <p class="for">Без проверки домашек.</p>
           <ul>
-            <li>Живые занятия</li>
-            <li>Записи</li>
+            <li>Живые занятия + записи</li>
             <li>Материалы и задания</li>
             <li>Общий чат</li>
             <li>Финальная встреча</li>
@@ -2563,7 +2535,7 @@
           <span class="tag-top">★ Выбор</span>
           <div class="t-num">Plan 02</div>
           <h4>С проверкой</h4>
-          <p class="for">Для тех, кто хочет пройти курс руками и получить обратную связь.</p>
+          <p class="for">Проверяем процесс решения, помогаем стать эффективнее.</p>
           <ul>
             <li>Всё из базового тарифа</li>
             <li>Проверка домашних заданий</li>
@@ -2576,7 +2548,7 @@
         <div class="tier">
           <div class="t-num">Plan 03</div>
           <h4>VIP</h4>
-          <p class="for">Для тех, кто хочет больше личного внимания.</p>
+          <p class="for">2 консультации 1 на 1.</p>
           <ul>
             <li>Всё из тарифа с проверкой</li>
             <li>2 личные консультации</li>
@@ -2598,7 +2570,7 @@
   <section id="authors" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">08<span class="slash">/</span></div>
+        <div class="sec-num-big">07<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Кто ведёт</span>
           <h2 class="sec-title"><span class="hl italic">Коля и Саша</span>.</h2>
@@ -2642,7 +2614,7 @@
   <section id="faq">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">09<span class="slash">/</span></div>
+        <div class="sec-num-big">08<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">FAQ</span>
           <h2 class="sec-title">Частые <span class="hl italic">вопросы</span>.</h2>
