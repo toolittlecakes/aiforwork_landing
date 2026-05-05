@@ -1525,11 +1525,13 @@
     padding-top: 32px;
     border-top: 1px solid var(--rule);
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     gap: 14px;
-    flex-wrap: wrap;
   }
   .pricing-tail .btn {
+    width: min(100%, 360px);
     white-space: normal;
     text-align: center;
     justify-content: center;
@@ -1539,9 +1541,6 @@
     .tier { border-right: none; border-bottom: 1px solid var(--rule); }
     .tier:last-child { border-bottom: none; }
     .pricing-tail { padding-top: 28px; }
-  }
-  @media (max-width: 640px) {
-    .pricing-tail .btn { width: 100%; }
   }
 
   /* ==================== AUTHORS ==================== */
