@@ -414,7 +414,7 @@
 
   .hero-meta {
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.75fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 64px;
     align-items: start;
   }
@@ -441,76 +441,6 @@
     flex-wrap: wrap;
   }
 
-  .spec-card {
-    border: 1px solid var(--rule);
-    background: var(--paper);
-    padding: 0;
-    position: relative;
-  }
-  .spec-card::before {
-    content: "";
-    position: absolute;
-    top: -8px; left: -8px;
-    width: 100%; height: 100%;
-    background: var(--accent);
-    z-index: -1;
-  }
-  .spec-head {
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: var(--mono);
-    font-size: 11.5px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-  }
-  .spec-head .badge {
-    display: inline-flex;
-    gap: 6px;
-    align-items: center;
-    color: var(--accent);
-  }
-  .spec-rows {
-    padding: 8px 20px;
-  }
-  .spec-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(120px, 220px);
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px dashed var(--rule-soft);
-    font-size: 14px;
-  }
-  .spec-row:last-child { border-bottom: none; }
-  .spec-row .k {
-    color: var(--ink-3);
-    font-family: var(--mono);
-    font-size: 11.5px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    align-self: center;
-  }
-  .spec-row .v {
-    font-family: var(--display);
-    font-weight: 500;
-    color: var(--ink);
-    text-align: right;
-    font-size: 15px;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-  }
-  .spec-foot {
-    padding: 16px 20px;
-    border-top: 1px solid var(--rule);
-  }
-  .spec-foot .btn {
-    width: 100%;
-    justify-content: center;
-  }
-
   @media (max-width: 900px) {
     .hero-meta { grid-template-columns: 1fr; gap: 36px; }
     .hero-top { grid-template-columns: 1fr; align-items: flex-start; }
@@ -519,7 +449,7 @@
   .hero-hooks {
     margin-top: 56px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     border-top: 1px solid var(--rule);
     border-left: 1px solid var(--rule);
     background: var(--paper);
@@ -552,6 +482,9 @@
     font-size: 14.5px;
     line-height: 1.55;
     color: var(--ink-2);
+  }
+  @media (max-width: 1080px) {
+    .hero-hooks { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 860px) {
     .hero-hooks { grid-template-columns: 1fr; margin-top: 40px; }
@@ -2074,36 +2007,23 @@
             <a class="btn btn-ghost" href="#program">Посмотреть программу</a>
           </div>
         </div>
-
-        <aside class="spec-card reveal">
-          <div class="spec-head">
-            <span>Спецификация</span>
-            <span class="badge"><span class="status-dot" style="background: var(--accent);"></span>live</span>
-          </div>
-          <div class="spec-rows">
-            <div class="spec-row"><span class="k">Старт</span><span class="v">Май 2026</span></div>
-            <div class="spec-row"><span class="k">Длительность</span><span class="v">6 недель</span></div>
-            <div class="spec-row"><span class="k">Формат</span><span class="v">Живые занятия + записи + домашки</span></div>
-            <div class="spec-row"><span class="k">Практика</span><span class="v">онбординг + 4 модуля + свой проект</span></div>
-            <div class="spec-row"><span class="k">Результат</span><span class="v">Первая автоматизация на ваших данных</span></div>
-            <div class="spec-row"><span class="k">Уровень</span><span class="v">Для НЕ-программистов</span></div>
-          </div>
-          <div class="spec-foot">
-            <a href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener" class="btn btn-solid">Записаться в поток <span class="arr">→</span></a>
-          </div>
-        </aside>
       </div>
 
       <div class="hero-hooks reveal">
         <div class="hero-hook">
-          <span class="k">Результат</span>
-          <strong>Первая автоматизация на ваших данных</strong>
-          <p>Берёте реальную рабочую задачу и собираете сценарий, который можно повторять после курса.</p>
-        </div>
-        <div class="hero-hook">
           <span class="k">Старт</span>
           <strong>Начинаем с нуля</strong>
           <p>Подписка, установка, первая простая задача и базовая настройка не остаются на вас в одиночку.</p>
+        </div>
+        <div class="hero-hook">
+          <span class="k">4 модуля</span>
+          <strong>Практика на реальных кейсах</strong>
+          <p>На примерах из B2B-воркшопов разбираем основные подходы и подводные камни в использовании ИИ-агентов.</p>
+        </div>
+        <div class="hero-hook">
+          <span class="k">Результат</span>
+          <strong>Агент решил задачу на ваших данных</strong>
+          <p>Берёте реальную рабочую задачу и собираете сценарий, который можно повторять после курса.</p>
         </div>
         <div class="hero-hook">
           <span class="k">Границы</span>
