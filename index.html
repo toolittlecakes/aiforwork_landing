@@ -1544,6 +1544,10 @@
   }
 
   /* ==================== AUTHORS ==================== */
+  .authors-head {
+    column-gap: 40px;
+    row-gap: 24px;
+  }
   .auth-intro {
     font-family: var(--display);
     font-size: clamp(18px, 2vw, 22px);
@@ -1551,8 +1555,11 @@
     color: var(--ink-2);
     letter-spacing: -0.015em;
     max-width: 62ch;
-    margin-top: 12px;
+    margin: 0;
     font-weight: 400;
+  }
+  .authors-head .auth-intro {
+    grid-column: 2;
   }
   .authors {
     display: grid;
@@ -1641,6 +1648,9 @@
     .authors { grid-template-columns: 1fr; }
     .author { border-right: none; border-bottom: 1px solid var(--rule); }
     .author:last-child { border-bottom: none; }
+  }
+  @media (max-width: 860px) {
+    .authors-head .auth-intro { grid-column: 1; }
   }
   @media (max-width: 480px) {
     .author { grid-template-columns: 96px 1fr; gap: 20px; padding: 30px 24px; }
@@ -2521,15 +2531,15 @@
   <!-- AUTHORS -->
   <section id="authors" class="paper">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head authors-head reveal">
         <div class="sec-num-big">08<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Кто ведёт</span>
           <h2 class="sec-title"><span class="hl italic">Коля и Саша</span>.</h2>
-          <p class="auth-intro">
-            Коля отвечает за техническую применимость: где агент реально помогает, где ограничения, как не сломать процесс и как проверить результат.<br><br>Саша отвечает за образовательный формат, структуру и комьюнити — чтобы было не стыдно спросить, и чтобы курс не превратился в набор сложных программистских штук.
-          </p>
         </div>
+        <p class="auth-intro">
+          Коля отвечает за техническую применимость: где агент реально помогает, где ограничения, как не сломать процесс и как проверить результат.<br><br>Саша отвечает за образовательный формат, структуру и комьюнити — чтобы было не стыдно спросить, и чтобы курс не превратился в набор сложных программистских штук.
+        </p>
       </div>
 
       <div class="authors reveal">
