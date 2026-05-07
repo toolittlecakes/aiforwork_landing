@@ -185,6 +185,15 @@
     box-shadow: none;
   }
   .btn-ghost:hover { background: var(--ink); color: var(--bg); }
+  .btn-dark {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .btn-dark:hover {
+    background: #000;
+    color: var(--bg);
+  }
   .btn-sm { padding: 9px 15px; font-size: 13px; }
   .btn .arr { transition: transform .15s; display: inline-block; }
   .btn:hover .arr { transform: translateX(3px); }
@@ -1184,23 +1193,12 @@
     border-right: 1px solid var(--rule);
   }
   .timeline li {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 24px;
     padding: 20px 28px;
     border-bottom: 1px solid var(--rule-soft);
-    align-items: center;
     font-size: 15px;
   }
   .timeline li:last-child { border-bottom: none; }
   .timeline li:hover { background: var(--bg); }
-  .timeline li .idx {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    font-weight: 500;
-  }
   .timeline li strong {
     font-family: var(--display);
     font-weight: 500;
@@ -1440,6 +1438,16 @@
     white-space: normal;
     text-align: center;
     justify-content: center;
+  }
+  .company-divider {
+    width: min(100%, 360px);
+    margin: 12px 0 -2px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-align: center;
   }
   @media (max-width: 900px) {
     .pricing { grid-template-columns: 1fr; }
@@ -1852,7 +1860,7 @@
         <div class="reveal">
           <h1>
             <span class="block">Как отдать рабочую <span class="box italic">рутину</span> ИИ-агенту,</span>
-            <span class="block">оставив себе <span class="box italic">самое интересное</span></span>
+            <span class="block">оставив себе <span class="box italic">экспертизу</span></span>
           </h1>
           <p class="hero-lede">
             Научим на понятных рабочих задачах, и доведём до первой автоматизации на ваших данных.
@@ -2090,19 +2098,15 @@
       <div class="format-grid program-schedule reveal">
         <ol class="timeline">
           <li>
-            <span class="idx">01</span>
-            <div><strong>Неделя 0</strong><span class="desc">Онбординг и первое применение.</span></div>
+            <div><strong>Неделя 1</strong><span class="desc">Онбординг и первое применение.</span></div>
           </li>
           <li>
-            <span class="idx">02</span>
-            <div><strong>Недели 1–4</strong><span class="desc">Практические воркшопы.</span></div>
+            <div><strong>Недели 2–5</strong><span class="desc">Практические воркшопы.</span></div>
           </li>
           <li>
-            <span class="idx">03</span>
-            <div><strong>Неделя 5</strong><span class="desc">Свой проект.</span></div>
+            <div><strong>Неделя 6</strong><span class="desc">Свой проект.</span></div>
           </li>
           <li>
-            <span class="idx">04</span>
             <div><strong>Финальная встреча</strong><span class="desc">Показываем результаты.</span></div>
           </li>
         </ol>
@@ -2335,16 +2339,16 @@
           <p>Больше не нужно писать код: достаточно логики, вашей экспертности и текста с описанием процесса</p>
         </article>
         <article class="why-card">
-          <h3>Инструментов слишком много, что выбрать?</h3>
-          <p>Всё меняется каждую неделю. Перебрать все варианты невозможно. На курсе ведём через универсальные инструменты</p>
-        </article>
-        <article class="why-card">
-          <h3>Нагнать прогресс уже сложно. А какой смысл?</h3>
-          <p>Навыки работы с ИИ теперь и в вакансиях за пределами разработки – это новое "владеет Microsoft Office". Умеешь управлять результатом с ИИ - остаёшься востребован</p>
-        </article>
-        <article class="why-card">
           <h3>ИИ вышел за пределы чата</h3>
           <p>ИИ-агенты резко стали автономнее. Они могут вызывать инструменты, проверять себя, сами раскладывать ваши задачи на шаги без булшита и галлюцинаций</p>
+        </article>
+        <article class="why-card">
+          <h3>Нагнать прогресс становится сложнее</h3>
+          <p>Всё меняется каждую неделю. Следить за всеми апдейтами невозможно, а без опыта сложно понять, что важно и нужно</p>
+        </article>
+        <article class="why-card">
+          <h3>Рынок найма перестраивается</h3>
+          <p>Пока бизнес сокращает штат, навыки работы с ИИ приходят в вакансии за пределами разработки – это новое "владеть Microsoft Office". Умеешь приводить ИИ к результату - остаёшься востребован</p>
         </article>
       </div>
     </div>
@@ -2407,8 +2411,9 @@
 
       <div class="pricing-tail reveal">
         <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать условия <span class="arr">→</span></a>
-        <a class="btn btn-ghost" href="https://t.me/m/VltsQycYNGM6" target="_blank" rel="noopener">Хочу, чтобы оплатила компания <span class="arr">→</span></a>
-        <a class="btn btn-ghost" href="https://t.me/m/nTDXSturMjRi" target="_blank" rel="noopener">Записать моих сотрудников <span class="arr">→</span></a>
+        <a class="btn btn-ghost" href="https://t.me/m/VltsQycYNGM6" target="_blank" rel="noopener">Хочу, чтобы оплатил работодатель <span class="arr">→</span></a>
+        <div class="company-divider">Бизнесу</div>
+        <a class="btn btn-dark" href="https://t.me/m/nTDXSturMjRi" target="_blank" rel="noopener">Записать моих сотрудников <span class="arr">→</span></a>
       </div>
     </div>
   </section>
