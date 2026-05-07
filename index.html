@@ -489,8 +489,8 @@
     border-left: 1px solid color-mix(in srgb, var(--bg) 25%, transparent);
   }
   .why-card {
-    min-height: 280px;
-    padding: 34px 28px 32px;
+    min-height: 210px;
+    padding: 30px 28px 28px;
     border-right: 1px solid color-mix(in srgb, var(--bg) 25%, transparent);
     border-bottom: 1px solid color-mix(in srgb, var(--bg) 25%, transparent);
     display: flex;
@@ -520,7 +520,7 @@
   }
   @media (max-width: 640px) {
     .why-grid { grid-template-columns: 1fr; }
-    .why-card { min-height: 220px; padding: 28px 24px; }
+    .why-card { min-height: 0; padding: 28px 24px; }
   }
 
   /* ==================== RECOGNIZE ==================== */
@@ -754,6 +754,27 @@
     border-left: 1px solid var(--rule);
     background: var(--paper);
   }
+  .segment-table-head {
+    display: grid;
+    grid-template-columns: 52px minmax(220px, .78fr) minmax(0, 1.5fr);
+    gap: 18px;
+    align-items: center;
+    padding: 12px 24px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .segment-head-flow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .segment-head-flow span:last-child {
+    padding-left: 16px;
+  }
   .segment-card {
     border-right: 1px solid var(--rule);
     border-bottom: 1px solid var(--rule);
@@ -794,15 +815,6 @@
     border-right: none;
     background: var(--paper);
   }
-  .segment-flow span {
-    display: block;
-    margin-bottom: 8px;
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
   .segment-flow strong {
     display: block;
     font-weight: 500;
@@ -816,6 +828,19 @@
       grid-template-columns: 44px 1fr;
       gap: 12px;
       padding: 20px;
+    }
+    .segment-table-head {
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      padding: 14px 20px;
+    }
+    .segment-head-flow {
+      grid-column: 2 / -1;
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .segment-head-flow span:last-child {
+      padding-left: 0;
     }
     .segment-flow {
       grid-column: 2 / -1;
@@ -1438,8 +1463,9 @@
     margin: 0;
     font-weight: 400;
   }
-  .authors-head .auth-intro {
-    grid-column: 2;
+  .authors + .auth-intro {
+    margin-top: 34px;
+    max-width: 74ch;
   }
   .authors {
     display: grid;
@@ -1528,9 +1554,6 @@
     .authors { grid-template-columns: 1fr; }
     .author { border-right: none; border-bottom: 1px solid var(--rule); }
     .author:last-child { border-bottom: none; }
-  }
-  @media (max-width: 860px) {
-    .authors-head .auth-intro { grid-column: 1; }
   }
   @media (max-width: 480px) {
     .author { grid-template-columns: 96px 1fr; gap: 20px; padding: 30px 24px; }
@@ -1877,13 +1900,21 @@
       </div>
 
       <div class="segment-list reveal">
+        <div class="segment-table-head" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <div class="segment-head-flow">
+            <span>С чем работаем</span>
+            <span>Что важно</span>
+          </div>
+        </div>
         <div class="segment-card">
           <div class="segment-row">
             <span class="segment-num">01</span>
             <span class="segment-title">Маркетинг, ресёрч и контент</span>
             <div class="segment-flow">
-              <div><span>На вход</span><strong>Видео, Telegram и конкуренты</strong></div>
-              <div><span>На выход</span><strong>Темы, посевы и контент</strong></div>
+              <div><strong>Видео, Telegram и конкуренты</strong></div>
+              <div><strong>Темы, посевы и контент</strong></div>
             </div>
           </div>
         </div>
@@ -1892,8 +1923,8 @@
             <span class="segment-num">02</span>
             <span class="segment-title">Sales и bizdev</span>
             <div class="segment-flow">
-              <div><span>На вход</span><strong>Открытые источники и Telegram</strong></div>
-              <div><span>На выход</span><strong>Лиды, триггеры и заходы</strong></div>
+              <div><strong>Публичные базы, тендеры и Telegram</strong></div>
+              <div><strong>Лиды, триггеры и заходы</strong></div>
             </div>
           </div>
         </div>
@@ -1902,8 +1933,8 @@
             <span class="segment-num">03</span>
             <span class="segment-title">Операционка, финансы и внедрение</span>
             <div class="segment-flow">
-              <div><span>На вход</span><strong>CRM, выгрузки и клиентские файлы</strong></div>
-              <div><span>На выход</span><strong>Отчёты, чистые данные и нормальный формат</strong></div>
+              <div><strong>CRM, выгрузки и клиентские файлы</strong></div>
+              <div><strong>Отчёты, чистые данные и нормальный формат</strong></div>
             </div>
           </div>
         </div>
@@ -1912,8 +1943,8 @@
             <span class="segment-num">04</span>
             <span class="segment-title">Руководители, фаундеры и проектные менеджеры</span>
             <div class="segment-flow">
-              <div><span>На вход</span><strong>Звонки, переписки и статусы</strong></div>
-              <div><span>На выход</span><strong>Обещания, решения, риски без глухого телефона</strong></div>
+              <div><strong>Звонки, переписки, задачи и статусы</strong></div>
+              <div><strong>Обещания, решения, риски — без глухого телефона</strong></div>
             </div>
           </div>
         </div>
@@ -1922,8 +1953,8 @@
             <span class="segment-num">05</span>
             <span class="segment-title">HR и рекрутинг</span>
             <div class="segment-flow">
-              <div><span>На вход</span><strong>HH и резюме</strong></div>
-              <div><span>На выход</span><strong>Карта рынка и точечный подбор кандидатов</strong></div>
+              <div><strong>HH, LinkedIn и резюме</strong></div>
+              <div><strong>Карта рынка и точечный подбор кандидатов</strong></div>
             </div>
           </div>
         </div>
@@ -1948,7 +1979,7 @@
       </div>
 
       <div class="aud-note reveal">
-        <p>У нас нет цели забрать <em>интересную часть</em> работы. Пока агент занимается рутиной: собирает данные, чистит таблицу, ищет ссылки или собирает черновик отчёта — вы занимаетесь смыслами, доменными решениями, выбором подхода и качеством результата.</p>
+        <p>У нас нет цели отдать <em>интересную часть</em> работы. Пока агент занимается рутиной: собирает данные, чистит таблицу, ищет ссылки или собирает черновик отчёта — вы занимаетесь смыслами, доменными решениями, выбором подхода и качеством результата.</p>
       </div>
     </div>
   </section>
@@ -2080,7 +2111,7 @@
           <div class="stat">
             <div class="txt">
               <h4>Продолжительность</h4>
-              <p>Неделя старта + 4 практики + неделя финального проекта.</p>
+              <p>Неделя старта + 4 практики + неделя проекта.</p>
             </div>
             <div class="big">6<small>недель</small></div>
           </div>
@@ -2239,7 +2270,7 @@
 
         <article id="project" class="module launch-module project-module reveal">
           <div class="mod-index">
-            <div class="launch-label">Финальный проект</div>
+            <div class="launch-label">Проект</div>
           </div>
           <div class="mod-title">
             <h3>Автоматизация под <em>вашу задачу</em>.</h3>
@@ -2247,7 +2278,7 @@
           <div class="mod-detail">
             <div class="mod-field">
               <div class="k">Что делаем</div>
-              <div class="v">Вы берёте один свой процесс: отчёт, ресёрч, таблицу, мониторинг, поиск клиентов, подготовку файлов или другую рутину. Перестраиваете его с помощью ИИ-агента, на финальной встрече — презентуете.</div>
+              <div class="v">Берём свой процесс: отчёт, ресёрч, таблицу, мониторинг, поиск клиентов, подготовку файлов или другую рутину. Перестраиваем его с помощью ИИ-агента, на финальной встрече — презентуем.</div>
             </div>
             <div class="mod-field">
               <div class="k">Результат</div>
@@ -2281,7 +2312,6 @@
           <li>Видно, как думают другие</li>
           <li>Рабочие знакомства</li>
           <li>Единомышленники</li>
-          <li>Вайб универа</li>
           <li>Это весело</li>
         </ul>
       </div>
@@ -2392,9 +2422,6 @@
           <span class="sec-label">Кто ведёт</span>
           <h2 class="sec-title"><span class="hl italic">Коля и Саша</span>.</h2>
         </div>
-        <p class="auth-intro">
-          Коля отвечает за техническую применимость: где агент реально помогает, где ограничения, как не сломать процесс и как проверить результат.<br><br>Саша отвечает за образовательный формат, структуру и комьюнити — чтобы было не стыдно спросить, и чтобы курс не превратился в набор сложных программистских штук.
-        </p>
       </div>
 
       <div class="authors reveal">
@@ -2402,7 +2429,7 @@
           <div class="portrait"><img src="/images/kolya.jpg" alt="Коля Шейко" loading="lazy"></div>
           <div>
             <h4>Коля Шейко</h4>
-            <div class="role">Технический автор · b2b-обучение</div>
+            <div class="role">Контент · Кейсы</div>
             <ul>
               <li>Фаундер <a href="https://grably.tech" target="_blank" rel="noopener">grably.tech</a> — кастомная ИИ-разработка</li>
               <li>Ко-фаундер ИИ-конференций <a href="https://entropy.talk" target="_blank" rel="noopener">entropy.talk</a></li>
@@ -2424,6 +2451,9 @@
           </div>
         </div>
       </div>
+      <p class="auth-intro reveal">
+        Коля отвечает за техническую применимость: где агент реально помогает, где ограничения, как не сломать процесс и как проверить результат.<br><br>Саша отвечает за образовательный формат, структуру и комьюнити — чтобы было не стыдно спросить, и чтобы курс не превратился в набор сложных программистских штук.
+      </p>
     </div>
   </section>
 
@@ -2441,7 +2471,7 @@
       <div class="faq reveal">
         <details>
           <summary>Я вообще не могу и не хочу работать с кодом. Я справлюсь? Автоматизации же подразумевают кодинг.</summary>
-          <p>Да. Курс как раз для неразработчиков: людей без программирования, API, n8n и технического бэкграунда. Мы начинаем с простого: как поставить инструмент, как дать первую задачу, как работать с файлами и как проверить результат.</p>
+          <p>Курс как раз для неразработчиков: людей без программирования, API, n8n и технического бэкграунда. Мы начинаем с простого: как поставить инструмент, как дать первую задачу, как работать с файлами и как проверить результат.</p>
         </details>
         <details>
           <summary>Когда думаю про курс, кажется, что это будет муторно и сложно</summary>
