@@ -458,7 +458,7 @@
   .hero-hooks {
     margin-top: 56px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     border-top: 1px solid var(--rule);
     border-left: 1px solid var(--rule);
     background: var(--paper);
@@ -780,9 +780,16 @@
   .segment-head-flow {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--rule-soft);
+    background: var(--bg);
+  }
+  .segment-head-flow span {
+    padding: 10px 16px;
+    border-right: 1px solid var(--rule-soft);
   }
   .segment-head-flow span:last-child {
-    padding-left: 16px;
+    border-right: none;
+    background: var(--paper);
   }
   .segment-card {
     border-right: 1px solid var(--rule);
@@ -846,10 +853,13 @@
     .segment-head-flow {
       grid-column: 2 / -1;
       grid-template-columns: 1fr;
-      gap: 4px;
+    }
+    .segment-head-flow span {
+      border-right: none;
+      border-bottom: 1px solid var(--rule-soft);
     }
     .segment-head-flow span:last-child {
-      padding-left: 0;
+      border-bottom: none;
     }
     .segment-flow {
       grid-column: 2 / -1;
@@ -1849,7 +1859,7 @@
     <div class="wrap hero-grid">
       <div class="hero-top">
         <div class="dateline">
-          <span>Май 2026</span>
+          <span>Старт 25 мая</span>
           <span>Онлайн</span>
           <span>Для не-программистов</span>
           <span>Живые занятия + записи</span>
@@ -1888,6 +1898,10 @@
           <strong>Финальный проект</strong>
           <p>ИИ-автоматизация под вашу собственную рабочую задачу</p>
         </div>
+        <div class="hero-hook">
+          <strong>Без кодинга</strong>
+          <p>Работа с файлами, таблицами, папками, сайтами – всё текстом</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1912,8 +1926,8 @@
           <span></span>
           <span></span>
           <div class="segment-head-flow">
-            <span>С чем работаем</span>
-            <span>Что важно</span>
+            <span>Сырые данные</span>
+            <span>Результат</span>
           </div>
         </div>
         <div class="segment-card">
@@ -1922,7 +1936,7 @@
             <span class="segment-title">Маркетинг, ресёрч и контент</span>
             <div class="segment-flow">
               <div><strong>Видео, Telegram и конкуренты</strong></div>
-              <div><strong>Темы, посевы и контент</strong></div>
+              <div><strong>Подбор каналов для рекламы и генерация контента</strong></div>
             </div>
           </div>
         </div>
@@ -2142,7 +2156,7 @@
             <div class="launch-label">Стартуем вместе</div>
           </div>
           <div class="mod-title">
-            <h3>Настраиваем <em>среду</em>.</h3>
+            <h3>Настраиваем <em>среду с нуля</em>.</h3>
             <div class="chip-group" aria-label="Что проходим на старте">
               <span class="chip mod">Подписка</span>
               <span class="chip mod">Установка</span>
@@ -2184,7 +2198,7 @@
             </div>
             <div class="mod-field">
               <div class="k">Результат</div>
-              <div class="v">Структурированный документ или стройный визуал из сырого материала.</div>
+              <div class="v">Презентация, отчёт, лендинг, дашборд, сводная таблица по вашей логике без "додумывания" от ИИ.</div>
             </div>
           </div>
         </article>
@@ -2251,7 +2265,7 @@
             <div class="lbl">Модуль</div>
           </div>
           <div class="mod-title">
-            <h3>Работа в браузере: агент <em>"проходит капчу"</em> и тыкает на кнопки.</h3>
+            <h3>Работа в браузере: <em>даём агенту универсальный доступ</em>.</h3>
             <div class="chip-group">
               <span class="chip mod">Браузер</span>
               <span class="chip mod">Формы</span>
@@ -2538,7 +2552,7 @@
   <section class="final" id="final">
     <span class="bg-big" aria-hidden="true">2026</span>
     <div class="wrap">
-      <span class="eyebrow reveal">Май 2026</span>
+      <span class="eyebrow reveal">Старт 25 мая</span>
       <h2 class="reveal">
         Если в вашей работе много ручной информационной рутины — часть её уже можно <span class="box italic">автоматизировать</span>.
       </h2>
