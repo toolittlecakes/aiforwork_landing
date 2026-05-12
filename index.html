@@ -1409,6 +1409,55 @@
     color: color-mix(in srgb, var(--bg) 65%, transparent);
     border-bottom-color: color-mix(in srgb, var(--bg) 20%, transparent);
   }
+  .tier .for.has-price {
+    margin-bottom: 16px;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+  .tier .price {
+    display: grid;
+    gap: 4px;
+    margin: 0 0 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .tier .price-old {
+    font-family: var(--display);
+    font-size: clamp(34px, 3.2vw, 42px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+    color: var(--ink-3);
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+  }
+  .tier .price-new {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-family: var(--display);
+    font-size: clamp(24px, 2.4vw, 32px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+  }
+  .tier .price-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .tier.featured .price {
+    border-bottom-color: color-mix(in srgb, var(--bg) 20%, transparent);
+  }
+  .tier.featured .price-old {
+    color: color-mix(in srgb, var(--bg) 45%, transparent);
+  }
+  .tier.featured .price-label {
+    color: var(--accent-hot);
+  }
   .tier ul {
     list-style: none;
     padding: 0;
@@ -1915,7 +1964,7 @@
             Курс для не-программистов. Живые занятия + записи.
           </p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать условия <span class="arr">→</span></a>
+            <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать условия оплаты <span class="arr">→</span></a>
             <a class="btn btn-ghost" href="#program">Посмотреть программу</a>
           </div>
         </div>
@@ -2420,7 +2469,11 @@
         <div class="tier">
           <div class="t-num">Plan 01</div>
           <h4>Базовый</h4>
-          <p class="for">Без проверки домашек</p>
+          <p class="for has-price">Без проверки домашек</p>
+          <div class="price">
+            <div class="price-old">39 000 ₽</div>
+            <div class="price-new">34 000 ₽ <span class="price-label">Early birds</span></div>
+          </div>
           <ul>
             <li>Живые занятия + записи</li>
             <li>Рабочие skills (навыки для агента)</li>
@@ -2439,7 +2492,11 @@
           <span class="tag-top">★ Рекомендуем</span>
           <div class="t-num">Plan 02</div>
           <h4>С проверкой</h4>
-          <p class="for">Проверяем результат и путь решения, даём обратную связь</p>
+          <p class="for has-price">Проверяем результат и путь решения, даём обратную связь</p>
+          <div class="price">
+            <div class="price-old">59 000 ₽</div>
+            <div class="price-new">54 000 ₽ <span class="price-label">Early birds</span></div>
+          </div>
           <ul>
             <li>Всё из базового тарифа</li>
             <li>Проверка домашних заданий</li>
@@ -2452,7 +2509,11 @@
         <div class="tier">
           <div class="t-num">Plan 03</div>
           <h4>VIP</h4>
-          <p class="for">2 консультации 1 на 1</p>
+          <p class="for has-price">2 консультации 1 на 1</p>
+          <div class="price">
+            <div class="price-old">79 000 ₽</div>
+            <div class="price-new">69 000 ₽ <span class="price-label">Early birds</span></div>
+          </div>
           <ul>
             <li>Всё из тарифа с проверкой</li>
             <li>2 личные консультации по вашим кейсам</li>
@@ -2469,7 +2530,7 @@
       </div>
 
       <div class="pricing-tail reveal">
-        <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать условия <span class="arr">→</span></a>
+        <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать условия оплаты <span class="arr">→</span></a>
         <a class="btn btn-ghost" href="https://t.me/m/VltsQycYNGM6" target="_blank" rel="noopener">Хочу, чтобы оплатил работодатель <span class="arr">→</span></a>
         <div class="company-divider">Бизнесу</div>
         <a class="btn btn-dark" href="https://t.me/m/nTDXSturMjRi" target="_blank" rel="noopener">Записать моих сотрудников <span class="arr">→</span></a>
