@@ -11,6 +11,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script>
+  if (new URLSearchParams(window.location.search).get("price") === "hide") {
+    document.documentElement.classList.add("prices-hidden");
+  }
+</script>
 <style>
   :root {
     --bg: #ecebe6;
@@ -1458,6 +1463,17 @@
   .tier.featured .price-label {
     color: var(--accent-hot);
   }
+  .prices-hidden .tier .price {
+    display: none;
+  }
+  .prices-hidden .tier .for.has-price {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .prices-hidden .tier.featured .for.has-price {
+    border-bottom-color: color-mix(in srgb, var(--bg) 20%, transparent);
+  }
   .tier ul {
     list-style: none;
     padding: 0;
@@ -1958,13 +1974,13 @@
             <span class="block">оставив себе <span class="box italic">экспертизу</span></span>
           </h1>
           <p class="hero-lede">
-            Научим на понятных рабочих задачах, и доведём до первой автоматизации на ваших данных.
+            За курс вы настраиваете агенту безопасный доступ к браузеру и внешним сервисам и доводите до автоматизации один ваш реальный рабочий процесс.
           </p>
           <p class="hero-sub">
             Курс для не-программистов. Живые занятия + записи.
           </p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать условия оплаты <span class="arr">→</span></a>
+            <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Хочу в первый поток <span class="arr">→</span></a>
             <a class="btn btn-ghost" href="#program">Посмотреть программу</a>
           </div>
         </div>
@@ -1981,7 +1997,7 @@
         </div>
         <div class="hero-hook">
           <strong>Финальный проект</strong>
-          <p>ИИ-автоматизация под вашу собственную рабочую задачу</p>
+          <p>Автоматизация одного реального рабочего процесса</p>
         </div>
         <div class="hero-hook">
           <strong>Без кодинга</strong>
@@ -2386,7 +2402,7 @@
             </div>
             <div class="mod-field">
               <div class="k">Результат</div>
-              <div class="v">Вы уже сняли себе кусочек рабочей рутины. Теперь агент делает это за вас.</div>
+              <div class="v">За курс вы настраиваете агенту безопасный доступ к браузеру и внешним сервисам и доводите до автоматизации один ваш реальный рабочий процесс.</div>
             </div>
           </div>
         </article>
@@ -2679,7 +2695,7 @@
         Если в вашей работе много ручной информационной рутины — часть её уже можно <span class="box italic">автоматизировать</span>.
       </h2>
       <p class="reveal">
-        Мы покажем, как это делать на понятных рабочих задачах, и доведём до первого кейса на ваших данных. Без программирования и без магии.
+        За курс вы настраиваете агенту безопасный доступ к браузеру и внешним сервисам и доводите до автоматизации один ваш реальный рабочий процесс. Без программирования и без магии.
       </p>
       <div class="hero-cta reveal">
         <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Хочу в первый поток <span class="arr">→</span></a>
