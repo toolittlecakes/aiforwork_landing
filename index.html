@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI For Work — практический курс по ИИ-агентам для не-разработчиков</title>
-<meta name="description" content="Шестинедельный практический курс: учим не-разработчиков использовать ИИ-агентов для реальных рабочих задач — таблиц, отчётов, ресёрча, Telegram и браузерной рутины.">
+<title>AI For Work — практический курс по ИИ-агентам для работы</title>
+<meta name="description" content="Практический курс для тех, кто уже пользуется ChatGPT, DeepSeek или Perplexity и хочет, чтобы ИИ закрывал рабочие задачи: поиск, таблицы, браузерную рутину, документы и отчёты.">
 <meta name="theme-color" content="#ecebe6">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/favicon.svg">
@@ -455,6 +455,9 @@
     .hero-meta { grid-template-columns: 1fr; gap: 36px; }
     .hero-top { grid-template-columns: 1fr; align-items: flex-start; }
   }
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 32px; line-height: 1.04; }
+  }
 
   .hero-hooks {
     margin-top: 56px;
@@ -695,17 +698,17 @@
     color: var(--accent-hot);
     font-weight: 500;
   }
-  #audience {
+  #pain {
     padding: 82px 0 92px;
   }
-  #audience .sec-head {
+  #pain .sec-head {
     margin-bottom: 34px;
     padding-bottom: 24px;
   }
-  #audience .aud-lede {
+  #pain .aud-lede {
     margin-bottom: 30px;
   }
-  #audience .chip-block {
+  #pain .chip-block {
     margin-top: 24px;
   }
 
@@ -1010,6 +1013,12 @@
     .not-row:not(.not-row-head) > div + div::before {
       content: "Не будем";
       color: var(--ink-3);
+    }
+    #capabilities .not-row:not(.not-row-head) > div:first-child::before {
+      content: "Было";
+    }
+    #capabilities .not-row:not(.not-row-head) > div + div::before {
+      content: "Стало";
     }
   }
 
@@ -1913,8 +1922,25 @@
   /* ==================== MOBILE NAV ==================== */
   @media (max-width: 860px) {
     nav.top { display: none; }
-    header .wrap { grid-template-columns: auto 1fr auto; }
+    header .wrap {
+      grid-template-columns: auto auto;
+      justify-content: space-between;
+    }
     .status-badge { display: none; }
+    header .btn-sm { justify-self: end; }
+  }
+  @media (max-width: 480px) {
+    header .wrap {
+      gap: 12px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .brand { font-size: 17px; }
+    .btn-sm {
+      padding: 9px 11px;
+      font-size: 12px;
+      gap: 6px;
+    }
   }
 </style>
 
@@ -1941,15 +1967,16 @@
       <span>AI&nbsp;For&nbsp;Work</span>
     </a>
     <nav class="top">
-      <a href="#audience">Кейсы</a>
+      <a href="#pain">Боль</a>
+      <a href="#capabilities">Что уже можно</a>
       <a href="#program">Программа</a>
-      <a href="#why-now">Почему сейчас</a>
+      <a href="#results">Результаты</a>
       <a href="#pricing">Тарифы</a>
       <a href="#authors">Ведут</a>
       <a href="#faq">FAQ</a>
     </nav>
     <span class="status-badge"><span class="status-dot"></span>Идёт набор</span>
-    <a class="btn btn-primary btn-sm" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Записаться <span class="arr">→</span></a>
+    <a class="btn btn-primary btn-sm" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Оставить заявку <span class="arr">→</span></a>
   </div>
 </header>
 
@@ -1970,17 +1997,17 @@
       <div class="hero-meta">
         <div class="reveal">
           <h1>
-            <span class="block">Как отдать рабочую <span class="box italic">рутину</span> ИИ-агенту,</span>
-            <span class="block">оставив себе <span class="box italic">экспертизу</span></span>
+            <span class="block">Как превратить ИИ</span>
+            <span class="block">из генератора текста в <span class="box italic">рабочего</span></span>
           </h1>
           <p class="hero-lede">
-            За курс вы настраиваете агенту безопасный доступ к браузеру и внешним сервисам и доводите до автоматизации один ваш реальный рабочий процесс.
+            Практический курс для тех, кто уже пользуется ChatGPT, DeepSeek или Perplexity, но хочет, чтобы ИИ закрывал рабочие задачи.
           </p>
           <p class="hero-sub">
-            Курс для не-программистов. Живые занятия + записи.
+            Поиск и анализ информации, работа с таблицами, рутина в браузере, создание документов, отчётов и дашбордов. Без программирования.
           </p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Хочу в первый поток <span class="arr">→</span></a>
+            <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Оставить заявку <span class="arr">→</span></a>
             <a class="btn btn-ghost" href="#program">Посмотреть программу</a>
           </div>
         </div>
@@ -1988,208 +2015,128 @@
 
       <div class="hero-hooks reveal">
         <div class="hero-hook">
-          <strong>Старт с нуля</strong>
-          <p>Проводим вас за руку: установка, настройка, первое использование</p>
+          <strong>Поиск</strong>
+          <p>Сбор и анализ информации из открытых и закрытых источников</p>
         </div>
         <div class="hero-hook">
-          <strong>4 модуля</strong>
-          <p>Обучаем логике использования на практических задачах из жизни</p>
+          <strong>Таблицы</strong>
+          <p>Чистка данных, выводы, отчёты и понятный формат результата</p>
         </div>
         <div class="hero-hook">
-          <strong>Финальный проект</strong>
-          <p>Автоматизация одного реального рабочего процесса</p>
+          <strong>Браузер</strong>
+          <p>Рутина в сервисах, формах, кабинетах и рабочих инструментах</p>
         </div>
         <div class="hero-hook">
-          <strong>Без кодинга</strong>
-          <p>Работа с файлами, таблицами, папками, сайтами – всё текстом</p>
+          <strong>Документы</strong>
+          <p>Презентации, отчёты, лендинги и дашборды на своих задачах</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- AUDIENCE -->
-  <section id="audience" class="paper">
+  <!-- PAIN -->
+  <section id="pain" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
         <div class="sec-num-big">01<span class="slash">/</span></div>
         <div class="right">
-          <span class="sec-label">Для кого</span>
-          <h2 class="sec-title">Курс для тех, чья работа держится на <span class="hl italic">информации</span>.</h2>
-        </div>
-      </div>
-
-      <div class="chip-block reveal">
-        <div class="chip-label">Реальные кейсы с наших консультаций</div>
-      </div>
-
-      <div class="segment-list reveal">
-        <div class="segment-table-head" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <div class="segment-head-flow">
-            <span>Сырые данные</span>
-            <span>Результат</span>
-          </div>
-        </div>
-        <div class="segment-card">
-          <div class="segment-row">
-            <span class="segment-num">01</span>
-            <span class="segment-title">Маркетинг, ресёрч и контент</span>
-            <div class="segment-flow">
-              <div><strong>Видео, Telegram и конкуренты</strong></div>
-              <div><strong>Подбор каналов для рекламы и генерация контента</strong></div>
-            </div>
-          </div>
-        </div>
-        <div class="segment-card">
-          <div class="segment-row">
-            <span class="segment-num">02</span>
-            <span class="segment-title">Sales и bizdev</span>
-            <div class="segment-flow">
-              <div><strong>Публичные базы, тендеры и Telegram</strong></div>
-              <div><strong>Лиды, триггеры и заходы</strong></div>
-            </div>
-          </div>
-        </div>
-        <div class="segment-card">
-          <div class="segment-row">
-            <span class="segment-num">03</span>
-            <span class="segment-title">Операционка, финансы и внедрение</span>
-            <div class="segment-flow">
-              <div><strong>CRM, выгрузки и клиентские файлы</strong></div>
-              <div><strong>Отчёты, чистые данные и нормальный формат</strong></div>
-            </div>
-          </div>
-        </div>
-        <div class="segment-card">
-          <div class="segment-row">
-            <span class="segment-num">04</span>
-            <span class="segment-title">Руководители, фаундеры и проектные менеджеры</span>
-            <div class="segment-flow">
-              <div><strong>Звонки, переписки, задачи и статусы</strong></div>
-              <div><strong>Обещания, решения, риски — без глухого телефона</strong></div>
-            </div>
-          </div>
-        </div>
-        <div class="segment-card">
-          <div class="segment-row">
-            <span class="segment-num">05</span>
-            <span class="segment-title">HR и рекрутинг</span>
-            <div class="segment-flow">
-              <div><strong>HH, LinkedIn и резюме</strong></div>
-              <div><strong>Карта рынка и точечный подбор кандидатов</strong></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="chip-block reveal">
-        <div class="chip-label">Тоже будет полезно</div>
-        <div class="chip-group">
-          <span class="chip">Аналитики</span>
-          <span class="chip">Продакты</span>
-          <span class="chip">Проджекты</span>
-          <span class="chip">Аккаунт-менеджеры</span>
-          <span class="chip">Customer Success</span>
-          <span class="chip">People Ops</span>
-          <span class="chip">SMM</span>
-          <span class="chip">PR</span>
-          <span class="chip">Редакторы</span>
-          <span class="chip">Методисты</span>
-          <span class="chip">Продюсеры курсов</span>
-          <span class="chip">Комьюнити-менеджеры</span>
-        </div>
-      </div>
-
-      <div class="aud-note reveal">
-        <p>У нас нет цели отдать <em>интересную часть</em> работы. Пока агент занимается рутиной: собирает данные, чистит таблицу, ищет ссылки или собирает черновик отчёта — вы занимаетесь смыслами, доменными решениями, выбором подхода и качеством результата.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- RECOGNIZE -->
-  <section id="recognize">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num-big">02<span class="slash">/</span></div>
-        <div class="right">
           <span class="sec-label">Узнаёте себя?</span>
-          <h2 class="sec-title wide">Вы пробовали ИИ, но задачи всё равно делаете <span class="hl italic">руками</span>.</h2>
-        </div>
-      </div>
-
-      <div class="rec-grid reveal">
-        <div class="rec-item">
-          <span class="num">01 / 06</span>
-          <p>Руками переносите информацию между <em>десятками вкладок</em> и приложений.</p>
-        </div>
-        <div class="rec-item">
-          <span class="num">02 / 06</span>
-          <p>Есть папки, файлы, выгрузки и документы, до которых <em>страшно дотрагиваться</em>.</p>
-        </div>
-        <div class="rec-item">
-          <span class="num">03 / 06</span>
-          <p>Постоянно делаете "быстрый ресёрч", который почему-то занимает <em>полдня</em>.</p>
-        </div>
-        <div class="rec-item">
-          <span class="num">04 / 06</span>
-          <p>Можете разобраться сами, но почему-то <em>опять откладываете</em>.</p>
-        </div>
-        <div class="rec-item">
-          <span class="num">05 / 06</span>
-          <p>Тонете в подписках, агентах и инструментах, но не понимаете, что реально применимо <em>в вашей работе</em>.</p>
-        </div>
-        <div class="rec-item">
-          <span class="num">06 / 06</span>
-          <p>Боитесь, что ИИ красиво ошибётся, а вы <em>этого не заметите</em>.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- NOT IN COURSE -->
-  <section id="not-in-course">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num-big">03<span class="slash">/</span></div>
-        <div class="right">
-          <span class="sec-label">Антивайбкодинг</span>
-          <h2 class="sec-title wide">Это не курс по разработке и не <span class="hl italic">автоматизация под ключ</span>.</h2>
+          <h2 class="sec-title wide">Хотите, чтобы DeepSeek всё делал за вас, а он <span class="hl italic">не делает</span>? :/</h2>
         </div>
       </div>
 
       <div class="not-lede-grid reveal">
         <p class="not-lede">
-          Чаты, агенты, вайбкодинг, конструкторы автоматизаций, "революционные" инструменты — шума много, что делать непонятно.
+          Обычно вы просите ИИ поразгонять идеи, написать текст или обсудить задачку.
         </p>
         <p class="not-lede">
-          На курсе отсекаем лишнее и учим работать с универсальным инструментом: задача, данные на входе, результат и проверка.
+          Но как только нужно сделать работу руками — собрать информацию, проверить факты, разложить данные, оформить результат и повторить процесс через неделю — всё снова оказывается на вас.
         </p>
       </div>
+
+      <div class="rec-grid reveal">
+        <div class="rec-item">
+          <span class="num">01 / 08</span>
+          <p>Другие строят целые отделы на ИИ, а у вас — <em>генерация текста</em>.</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">02 / 08</span>
+          <p>Проще сделать руками, чем постоянно <em>перепроверять</em> за ИИ.</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">03 / 08</span>
+          <p>Подключили кучу сервисов, но ни один не стал <em>частью работы</em>.</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">04 / 08</span>
+          <p>Доступы, оплаты, VPN и прокси — уже <em>отдельная работа</em>.</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">05 / 08</span>
+          <p>Хочется одного рабочего окна, а не зоопарка сервисов под каждую мелочь.</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">06 / 08</span>
+          <p>Рынок требует навыка, а непонятно, <em>с чего начать</em>.</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">07 / 08</span>
+          <p>Сотрудникам купили подписки, а они всё равно используют только чат.</p>
+        </div>
+        <div class="rec-item">
+          <span class="num">08 / 08</span>
+          <p>Боитесь, что ИИ красиво ошибётся, а вы <em>этого не заметите</em>.</p>
+        </div>
+      </div>
+
+      <div class="aud-note reveal">
+        <p>Менеджерам · Маркетологам · Сейлзам · HR · Фаундерам</p>
+        <p>Если у вас есть хотя бы 2 часа в день работы за компьютером — будет полезно.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section id="capabilities">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">02<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Что уже можно</span>
+          <h2 class="sec-title wide">ИИ умеет не только <span class="hl italic">генерить текст</span>.</h2>
+        </div>
+      </div>
+
+      <p class="usecase-intro reveal">
+        ИИ-агент может сделать анализ конкурентов, найти лидов, настроить Яндекс.Метрику, а потом собрать аналитику и понятный отчёт для вас и начальства.
+      </p>
 
       <div class="not-grid reveal">
         <div class="not-row not-row-head">
-          <div><span>Будем</span></div>
-          <div><span>Не будем</span></div>
+          <div><span>Было</span></div>
+          <div><span>Стало</span></div>
         </div>
         <div class="not-row">
-          <div>Снимать рутину — составлять отчёты, таблицы и делать ресёрч</div>
-          <div>Вайбкодить приложения и MVP</div>
+          <div>Вы используете ИИ как чатик, который генерит текст.</div>
+          <div>Вы отдаёте агенту куски работы: найти, собрать, открыть, структурировать, оформить — и повторять раз в неделю.</div>
         </div>
         <div class="not-row">
-          <div>Автоматизировать рутину без работы с кодом</div>
-          <div>Собирать схемы в конструкторе из десятков блоков</div>
+          <div>Вы руками делаете рутину за компом, а ИИ просите только что-то придумать.</div>
+          <div>Агент делает часть рутины за компьютером, а вы отвечаете за смысл, критерии и качество результата.</div>
         </div>
         <div class="not-row">
-          <div>Брать один инструмент, который экономит время</div>
-          <div>Перебирать 50 программ, чтобы закрыть одну задачу</div>
+          <div>«Я слышал, что ИИ может многое, но у меня он нормально не работает».</div>
+          <div>«Я знаю рабочие сценарии, понимаю границы возможностей и могу применять это к своим задачам».</div>
         </div>
         <div class="not-row">
-          <div>Учиться ловить ошибки, сверять источники и проверять результат</div>
-          <div>Обещать магию без ошибок</div>
+          <div>«Надо внедрять ИИ в команду, но непонятно как научить».</div>
+          <div>«Я понимаю, какие процессы можно автоматизировать, как это тестировать и как объяснять команде».</div>
+        </div>
+        <div class="not-row">
+          <div>Нужно оплатить 15 подписок и вникать в ограничения каждой, чтобы через месяц начать сначала.</div>
+          <div>Используете один инструмент, понимаете принцип ИИ-агентов и не боитесь изменений.</div>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -2197,10 +2144,10 @@
   <section id="program">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">04<span class="slash">/</span></div>
+        <div class="sec-num-big">03<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Программа</span>
-          <h2 class="sec-title wide">Онбординг + 4 практических модуля + <span class="hl italic">свой проект</span>.</h2>
+          <h2 class="sec-title wide">Практика → принципы → рабочие сценарии <span class="hl italic">под свою задачу</span>.</h2>
         </div>
       </div>
 
@@ -2216,7 +2163,7 @@
             <div><strong>Неделя 1</strong><span class="desc">Онбординг и первое применение.</span></div>
           </li>
           <li>
-            <div><strong>Недели 2–5</strong><span class="desc">Практические воркшопы.</span></div>
+            <div><strong>Недели 2–5</strong><span class="desc">Практические сценарии.</span></div>
           </li>
           <li>
             <div><strong>Неделя 6</strong><span class="desc">Свой проект.</span></div>
@@ -2229,78 +2176,57 @@
         <div class="stats">
           <div class="stat">
             <div class="txt">
-              <h4>Продолжительность</h4>
-              <p>Неделя старта + 4 практики + неделя проекта.</p>
-            </div>
-            <div class="big">6<small>недель</small></div>
-          </div>
-          <div class="stat">
-            <div class="txt">
-              <h4>Базовая домашка</h4>
-              <p>Ориентир — 30–40 минут. Всегда можно потратить ночь, докручивая до идеала.</p>
-            </div>
-            <div class="big">30′<small>~40 мин</small></div>
-          </div>
-          <div class="stat">
-            <div class="txt">
               <h4>Живые занятия + записи</h4>
               <p>Занятия проходят вживую, записи остаются участникам.</p>
             </div>
             <div class="big">∞<small>доступ</small></div>
           </div>
+          <div class="stat">
+            <div class="txt">
+              <h4>Домашки 30–40 минут</h4>
+              <p>Короткая практика после занятия. Всегда можно потратить ночь, докручивая до идеала.</p>
+            </div>
+            <div class="big">30′<small>~40 мин</small></div>
+          </div>
+          <div class="stat">
+            <div class="txt">
+              <h4>Чат и поддержка</h4>
+              <p>Можно задавать вопросы и забирать идеи из задач людей с другим бэкграундом.</p>
+            </div>
+            <div class="big">24<small>чат</small></div>
+          </div>
+          <div class="stat">
+            <div class="txt">
+              <h4>Обратная связь</h4>
+              <p>На тарифе с проверкой смотрим результат и путь: задачу, контекст и упрощения.</p>
+            </div>
+            <div class="big">✓<small>разбор</small></div>
+          </div>
         </div>
       </div>
 
       <div class="modules">
-        <article class="module launch-module reveal">
-          <div class="mod-index">
-            <div class="launch-label">Стартуем вместе</div>
-          </div>
-          <div class="mod-title">
-            <h3>Настраиваем <em>среду с нуля</em>.</h3>
-            <div class="chip-group" aria-label="Что проходим на старте">
-              <span class="chip mod">Подписка</span>
-              <span class="chip mod">Установка</span>
-              <span class="chip mod">Оплата</span>
-              <span class="chip mod">Первый запуск</span>
-            </div>
-          </div>
-          <div class="mod-detail">
-            <div class="mod-field">
-              <div class="k">Что делаем</div>
-              <div class="v">Ведём за ручку: как поставить программы, как оплатить, что в какой последовательности нажимать.</div>
-            </div>
-            <div class="mod-field">
-              <div class="k">Результат</div>
-              <div class="v">Настроенная среда для прохождения курса и дальнейшей работы.</div>
-            </div>
-          </div>
-        </article>
-
         <article class="module reveal">
           <div class="mod-index">
             <div class="n">01<em>.</em></div>
-            <div class="lbl">Модуль</div>
+            <div class="lbl">Сценарий</div>
           </div>
           <div class="mod-title">
-            <h3>Из страшной таблицы — <em>в презентацию</em>.</h3>
+            <h3>Понимаем, что агенты <em>вообще могут</em>.</h3>
             <div class="chip-group">
-              <span class="chip mod">Файлы</span>
-              <span class="chip mod">Таблицы</span>
-              <span class="chip mod">Отчёт</span>
-              <span class="chip mod">Презентация</span>
-              <span class="chip mod">Документ</span>
-              <span class="chip mod">Web-страницы</span>
+              <span class="chip mod">Агенты</span>
+              <span class="chip mod">Чат</span>
+              <span class="chip mod">Границы</span>
             </div>
           </div>
           <div class="mod-detail">
             <div class="mod-field">
-              <div class="k">Что делаем</div>
-              <div class="v">Берём сырые данные (10 таблиц, 4 расшифровки звонка, текст для лендинга или дашборда) и получаем структурированный кликабельный отчёт со стройным визуалом.</div>
+              <div class="k">Фокус</div>
+              <div class="v">Разбираемся, чем агент отличается от чата, какие задачи ему можно отдавать, где он помогает, а где пока лучше не ждать магии.</div>
             </div>
             <div class="mod-field">
-              <div class="k">Результат</div>
-              <div class="v">Презентация, отчёт, лендинг, дашборд, сводная таблица по вашей логике без "додумывания" от ИИ.</div>
+              <div class="k">Итог</div>
+              <div class="v">Понимаете базовую логику работы с агентом и видите, какие задачи из вашей работы подходят для курса.</div>
             </div>
           </div>
         </article>
@@ -2308,27 +2234,25 @@
         <article class="module reveal">
           <div class="mod-index">
             <div class="n">02<em>.</em></div>
-            <div class="lbl">Модуль</div>
+            <div class="lbl">Сценарий</div>
           </div>
           <div class="mod-title">
-            <h3>Сбор информации <em>из открытых источников</em>.</h3>
+            <h3>Учимся отдавать <em>простые задачи</em>.</h3>
             <div class="chip-group">
-              <span class="chip mod">Ресёрч</span>
-              <span class="chip mod">HeadHunter</span>
-              <span class="chip mod">Рынок</span>
-              <span class="chip mod">Фильтрация</span>
-              <span class="chip mod">Лиды</span>
-              <span class="chip mod">Поиск клиентов</span>
+              <span class="chip mod">Контекст</span>
+              <span class="chip mod">Критерии</span>
+              <span class="chip mod">Проверка</span>
+              <span class="chip mod">Формат</span>
             </div>
           </div>
           <div class="mod-detail">
             <div class="mod-field">
-              <div class="k">Что делаем</div>
-              <div class="v">На примере HeadHunter собираем вакансии, компании, требования, роли, спрос на специалистов и паттерны рынка.</div>
+              <div class="k">Фокус</div>
+              <div class="v">Тренируем постановку задачи: контекст, входные данные, критерии результата, ограничения, проверка и понятный формат на выходе.</div>
             </div>
             <div class="mod-field">
-              <div class="k">Результат</div>
-              <div class="v">Умеем собирать открытые данные по критериям, чистить выдачу и превращать её в выводы для найма, продаж, bizdev или анализа рынка.</div>
+              <div class="k">Итог</div>
+              <div class="v">Агент не угадывает, а работает по понятной рамке, которую можно повторить.</div>
             </div>
           </div>
         </article>
@@ -2336,27 +2260,25 @@
         <article class="module reveal">
           <div class="mod-index">
             <div class="n">03<em>.</em></div>
-            <div class="lbl">Модуль</div>
+            <div class="lbl">Сценарий</div>
           </div>
           <div class="mod-title">
-            <h3>Сбор информации <em>из закрытых источников</em>.</h3>
+            <h3>Подключаем <em>внешние источники</em>.</h3>
             <div class="chip-group">
+              <span class="chip mod">Браузер</span>
+              <span class="chip mod">Сайты</span>
               <span class="chip mod">Telegram</span>
-              <span class="chip mod">Каналы</span>
-              <span class="chip mod">Чаты</span>
-              <span class="chip mod">Сводки</span>
-              <span class="chip mod">Мониторинг</span>
-              <span class="chip mod">Уведомления</span>
+              <span class="chip mod">Файлы</span>
             </div>
           </div>
           <div class="mod-detail">
             <div class="mod-field">
-              <div class="k">Что делаем</div>
-              <div class="v">Делаем выгрузку, обработку и ресёрч по Telegram: каналы, чаты, обсуждения, темы, инсайты и триггеры.</div>
+              <div class="k">Фокус</div>
+              <div class="v">Работаем с браузером, сайтами, Telegram, файлами и другими источниками, чтобы агент собирал материал для задачи.</div>
             </div>
             <div class="mod-field">
-              <div class="k">Результат</div>
-              <div class="v">Мониторим каналы и чаты, собираем сводки, анализируем обсуждения, отправляем уведомления и дашборды.</div>
+              <div class="k">Итог</div>
+              <div class="v">Умеете давать агенту данные не только из головы и чата, а из реальных рабочих источников.</div>
             </div>
           </div>
         </article>
@@ -2364,45 +2286,44 @@
         <article class="module reveal">
           <div class="mod-index">
             <div class="n">04<em>.</em></div>
-            <div class="lbl">Модуль</div>
+            <div class="lbl">Сценарий</div>
           </div>
           <div class="mod-title">
-            <h3>Работа в браузере: <em>даём агенту универсальный доступ</em>.</h3>
+            <h3>Собираем <em>повторяемые сценарии</em>.</h3>
             <div class="chip-group">
-              <span class="chip mod">Браузер</span>
-              <span class="chip mod">Формы</span>
-              <span class="chip mod">LinkedIn</span>
-              <span class="chip mod">Яндекс Метрика</span>
-              <span class="chip mod">Кабинеты</span>
+              <span class="chip mod">Процесс</span>
+              <span class="chip mod">Шаги</span>
+              <span class="chip mod">Контроль</span>
+              <span class="chip mod">Повторение</span>
             </div>
           </div>
           <div class="mod-detail">
             <div class="mod-field">
-              <div class="k">Что делаем</div>
-              <div class="v">Безопасно даём агенту доступ к браузеру: заполнить форму, добавить людей в LinkedIn, настроить счётчик в Яндекс Метрике.</div>
+              <div class="k">Фокус</div>
+              <div class="v">Превращаем разовую задачу в понятный процесс: что делать каждый раз, какие шаги повторять, где проверять и как получать стабильный результат.</div>
             </div>
             <div class="mod-field">
-              <div class="k">Результат</div>
-              <div class="v">Браузер подключён к агенту и настроен, работает "как простой смертный".</div>
+              <div class="k">Итог</div>
+              <div class="v">У вас появляется рабочий сценарий, а не удачный единичный промпт.</div>
             </div>
           </div>
         </article>
 
         <article id="project" class="module launch-module project-module reveal">
           <div class="mod-index">
-            <div class="launch-label">Проект</div>
+            <div class="launch-label">05.</div>
           </div>
           <div class="mod-title">
-            <h3>Автоматизация под <em>вашу задачу</em>.</h3>
+            <h3>Делаем финальный проект <em>на своей задаче</em>.</h3>
           </div>
           <div class="mod-detail">
             <div class="mod-field">
-              <div class="k">Что делаем</div>
-              <div class="v">Берём свой процесс: отчёт, ресёрч, таблицу, мониторинг, поиск клиентов, подготовку файлов или другую рутину. Перестраиваем его с помощью ИИ-агента, на финальной встрече — презентуем.</div>
+              <div class="k">Фокус</div>
+              <div class="v">Берёте одну реальную задачу из своей работы и собираете под неё рабочий сценарий с ИИ-агентом.</div>
             </div>
             <div class="mod-field">
-              <div class="k">Результат</div>
-              <div class="v">За курс вы настраиваете агенту безопасный доступ к браузеру и внешним сервисам и доводите до автоматизации один ваш реальный рабочий процесс.</div>
+              <div class="k">Итог</div>
+              <div class="v">Готовый сценарий, который можно использовать дальше и развивать после курса.</div>
             </div>
           </div>
         </article>
@@ -2410,62 +2331,30 @@
     </div>
   </section>
 
-  <!-- COMMUNITY -->
-  <section id="community" class="paper">
+  <!-- RESULTS -->
+  <section id="results" class="dark">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">05<span class="slash">/</span></div>
+        <div class="sec-num-big">04<span class="slash">/</span></div>
         <div class="right">
-          <span class="sec-label">Комьюнити</span>
-          <h2 class="sec-title"><span class="hl italic">Нетворкинг</span>.</h2>
+          <span class="sec-label">Результаты курса</span>
+          <h2 class="sec-title">Что ИИ будет делать за вас <span class="hl italic">после курса</span>?</h2>
         </div>
       </div>
 
-      <div class="com-grid">
-        <div class="com-text reveal">
-          <p class="big">Вы видите, как похожие задачи решают люди с разным бэкграундом.</p>
-          <p class="dim">Видите более или менее изящные решения. Каждый из вас получает опыт целой группы.</p>
-          <p class="dim">А ещё мы планируем создать среду для нетворкинга. Будем помогать знакомиться, общаться, обсуждать подходы, делиться находками и чисто по-человечески дружить.</p>
+      <div class="quality-grid reveal">
+        <p class="quality-copy">
+          Главный результат — работа с ИИ-агентом стала частью вашего <em>мышления</em>. По ходу обучения вы научили агента решать вашу задачу. Без навыков разработки.
+        </p>
+        <div>
+          <p class="quality-note">После курса агент помогает</p>
+          <ul class="quality-list">
+            <li>Собирать данные из открытых и закрытых источников, чистить выдачу и превращать её в выводы: hh, linkedin, telegram, 2gis, сайты конкурентов.</li>
+            <li>Создавать презентации, отчёты, лендинги и дашборды.</li>
+            <li>Работать с файлами на компьютере и в облачном хранилище: Google Docs/Sheets, Excel и Word.</li>
+            <li>Работать в браузере как реальный человек: пройти антибот-защиту LinkedIn, отредактировать настройки аналитики, добавить клиента в базу.</li>
+          </ul>
         </div>
-        <ul class="com-reasons reveal">
-          <li>Проще держать темп</li>
-          <li>Видно, как думают другие</li>
-          <li>Рабочие знакомства</li>
-          <li>Единомышленники</li>
-          <li>Это весело</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY NOW -->
-  <section id="why-now" class="dark">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num-big">06<span class="slash">/</span></div>
-        <div class="right">
-          <span class="sec-label">Почему сейчас</span>
-          <h2 class="sec-title">Что <span class="hl italic">изменилось</span></h2>
-        </div>
-      </div>
-
-      <div class="why-grid reveal">
-        <article class="why-card">
-          <h3>Автоматизацию теперь можно настраивать текстом</h3>
-          <p>Больше не нужно писать код: достаточно логики, вашей экспертности и текста с описанием процесса</p>
-        </article>
-        <article class="why-card">
-          <h3>ИИ вышел за пределы чата</h3>
-          <p>ИИ-агенты резко стали автономнее. Они могут вызывать инструменты, проверять себя, сами раскладывать ваши задачи на шаги без булшита и галлюцинаций</p>
-        </article>
-        <article class="why-card">
-          <h3>Нагнать прогресс становится сложнее</h3>
-          <p>Всё меняется каждую неделю. Следить за всеми апдейтами невозможно, а без опыта сложно понять, что важно и нужно</p>
-        </article>
-        <article class="why-card">
-          <h3>Рынок найма перестраивается</h3>
-          <p>Пока бизнес сокращает штат, навыки работы с ИИ приходят в вакансии за пределами разработки – это новое "владеть Microsoft Office".</p>
-        </article>
       </div>
     </div>
   </section>
@@ -2474,7 +2363,7 @@
   <section id="pricing">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">07<span class="slash">/</span></div>
+        <div class="sec-num-big">05<span class="slash">/</span></div>
         <div class="right">
           <span class="sec-label">Тарифы</span>
           <h2 class="sec-title">Выберите <span class="hl italic">свой режим</span>.</h2>
@@ -2554,14 +2443,118 @@
     </div>
   </section>
 
+  <!-- WHY US -->
+  <section id="why-us" class="dark">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">06<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Почему мы</span>
+          <h2 class="sec-title wide">Потому что мы УЖЕ обучали логике работы с агентами, <span class="hl italic">а не кнопкам</span>.</h2>
+        </div>
+      </div>
+
+      <div class="why-grid reveal">
+        <article class="why-card">
+          <h3>Технический взгляд простыми словами</h3>
+          <p>У нас есть техническая экспертиза: Коля использует ИИ-агентов как разработчик с момента их появления, видит инструмент изнутри и понимает, как он работает.</p>
+        </article>
+        <article class="why-card">
+          <h3>Знаем, как надо и не надо</h3>
+          <p>Уже внедряли ИИ-автоматизации в компании, обучали команды, автоматизировали личные и бизнесовые задачи.</p>
+        </article>
+        <article class="why-card">
+          <h3>Принципы вместо кнопок</h3>
+          <p>Инструменты меняются, но логика остаётся. Закладываем базу, чтобы не зависеть от изменчивости рынка.</p>
+        </article>
+        <article class="why-card">
+          <h3>Практика, а не лекции</h3>
+          <p>«Послушал лекции и всё понял»? Не верим. Курс строится вокруг коротких практических домашек, проверки логики выполнения и взаимоопыления между студентами.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUS -->
+  <section id="bonus" class="paper">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num-big">07<span class="slash">/</span></div>
+        <div class="right">
+          <span class="sec-label">Бонус</span>
+          <h2 class="sec-title">Готовые инструменты и <span class="hl italic">шаблоны</span>.</h2>
+        </div>
+      </div>
+
+      <div class="program-intro reveal">
+        <p><strong>Скилл агента — это сохранённая инструкция для повторяемой задачи.</strong></p>
+        <p class="dim">Внутри скилла — описание, как собирать данные, какие источники проверять, в каком формате отдавать результат и на что обращать особое внимание.</p>
+        <p class="dim">На курсе вы получите готовые промпты, шаблоны и скиллы под типовые процессы — и поймёте, как адаптировать их под себя.</p>
+      </div>
+
+      <div class="segment-list reveal">
+        <div class="segment-card">
+          <div class="segment-row">
+            <span class="segment-num">01</span>
+            <span class="segment-title">Собрать</span>
+            <div class="segment-flow">
+              <div><strong>Telegram-каналы, источники, ссылки</strong></div>
+              <div><strong>Промпт для сбора открытых данных</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-row">
+            <span class="segment-num">02</span>
+            <span class="segment-title">Разобрать</span>
+            <div class="segment-flow">
+              <div><strong>Сложная информация из разных источников</strong></div>
+              <div><strong>Шаблоны для анализа и структурирования</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-row">
+            <span class="segment-num">03</span>
+            <span class="segment-title">Проверить</span>
+            <div class="segment-flow">
+              <div><strong>Факты, логика, полнота</strong></div>
+              <div><strong>Заготовки для поиска галлюцинаций</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-row">
+            <span class="segment-num">04</span>
+            <span class="segment-title">Повторить</span>
+            <div class="segment-flow">
+              <div><strong>Регулярные рабочие задачи</strong></div>
+              <div><strong>Скиллы и сценарии для повторения</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-row">
+            <span class="segment-num">05</span>
+            <span class="segment-title">Адаптировать</span>
+            <div class="segment-flow">
+              <div><strong>Ваш бизнес, роль или процесс</strong></div>
+              <div><strong>Шаблон, который можно подстроить под себя</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- AUTHORS -->
   <section id="authors" class="paper">
     <div class="wrap">
       <div class="sec-head authors-head reveal">
         <div class="sec-num-big">08<span class="slash">/</span></div>
         <div class="right">
-          <span class="sec-label">Кто ведёт</span>
-          <h2 class="sec-title"><span class="hl italic">Коля и Саша</span>.</h2>
+          <span class="sec-label">Почему можно верить</span>
+          <h2 class="sec-title">Потому что мы это <span class="hl italic">уже делали</span>.</h2>
         </div>
       </div>
 
@@ -2611,76 +2604,40 @@
 
       <div class="faq reveal">
         <details>
-          <summary>Я вообще не могу и не хочу работать с кодом. Я справлюсь? Автоматизации же подразумевают кодинг.</summary>
-          <p>Курс как раз для неразработчиков: людей без программирования, API, n8n и технического бэкграунда. Мы начинаем с простого: как поставить инструмент, как дать первую задачу, как работать с файлами и как проверить результат.</p>
+          <summary>А если я уже пользуюсь ChatGPT?</summary>
+          <p>Отлично. На курсе мы переходим от «попросить чат что-то сгенерировать» к рабочим сценариям для работы с файлами, таблицами и инструментами.</p>
         </details>
         <details>
-          <summary>Когда думаю про курс, кажется, что это будет муторно и сложно</summary>
-          <p>Самый муторный первый шаг проходим вместе: подписка, настройка, первый запуск, первая задача. Дальше идём маленькими шагами: берём одну понятную задачу, учимся отдавать её помощнику и смотрим, как это относится к вашей работе.</p>
-          <p>А ещё вы будете делать это плечом к плечу с "такими же". Мы всегда на связи в чате и готовы отвечать на самые глупые и стыдные вопросы.</p>
+          <summary>Почему домашки для всех одинаковые? Тут же разные профессии.</summary>
+          <p>Базовые классы задач похожи в разных профессиях: собрать, проверить, структурировать, оформить, повторить. Мы учим логике, базе и общему принципу на практических примерах домашних заданий. А переносить принцип вы будете уже на свою работу и финальный проект.</p>
         </details>
         <details>
-          <summary>А если инструменты поменяются за время курса?</summary>
-          <p>Мы показываем общие подходы, а не фишки одного сервиса. Инструменты быстро меняются, поэтому курс строится не вокруг кнопок в одном интерфейсе, а вокруг навыка: как ставить задачи агенту, давать контекст, проверять результат и переносить подход между инструментами.</p>
+          <summary>А если я не понимаю, какую свою задачу взять?</summary>
+          <p>Поможем выбрать. Обычно задача находится в повторяющейся рутине: отчёты, ресёрч, чаты, таблицы, файлы, мониторинг, подготовка материалов. А ещё в чате можно подглядывать за обсуждением задач других студентов.</p>
         </details>
         <details>
-          <summary>Какой формат курса? Просто видео смотрю?</summary>
-          <p>Будут живые занятия, записи, домашки, чат поддержки и механики нетворкинга.</p>
-          <p>Домашки рассчитаны примерно на 30–40 минут. Но всегда есть ещё ночь, чтобы "ещё немножко улучшить" — тут мы, конечно, не будем мешать 🌚</p>
-          <p>На живых занятиях разбираем подход на конкретном примере. В конце занятий обсуждаем, где такой подход можно применить в рабочих задачах участников.</p>
-          <p>Дома вы делаете похожую задачу, отправляете результат и ход работы, а мы даём письменную обратную связь.</p>
-          <p>Курс идёт 6 недель: стартуем 3 июня, финальная встреча — ориентировочно 15 июля.</p>
+          <summary>Можно ли работать с рабочими файлами и данными?</summary>
+          <p>Да, но аккуратно. Будем разбирать, как обезличивать данные и создавать безопасные сценарии, чтобы не тащить в инструмент лишнее.</p>
         </details>
         <details>
-          <summary>А если я не смогу прийти на живое занятие?</summary>
-          <p>Будет запись. Можно посмотреть позже и сделать задание в своём темпе, а вопросы задать в чате. Или договориться с кем-то из участников на созвон в формате "блин, я чет всё пропустил, помоги, пожалуйста, разобраться". Это простой способ завести себе друзей и помочь тому, кто объясняет, лучше понять материал.</p>
+          <summary>Что я получу в конце?</summary>
+          <p>Умение применять универсальные принципы на практике, набор рабочих заготовок и готовый сценарий под свою задачу.</p>
         </details>
         <details>
-          <summary>Что будет в домашних заданиях?</summary>
-          <p>Домашки нужны не "для галочки". На них тренируем базовые классы задач: работа с открытыми источниками, закрытыми источниками, таблицами, файлами, отчётами, браузером. После каждого задания вы смотрите, где похожий сценарий есть в вашей работе.</p>
-          <p>На тарифе с проверкой мы смотрим не только результат, но и процесс: как вы ставили задачу агенту, где потеряли контекст, где можно было сделать проще, быстрее или точнее.</p>
-          <p>Домашку нужно сдать до вечера воскресенья. Обратную связь получаете до следующего занятия.</p>
+          <summary>Подойдёт ли курс руководителям?</summary>
+          <p>Да. Особенно если нужно понять, какие процессы можно автоматизировать, как тестировать гипотезы и как внедрить ИИ в саму команду по любви.</p>
         </details>
         <details>
-          <summary>Можно без домашек?</summary>
-          <p>Да, для этого есть базовый тариф. Вы сможете смотреть занятия, быть в чате и пробовать самостоятельно, без проверки и персонального фидбека. При этом мы верим, что без личной практики знания про ИИ-агентов почти ничего не дают. Поэтому курс строится вокруг домашних заданий, обратной связи и финального проекта.</p>
+          <summary>Полно курсов по ИИ, почему именно ваш?</summary>
+          <p>Курс стоит на стыке технического опыта, практики на реальных задачах и понятного образовательного формата.</p>
         </details>
         <details>
-          <summary>Чем наш курс отличается от других?</summary>
-          <p>Экспертиза, практика и обратная связь, ноль разработки, нетворкинг.</p>
-          <p>Многие курсы по ИИ делают люди с сильной доменной экспертизой: маркетологи, сейлзы, предприниматели. Люди без технического бэкграунда. Это здорово, но там рискуете "использовать айфон как кнопочную звонилку" - упустить большой спектр возможностей технологии.</p>
-          <p>Одновременно курсы "от чистых технарей" бывают сложноприменимы к "обычным рутинным задачам".</p>
-          <p>Наш курс на стыке: реальные рабочие задачи, образовательный формат и техническая экспертиза Коли, который занимается разработкой и внедрением ИИ-решений для бизнеса.</p>
+          <summary>Инструменты постоянно меняются. Я сейчас обучусь, а завтра всё устареет. Я зря потрачу время и деньги?</summary>
+          <p>Мы учим не кнопкам одной программы, а логике работы с агентом: как мыслить задачами, источниками, проверкой, сценариями и результатом. Инструменты поменяются, этот принцип останется.</p>
         </details>
         <details>
-          <summary>Почему одинаковая домашка будет полезна людям с разной работой?</summary>
-          <p>Потому что мы учим не конкретному сервису, а подходам: как поставить задачу агенту, дать контекст, подключить источник, проверить результат и перенести принцип на другой рабочий процесс. А финальный проект нужен как раз для переноса этих подходов на вашу реальную задачу.</p>
-        </details>
-        <details>
-          <summary>Почему в программе HH и Telegram, если я не HR и не работаю с Telegram?</summary>
-          <p>HH — это пример открытого источника: как собирать, сравнивать и анализировать информацию из внешней среды. Telegram — пример закрытого или полузакрытого источника: как работать с потоком сообщений, каналов, обсуждений. Эти навыки перекладываются на анализ конкурентов, клиентов, вакансий, рынков, поставщиков, документов, отчётов и внутренних материалов.</p>
-        </details>
-        <details>
-          <summary>Я приду со своей задачей или буду делать только учебные примеры?</summary>
-          <p>И то, и другое. Учебные примеры нужны, чтобы спокойно освоить базовые приёмы и не тратить сотни тысяч на внедрение вслепую. Параллельно вы будете искать, как применить это к своей работе. В финале собираете небольшой рабочий сценарий под свою реальную рутину.</p>
-        </details>
-        <details>
-          <summary>Автоматизацию сделаете вы или я сама?</summary>
-          <p>Автоматизацию делает сам участник, но с поддержкой курса. Мы не "внедряем за вас под ключ", потому что тогда навык останется у нас. Наша задача — провести вас за руку так, чтобы вы сами поняли логику, собрали первый сценарий и могли повторить принцип дальше.</p>
-        </details>
-        <details>
-          <summary>Сколько самостоятельной работы будет?</summary>
-          <p>Нужно будет выделять время на короткие домашки и финальный проект. Мы не обещаем, что всё случится без вашего участия: задача курса — научить вас применять ИИ-агентов в своей работе. Для этого надо их применять. Но вы не остаётесь один на один с настройками и непонятными ошибками.</p>
-        </details>
-        <details>
-          <summary>Можно будет подключить WhatsApp, Instagram, 1С, маркетплейсы или другие рабочие сервисы?</summary>
-          <p>Сначала ищем простой путь: выгрузить файл, обработать таблицу, повторить понятную инструкцию. Если без API и сложных интеграций не обойтись, честно говорим, что это уже отдельная техническая задача.</p>
-        </details>
-        <details>
-          <summary>Может ли компания оплатить мне обучение? А иностранной картой? А в рассрочку?</summary>
-          <p>Да. Ещё дадим шаблон письма руководителю, если непонятно, как попросить оплату обучения.</p>
-          <p>Стандартный способ оплаты пока через РФ. Если он вам не подходит, напишите — подберём удобный вариант вручную.</p>
-          <p>Можно оформить рассрочку. Детали и доступные варианты у <a href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Саши</a>.</p>
+          <summary>Может ли компания оплатить обучение? А иностранной картой?</summary>
+          <p>Да. Можно обсудить оплату от компании и удобный способ оплаты вручную. Ещё можно подготовить письмо руководителю, если нужно обосновать обучение.</p>
         </details>
       </div>
     </div>
@@ -2692,14 +2649,13 @@
     <div class="wrap">
       <span class="eyebrow reveal">Старт 3 июня</span>
       <h2 class="reveal">
-        Если в вашей работе много ручной информационной рутины — часть её уже можно <span class="box italic">автоматизировать</span>.
+        Перестаньте использовать ИИ как чатик. Начните собирать рабочие сценарии <span class="box italic">под себя</span>.
       </h2>
       <p class="reveal">
-        За курс вы настраиваете агенту безопасный доступ к браузеру и внешним сервисам и доводите до автоматизации один ваш реальный рабочий процесс. Без программирования и без магии.
+        На курсе вы попробуете это на практических кейсах и соберёте первый сценарий на своей задаче.
       </p>
       <div class="hero-cta reveal">
-        <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Хочу в первый поток <span class="arr">→</span></a>
-        <a class="btn btn-ghost" href="#program">Ещё раз про программу</a>
+        <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Оставить заявку <span class="arr">→</span></a>
       </div>
     </div>
   </section>
