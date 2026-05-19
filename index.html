@@ -2257,7 +2257,7 @@
       <div class="sec-head reveal">
         <div class="sec-num-big">02<span class="slash">/</span></div>
         <div class="right">
-          <h2 class="sec-title wide">Хотите, чтобы DeepSeek всё делал за вас, а он не делает</h2>
+          <h2 class="sec-title wide">Хотите, чтобы DeepSeek всё делал за вас, а он не делает :/</h2>
         </div>
       </div>
 
@@ -2934,9 +2934,13 @@
         user_agent: navigator.userAgent,
       });
 
-      leadForm.reset();
-      submitButton.hidden = true;
-      showLeadStatus("Заявка отправлена. Саша скоро вам напишет.", "success");
+      submitButton.disabled = true;
+      submitButton.innerHTML = "Отправляем...";
+      setTimeout(() => {
+        leadForm.reset();
+        submitButton.hidden = true;
+        showLeadStatus("Заявка отправлена. Саша скоро вам напишет.", "success");
+      }, 1000);
     });
 
     function clearLeadStatus() {
@@ -2989,9 +2993,13 @@
         user_agent: navigator.userAgent,
       });
 
-      pricingForm.reset();
-      submitButton.hidden = true;
-      showPricingStatus("Заявка отправлена. Саша скоро вам напишет.", "success");
+      submitButton.disabled = true;
+      submitButton.innerHTML = "Отправляем...";
+      setTimeout(() => {
+        pricingForm.reset();
+        submitButton.hidden = true;
+        showPricingStatus("Заявка отправлена. Саша скоро вам напишет.", "success");
+      }, 1000);
     });
 
     function showPricingStatus(message, type) {
