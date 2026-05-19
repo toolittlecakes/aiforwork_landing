@@ -766,9 +766,8 @@
   }
   .segment-list {
     display: grid;
-    border-top: 1px solid var(--rule);
-    border-left: 1px solid var(--rule);
-    background: var(--paper);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
   }
   .segment-table-head {
     display: grid;
@@ -799,15 +798,16 @@
     background: var(--paper);
   }
   .segment-card {
-    border-right: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    min-height: 100%;
   }
   .segment-card .segment-row {
     display: grid;
-    grid-template-columns: 52px minmax(220px, .78fr) minmax(0, 1.5fr);
-    gap: 18px;
-    align-items: center;
-    padding: 18px 24px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 20px;
   }
   .segment-num {
     font-family: var(--mono);
@@ -825,18 +825,15 @@
   }
   .segment-flow {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    border: 1px solid var(--rule-soft);
-    background: var(--bg);
+    gap: 10px;
   }
   .segment-flow > div {
-    padding: 14px 16px 16px;
-    border-right: 1px solid var(--rule-soft);
-    min-height: 88px;
+    padding: 0;
+    border-right: none;
+    min-height: auto;
   }
   .segment-flow > div:last-child {
-    border-right: none;
-    background: var(--paper);
+    background: transparent;
   }
   .segment-flow strong {
     display: block;
@@ -848,8 +845,7 @@
     .usecase-role { border-right: none; border-bottom: 1px solid var(--rule-soft); }
     .usecase-task { padding-top: 22px; }
     .segment-card .segment-row {
-      grid-template-columns: 44px 1fr;
-      gap: 12px;
+      grid-template-columns: 1fr;
       padding: 20px;
     }
     .segment-table-head {
@@ -868,19 +864,10 @@
     .segment-head-flow span:last-child {
       border-bottom: none;
     }
-    .segment-flow {
-      grid-column: 2 / -1;
-    }
-    .segment-flow {
-      grid-template-columns: 1fr;
-    }
+    .segment-list { grid-template-columns: 1fr; }
     .segment-flow > div {
       border-right: none;
-      border-bottom: 1px solid var(--rule-soft);
       min-height: auto;
-    }
-    .segment-flow > div:last-child {
-      border-bottom: none;
     }
   }
 
@@ -1050,18 +1037,21 @@
   }
   .modules {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    border-top: 1px solid var(--rule);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
   .module {
     display: grid;
-    grid-template-columns: 72px minmax(220px, .9fr) minmax(0, 1.35fr);
-    gap: 28px;
-    padding: 24px 0;
-    border-bottom: 1px solid var(--rule);
-    align-items: baseline;
+    grid-template-columns: 44px 1fr;
+    gap: 18px;
+    padding: 22px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    align-items: start;
     position: relative;
+  }
+  #project {
+    grid-column: 1 / -1;
   }
   .mod-index {
     display: flex;
@@ -1095,6 +1085,7 @@
   }
   .mod-detail {
     display: grid;
+    grid-column: 2 / -1;
     font-size: 15px;
   }
   .mod-field {
@@ -1103,11 +1094,14 @@
   .mod-field .k { display: none; }
   .mod-field .v { color: var(--ink-2); }
   @media (max-width: 1020px) {
-    .module { grid-template-columns: 64px 1fr; }
+    .segment-list { grid-template-columns: repeat(2, 1fr); }
+    .modules { grid-template-columns: 1fr; }
+    .module { grid-template-columns: 44px 1fr; }
     .mod-detail { grid-column: 1 / -1; padding-left: 0; }
   }
   @media (max-width: 640px) {
-    .module { grid-template-columns: 1fr; gap: 12px; padding: 24px 0; }
+    .module { gap: 12px; padding: 20px; }
+    .segment-list { grid-template-columns: 1fr; }
     .mod-field { grid-template-columns: 1fr; gap: 4px; }
   }
 
@@ -2537,9 +2531,7 @@
 
       <div class="homework-note reveal">
         <h3>Почему мы отдельно топим за проверку.</h3>
-        <p>В работе с агентами важен не только финальный результат, а путь: как вы поставили задачу, какой контекст дали, где проверили факты и что решили упростить.</p>
-        <p>Без обратной связи легко получить красивый ответ и не заметить, что агент пропустил источник, неверно понял критерии или сделал лишнюю ручную работу за вас.</p>
-        <p>Поэтому на тарифе с домашками мы смотрим решение целиком и помогаем докрутить сценарий так, чтобы его можно было реально использовать после курса.</p>
+        <p>В работе с агентами важен не только финальный результат, а путь: как вы поставили задачу, какой контекст дали, где проверили факты и что решили упростить. Поэтому на тарифе с домашками мы смотрим решение целиком и помогаем докрутить сценарий так, чтобы его можно было реально использовать после курса.</p>
       </div>
 
       <div class="pricing-lead reveal">
