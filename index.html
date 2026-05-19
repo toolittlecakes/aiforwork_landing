@@ -30,7 +30,7 @@
     --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     --mono: "JetBrains Mono", ui-monospace, Menlo, Monaco, monospace;
 
-    --wrap: 1180px;
+    --wrap: 1280px;
     --gutter: clamp(20px, 4vw, 56px);
   }
 
@@ -305,7 +305,7 @@
     font-size: clamp(32px, 4.6vw, 56px);
     line-height: 0.98;
     letter-spacing: -0.04em;
-    font-weight: 600;
+    font-weight: 500;
     max-width: 30ch;
     color: var(--ink);
   }
@@ -427,7 +427,34 @@
     .hero-top { grid-template-columns: 1fr; align-items: flex-start; }
   }
   @media (max-width: 480px) {
-    .hero h1 { font-size: 32px; line-height: 1.04; }
+    .hero h1 {
+      width: 100%;
+      max-width: 340px;
+      font-size: 36px;
+      line-height: 1.05;
+      overflow-wrap: normal;
+      word-break: normal;
+    }
+    .hero h1 .block {
+      display: block;
+    }
+    .hero h1 .box {
+      display: block;
+      width: fit-content;
+    }
+    .hero-lede,
+    .hero-sub {
+      width: 100%;
+      max-width: 340px;
+      font-size: 18px;
+      overflow-wrap: normal;
+      word-break: normal;
+    }
+    .hero-meta,
+    .hero-cta {
+      width: 100%;
+      max-width: 340px;
+    }
   }
 
   .hero-hooks {
@@ -764,111 +791,10 @@
   .usecase-task li {
     margin: 0;
   }
-  .segment-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-  }
-  .segment-table-head {
-    display: grid;
-    grid-template-columns: 52px minmax(220px, .78fr) minmax(0, 1.5fr);
-    gap: 18px;
-    align-items: center;
-    padding: 12px 24px;
-    border-right: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-  }
-  .segment-head-flow {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border: 1px solid var(--rule-soft);
-    background: var(--bg);
-  }
-  .segment-head-flow span {
-    padding: 10px 16px;
-    border-right: 1px solid var(--rule-soft);
-  }
-  .segment-head-flow span:last-child {
-    border-right: none;
-    background: var(--paper);
-  }
-  .segment-card {
-    border: 1px solid var(--rule);
-    background: var(--paper);
-    min-height: 100%;
-  }
-  .segment-card .segment-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    align-items: start;
-    padding: 20px;
-  }
-  .segment-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .segment-title {
-    font-family: var(--display);
-    font-size: clamp(20px, 2vw, 26px);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    font-weight: 500;
-  }
-  .segment-flow {
-    display: grid;
-    gap: 10px;
-  }
-  .segment-flow > div {
-    padding: 0;
-    border-right: none;
-    min-height: auto;
-  }
-  .segment-flow > div:last-child {
-    background: transparent;
-  }
-  .segment-flow strong {
-    display: block;
-    font-weight: 500;
-    line-height: 1.4;
-  }
   @media (max-width: 720px) {
     .usecase-row { grid-template-columns: 1fr; }
     .usecase-role { border-right: none; border-bottom: 1px solid var(--rule-soft); }
     .usecase-task { padding-top: 22px; }
-    .segment-card .segment-row {
-      grid-template-columns: 1fr;
-      padding: 20px;
-    }
-    .segment-table-head {
-      grid-template-columns: 44px 1fr;
-      gap: 12px;
-      padding: 14px 20px;
-    }
-    .segment-head-flow {
-      grid-column: 2 / -1;
-      grid-template-columns: 1fr;
-    }
-    .segment-head-flow span {
-      border-right: none;
-      border-bottom: 1px solid var(--rule-soft);
-    }
-    .segment-head-flow span:last-child {
-      border-bottom: none;
-    }
-    .segment-list { grid-template-columns: 1fr; }
-    .segment-flow > div {
-      border-right: none;
-      min-height: auto;
-    }
   }
 
   /* ==================== NOT IN COURSE ==================== */
@@ -1094,14 +1020,12 @@
   .mod-field .k { display: none; }
   .mod-field .v { color: var(--ink-2); }
   @media (max-width: 1020px) {
-    .segment-list { grid-template-columns: repeat(2, 1fr); }
     .modules { grid-template-columns: 1fr; }
     .module { grid-template-columns: 44px 1fr; }
     .mod-detail { grid-column: 1 / -1; padding-left: 0; }
   }
   @media (max-width: 640px) {
     .module { gap: 12px; padding: 20px; }
-    .segment-list { grid-template-columns: 1fr; }
     .mod-field { grid-template-columns: 1fr; gap: 4px; }
   }
 
@@ -2249,7 +2173,7 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div class="right">
-          <h2 class="sec-title wide">Хотите, чтобы DeepSeek всё делал за вас?</h2>
+          <h2 class="sec-title wide">Хотите, чтобы DeepSeek всё делал за вас, а он не делает</h2>
         </div>
       </div>
 
@@ -2315,7 +2239,7 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div class="right">
-          <h2 class="sec-title wide">ИИ умеет не только генерить текст.</h2>
+          <h2 class="sec-title wide">Что? ИИ умеет не только <span class="hl italic">генерить текст</span>?</h2>
         </div>
       </div>
 
@@ -2357,13 +2281,16 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div class="right">
-          <h2 class="sec-title wide">Как устроен курс.</h2>
+          <h2 class="sec-title wide">Практика → принципы → рабочие сценарии <span class="hl italic">под свою задачу</span>.</h2>
         </div>
       </div>
 
       <div class="program-intro reveal">
         <p>
-          <strong>Практика → принципы → рабочие сценарии под свою задачу.</strong> С первого занятия ищем применение в вашей работе.
+          <strong>С первого занятия ищем применение в вашей работе.</strong> Настраиваем среду для работы, подписки, подключения.
+        </p>
+        <p class="dim">
+          Идём от простого понимания возможностей агента к своему рабочему сценарию, который можно применять после курса.
         </p>
       </div>
 
@@ -2499,13 +2426,13 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div class="right">
-          <h2 class="sec-title">Что ИИ будет делать за вас?</h2>
+          <h2 class="sec-title">Что ИИ будет делать за вас <span class="hl italic">после курса</span>?</h2>
         </div>
       </div>
 
       <div class="quality-grid reveal">
         <p class="quality-copy">
-          После курса главный результат — работа с ИИ-агентом стала частью вашего <em>мышления</em>. По ходу обучения вы научили агента решать вашу задачу. Без навыков разработки.
+          Главный результат — работа с ИИ-агентом стала частью вашего <em>мышления</em>. Уже на курсе вы собираете автоматизацию под свои процессы. Без навыков разработки.
         </p>
         <div>
           <p class="quality-note">После курса агент помогает</p>
@@ -2525,7 +2452,7 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div class="right">
-          <h2 class="sec-title">Особый тариф с домашками.</h2>
+          <h2 class="sec-title">Особый тариф <span class="hl italic">с домашками</span>.</h2>
         </div>
       </div>
 
@@ -2573,7 +2500,7 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div class="right">
-          <h2 class="sec-title">Готовые инструменты и шаблоны.</h2>
+          <h2 class="sec-title">Бонус: готовые <span class="hl italic">инструменты и шаблоны</span>.</h2>
         </div>
       </div>
 
@@ -2583,58 +2510,6 @@
         <p class="dim">На курсе вы получите готовые промпты, шаблоны и скиллы под типовые процессы — и поймёте, как адаптировать их под себя.</p>
       </div>
 
-      <div class="segment-list reveal">
-        <div class="segment-card">
-          <div class="segment-row">
-            <span class="segment-num">01</span>
-            <span class="segment-title">Собрать</span>
-            <div class="segment-flow">
-              <div><strong>Telegram-каналы, источники, ссылки</strong></div>
-              <div><strong>Промпт для сбора открытых данных</strong></div>
-            </div>
-          </div>
-        </div>
-        <div class="segment-card">
-          <div class="segment-row">
-            <span class="segment-num">02</span>
-            <span class="segment-title">Разобрать</span>
-            <div class="segment-flow">
-              <div><strong>Сложная информация из разных источников</strong></div>
-              <div><strong>Шаблоны для анализа и структурирования</strong></div>
-            </div>
-          </div>
-        </div>
-        <div class="segment-card">
-          <div class="segment-row">
-            <span class="segment-num">03</span>
-            <span class="segment-title">Проверить</span>
-            <div class="segment-flow">
-              <div><strong>Факты, логика, полнота</strong></div>
-              <div><strong>Заготовки для поиска галлюцинаций</strong></div>
-            </div>
-          </div>
-        </div>
-        <div class="segment-card">
-          <div class="segment-row">
-            <span class="segment-num">04</span>
-            <span class="segment-title">Повторить</span>
-            <div class="segment-flow">
-              <div><strong>Регулярные рабочие задачи</strong></div>
-              <div><strong>Скиллы и сценарии для повторения</strong></div>
-            </div>
-          </div>
-        </div>
-        <div class="segment-card">
-          <div class="segment-row">
-            <span class="segment-num">05</span>
-            <span class="segment-title">Адаптировать</span>
-            <div class="segment-flow">
-              <div><strong>Ваш бизнес, роль или процесс</strong></div>
-              <div><strong>Шаблон, который можно подстроить под себя</strong></div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -2685,7 +2560,7 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div class="right">
-          <h2 class="sec-title wide">Почему нам можно верить.</h2>
+          <h2 class="sec-title wide"><span class="hl italic">Почему мы</span></h2>
         </div>
       </div>
 
@@ -2708,7 +2583,7 @@
         </article>
         <article class="why-card">
           <h3>Практика, а не лекции</h3>
-          <p>“Послушал лекции и всё понял”? Не верим. Курс строится вокруг коротких практических домашек и проверки логики выполнения. И взаимоопыления между студентами.</p>
+          <p>“Послушал лекции и всё понял”? Не верим. Курс строится вокруг коротких практических домашек и проверки логики выполнения.</p>
         </article>
       </div>
     </div>
@@ -2719,7 +2594,7 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div class="right">
-          <h2 class="sec-title">Частые вопросы.</h2>
+          <h2 class="sec-title">Частые <span class="hl italic">вопросы</span>.</h2>
         </div>
       </div>
 
