@@ -11,11 +11,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<script>
-  if (new URLSearchParams(window.location.search).get("price") === "hide") {
-    document.documentElement.classList.add("prices-hidden");
-  }
-</script>
 <style>
   :root {
     --bg: #ecebe6;
@@ -35,7 +30,7 @@
     --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     --mono: "JetBrains Mono", ui-monospace, Menlo, Monaco, monospace;
 
-    --wrap: 1280px;
+    --wrap: 1180px;
     --gutter: clamp(20px, 4vw, 56px);
   }
 
@@ -288,55 +283,22 @@
   section.paper { background: var(--paper); }
 
   .sec-head {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 40px;
-    align-items: end;
-    margin-bottom: 72px;
-    padding-bottom: 32px;
+    margin-bottom: 56px;
+    padding-bottom: 28px;
     border-bottom: 1px solid var(--rule);
     position: relative;
   }
-  .sec-num-big {
-    font-family: var(--display);
-    font-weight: 500;
-    font-size: clamp(110px, 14vw, 200px);
-    line-height: 0.78;
-    letter-spacing: -0.055em;
-    color: var(--ink);
-  }
-  .sec-num-big .slash {
-    color: var(--accent);
-  }
   .sec-head .right {
-    padding-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-  }
-  .sec-label {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .sec-label::before {
-    content: "";
-    width: 36px; height: 1px;
-    background: var(--ink);
+    padding-bottom: 0;
   }
   .sec-title {
     font-size: clamp(32px, 4.6vw, 56px);
     line-height: 0.98;
     letter-spacing: -0.04em;
     font-weight: 500;
-    max-width: 20ch;
+    max-width: 30ch;
   }
-  .sec-title.wide { max-width: 30ch; }
+  .sec-title.wide { max-width: 34ch; }
   .sec-intro {
     font-size: 18px;
     line-height: 1.5;
@@ -345,19 +307,12 @@
     margin-top: 8px;
   }
   section.dark .sec-head { border-bottom-color: color-mix(in srgb, var(--bg) 25%, transparent); }
-  section.dark .sec-num-big { color: var(--bg); }
-  section.dark .sec-label { color: color-mix(in srgb, var(--bg) 60%, transparent); }
-  section.dark .sec-label::before { background: var(--bg); }
   section.dark .sec-intro { color: color-mix(in srgb, var(--bg) 75%, transparent); }
 
   @media (max-width: 860px) {
     .sec-head {
-      grid-template-columns: 1fr;
-      gap: 18px;
       margin-bottom: 44px;
     }
-    .sec-num-big { font-size: 90px; line-height: .85; }
-    .sec-head .right { padding-bottom: 0; }
   }
 
   /* ==================== HERO ==================== */
@@ -511,6 +466,15 @@
     grid-template-columns: repeat(2, 1fr);
     border-top: 1px solid color-mix(in srgb, var(--bg) 25%, transparent);
     border-left: 1px solid color-mix(in srgb, var(--bg) 25%, transparent);
+  }
+  .why-intro {
+    margin: 0 0 34px;
+    font-family: var(--display);
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+    color: color-mix(in srgb, var(--bg) 78%, transparent);
+    max-width: 62ch;
   }
   .why-card {
     min-height: 210px;
@@ -698,6 +662,18 @@
     color: var(--accent-hot);
     font-weight: 500;
   }
+  .aud-tags {
+    margin-bottom: 18px;
+  }
+  .aud-tags .chip {
+    background: transparent;
+    border-color: color-mix(in srgb, var(--bg) 30%, transparent);
+    color: var(--bg);
+  }
+  .aud-tags .chip:hover {
+    background: var(--bg);
+    color: var(--ink);
+  }
   #pain {
     padding: 82px 0 92px;
   }
@@ -718,7 +694,7 @@
     font-size: clamp(20px, 2.3vw, 28px);
     line-height: 1.22;
     letter-spacing: -0.025em;
-    max-width: 34ch;
+    max-width: 52ch;
     margin: 0 0 44px;
     font-weight: 500;
   }
@@ -898,14 +874,14 @@
     font-size: clamp(20px, 2.3vw, 28px);
     line-height: 1.22;
     letter-spacing: -0.025em;
-    max-width: 36ch;
+    max-width: 46ch;
     margin: 0 0 44px;
     font-weight: 500;
   }
   .not-lede-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: 56px;
     margin: 0 0 44px;
   }
   .not-lede-grid .not-lede {
@@ -956,6 +932,15 @@
   }
   .not-row-head > div + div {
     color: var(--ink-3);
+  }
+  #capabilities .not-row-head > div:first-child span {
+    background: var(--paper);
+    border-color: var(--rule-soft);
+    color: var(--ink-3);
+  }
+  #capabilities .not-row-head > div + div span {
+    border-color: color-mix(in srgb, var(--accent) 36%, var(--rule-soft));
+    color: var(--accent);
   }
   .not-close {
     margin: 36px 0 0;
@@ -1016,9 +1001,11 @@
     }
     #capabilities .not-row:not(.not-row-head) > div:first-child::before {
       content: "Было";
+      color: var(--ink-3);
     }
     #capabilities .not-row:not(.not-row-head) > div + div::before {
       content: "Стало";
+      color: var(--accent);
     }
   }
 
@@ -1053,105 +1040,68 @@
   }
   .module {
     display: grid;
-    grid-template-columns: 180px 1fr 1fr;
-    gap: 40px;
-    padding: 52px 0;
+    grid-template-columns: 72px minmax(220px, .9fr) minmax(0, 1.35fr);
+    gap: 28px;
+    padding: 24px 0;
     border-bottom: 1px solid var(--rule);
-    align-items: start;
+    align-items: baseline;
     position: relative;
   }
   .mod-index {
     display: flex;
     flex-direction: column;
-    gap: 10px;
   }
   .mod-index .n {
-    font-family: var(--display);
+    font-family: var(--mono);
     font-weight: 500;
-    font-size: clamp(80px, 10vw, 120px);
-    line-height: 0.82;
-    letter-spacing: -0.06em;
-    color: var(--ink);
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    color: var(--accent);
   }
   .mod-index .n em {
     font-style: italic;
     color: var(--accent);
     font-weight: 500;
   }
-  .mod-index .lbl {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-top: 4px;
-  }
   .mod-title h3 {
-    font-size: clamp(24px, 2.6vw, 32px);
-    line-height: 1.05;
+    font-size: clamp(19px, 1.8vw, 24px);
+    line-height: 1.16;
     font-weight: 500;
-    letter-spacing: -0.028em;
-    margin-bottom: 20px;
-    max-width: 22ch;
+    letter-spacing: -0.02em;
+    margin-bottom: 0;
+    max-width: none;
   }
   .mod-title h3 em {
     font-style: italic;
     color: var(--accent);
     font-weight: 500;
   }
-  .mod-title .chip-group { margin-top: 20px; }
   .mod-detail {
     display: grid;
-    gap: 22px;
     font-size: 15px;
   }
   .mod-field {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 18px;
     line-height: 1.55;
-    align-items: baseline;
   }
-  .mod-field .k {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink);
-    font-weight: 500;
-  }
-  .mod-field .v { color: var(--ink); }
-  .launch-module .launch-label {
-    font-family: var(--display);
-    font-weight: 500;
-    font-size: clamp(24px, 3vw, 42px);
-    line-height: .95;
-    letter-spacing: -0.04em;
-    color: var(--accent);
-    max-width: 7ch;
-  }
-  .launch-module .mod-title h3 {
-    max-width: 18ch;
-  }
-  .project-module .launch-label {
-    max-width: 9ch;
-  }
-
+  .mod-field .k { display: none; }
+  .mod-field .v { color: var(--ink-2); }
   @media (max-width: 1020px) {
-    .module { grid-template-columns: 140px 1fr; }
+    .module { grid-template-columns: 64px 1fr; }
     .mod-detail { grid-column: 1 / -1; padding-left: 0; }
   }
   @media (max-width: 640px) {
-    .module { grid-template-columns: 1fr; gap: 20px; padding: 36px 0; }
+    .module { grid-template-columns: 1fr; gap: 12px; padding: 24px 0; }
     .mod-field { grid-template-columns: 1fr; gap: 4px; }
   }
 
   /* ==================== QUALITY ==================== */
   .quality-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 56px;
+    grid-template-columns: 1fr;
+    gap: 34px;
     align-items: start;
+    max-width: none;
   }
   .quality-copy {
     font-family: var(--display);
@@ -1160,6 +1110,7 @@
     letter-spacing: -0.035em;
     font-weight: 500;
     margin: 0;
+    max-width: 34ch;
   }
   .quality-copy em {
     color: var(--accent-hot);
@@ -1177,6 +1128,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    max-width: none;
     border-top: 1px solid color-mix(in srgb, var(--bg) 22%, transparent);
   }
   .quality-list li {
@@ -1222,11 +1174,15 @@
     margin: 0;
     background: var(--paper);
     border-right: 1px solid var(--rule);
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
   }
   .timeline li {
     padding: 20px 28px;
     border-bottom: 1px solid var(--rule-soft);
     font-size: 15px;
+    display: flex;
+    align-items: center;
   }
   .timeline li:last-child { border-bottom: none; }
   .timeline li:hover { background: var(--bg); }
@@ -1246,7 +1202,7 @@
 
   .stats {
     display: grid;
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     background: var(--paper);
   }
   .stat {
@@ -1567,6 +1523,118 @@
     color: var(--ink-3);
     text-align: center;
   }
+  .pricing-lead {
+    max-width: none;
+    margin: 0 auto;
+    padding: clamp(28px, 4vw, 44px);
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 6px 6px 0 0 var(--accent);
+  }
+  .homework-note {
+    max-width: 920px;
+    margin: 0 0 42px;
+  }
+  .homework-note h3 {
+    font-size: clamp(28px, 3.2vw, 42px);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+    margin: 0 0 18px;
+  }
+  .homework-note p {
+    margin: 0 0 14px;
+    font-family: var(--display);
+    font-size: clamp(18px, 2vw, 23px);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    color: var(--ink-2);
+  }
+  .homework-note p:last-child { margin-bottom: 0; }
+  .pricing-lead h3 {
+    font-size: clamp(28px, 3.4vw, 42px);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+    max-width: 18ch;
+    margin: 0 0 18px;
+  }
+  .pricing-lead .lead-text {
+    font-family: var(--display);
+    font-size: clamp(18px, 2vw, 23px);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    max-width: 42ch;
+    margin: 0;
+    color: var(--ink-2);
+  }
+  .pricing-lead-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, .85fr) minmax(360px, 1fr);
+    gap: clamp(28px, 5vw, 72px);
+    align-items: start;
+  }
+  .pricing-inline-form {
+    display: grid;
+    gap: 14px;
+    max-width: none;
+  }
+  .pricing-inline-form label {
+    display: grid;
+    gap: 8px;
+  }
+  .pricing-inline-form label span {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .pricing-inline-form input {
+    width: 100%;
+    min-height: 52px;
+    padding: 13px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 500 16px/1.2 var(--sans);
+  }
+  .pricing-inline-form input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .pricing-inline-row {
+    display: contents;
+  }
+  .pricing-submit {
+    width: 100%;
+    justify-content: center;
+    box-shadow: 5px 5px 0 0 var(--ink);
+  }
+  .pricing-submit:disabled {
+    cursor: wait;
+    opacity: .65;
+  }
+  .pricing-consent {
+    margin: 16px 0 0;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-3);
+  }
+  .pricing-consent a {
+    color: var(--ink);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .pricing-form-status {
+    min-height: 22px;
+    margin: 8px 0 0;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .pricing-form-status.is-error { color: #8a1f12; }
+  .pricing-form-status.is-success { color: #145c20; }
   @media (max-width: 900px) {
     .pricing { grid-template-columns: 1fr; }
     .tier + .tier {
@@ -1574,6 +1642,8 @@
       margin-top: -1px;
     }
     .pricing-tail { padding-top: 28px; }
+    .pricing-lead-grid { grid-template-columns: 1fr; }
+    .pricing-inline-row { grid-template-columns: 1fr; }
   }
 
   /* ==================== AUTHORS ==================== */
@@ -1587,13 +1657,13 @@
     line-height: 1.4;
     color: var(--ink-2);
     letter-spacing: -0.015em;
-    max-width: 62ch;
+    max-width: 76ch;
     margin: 0;
     font-weight: 400;
   }
   .authors + .auth-intro {
     margin-top: 34px;
-    max-width: 74ch;
+    max-width: 86ch;
   }
   .authors {
     display: grid;
@@ -1690,7 +1760,7 @@
 
   /* ==================== FAQ ==================== */
   .faq {
-    max-width: 920px;
+    max-width: none;
     border-top: 1px solid var(--rule);
   }
   .faq details {
@@ -2131,10 +2201,10 @@
             <span class="block">из генератора текста в <span class="box italic">рабочего</span></span>
           </h1>
           <p class="hero-lede">
-            Практический курс для тех, кто уже пользуется ChatGPT, DeepSeek или Perplexity, но хочет, чтобы ИИ закрывал рабочие задачи.
+            Практический курс для тех, кто уже пользуется ChatGPT, DeepSeek или Perplexity, но хочет, чтобы ИИ закрывал задачи.
           </p>
           <p class="hero-sub">
-            Поиск и анализ информации, работа с таблицами, рутина в браузере, создание документов, отчётов и дашбордов. Без программирования.
+            Поиск и анализ информации, работа с таблицами, рутина в браузере, создание документов, отчетов и дашбордов. Без программирования. На практических кейсах и своих задачах.
           </p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="#lead-dialog" data-lead-open data-lead-type="hero">Оставить заявку <span class="arr">→</span></a>
@@ -2168,16 +2238,14 @@
   <section id="pain" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">01<span class="slash">/</span></div>
         <div class="right">
-          <span class="sec-label">Узнаёте себя?</span>
-          <h2 class="sec-title wide">Хотите, чтобы DeepSeek всё делал за вас, а он <span class="hl italic">не делает</span>? :/</h2>
+          <h2 class="sec-title wide">Хотите, чтобы DeepSeek всё делал за вас?</h2>
         </div>
       </div>
 
       <div class="not-lede-grid reveal">
         <p class="not-lede">
-          Обычно вы просите ИИ поразгонять идеи, написать текст или обсудить задачку.
+          А он не делает. Обычно вы просите ИИ поразгонять идеи, написать текст или обсудить задачку.
         </p>
         <p class="not-lede">
           Но как только нужно сделать работу руками — собрать информацию, проверить факты, разложить данные, оформить результат и повторить процесс через неделю — всё снова оказывается на вас.
@@ -2187,11 +2255,11 @@
       <div class="rec-grid reveal">
         <div class="rec-item">
           <span class="num">01 / 08</span>
-          <p>Другие строят целые отделы на ИИ, а у вас — <em>генерация текста</em>.</p>
+          <p>Видите, как другие строят целые отделы на ИИ, а у вас — <em>генерация текста</em>.</p>
         </div>
         <div class="rec-item">
           <span class="num">02 / 08</span>
-          <p>Проще сделать руками, чем постоянно <em>перепроверять</em> за ИИ.</p>
+          <p>Уверены, что проще сделать руками, чем постоянно <em>перепроверять</em> за ИИ.</p>
         </div>
         <div class="rec-item">
           <span class="num">03 / 08</span>
@@ -2199,19 +2267,19 @@
         </div>
         <div class="rec-item">
           <span class="num">04 / 08</span>
-          <p>Доступы, оплаты, VPN и прокси — уже <em>отдельная работа</em>.</p>
+          <p>Разобраться с доступами, оплатами, VPN и прокси — уже <em>отдельная работа</em>.</p>
         </div>
         <div class="rec-item">
           <span class="num">05 / 08</span>
-          <p>Хочется одного рабочего окна, а не зоопарка сервисов под каждую мелочь.</p>
+          <p>Хочется одного рабочего окна, а не зоопарка сервисов под каждую мелкую задачу.</p>
         </div>
         <div class="rec-item">
           <span class="num">06 / 08</span>
-          <p>Рынок требует навыка, а непонятно, <em>с чего начать</em>.</p>
+          <p>Чувствуете, что рынок требует навыка, а непонятно, <em>с чего начать</em>.</p>
         </div>
         <div class="rec-item">
           <span class="num">07 / 08</span>
-          <p>Сотрудникам купили подписки, а они всё равно используют только чат.</p>
+          <p>Купили подписки сотрудникам, а они всё равно используют только чат.</p>
         </div>
         <div class="rec-item">
           <span class="num">08 / 08</span>
@@ -2220,7 +2288,13 @@
       </div>
 
       <div class="aud-note reveal">
-        <p>Менеджерам · Маркетологам · Сейлзам · HR · Фаундерам</p>
+        <div class="chip-group aud-tags" aria-label="Кому будет полезно">
+          <span class="chip">Менеджерам</span>
+          <span class="chip">Маркетологам</span>
+          <span class="chip">Сейлзам</span>
+          <span class="chip">HR</span>
+          <span class="chip">Фаундерам</span>
+        </div>
         <p>Если у вас есть хотя бы 2 часа в день работы за компьютером — будет полезно.</p>
       </div>
     </div>
@@ -2230,15 +2304,13 @@
   <section id="capabilities">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">02<span class="slash">/</span></div>
         <div class="right">
-          <span class="sec-label">Что уже можно</span>
-          <h2 class="sec-title wide">ИИ умеет не только <span class="hl italic">генерить текст</span>.</h2>
+          <h2 class="sec-title wide">ИИ умеет не только генерить текст.</h2>
         </div>
       </div>
 
       <p class="usecase-intro reveal">
-        ИИ-агент может сделать анализ конкурентов, найти лидов, настроить Яндекс.Метрику, а потом собрать аналитику и понятный отчёт для вас и начальства.
+        ИИ-агент может сделать анализ конкурентов, найти лидов, настроить яндекс.метрику, а потом сделать аналитику и сформировать понятный отчет для вас и начальства.
       </p>
 
       <div class="not-grid reveal">
@@ -2248,7 +2320,7 @@
         </div>
         <div class="not-row">
           <div>Вы используете ИИ как чатик, который генерит текст.</div>
-          <div>Вы отдаёте агенту куски работы: найти, собрать, открыть, структурировать, оформить — и повторять раз в неделю.</div>
+          <div>Вы отдаёте агенту куски работы: найти, собрать, открыть, структурировать, оформить (и повторять раз в неделю)</div>
         </div>
         <div class="not-row">
           <div>Вы руками делаете рутину за компом, а ИИ просите только что-то придумать.</div>
@@ -2264,7 +2336,7 @@
         </div>
         <div class="not-row">
           <div>Нужно оплатить 15 подписок и вникать в ограничения каждой, чтобы через месяц начать сначала.</div>
-          <div>Используете один инструмент, понимаете принцип ИИ-агентов и не боитесь изменений.</div>
+          <div>Использую один инструмент, понимаю принцип самой технологии ИИ-агентов и не боюсь изменений.</div>
         </div>
       </div>
     </div>
@@ -2274,16 +2346,14 @@
   <section id="program">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">03<span class="slash">/</span></div>
         <div class="right">
-          <span class="sec-label">Программа</span>
-          <h2 class="sec-title wide">Практика → принципы → рабочие сценарии <span class="hl italic">под свою задачу</span>.</h2>
+          <h2 class="sec-title wide">Как устроен курс.</h2>
         </div>
       </div>
 
       <div class="program-intro reveal">
         <p>
-          <strong>С первого занятия ищем применение в вашей работе.</strong>
+          <strong>Практика → принципы → рабочие сценарии под свою задачу.</strong> С первого занятия ищем применение в вашей работе.
         </p>
       </div>
 
@@ -2307,21 +2377,21 @@
           <div class="stat">
             <div class="txt">
               <h4>Живые занятия + записи</h4>
-              <p>Занятия проходят вживую, записи остаются участникам.</p>
+              <p>Живые занятия, записи остаются участникам.</p>
             </div>
             <div class="big">∞<small>доступ</small></div>
           </div>
           <div class="stat">
             <div class="txt">
               <h4>Домашки 30–40 минут</h4>
-              <p>Короткая практика после занятия. Всегда можно потратить ночь, докручивая до идеала.</p>
+              <p>Короткая практика после занятия. Можно докрутить глубже, если хочется.</p>
             </div>
             <div class="big">30′<small>~40 мин</small></div>
           </div>
           <div class="stat">
             <div class="txt">
               <h4>Чат и поддержка</h4>
-              <p>Можно задавать вопросы и забирать идеи из задач людей с другим бэкграундом.</p>
+              <p>Вопросы, разборы и идеи из задач участников с разным бэкграундом.</p>
             </div>
             <div class="big">24<small>чат</small></div>
           </div>
@@ -2339,24 +2409,14 @@
         <article class="module reveal">
           <div class="mod-index">
             <div class="n">01<em>.</em></div>
-            <div class="lbl">Сценарий</div>
           </div>
           <div class="mod-title">
             <h3>Понимаем, что агенты <em>вообще могут</em>.</h3>
-            <div class="chip-group">
-              <span class="chip mod">Агенты</span>
-              <span class="chip mod">Чат</span>
-              <span class="chip mod">Границы</span>
-            </div>
           </div>
           <div class="mod-detail">
             <div class="mod-field">
               <div class="k">Фокус</div>
               <div class="v">Разбираемся, чем агент отличается от чата, какие задачи ему можно отдавать, где он помогает, а где пока лучше не ждать магии.</div>
-            </div>
-            <div class="mod-field">
-              <div class="k">Итог</div>
-              <div class="v">Понимаете базовую логику работы с агентом и видите, какие задачи из вашей работы подходят для курса.</div>
             </div>
           </div>
         </article>
@@ -2364,25 +2424,14 @@
         <article class="module reveal">
           <div class="mod-index">
             <div class="n">02<em>.</em></div>
-            <div class="lbl">Сценарий</div>
           </div>
           <div class="mod-title">
             <h3>Учимся отдавать <em>простые задачи</em>.</h3>
-            <div class="chip-group">
-              <span class="chip mod">Контекст</span>
-              <span class="chip mod">Критерии</span>
-              <span class="chip mod">Проверка</span>
-              <span class="chip mod">Формат</span>
-            </div>
           </div>
           <div class="mod-detail">
             <div class="mod-field">
               <div class="k">Фокус</div>
               <div class="v">Тренируем постановку задачи: контекст, входные данные, критерии результата, ограничения, проверка и понятный формат на выходе.</div>
-            </div>
-            <div class="mod-field">
-              <div class="k">Итог</div>
-              <div class="v">Агент не угадывает, а работает по понятной рамке, которую можно повторить.</div>
             </div>
           </div>
         </article>
@@ -2390,25 +2439,14 @@
         <article class="module reveal">
           <div class="mod-index">
             <div class="n">03<em>.</em></div>
-            <div class="lbl">Сценарий</div>
           </div>
           <div class="mod-title">
             <h3>Подключаем <em>внешние источники</em>.</h3>
-            <div class="chip-group">
-              <span class="chip mod">Браузер</span>
-              <span class="chip mod">Сайты</span>
-              <span class="chip mod">Telegram</span>
-              <span class="chip mod">Файлы</span>
-            </div>
           </div>
           <div class="mod-detail">
             <div class="mod-field">
               <div class="k">Фокус</div>
               <div class="v">Работаем с браузером, сайтами, Telegram, файлами и другими источниками, чтобы агент собирал материал для задачи.</div>
-            </div>
-            <div class="mod-field">
-              <div class="k">Итог</div>
-              <div class="v">Умеете давать агенту данные не только из головы и чата, а из реальных рабочих источников.</div>
             </div>
           </div>
         </article>
@@ -2416,32 +2454,21 @@
         <article class="module reveal">
           <div class="mod-index">
             <div class="n">04<em>.</em></div>
-            <div class="lbl">Сценарий</div>
           </div>
           <div class="mod-title">
             <h3>Собираем <em>повторяемые сценарии</em>.</h3>
-            <div class="chip-group">
-              <span class="chip mod">Процесс</span>
-              <span class="chip mod">Шаги</span>
-              <span class="chip mod">Контроль</span>
-              <span class="chip mod">Повторение</span>
-            </div>
           </div>
           <div class="mod-detail">
             <div class="mod-field">
               <div class="k">Фокус</div>
               <div class="v">Превращаем разовую задачу в понятный процесс: что делать каждый раз, какие шаги повторять, где проверять и как получать стабильный результат.</div>
             </div>
-            <div class="mod-field">
-              <div class="k">Итог</div>
-              <div class="v">У вас появляется рабочий сценарий, а не удачный единичный промпт.</div>
-            </div>
           </div>
         </article>
 
-        <article id="project" class="module launch-module project-module reveal">
+        <article id="project" class="module reveal">
           <div class="mod-index">
-            <div class="launch-label">05.</div>
+            <div class="n">05<em>.</em></div>
           </div>
           <div class="mod-title">
             <h3>Делаем финальный проект <em>на своей задаче</em>.</h3>
@@ -2449,11 +2476,7 @@
           <div class="mod-detail">
             <div class="mod-field">
               <div class="k">Фокус</div>
-              <div class="v">Берёте одну реальную задачу из своей работы и собираете под неё рабочий сценарий с ИИ-агентом.</div>
-            </div>
-            <div class="mod-field">
-              <div class="k">Итог</div>
-              <div class="v">Готовый сценарий, который можно использовать дальше и развивать после курса.</div>
+              <div class="v">Берёте одну реальную задачу из своей работы и собираете под неё рабочий сценарий с ИИ-агентом, который можно развивать дальше.</div>
             </div>
           </div>
         </article>
@@ -2465,24 +2488,22 @@
   <section id="results" class="dark">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">04<span class="slash">/</span></div>
         <div class="right">
-          <span class="sec-label">Результаты курса</span>
-          <h2 class="sec-title">Что ИИ будет делать за вас <span class="hl italic">после курса</span>?</h2>
+          <h2 class="sec-title">Что ИИ будет делать за вас?</h2>
         </div>
       </div>
 
       <div class="quality-grid reveal">
         <p class="quality-copy">
-          Главный результат — работа с ИИ-агентом стала частью вашего <em>мышления</em>. По ходу обучения вы научили агента решать вашу задачу. Без навыков разработки.
+          После курса главный результат — работа с ИИ-агентом стала частью вашего <em>мышления</em>. По ходу обучения вы научили агента решать вашу задачу. Без навыков разработки.
         </p>
         <div>
           <p class="quality-note">После курса агент помогает</p>
           <ul class="quality-list">
-            <li>Собирать данные из открытых и закрытых источников, чистить выдачу и превращать её в выводы: hh, linkedin, telegram, 2gis, сайты конкурентов.</li>
-            <li>Создавать презентации, отчёты, лендинги и дашборды.</li>
-            <li>Работать с файлами на компьютере и в облачном хранилище: Google Docs/Sheets, Excel и Word.</li>
-            <li>Работать в браузере как реальный человек: пройти антибот-защиту LinkedIn, отредактировать настройки аналитики, добавить клиента в базу.</li>
+            <li>Собирать данные из открытых и закрытых источников, чистить выдачу и превращать её в выводы (hh, linkedin, telegram, 2gis, сайты конкурентов)</li>
+            <li>Создавать презентации, отчёты, лендинги, дашборды</li>
+            <li>Работать с файлами на компьютере и в облачном хранилище (+ google docs/sheets, excel/word)</li>
+            <li>Работать в браузере как реальный человек (пройти антибот-защиту LinkedIn, отредактировать настройки аналитики, добавить клиента в базу)</li>
           </ul>
         </div>
       </div>
@@ -2493,114 +2514,48 @@
   <section id="pricing">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">05<span class="slash">/</span></div>
         <div class="right">
-          <span class="sec-label">Тарифы</span>
-          <h2 class="sec-title">Выберите <span class="hl italic">свой режим</span>.</h2>
+          <h2 class="sec-title">Особый тариф с домашками.</h2>
         </div>
       </div>
 
-      <div class="pricing reveal">
-        <div class="tier">
-          <div class="t-num">Plan 01</div>
-          <h4>Базовый</h4>
-          <p class="for has-price">Без проверки домашек</p>
-          <div class="price">
-            <div class="price-old">39 000 ₽</div>
-            <div class="price-new">34 000 ₽ <span class="price-label">Early birds</span></div>
+      <div class="homework-note reveal">
+        <h3>Почему мы отдельно топим за проверку.</h3>
+        <p>В работе с агентами важен не только финальный результат, а путь: как вы поставили задачу, какой контекст дали, где проверили факты и что решили упростить.</p>
+        <p>Без обратной связи легко получить красивый ответ и не заметить, что агент пропустил источник, неверно понял критерии или сделал лишнюю ручную работу за вас.</p>
+        <p>Поэтому на тарифе с домашками мы смотрим решение целиком и помогаем докрутить сценарий так, чтобы его можно было реально использовать после курса.</p>
+      </div>
+
+      <div class="pricing-lead reveal">
+        <div class="pricing-lead-grid">
+          <div>
+            <h3>Какой формат обучения выбрать?</h3>
+            <p class="lead-text">
+              Заполните форму — мы свяжемся с вами и подберем оптимальный вариант под вашу цель и график.
+            </p>
           </div>
-          <ul>
-            <li>Живые занятия + записи</li>
-            <li>Рабочие skills (навыки для агента)</li>
-            <li>Общий чат</li>
-            <li>Финальная встреча</li>
-          </ul>
-          <div class="split">Не входит</div>
-          <ul class="not">
-            <li>Проверка домашних заданий</li>
-            <li>Персональная обратная связь</li>
-            <li>Личные консультации</li>
-          </ul>
-        </div>
-
-        <div class="tier featured">
-          <span class="tag-top">★ Рекомендуем</span>
-          <div class="t-num">Plan 02</div>
-          <h4>С проверкой</h4>
-          <p class="for has-price">Проверяем результат и путь решения, даём обратную связь</p>
-          <div class="price">
-            <div class="price-old">59 000 ₽</div>
-            <div class="price-new">54 000 ₽ <span class="price-label">Early birds</span></div>
+          <div>
+            <form class="pricing-inline-form" id="pricing-form" data-endpoint="https://script.google.com/macros/s/AKfycbx52G8XiOmx7h9nDaaepa1qEVyKsUQX185Mz_hfu4rJ6uchI2VFdfrb_XV9eGUr2gHm/exec" novalidate>
+              <label>
+                <span>Email</span>
+                <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+              </label>
+              <div class="pricing-inline-row">
+                <label>
+                  <span>Telegram</span>
+                  <input name="telegram_username" type="text" inputmode="text" autocomplete="off" placeholder="@username" required>
+                </label>
+                <button class="btn btn-primary pricing-submit" type="submit">Получить тарифы <span class="arr">→</span></button>
+              </div>
+              <input type="hidden" name="source" value="aiforwork_landing">
+              <input type="hidden" name="lead_type" value="pricing_inline">
+            </form>
+            <p class="pricing-consent">
+              Нажимая кнопку, вы соглашаетесь с <a href="/privacy/">политикой обработки персональных данных</a>. Контакты используем только для ответа по курсу.
+            </p>
+            <p class="pricing-form-status" role="status" aria-live="polite"></p>
           </div>
-          <ul>
-            <li>Всё из базового тарифа</li>
-            <li>Проверка домашних заданий</li>
-            <li>Докрученные решения от нас</li>
-            <li>Отвечаем на все вопросы по домашкам</li>
-            <li>30 мест</li>
-          </ul>
         </div>
-
-        <div class="tier">
-          <div class="t-num">Plan 03</div>
-          <h4>VIP</h4>
-          <p class="for has-price">2 консультации 1 на 1</p>
-          <div class="price">
-            <div class="price-old">79 000 ₽</div>
-            <div class="price-new">69 000 ₽ <span class="price-label">Early birds</span></div>
-          </div>
-          <ul>
-            <li>Всё из тарифа с проверкой</li>
-            <li>2 личные консультации по вашим кейсам</li>
-            <li>10 мест</li>
-          </ul>
-          <div class="split">Формат консультаций</div>
-          <p class="for" style="padding: 0; border: none; margin: 4px 0 0;">Консультации помогают разобрать задачу и выбрать направление. Это не решение задачи за вас</p>
-        </div>
-      </div>
-
-      <div class="refund-note reveal">
-        <h3>Первая неделя – вайбчек без риска</h3>
-        <p>Если не зайдет в течение первой недели – возвращаем 100%.</p>
-      </div>
-
-      <div class="pricing-tail reveal">
-        <a class="btn btn-primary" href="#lead-dialog" data-lead-open data-lead-type="pricing">Узнать условия оплаты <span class="arr">→</span></a>
-        <a class="btn btn-ghost" href="#lead-dialog" data-lead-open data-lead-type="employer">Хочу, чтобы оплатил работодатель <span class="arr">→</span></a>
-        <div class="company-divider">Бизнесу</div>
-        <a class="btn btn-dark" href="#lead-dialog" data-lead-open data-lead-type="business">Записать моих сотрудников <span class="arr">→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY US -->
-  <section id="why-us" class="dark">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num-big">06<span class="slash">/</span></div>
-        <div class="right">
-          <span class="sec-label">Почему мы</span>
-          <h2 class="sec-title wide">Потому что мы УЖЕ обучали логике работы с агентами, <span class="hl italic">а не кнопкам</span>.</h2>
-        </div>
-      </div>
-
-      <div class="why-grid reveal">
-        <article class="why-card">
-          <h3>Технический взгляд простыми словами</h3>
-          <p>У нас есть техническая экспертиза: Коля использует ИИ-агентов как разработчик с момента их появления, видит инструмент изнутри и понимает, как он работает.</p>
-        </article>
-        <article class="why-card">
-          <h3>Знаем, как надо и не надо</h3>
-          <p>Уже внедряли ИИ-автоматизации в компании, обучали команды, автоматизировали личные и бизнесовые задачи.</p>
-        </article>
-        <article class="why-card">
-          <h3>Принципы вместо кнопок</h3>
-          <p>Инструменты меняются, но логика остаётся. Закладываем базу, чтобы не зависеть от изменчивости рынка.</p>
-        </article>
-        <article class="why-card">
-          <h3>Практика, а не лекции</h3>
-          <p>«Послушал лекции и всё понял»? Не верим. Курс строится вокруг коротких практических домашек, проверки логики выполнения и взаимоопыления между студентами.</p>
-        </article>
       </div>
     </div>
   </section>
@@ -2609,10 +2564,8 @@
   <section id="bonus" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">07<span class="slash">/</span></div>
         <div class="right">
-          <span class="sec-label">Бонус</span>
-          <h2 class="sec-title">Готовые инструменты и <span class="hl italic">шаблоны</span>.</h2>
+          <h2 class="sec-title">Готовые инструменты и шаблоны.</h2>
         </div>
       </div>
 
@@ -2681,10 +2634,8 @@
   <section id="authors" class="paper">
     <div class="wrap">
       <div class="sec-head authors-head reveal">
-        <div class="sec-num-big">08<span class="slash">/</span></div>
         <div class="right">
-          <span class="sec-label">Почему можно верить</span>
-          <h2 class="sec-title">Потому что мы это <span class="hl italic">уже делали</span>.</h2>
+          <h2 class="sec-title">Кто мы.</h2>
         </div>
       </div>
 
@@ -2721,29 +2672,61 @@
     </div>
   </section>
 
+  <!-- WHY US -->
+  <section id="why-us" class="dark">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="right">
+          <h2 class="sec-title wide">Почему нам можно верить.</h2>
+        </div>
+      </div>
+
+      <p class="why-intro reveal">
+        Потому что мы это уже делали.
+      </p>
+
+      <div class="why-grid reveal">
+        <article class="why-card">
+          <h3>Технический взгляд простыми словами</h3>
+          <p>У нас есть техническая экспертиза: Коля использует ИИ-агентов как разработчик с момента их появления, видит инструмент изнутри и понимает, как он работает.</p>
+        </article>
+        <article class="why-card">
+          <h3>Знаем, как надо и не надо</h3>
+          <p>Уже внедряли ИИ-автоматизации в компании, обучали команды, автоматизировали личные и бизнесовые задачи.</p>
+        </article>
+        <article class="why-card">
+          <h3>Принципы вместо кнопок</h3>
+          <p>Инструменты меняются, но логика остаётся. Закладываем базу, чтобы не зависеть от изменчивости рынка.</p>
+        </article>
+        <article class="why-card">
+          <h3>Практика, а не лекции</h3>
+          <p>“Послушал лекции и всё понял”? Не верим. Курс строится вокруг коротких практических домашек и проверки логики выполнения. И взаимоопыления между студентами.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section id="faq">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="sec-num-big">09<span class="slash">/</span></div>
         <div class="right">
-          <span class="sec-label">FAQ</span>
-          <h2 class="sec-title">Частые <span class="hl italic">вопросы</span>.</h2>
+          <h2 class="sec-title">Частые вопросы.</h2>
         </div>
       </div>
 
       <div class="faq reveal">
         <details>
           <summary>А если я уже пользуюсь ChatGPT?</summary>
-          <p>Отлично. На курсе мы переходим от «попросить чат что-то сгенерировать» к рабочим сценариям для работы с файлами, таблицами и инструментами.</p>
+          <p>Отлично. На курсе мы переходим от “попросить чат что-то сгенерировать” к рабочим сценариям для работы с файлами, таблицами, инструментами.</p>
         </details>
         <details>
           <summary>Почему домашки для всех одинаковые? Тут же разные профессии.</summary>
-          <p>Базовые классы задач похожи в разных профессиях: собрать, проверить, структурировать, оформить, повторить. Мы учим логике, базе и общему принципу на практических примерах домашних заданий. А переносить принцип вы будете уже на свою работу и финальный проект.</p>
+          <p>Базовые классы задач похожи в разных профессиях: собрать, проверить, структурировать, оформить, повторить. Мы уже говорили - учим логике, базе, общему, на практических примерах домашек. А переносить принцип вы будете уже на свою работу и финальный проект.</p>
         </details>
         <details>
           <summary>А если я не понимаю, какую свою задачу взять?</summary>
-          <p>Поможем выбрать. Обычно задача находится в повторяющейся рутине: отчёты, ресёрч, чаты, таблицы, файлы, мониторинг, подготовка материалов. А ещё в чате можно подглядывать за обсуждением задач других студентов.</p>
+          <p>Поможем выбрать. Обычно задача находится в повторяющейся рутине: отчёты, ресёрч, чаты, таблицы, файлы, мониторинг, подготовка материалов. А еще в чате можно подглядывать за обсуждением задач других студентов.</p>
         </details>
         <details>
           <summary>Можно ли работать с рабочими файлами и данными?</summary>
@@ -2755,7 +2738,7 @@
         </details>
         <details>
           <summary>Подойдёт ли курс руководителям?</summary>
-          <p>Да. Особенно если нужно понять, какие процессы можно автоматизировать, как тестировать гипотезы и как внедрить ИИ в саму команду по любви.</p>
+          <p>Да. Особенно если нужно понять, какие процессы можно автоматизировать, как тестировать гипотезы и как внедрить ИИ в саму команду <s>без вазелина</s> по любви.</p>
         </details>
         <details>
           <summary>Полно курсов по ИИ, почему именно ваш?</summary>
@@ -2866,6 +2849,10 @@
         title: "Оставить заявку",
         copy: "Оставьте email и Telegram. Мы напишем напрямую и ответим на вопросы по курсу.",
       },
+      pricing: {
+        title: "Получить тарифы",
+        copy: "Оставьте email и Telegram. Мы пришлём варианты участия и поможем выбрать формат.",
+      },
       employer: {
         title: "Оплата работодателем",
         copy: "Оставьте контакты. Пришлём детали и поможем подготовить аргументы для руководителя.",
@@ -2961,6 +2948,67 @@
     function showLeadStatus(message, type) {
       statusEl.textContent = message;
       statusEl.className = `lead-status is-${type}`;
+    }
+  }
+
+  const pricingForm = document.querySelector("#pricing-form");
+  const pricingStatus = document.querySelector(".pricing-form-status");
+
+  if (pricingForm && pricingStatus) {
+    const submitButton = pricingForm.querySelector('button[type="submit"]');
+
+    pricingForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      showPricingStatus("", "");
+
+      const formData = new FormData(pricingForm);
+      const email = String(formData.get("email") || "").trim().toLowerCase();
+      const telegramUsername = String(formData.get("telegram_username") || "")
+        .trim()
+        .replace(/^https?:\/\/t\.me\//i, "")
+        .replace(/^@/, "");
+      const endpoint = pricingForm.dataset.endpoint;
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showPricingStatus("Проверьте email.", "error");
+        return;
+      }
+
+      if (!/^[A-Za-z0-9_]{5,32}$/.test(telegramUsername)) {
+        showPricingStatus("Укажите Telegram username в формате @username.", "error");
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Отправляем...";
+
+      try {
+        await fetch(endpoint, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            email,
+            telegram_username: telegramUsername,
+            source: `${formData.get("source")}/${formData.get("lead_type")}`,
+            page_url: window.location.href,
+            user_agent: navigator.userAgent,
+          }),
+        });
+
+        pricingForm.reset();
+        showPricingStatus("Заявка отправлена. Мы напишем в Telegram или на почту.", "success");
+      } catch (error) {
+        showPricingStatus("Не получилось отправить заявку. Попробуйте ещё раз.", "error");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Получить тарифы <span class="arr">→</span>';
+      }
+    });
+
+    function showPricingStatus(message, type) {
+      pricingStatus.textContent = message;
+      pricingStatus.className = type ? `pricing-form-status is-${type}` : "pricing-form-status";
     }
   }
 </script>
