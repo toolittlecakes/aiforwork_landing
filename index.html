@@ -1838,6 +1838,136 @@
     border-color: var(--bg);
   }
 
+  /* ==================== LEAD DIALOG ==================== */
+  .lead-dialog {
+    width: min(calc(100vw - 32px), 560px);
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--rule);
+    box-shadow: 10px 10px 0 0 var(--accent);
+  }
+  .lead-dialog::backdrop {
+    background: color-mix(in srgb, var(--ink) 62%, transparent);
+  }
+  .lead-dialog[open] {
+    animation: dialog-in .16s ease-out;
+  }
+  @keyframes dialog-in {
+    from { transform: translateY(10px); }
+    to { transform: none; }
+  }
+  .lead-dialog-inner {
+    padding: 30px;
+    position: relative;
+  }
+  .lead-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .lead-close:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .lead-kicker {
+    margin: 0 0 18px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .lead-dialog h3 {
+    max-width: 12ch;
+    margin: 0 48px 18px 0;
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: .96;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+  }
+  .lead-dialog p {
+    margin: 0 0 24px;
+    max-width: 38ch;
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .lead-fields {
+    display: grid;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .lead-dialog label {
+    display: grid;
+    gap: 8px;
+  }
+  .lead-dialog label span {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .lead-dialog input {
+    width: 100%;
+    min-height: 52px;
+    padding: 13px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 500 16px/1.2 var(--sans);
+  }
+  .lead-dialog input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .lead-dialog .btn-primary {
+    width: 100%;
+    justify-content: center;
+    box-shadow: 5px 5px 0 0 var(--ink);
+  }
+  .lead-dialog .btn-primary:disabled {
+    opacity: .65;
+    cursor: wait;
+  }
+  .lead-consent {
+    margin: 16px 0 0 !important;
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    color: var(--ink-3) !important;
+  }
+  .lead-consent a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .lead-status {
+    min-height: 22px;
+    margin: 14px 0 0 !important;
+    font-weight: 600;
+  }
+  .lead-status.is-error { color: #b42318; }
+  .lead-status.is-success { color: #166534; }
+  @media (max-width: 520px) {
+    .lead-dialog {
+      width: calc(100vw - 24px);
+      box-shadow: 6px 6px 0 0 var(--accent);
+    }
+    .lead-dialog-inner { padding: 24px; }
+    .lead-dialog h3 { margin-right: 40px; }
+  }
+
   /* ==================== FOOTER ==================== */
   footer {
     padding: 40px 0 32px;
@@ -1976,7 +2106,7 @@
       <a href="#faq">FAQ</a>
     </nav>
     <span class="status-badge"><span class="status-dot"></span>Идёт набор</span>
-    <a class="btn btn-primary btn-sm" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Оставить заявку <span class="arr">→</span></a>
+    <a class="btn btn-primary btn-sm" href="#lead-dialog" data-lead-open data-lead-type="header">Оставить заявку <span class="arr">→</span></a>
   </div>
 </header>
 
@@ -2007,7 +2137,7 @@
             Поиск и анализ информации, работа с таблицами, рутина в браузере, создание документов, отчётов и дашбордов. Без программирования.
           </p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Оставить заявку <span class="arr">→</span></a>
+            <a class="btn btn-primary" href="#lead-dialog" data-lead-open data-lead-type="hero">Оставить заявку <span class="arr">→</span></a>
             <a class="btn btn-ghost" href="#program">Посмотреть программу</a>
           </div>
         </div>
@@ -2435,10 +2565,10 @@
       </div>
 
       <div class="pricing-tail reveal">
-        <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Узнать условия оплаты <span class="arr">→</span></a>
-        <a class="btn btn-ghost" href="https://t.me/m/VltsQycYNGM6" target="_blank" rel="noopener">Хочу, чтобы оплатил работодатель <span class="arr">→</span></a>
+        <a class="btn btn-primary" href="#lead-dialog" data-lead-open data-lead-type="pricing">Узнать условия оплаты <span class="arr">→</span></a>
+        <a class="btn btn-ghost" href="#lead-dialog" data-lead-open data-lead-type="employer">Хочу, чтобы оплатил работодатель <span class="arr">→</span></a>
         <div class="company-divider">Бизнесу</div>
-        <a class="btn btn-dark" href="https://t.me/m/nTDXSturMjRi" target="_blank" rel="noopener">Записать моих сотрудников <span class="arr">→</span></a>
+        <a class="btn btn-dark" href="#lead-dialog" data-lead-open data-lead-type="business">Записать моих сотрудников <span class="arr">→</span></a>
       </div>
     </div>
   </section>
@@ -2655,7 +2785,7 @@
         На курсе вы попробуете это на практических кейсах и соберёте первый сценарий на своей задаче.
       </p>
       <div class="hero-cta reveal">
-        <a class="btn btn-primary" href="https://t.me/m/ItTvuOOmNDNi" target="_blank" rel="noopener">Оставить заявку <span class="arr">→</span></a>
+        <a class="btn btn-primary" href="#lead-dialog" data-lead-open data-lead-type="final">Оставить заявку <span class="arr">→</span></a>
       </div>
     </div>
   </section>
@@ -2684,6 +2814,30 @@
   </div>
 </footer>
 
+<dialog class="lead-dialog" id="lead-dialog" aria-labelledby="lead-title">
+  <form class="lead-dialog-inner" id="lead-form" data-endpoint="https://script.google.com/macros/s/AKfycbx52G8XiOmx7h9nDaaepa1qEVyKsUQX185Mz_hfu4rJ6uchI2VFdfrb_XV9eGUr2gHm/exec" novalidate>
+    <button class="lead-close" type="button" aria-label="Закрыть">×</button>
+    <p class="lead-kicker">AI For Work · заявка</p>
+    <h3 id="lead-title">Оставить заявку</h3>
+    <p id="lead-copy">Оставьте email и Telegram. Мы напишем напрямую и ответим на вопросы по курсу.</p>
+    <div class="lead-fields">
+      <label>
+        <span>Email</span>
+        <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+      </label>
+      <label>
+        <span>Telegram</span>
+        <input name="telegram_username" type="text" inputmode="text" autocomplete="off" placeholder="@username" required>
+      </label>
+    </div>
+    <input type="hidden" name="source" value="aiforwork_landing">
+    <input type="hidden" name="lead_type" value="default">
+    <button class="btn btn-primary" type="submit">Отправить заявку <span class="arr">→</span></button>
+    <p class="lead-consent">Нажимая кнопку, вы соглашаетесь с <a href="/privacy/">политикой обработки персональных данных</a>. Контакты используем только для ответа по курсу.</p>
+    <p class="lead-status" role="status" aria-live="polite"></p>
+  </form>
+</dialog>
+
 <script>
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) {
@@ -2694,6 +2848,121 @@
     }
   }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  const leadDialog = document.querySelector("#lead-dialog");
+  const leadForm = document.querySelector("#lead-form");
+
+  if (leadDialog && leadForm) {
+    const leadTitle = leadDialog.querySelector("#lead-title");
+    const leadCopy = leadDialog.querySelector("#lead-copy");
+    const leadTypeInput = leadForm.querySelector('input[name="lead_type"]');
+    const emailInput = leadForm.querySelector('input[name="email"]');
+    const submitButton = leadForm.querySelector('button[type="submit"]');
+    const statusEl = leadForm.querySelector(".lead-status");
+    const closeButton = leadDialog.querySelector(".lead-close");
+
+    const leadText = {
+      default: {
+        title: "Оставить заявку",
+        copy: "Оставьте email и Telegram. Мы напишем напрямую и ответим на вопросы по курсу.",
+      },
+      employer: {
+        title: "Оплата работодателем",
+        copy: "Оставьте контакты. Пришлём детали и поможем подготовить аргументы для руководителя.",
+      },
+      business: {
+        title: "Обучение команды",
+        copy: "Оставьте контакты. Обсудим формат для сотрудников и удобный способ оплаты.",
+      },
+    };
+
+    document.querySelectorAll("[data-lead-open]").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const leadType = button.dataset.leadType || "default";
+        const content = leadText[leadType] || leadText.default;
+
+        leadTitle.textContent = content.title;
+        leadCopy.textContent = content.copy;
+        leadTypeInput.value = leadType;
+        clearLeadStatus();
+        leadDialog.showModal();
+        emailInput.focus();
+      });
+    });
+
+    closeButton.addEventListener("click", () => {
+      leadDialog.close();
+    });
+
+    leadDialog.addEventListener("click", (event) => {
+      if (event.target === leadDialog) {
+        leadDialog.close();
+      }
+    });
+
+    leadForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearLeadStatus();
+
+      const formData = new FormData(leadForm);
+      const email = String(formData.get("email") || "").trim().toLowerCase();
+      const telegramUsername = String(formData.get("telegram_username") || "")
+        .trim()
+        .replace(/^https?:\/\/t\.me\//i, "")
+        .replace(/^@/, "");
+      const endpoint = leadForm.dataset.endpoint;
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showLeadStatus("Проверьте email.", "error");
+        return;
+      }
+
+      if (!/^[A-Za-z0-9_]{5,32}$/.test(telegramUsername)) {
+        showLeadStatus("Укажите Telegram username в формате @username.", "error");
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Отправляем...";
+
+      try {
+        const leadType = formData.get("lead_type");
+
+        await fetch(endpoint, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            email,
+            telegram_username: telegramUsername,
+            source: `${formData.get("source")}/${leadType}`,
+            page_url: window.location.href,
+            user_agent: navigator.userAgent,
+          }),
+        });
+
+        leadForm.reset();
+        showLeadStatus("Заявка отправлена. Мы напишем в Telegram или на почту.", "success");
+      } catch (error) {
+        showLeadStatus("Не получилось отправить заявку. Попробуйте ещё раз.", "error");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Отправить заявку <span class="arr">→</span>';
+      }
+    });
+
+    function clearLeadStatus() {
+      statusEl.textContent = "";
+      statusEl.className = "lead-status";
+    }
+
+    function showLeadStatus(message, type) {
+      statusEl.textContent = message;
+      statusEl.className = `lead-status is-${type}`;
+    }
+  }
 </script>
 
 </body>
