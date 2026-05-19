@@ -911,6 +911,56 @@
     letter-spacing: -0.01em;
     color: var(--accent);
   }
+  .bonus-lede {
+    max-width: 760px;
+    margin-bottom: 28px;
+  }
+  .bonus-lede p {
+    margin: 0;
+    font-family: var(--display);
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+  }
+  .bonus-lede strong {
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .bonus-explain {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--rule);
+    background: var(--bg);
+  }
+  .bonus-explain article {
+    padding: 28px 32px;
+  }
+  .bonus-explain article + article {
+    border-left: 1px solid var(--rule);
+  }
+  .bonus-explain h3 {
+    margin: 0 0 12px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .bonus-explain p {
+    margin: 0;
+    font-size: clamp(17px, 1.6vw, 20px);
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+  @media (max-width: 760px) {
+    .bonus-explain { grid-template-columns: 1fr; }
+    .bonus-explain article + article {
+      border-left: none;
+      border-top: 1px solid var(--rule);
+    }
+  }
   @media (max-width: 820px) {
     .program-intro { grid-template-columns: 1fr; gap: 24px; }
   }
@@ -2468,14 +2518,23 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div class="right">
-          <h2 class="sec-title">Бонус: готовые <span class="hl italic">инструменты и шаблоны</span>.</h2>
+          <h2 class="sec-title">Бонус: готовые <span class="hl italic">инструменты и шаблоны</span></h2>
         </div>
       </div>
 
-      <div class="program-intro reveal">
-        <p><strong>Скилл агента — это сохранённая инструкция для повторяемой задачи.</strong></p>
-        <p class="dim">Внутри скилла — описание, как собирать данные, какие источники проверять, в каком формате отдавать результат и на что обращать особое внимание.</p>
-        <p class="dim">На курсе вы получите готовые промпты, шаблоны и скиллы под типовые процессы — и поймёте, как адаптировать их под себя.</p>
+      <div class="bonus-lede reveal">
+        <p><strong>Скилл агента</strong> — это сохранённая инструкция для повторяемой задачи.</p>
+      </div>
+
+      <div class="bonus-explain reveal">
+        <article>
+          <h3>Что внутри</h3>
+          <p>Описание, как собирать данные, какие источники проверять, в каком формате отдавать результат и на что обращать особое внимание.</p>
+        </article>
+        <article>
+          <h3>Что получите</h3>
+          <p>Готовые промпты, шаблоны и скиллы под типовые процессы — и понимание, как адаптировать их под себя.</p>
+        </article>
       </div>
 
     </div>
@@ -2486,7 +2545,7 @@
     <div class="wrap">
       <div class="sec-head authors-head reveal">
         <div class="right">
-          <h2 class="sec-title">Кто мы.</h2>
+          <h2 class="sec-title">Кто мы</h2>
         </div>
       </div>
 
@@ -2606,7 +2665,7 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div class="right">
-          <h2 class="sec-title">Частые <span class="hl italic">вопросы</span>.</h2>
+          <h2 class="sec-title">Частые <span class="hl italic">вопросы</span></h2>
         </div>
       </div>
 
