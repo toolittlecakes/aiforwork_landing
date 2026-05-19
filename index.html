@@ -457,52 +457,6 @@
     }
   }
 
-  .hero-hooks {
-    margin-top: 56px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .hero-hook {
-    padding: 26px 24px 28px;
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    transition: background .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
-  }
-  .hero-hook + .hero-hook { margin-left: -1px; }
-  .hero-hook:hover {
-    background: color-mix(in srgb, var(--accent) 5%, var(--paper));
-    border-color: var(--accent);
-    box-shadow: inset 0 4px 0 0 var(--accent);
-    transform: translateY(-2px);
-  }
-  .hero-hook strong {
-    display: block;
-    font-family: var(--display);
-    font-size: clamp(20px, 2vw, 26px);
-    line-height: 1.08;
-    letter-spacing: -0.025em;
-    font-weight: 500;
-    margin-bottom: 10px;
-  }
-  .hero-hook p {
-    margin: 0;
-    font-size: 14.5px;
-    line-height: 1.55;
-    color: var(--ink-2);
-  }
-  @media (max-width: 1080px) {
-    .hero-hooks { grid-template-columns: repeat(2, 1fr); }
-    .hero-hook:nth-child(odd) { margin-left: 0; }
-    .hero-hook:nth-child(n + 3) { margin-top: -1px; }
-  }
-  @media (max-width: 860px) {
-    .hero-hooks { grid-template-columns: 1fr; margin-top: 40px; }
-    .hero-hook + .hero-hook {
-      margin-left: 0;
-      margin-top: -1px;
-    }
-  }
-
   /* ==================== WHY NOW ==================== */
   .why-grid {
     display: grid;
@@ -2193,24 +2147,6 @@
         </div>
       </div>
 
-      <div class="hero-hooks reveal">
-        <div class="hero-hook">
-          <strong>Поиск</strong>
-          <p>Сбор и анализ информации из открытых и закрытых источников</p>
-        </div>
-        <div class="hero-hook">
-          <strong>Таблицы</strong>
-          <p>Чистка данных, выводы, отчёты и понятный формат результата</p>
-        </div>
-        <div class="hero-hook">
-          <strong>Браузер</strong>
-          <p>Рутина в сервисах, формах, кабинетах и рабочих инструментах</p>
-        </div>
-        <div class="hero-hook">
-          <strong>Документы</strong>
-          <p>Презентации, отчёты, лендинги и дашборды на своих задачах</p>
-        </div>
-      </div>
     </div>
   </section>
 
