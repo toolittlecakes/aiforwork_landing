@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #ecebe6;
@@ -26,7 +26,7 @@
     --accent-hot: #3445ff;
     --sage: #889776;
 
-    --display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    --display: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     --mono: "JetBrains Mono", ui-monospace, Menlo, Monaco, monospace;
 
@@ -283,23 +283,28 @@
   section.paper { background: var(--paper); }
 
   .sec-head {
-    margin-bottom: 56px;
-    padding: 0 0 28px 28px;
-    border-bottom: 2px solid var(--ink);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 72px;
+    padding: 0 0 32px;
+    border-bottom: 1px solid var(--ink);
     position: relative;
   }
-  .sec-head::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.12em;
-    width: 10px;
-    height: clamp(32px, 4vw, 54px);
-    background: var(--accent);
-    box-shadow: 5px 5px 0 0 var(--ink);
+  .sec-num-big {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(110px, 14vw, 200px);
+    line-height: 0.78;
+    letter-spacing: -0.055em;
+    color: var(--ink);
+  }
+  .sec-num-big .slash {
+    color: var(--accent);
   }
   .sec-head .right {
-    padding-bottom: 0;
+    padding-bottom: 16px;
   }
   .sec-title {
     font-size: clamp(32px, 4.6vw, 56px);
@@ -317,18 +322,19 @@
     color: var(--ink-2);
     margin-top: 8px;
   }
-  section.dark .sec-head { border-bottom-color: color-mix(in srgb, var(--bg) 72%, transparent); }
-  section.dark .sec-head::before {
-    background: var(--accent-hot);
-    box-shadow: 5px 5px 0 0 var(--bg);
-  }
+  section.dark .sec-head { border-bottom-color: color-mix(in srgb, var(--bg) 25%, transparent); }
+  section.dark .sec-num-big { color: var(--bg); }
   section.dark .sec-title { color: var(--bg); }
   section.dark .sec-intro { color: color-mix(in srgb, var(--bg) 75%, transparent); }
 
   @media (max-width: 860px) {
     .sec-head {
+      grid-template-columns: 1fr;
+      gap: 18px;
       margin-bottom: 44px;
     }
+    .sec-head .right { padding-bottom: 0; }
+    .sec-num-big { font-size: clamp(72px, 26vw, 120px); }
   }
 
   /* ==================== HERO ==================== */
@@ -910,6 +916,31 @@
     font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--accent);
+  }
+  .program-callout {
+    max-width: 900px;
+    margin: -14px 0 42px;
+    padding: 22px 26px;
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 6px 6px 0 0 var(--ink);
+  }
+  .program-callout p {
+    margin: 0;
+    font-family: var(--display);
+    font-size: clamp(20px, 2.2vw, 28px);
+    line-height: 1.22;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+  }
+  .program-callout p + p {
+    margin-top: 10px;
+    font-size: clamp(16px, 1.6vw, 20px);
+    line-height: 1.35;
+    color: color-mix(in srgb, #fff 82%, transparent);
+  }
+  .program-callout strong {
+    font-weight: 700;
   }
   .bonus-lede {
     max-width: 760px;
@@ -1612,13 +1643,23 @@
     text-underline-offset: 3px;
   }
   .pricing-form-status {
-    min-height: 22px;
-    margin: 8px 0 0;
+    display: none;
+    margin: 12px 0 0;
     font-size: 14px;
     font-weight: 500;
   }
+  .pricing-form-status.is-error,
+  .pricing-form-status.is-success {
+    display: block;
+    padding: 14px 16px;
+    border: 1px solid currentColor;
+    box-shadow: 4px 4px 0 0 var(--ink);
+  }
   .pricing-form-status.is-error { color: #8a1f12; }
-  .pricing-form-status.is-success { color: #145c20; }
+  .pricing-form-status.is-success {
+    color: #145c20;
+    background: #e2f6d8;
+  }
   @media (max-width: 900px) {
     .pricing { grid-template-columns: 1fr; }
     .tier + .tier {
@@ -2007,12 +2048,22 @@
     text-underline-offset: 3px;
   }
   .lead-status {
-    min-height: 22px;
+    display: none;
     margin: 14px 0 0 !important;
     font-weight: 600;
   }
+  .lead-status.is-error,
+  .lead-status.is-success {
+    display: block;
+    padding: 14px 16px;
+    border: 1px solid currentColor;
+    box-shadow: 4px 4px 0 0 var(--ink);
+  }
   .lead-status.is-error { color: #b42318; }
-  .lead-status.is-success { color: #166534; }
+  .lead-status.is-success {
+    color: #166534;
+    background: #e2f6d8;
+  }
   @media (max-width: 520px) {
     .lead-dialog {
       width: calc(100vw - 24px);
@@ -2185,7 +2236,7 @@
             <span class="block">из генератора текста в <span class="box italic">работника</span></span>
           </h1>
           <p class="hero-lede">
-            Практический курс для тех, кто уже пользуется ChatGPT, DeepSeek или Perplexity, но хочет, чтобы ИИ сам выполнял задачи.
+            Курс для тех, кто пользуется ChatGPT/DeepSeek/Perplexity как чатом, а хочет, чтобы ИИ сам выполнял задачи.
           </p>
           <p class="hero-sub">
             Поиск и анализ информации, работа с таблицами, рутина в браузере, создание документов, отчетов и дашбордов. Без программирования. На практических кейсах и своих задачах.
@@ -2204,6 +2255,7 @@
   <section id="pain" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
+        <div class="sec-num-big">02<span class="slash">/</span></div>
         <div class="right">
           <h2 class="sec-title wide">Хотите, чтобы DeepSeek всё делал за вас, а он не делает</h2>
         </div>
@@ -2270,6 +2322,7 @@
   <section id="capabilities">
     <div class="wrap">
       <div class="sec-head reveal">
+        <div class="sec-num-big">03<span class="slash">/</span></div>
         <div class="right">
           <h2 class="sec-title wide">Что? ИИ умеет не только <span class="hl italic">генерить текст</span>?</h2>
         </div>
@@ -2293,12 +2346,12 @@
           <div>Агент делает часть рутины за компьютером, а вы отвечаете за смысл, критерии и качество результата.</div>
         </div>
         <div class="not-row">
-          <div>«Я слышал, что ИИ может многое, но у меня он нормально не работает».</div>
-          <div>«Я знаю рабочие сценарии, понимаю границы возможностей и могу применять это к своим задачам».</div>
-        </div>
-        <div class="not-row">
           <div>Нужно оплатить 15 подписок и вникать в ограничения каждой, чтобы через месяц начать сначала.</div>
           <div>Использую один инструмент, понимаю принцип самой технологии ИИ-агентов и не боюсь изменений.</div>
+        </div>
+        <div class="not-row">
+          <div>«Я слышал, что ИИ может многое, но у меня он нормально не работает».</div>
+          <div>«Я понимаю границы возможностей ИИ-агентов и управляю ими через свою экспертизу».</div>
         </div>
       </div>
     </div>
@@ -2308,6 +2361,7 @@
   <section id="program" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
+        <div class="sec-num-big">04<span class="slash">/</span></div>
         <div class="right">
           <h2 class="sec-title wide">Как устроен курс</h2>
         </div>
@@ -2367,11 +2421,11 @@
         </div>
       </div>
 
-      <div class="program-intro reveal">
+      <div class="program-callout reveal">
         <p>
           <strong>Практика → принципы → рабочие сценарии под свою задачу.</strong>
         </p>
-        <p class="dim">
+        <p>
           Идём от простого понимания возможностей агента к своему рабочему сценарию, который можно применять после курса.
         </p>
       </div>
@@ -2459,6 +2513,7 @@
   <section id="results" class="dark">
     <div class="wrap">
       <div class="sec-head reveal">
+        <div class="sec-num-big">05<span class="slash">/</span></div>
         <div class="right">
           <h2 class="sec-title">Что ИИ будет делать за вас <span class="hl italic">после курса</span>?</h2>
         </div>
@@ -2517,6 +2572,7 @@
   <section id="bonus" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
+        <div class="sec-num-big">06<span class="slash">/</span></div>
         <div class="right">
           <h2 class="sec-title">Бонус: готовые <span class="hl italic">инструменты и шаблоны</span></h2>
         </div>
@@ -2544,6 +2600,7 @@
   <section id="authors">
     <div class="wrap">
       <div class="sec-head authors-head reveal">
+        <div class="sec-num-big">07<span class="slash">/</span></div>
         <div class="right">
           <h2 class="sec-title">Кто мы</h2>
         </div>
@@ -2586,6 +2643,7 @@
   <section id="why-us" class="dark">
     <div class="wrap">
       <div class="sec-head reveal">
+        <div class="sec-num-big">08<span class="slash">/</span></div>
         <div class="right">
           <h2 class="sec-title wide"><span class="hl italic">Почему мы</span></h2>
         </div>
@@ -2616,6 +2674,7 @@
   <section id="pricing">
     <div class="wrap">
       <div class="sec-head reveal">
+        <div class="sec-num-big">09<span class="slash">/</span></div>
         <div class="right">
           <h2 class="sec-title">Обучение <span class="hl italic">с домашками</span></h2>
         </div>
@@ -2650,10 +2709,10 @@
               <input type="hidden" name="source" value="aiforwork_landing">
               <input type="hidden" name="lead_type" value="pricing_inline">
             </form>
+            <p class="pricing-form-status" role="status" aria-live="polite"></p>
             <p class="pricing-consent">
               Нажимая кнопку, вы соглашаетесь с <a href="/privacy/">политикой обработки персональных данных</a>. Контакты используем только для ответа по курсу.
             </p>
-            <p class="pricing-form-status" role="status" aria-live="polite"></p>
           </div>
         </div>
       </div>
@@ -2664,6 +2723,7 @@
   <section id="faq" class="paper">
     <div class="wrap">
       <div class="sec-head reveal">
+        <div class="sec-num-big">10<span class="slash">/</span></div>
         <div class="right">
           <h2 class="sec-title">Частые <span class="hl italic">вопросы</span></h2>
         </div>
@@ -2769,9 +2829,9 @@
     </div>
     <input type="hidden" name="source" value="aiforwork_landing">
     <input type="hidden" name="lead_type" value="default">
+    <p class="lead-status" role="status" aria-live="polite"></p>
     <button class="btn btn-primary" type="submit">Отправить заявку <span class="arr">→</span></button>
     <p class="lead-consent">Нажимая кнопку, вы соглашаетесь с <a href="/privacy/">политикой обработки персональных данных</a>. Контакты используем только для ответа по курсу.</p>
-    <p class="lead-status" role="status" aria-live="polite"></p>
   </form>
 </dialog>
 
@@ -2843,7 +2903,7 @@
       }
     });
 
-    leadForm.addEventListener("submit", async (event) => {
+    leadForm.addEventListener("submit", (event) => {
       event.preventDefault();
       clearLeadStatus();
 
@@ -2865,38 +2925,26 @@
         return;
       }
 
-      submitButton.disabled = true;
-      submitButton.textContent = "Отправляем...";
+      const leadType = formData.get("lead_type");
+      sendLeadRequest(endpoint, {
+        email,
+        telegram_username: telegramUsername,
+        source: `${formData.get("source")}/${leadType}`,
+        page_url: window.location.href,
+        user_agent: navigator.userAgent,
+      });
 
-      try {
-        const leadType = formData.get("lead_type");
-
-        await fetch(endpoint, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({
-            email,
-            telegram_username: telegramUsername,
-            source: `${formData.get("source")}/${leadType}`,
-            page_url: window.location.href,
-            user_agent: navigator.userAgent,
-          }),
-        });
-
-        leadForm.reset();
-        showLeadStatus("Заявка отправлена. Мы напишем в Telegram или на почту.", "success");
-      } catch (error) {
-        showLeadStatus("Не получилось отправить заявку. Попробуйте ещё раз.", "error");
-      } finally {
-        submitButton.disabled = false;
-        submitButton.innerHTML = 'Отправить заявку <span class="arr">→</span>';
-      }
+      leadForm.reset();
+      submitButton.hidden = true;
+      showLeadStatus("Заявка отправлена. Саша скоро вам напишет.", "success");
     });
 
     function clearLeadStatus() {
       statusEl.textContent = "";
       statusEl.className = "lead-status";
+      submitButton.hidden = false;
+      submitButton.disabled = false;
+      submitButton.innerHTML = 'Отправить заявку <span class="arr">→</span>';
     }
 
     function showLeadStatus(message, type) {
@@ -2911,7 +2959,7 @@
   if (pricingForm && pricingStatus) {
     const submitButton = pricingForm.querySelector('button[type="submit"]');
 
-    pricingForm.addEventListener("submit", async (event) => {
+    pricingForm.addEventListener("submit", (event) => {
       event.preventDefault();
       showPricingStatus("", "");
 
@@ -2933,37 +2981,35 @@
         return;
       }
 
-      submitButton.disabled = true;
-      submitButton.textContent = "Отправляем...";
+      sendLeadRequest(endpoint, {
+        email,
+        telegram_username: telegramUsername,
+        source: `${formData.get("source")}/${formData.get("lead_type")}`,
+        page_url: window.location.href,
+        user_agent: navigator.userAgent,
+      });
 
-      try {
-        await fetch(endpoint, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({
-            email,
-            telegram_username: telegramUsername,
-            source: `${formData.get("source")}/${formData.get("lead_type")}`,
-            page_url: window.location.href,
-            user_agent: navigator.userAgent,
-          }),
-        });
-
-        pricingForm.reset();
-        showPricingStatus("Заявка отправлена. Мы напишем в Telegram или на почту.", "success");
-      } catch (error) {
-        showPricingStatus("Не получилось отправить заявку. Попробуйте ещё раз.", "error");
-      } finally {
-        submitButton.disabled = false;
-        submitButton.innerHTML = 'Получить тарифы <span class="arr">→</span>';
-      }
+      pricingForm.reset();
+      submitButton.hidden = true;
+      showPricingStatus("Заявка отправлена. Саша скоро вам напишет.", "success");
     });
 
     function showPricingStatus(message, type) {
       pricingStatus.textContent = message;
       pricingStatus.className = type ? `pricing-form-status is-${type}` : "pricing-form-status";
     }
+  }
+
+  function sendLeadRequest(endpoint, payload) {
+    fetch(endpoint, {
+      method: "POST",
+      mode: "no-cors",
+      keepalive: true,
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload),
+    }).catch((error) => {
+      console.error("Lead request failed", error);
+    });
   }
 </script>
 
