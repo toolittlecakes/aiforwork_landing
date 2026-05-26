@@ -1660,6 +1660,11 @@
     font-size: 14px;
     font-weight: 500;
   }
+  .pricing-form-status a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
   .pricing-form-status.is-error,
   .pricing-form-status.is-success {
     display: block;
@@ -2070,6 +2075,11 @@
     padding: 14px 16px;
     border: 1px solid currentColor;
     box-shadow: 4px 4px 0 0 var(--ink);
+  }
+  .lead-status a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   .lead-status.is-error { color: #b42318; }
   .lead-status.is-success {
@@ -2953,7 +2963,7 @@
       setTimeout(() => {
         leadForm.reset();
         submitButton.hidden = true;
-        showLeadStatus("Заявка отправлена. Саша скоро вам напишет.", "success");
+        showLeadSuccess();
       }, 1000);
     });
 
@@ -2968,6 +2978,10 @@
     function showLeadStatus(message, type) {
       statusEl.textContent = message;
       statusEl.className = `lead-status is-${type}`;
+    }
+
+    function showLeadSuccess() {
+      showSashaFollowUpStatus(statusEl, "lead-status is-success");
     }
   }
 
@@ -3012,7 +3026,7 @@
       setTimeout(() => {
         pricingForm.reset();
         submitButton.hidden = true;
-        showPricingStatus("Заявка отправлена. Саша скоро вам напишет.", "success");
+        showPricingSuccess();
       }, 1000);
     });
 
@@ -3020,6 +3034,21 @@
       pricingStatus.textContent = message;
       pricingStatus.className = type ? `pricing-form-status is-${type}` : "pricing-form-status";
     }
+
+    function showPricingSuccess() {
+      showSashaFollowUpStatus(pricingStatus, "pricing-form-status is-success");
+    }
+  }
+
+  function showSashaFollowUpStatus(statusEl, className) {
+    const sashaLink = document.createElement("a");
+    sashaLink.href = "https://t.me/m/HKI5HKfvNzUy";
+    sashaLink.target = "_blank";
+    sashaLink.rel = "noopener";
+    sashaLink.textContent = "напиши Саше";
+
+    statusEl.replaceChildren("Мы скоро ответим, но чтобы ускорить процесс – ", sashaLink);
+    statusEl.className = className;
   }
 
   function sendLeadRequest(endpoint, payload) {
