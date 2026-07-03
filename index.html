@@ -217,18 +217,6 @@ section[id] { scroll-margin-top: 88px; }
   padding: 72px 0 96px;
   border-bottom: 1px solid var(--rule);
 }
-.dateline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 20px;
-  margin-bottom: 38px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--rule);
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
 .hero h1 {
   max-width: none;
   font-size: clamp(46px, 7.5vw, 118px);
@@ -243,13 +231,31 @@ section[id] { scroll-margin-top: 88px; }
   margin-top: 36px;
 }
 .hero-lines {
+  list-style: none;
   display: grid;
-  gap: 10px;
-  max-width: 58ch;
+  gap: 0;
+  max-width: 780px;
   margin-top: 36px;
+  padding: 0;
+  border-top: 1px solid var(--rule);
   font-size: clamp(18px, 2vw, 24px);
   line-height: 1.35;
   letter-spacing: -0.015em;
+}
+.hero-lines li {
+  position: relative;
+  padding: 18px 0 18px 36px;
+  border-bottom: 1px solid var(--rule);
+}
+.hero-lines li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(18px + 0.675em);
+  width: 0.5em;
+  height: 0.5em;
+  transform: translateY(-50%);
+  background: var(--accent);
 }
 .hero-lines a {
   color: var(--accent);
@@ -259,6 +265,27 @@ section[id] { scroll-margin-top: 88px; }
 .hero-lines a:hover {
   color: var(--accent-hot);
 }
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  max-width: 780px;
+  margin-top: 28px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.hero-meta span {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  border-right: 1px solid var(--rule);
+}
+.hero-meta span:last-child { border-right: 0; }
 .hero-card {
   display: flex;
   align-items: center;
@@ -442,10 +469,6 @@ blockquote p + p { margin-top: 14px; }
   transform: translateY(-2px);
   box-shadow: 6px 6px 0 0 var(--ink);
 }
-.testimonial:has(details[open]) {
-  transform: none;
-  box-shadow: 6px 6px 0 0 var(--accent);
-}
 .testimonial-head {
   min-height: 104px;
   padding: 24px 26px;
@@ -518,7 +541,7 @@ details.similar summary {
 }
 details.similar summary::-webkit-details-marker { display: none; }
 details.similar summary::after {
-  content: "+";
+  content: "↗";
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -529,21 +552,96 @@ details.similar summary::after {
   font-size: 22px;
   line-height: 1;
 }
-details.similar[open] summary::after { content: "−"; }
 details.similar summary:hover {
   background: var(--ink);
   color: var(--bg);
 }
 details.similar summary:hover::after { color: var(--bg); }
 .similar-list {
+  display: none;
+}
+.quote-modal[hidden] {
+  display: none;
+}
+.quote-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
   display: grid;
-  gap: 0;
-  border-top: 1px solid var(--rule);
+  place-items: center;
+  padding: 28px;
 }
-.similar-list .quote {
+.quote-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: color-mix(in srgb, var(--ink) 72%, transparent);
+  cursor: pointer;
+}
+.quote-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(860px, 100%);
+  max-height: min(760px, calc(100dvh - 56px));
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  box-shadow: 10px 10px 0 0 var(--accent);
+}
+.quote-modal-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: start;
+  padding: 24px 26px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--ink);
+  color: var(--bg);
+}
+.quote-modal-head p {
+  margin-bottom: 6px;
+  color: color-mix(in srgb, var(--bg) 62%, transparent);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.quote-modal-head h3 {
+  max-width: 24ch;
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.02;
+  color: var(--bg);
+}
+.quote-modal-close {
+  width: 38px;
+  height: 38px;
+  border: 1px solid color-mix(in srgb, var(--bg) 45%, transparent);
+  border-radius: 0;
+  background: transparent;
+  color: var(--bg);
+  font: inherit;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .16s ease, color .16s ease;
+}
+.quote-modal-close:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+.quote-modal-body {
+  overflow: auto;
+  padding: 0;
+}
+.quote-modal-body .quote {
+  padding: 28px 30px;
   border-bottom: 1px solid var(--rule-soft);
+  color: var(--ink);
 }
-.similar-list .quote:last-child { border-bottom: 0; }
+.quote-modal-body .quote:last-child {
+  border-bottom: 0;
+}
 
 .format-lede {
   display: grid;
@@ -963,6 +1061,18 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     font-size: 20px;
     line-height: 1.35;
   }
+  .hero-lines li {
+    padding-left: 30px;
+  }
+  .hero-meta {
+    grid-template-columns: 1fr;
+  }
+  .hero-meta span {
+    min-height: 48px;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-meta span:last-child { border-bottom: 0; }
   .hero-card {
     flex-direction: column;
     align-items: stretch;
@@ -992,6 +1102,28 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
   .testimonial-head,
   .quote,
   details.similar summary { padding-left: 20px; padding-right: 20px; }
+  .quote-modal {
+    padding: 0;
+    place-items: stretch;
+  }
+  .quote-modal-panel {
+    width: 100%;
+    max-height: 100dvh;
+    min-height: 100dvh;
+    border: 0;
+    box-shadow: none;
+  }
+  .quote-modal-head {
+    padding: 20px;
+  }
+  .quote-modal-head h3 {
+    font-size: 27px;
+  }
+  .quote-modal-body .quote {
+    padding: 24px 20px;
+    font-size: 18px;
+    line-height: 1.5;
+  }
   .format-card,
   .week,
   .price-card {
@@ -1057,21 +1189,22 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
 <main id="top">
   <section class="hero">
     <div class="wrap">
-      <div class="dateline">
-        <span>Старт 13.07</span>
-        <span>3 недели</span>
-        <span>Codex / Claude Code</span>
-      </div>
       <div class="hero-copy">
         <h1>Общаться с ИИ-агентом: <span>как?</span></h1>
         <div class="hero-card">
           <p>Практический марафон <del>желаний</del> по работе с ИИ-агентами для не-технарей</p>
           <a class="btn primary" href="#payment">Записаться</a>
         </div>
-        <div class="hero-lines">
-          <p>Переход от ии-чата к автоматизации работы (<a href="#testimonials">см отзывы</a>)</p>
-          <p>Файлы, таблицы, презентации. Отчеты, исследования, лендинги и работа с медиа</p>
-          <p>Формируем навык и привычку мыслить с агентом через короткие задания</p>
+        <ul class="hero-lines">
+          <li>Переход от ии-чата к автоматизации работы (<a href="#testimonials">см отзывы</a>)</li>
+          <li>Файлы, таблицы, презентации. Отчеты, исследования, лендинги и работа с медиа</li>
+          <li>Формируем навык и привычку мыслить с агентом</li>
+          <li>Задания 10-20 минут по будням</li>
+        </ul>
+        <div class="hero-meta" aria-label="Детали марафона">
+          <span>Старт 13.07</span>
+          <span>3 недели</span>
+          <span>Codex / Claude Code</span>
         </div>
       </div>
     </div>
@@ -1214,6 +1347,20 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
       </div>
     </div>
   </section>
+
+  <div class="quote-modal" id="quote-modal" hidden>
+    <button class="quote-modal-backdrop" type="button" data-modal-close aria-label="Закрыть похожие отзывы"></button>
+    <div class="quote-modal-panel" role="dialog" aria-modal="true" aria-labelledby="quote-modal-title">
+      <div class="quote-modal-head">
+        <div>
+          <p>Похожие отзывы</p>
+          <h3 id="quote-modal-title"></h3>
+        </div>
+        <button class="quote-modal-close" type="button" data-modal-close aria-label="Закрыть">×</button>
+      </div>
+      <div class="quote-modal-body" id="quote-modal-body"></div>
+    </div>
+  </div>
 
   <section id="format">
     <div class="wrap">
@@ -1413,6 +1560,54 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
   </div>
 </footer>
 <script>
+(() => {
+  const modal = document.querySelector("#quote-modal");
+  if (!modal) return;
+
+  const modalTitle = modal.querySelector("#quote-modal-title");
+  const modalBody = modal.querySelector("#quote-modal-body");
+  const closeButtons = [...modal.querySelectorAll("[data-modal-close]")];
+  let lastTrigger = null;
+
+  function openModal(trigger) {
+    const testimonial = trigger.closest(".testimonial");
+    const source = testimonial?.querySelector(".similar-list");
+    const title = testimonial?.querySelector(".testimonial-head h3")?.textContent.trim();
+    if (!source || !title) return;
+
+    lastTrigger = trigger;
+    modalTitle.textContent = title;
+    modalBody.innerHTML = source.innerHTML;
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    modal.querySelector(".quote-modal-close").focus();
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    modalBody.innerHTML = "";
+    document.body.style.overflow = "";
+    lastTrigger?.focus();
+  }
+
+  document.querySelectorAll("details.similar summary").forEach((summary) => {
+    summary.addEventListener("click", (event) => {
+      event.preventDefault();
+      openModal(summary);
+    });
+  });
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", closeModal);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modal.hidden) {
+      closeModal();
+    }
+  });
+})();
+
 (() => {
   const tabsRoot = document.querySelector("[data-tabs]");
   if (!tabsRoot) return;
