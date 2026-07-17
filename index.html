@@ -838,7 +838,7 @@ li + li { margin-top: 10px; }
 
 .price {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 .price-card {
@@ -1192,16 +1192,16 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
       <div class="hero-copy">
         <h1>Общаться с ИИ-агентом: <span>как?</span></h1>
         <div class="hero-card">
-          <p>Практический марафон <del>желаний</del> по работе с ИИ-агентами для не-технарей</p>
+          <p>Практический марафон <del>желаний</del> по вкату в ИИ-агенты для не-технарей.<br>С нуля.</p>
           <a class="btn primary" href="#payment">Записаться</a>
         </div>
         <ul class="hero-lines">
-          <li>Переход от ии-чата к автоматизации работы (<a href="#testimonials">см отзывы</a>)</li>
-          <li>Файлы, таблицы, презентации. Отчеты, исследования, лендинги и работа с медиа</li>
-          <li>Формируем навык и привычку мыслить с агентом через короткие задания</li>
+          <li>Не лекции или гайды. Ежедневные задания на 15-20 минут с короткой теорией и проверкой</li>
+          <li>Формируем навык, даем волшебный пинок, ведем за ручку</li>
+          <li>Файлы, таблицы, презентации. Отчеты, исследования, лендинги и работа с медиа. Автоматизация надоевшей рутины</li>
         </ul>
         <div class="hero-meta" aria-label="Детали марафона">
-          <span>Старт 13.07</span>
+          <span>Старт 1.09</span>
           <span>3 недели</span>
           <span>15-20 минут в день</span>
           <span>Codex / Claude Code</span>
@@ -1227,10 +1227,10 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
       </div>
       <div class="check-grid">
         <p>работа за компом занимает &gt;2 часов в день</p>
-        <p>уже пользуетесь ИИ</p>
-        <p>не можете выделить время, чтобы полноценно разобраться с агентами</p>
-        <p>ищете проверенные материалы, а не инфоцыганский бред</p>
-        <p>тоже не верите в обучение на лекциях</p>
+        <p>уже пробовали ИИ, но «он генерил фигню» вместо выполнения задачи</p>
+        <p>можете разобраться сами, но постоянно откладываете/бросаете</p>
+        <p>понимаете ценность практического марафона, построенного технарем и методологом</p>
+        <p>и да, тоже не верите в формирование навыков через «послушал лекцию»</p>
       </div>
     </div>
   </section>
@@ -1259,7 +1259,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
             <h3>Саша Литская</h3>
             <blockquote>
               <p>Строю арт пространство <a href="https://artchaos-academ.ru/" target="_blank" rel="noopener">ArtChaos</a> и творческое сообщество вокруг. Продюссирую самые популярные в рф онлайн курсы по керамике</p>
-              <p>Отвечаю за коммьюнити, вайб, тайминги и чтобы Коля не душнил слишком сильно</p>
+              <p>Отвечаю за коммьюнити, вайб, флоу и чтобы Коля не душнил слишком сильно</p>
             </blockquote>
           </div>
         </article>
@@ -1277,10 +1277,10 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
       <p class="anger-label">Нас бесят:</p>
       <ul class="anger-list">
         <li>инфоцыгане, которые продают курсы с устаревшими или вообще некорректными подходами</li>
-        <li>лекции, которые забываются на следующий день</li>
+        <li>лекции, которые послушал и забыл применить</li>
         <li>разработчики, которые научились пользоваться "волшебной палочкой", но не могут донести ее до всех остальных</li>
       </ul>
-      <p class="why-close">Поэтому мы делаем курс без лекций, для обычных людей и с актуальными подходами, которые на практике используем в своих компаниях и компаниях клиентов</p>
+      <p class="why-close">Поэтому мы строим курс вокруг ежедневной практики, с актуальными подходами, которые сами используем для обучения сотрудников в компаниях наших клиентов</p>
     </div>
   </section>
 
@@ -1371,13 +1371,14 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
         <div class="format-card">
           <ul>
             <li>3 недели</li>
-            <li>задания 10-20 минут по будням</li>
-            <li>3 живых разбора</li>
+            <li>задания 15-20 минут по будням</li>
+            <li>3 живых созвона-разбора сложных штук</li>
             <li>наши сердечки и поддержка в чате</li>
           </ul>
         </div>
         <div class="format-card accent">
-          <p>Кто не делает задание – вылетает. За успешное выполнение заданий – возможность вернуться</p>
+          <p>Сутки на выполнение задания. Бот - часть формата: фиксирует сдачу, напоминает о дедлайнах, выкидывает или возвращает в чат.</p>
+          <p>Обратная связь - от нас, никакого нейрослопа. Нюансы - обсуждаем в чате вживую, а затыки разбираем на созвонах.</p>
           <p>Доходимость до конца - 85% (обычно на рынке ~15-20%)</p>
         </div>
       </div>
@@ -1387,12 +1388,12 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
         <article class="week">
           <h3>Неделя 1</h3>
           <p>Знакомимся с базой по ИИ-агентам</p>
-          <p>документы, таблицы, презентации, плагины, системные инструкции, субагенты</p>
+          <p>настройка под себя, контекст, критерии результата, файлы, документы, таблицы, PDF, плагины, субагенты</p>
         </article>
         <article class="week">
           <h3>Неделя 2</h3>
           <p>Подключаем внешние инструменты</p>
-          <p>Браузер, Телеграм, YouTube, транскрибация и внешние API</p>
+          <p>API-ключи, .env/секреты, консольные команды, браузер, залогиненные сайты, транскрибации, Telegram-бот (звучит страшно, но на деле это 15 минут. Проверили на прошлом потоке)</p>
         </article>
         <article class="week">
           <h3>Неделя 3</h3>
@@ -1403,9 +1404,9 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
 
       <div class="outcome-tabs" data-tabs>
         <div class="tab-row" role="tablist" aria-label="Что будет после марафона">
-          <button class="tab-button is-active" id="tab-build-top" type="button" role="tab" aria-selected="true" aria-controls="tab-build" data-tab-target="build">Сможете сделать</button>
-          <button class="tab-button" id="tab-know-top" type="button" role="tab" aria-selected="false" aria-controls="tab-know" data-tab-target="know" tabindex="-1">Будете знать</button>
-          <button class="tab-button" id="tab-not-top" type="button" role="tab" aria-selected="false" aria-controls="tab-not" data-tab-target="not" tabindex="-1">Не будете</button>
+          <button class="tab-button is-active" id="tab-build-top" type="button" role="tab" aria-selected="true" aria-controls="tab-build" data-tab-target="build">Сможете сделать, например</button>
+          <button class="tab-button" id="tab-know-top" type="button" role="tab" aria-selected="false" aria-controls="tab-know" data-tab-target="know" tabindex="-1">Будете знать, как</button>
+          <button class="tab-button" id="tab-not-top" type="button" role="tab" aria-selected="false" aria-controls="tab-not" data-tab-target="not" tabindex="-1">А этого не будет</button>
         </div>
 
         <div class="tab-panels">
@@ -1429,10 +1430,10 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
           </section>
           <section class="tab-panel" id="tab-not" role="tabpanel" aria-labelledby="tab-not-top" data-tab-panel="not" hidden>
           <ul class="not-list">
-            <li>сможете сделать полноценный продукт для внешних пользователей</li>
-            <li>разбиретесь в гитхабах, докерах, vps и других технических штуках</li>
-            <li>узнаете, как сделать свой codex на минималках</li>
-            <li>изучите кучу новых ИИ-инструментов</li>
+            <li>полноценный продукт для внешних пользователей</li>
+            <li>программирования, докеров, гитхабов, vps и других технических штук</li>
+            <li>уметь делать свой карманный Codex/Claude Code</li>
+            <li>изучать кучу новых инструментов (по гайдам и лекциям)</li>
           </ul>
           </section>
         </div>
@@ -1444,19 +1445,24 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     <div class="wrap">
       <div class="section-head">
         <div>
-          <h2>Старт 13.07</h2>
+          <h2>Старт 1.09</h2>
         </div>
       </div>
       <div class="price">
         <article class="price-card">
-          <p class="price-label">Оплатить до 3.07</p>
+          <p class="price-label">Оплатить до 29.07</p>
           <p class="price-amount">15&nbsp;000&nbsp;₽</p>
-          <a class="price-link" href="#">ссылка на оплату</a>
+          <a class="price-link" href="https://qr.nspk.ru/BS100061MLQRK9TF9CAPGVASBD6EQUJR">ссылка на оплату</a>
         </article>
         <article class="price-card">
-          <p class="price-label">Оплатить после 3.07</p>
+          <p class="price-label">Оплатить до 19.08</p>
+          <p class="price-amount">18&nbsp;000&nbsp;₽</p>
+          <a class="price-link" href="https://qr.nspk.ru/BS10005PBBMHEGIN815QEG6F7J36MM1F">ссылка на оплату</a>
+        </article>
+        <article class="price-card">
+          <p class="price-label">Оплатить после 19.08</p>
           <p class="price-amount">25&nbsp;000&nbsp;₽</p>
-          <a class="price-link" href="#">ссылка на оплату</a>
+          <a class="price-link" href="https://qr.nspk.ru/BS100078LCS44OLJ8U7OR8N8MVL6C9FT">ссылка на оплату</a>
         </article>
       </div>
       <p class="refund">Полный возврат при отмене в течение первой недели</p>
@@ -1509,7 +1515,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
         <details>
           <summary>Что если я вылечу случайно? Например из-за болезни?</summary>
           <div class="faq-body">
-            <p>Для нас нет смысла выкидывать вас просто из принципа. Поэтому если вы предупреждаете больше чем за сутки, что у вас не получится сдать конкретное задание – мы вас не выкидываем. Так же, если вы случайно вылетели, но уже успели сдать несколько заданий – у вас будет одно (или даже несколько) восстановлений.</p>
+            <p>Для нас нет смысла выкидывать вас просто из принципа. Поэтому если вы предупреждаете больше чем за сутки, что у вас не получится сдать конкретное задание – мы вас не выкидываем. А также в процессе прохождения марафона, за задания, взаимопомощь или вайб вы получаете "плюсики кармы". Их можно использовать для восстановления.</p>
           </div>
         </details>
         <details>
@@ -1520,9 +1526,9 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
           </div>
         </details>
         <details>
-          <summary>Вы поможете с оформлением подписки?</summary>
+          <summary>Вы поможете с оформлением подписки для работы агента?</summary>
           <div class="faq-body">
-            <p>Мы не перепродаем подписку, но у нас есть бесплатный гайд, как её можно получить. Забрать его можно <a href="https://t.me/ai_for_work_public/30">тут</a></p>
+            <p>Мы не перепродаем подписку, но у нас есть бесплатный гайд, как её можно получить. Забрать его можно <a href="https://t.me/ai_for_work_public/30">тут</a>. В самом-самом крайнем случае напишите Саше, найдем варианты.</p>
           </div>
         </details>
         <details>
