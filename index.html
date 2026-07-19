@@ -842,6 +842,19 @@ ul, ol {
 }
 li + li { margin-top: 10px; }
 
+.payment-intro {
+  padding: 64px 0;
+}
+.payment-intro .intro-text {
+  max-width: 860px;
+  font-size: clamp(20px, 2.3vw, 30px);
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+}
+.payment-intro .intro-text p + p {
+  margin-top: 18px;
+}
+
 .price {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1443,6 +1456,15 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
           </ul>
           </section>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper payment-intro" aria-label="Что дает марафон">
+    <div class="wrap">
+      <div class="intro-text">
+        <p>Есть такой фильм - Человек-швейцарский нож. По ходу развития событий у одного из персонажей обнаруживаются все новые и новые способности, которые закрывают "совместный быт".</p>
+        <p>Так вот, марафон это не только про рамку, но еще и про быстрый обзор сразу через практику: а что вообще можно делать через ИИ-агентов.</p>
       </div>
     </div>
   </section>
