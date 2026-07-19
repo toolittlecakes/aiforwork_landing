@@ -846,12 +846,14 @@ li + li { margin-top: 10px; }
   padding: 42px 0;
 }
 .payment-intro .intro-text {
-  max-width: 760px;
+  width: 100%;
+  max-width: none;
   font-size: clamp(16px, 1.35vw, 18px);
   font-weight: 400;
   line-height: 1.55;
   letter-spacing: 0;
   color: var(--ink-2);
+  text-align: center;
 }
 .payment-intro .intro-text p + p {
   margin-top: 12px;
@@ -1149,6 +1151,9 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
   .week,
   .price-card {
     padding: 24px;
+  }
+  .payment-intro .intro-text {
+    text-align: left;
   }
   .week h3 {
     font-size: 30px;
