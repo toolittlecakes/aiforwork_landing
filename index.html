@@ -719,6 +719,59 @@ details.similar summary:hover::after { color: var(--bg); }
   margin-top: 28px;
   text-align: center;
 }
+.payment-modal-tariff {
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: var(--accent);
+}
+.payment-form {
+  margin-top: 22px;
+}
+.payment-field {
+  display: block;
+  margin-top: 16px;
+}
+.payment-field span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.payment-field input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+}
+.payment-field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 3px 3px 0 0 var(--accent);
+}
+.payment-form-error {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border: 1px solid #c0331b;
+  color: #c0331b;
+  font-size: 14px;
+}
+.payment-consent {
+  margin-top: 14px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.payment-consent a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 
 .format-lede {
   display: grid;
@@ -1589,17 +1642,17 @@ footer .foot-legal .legal-payment {
         <article class="price-card">
           <p class="price-label">10 мест</p>
           <p class="price-amount">15&nbsp;000&nbsp;₽</p>
-          <a class="price-link" href="https://qr.nspk.ru/BS100061MLQRK9TF9CAPGVASBD6EQUJR" data-payment-trigger>ссылка на оплату</a>
+          <a class="price-link" href="#payment" data-payment-trigger data-offer-id="early_2026_09" data-offer-label="Ранняя цена · 10 мест" data-offer-amount="15 000 ₽">оплатить</a>
         </article>
         <article class="price-card">
           <p class="price-label">Оплатить до 19.08</p>
           <p class="price-amount">18&nbsp;000&nbsp;₽</p>
-          <a class="price-link" href="https://qr.nspk.ru/BS10005PBBMHEGIN815QEG6F7J36MM1F" data-payment-trigger>ссылка на оплату</a>
+          <a class="price-link" href="#payment" data-payment-trigger data-offer-id="standard_2026_09" data-offer-label="Оплата до 19.08" data-offer-amount="18 000 ₽">оплатить</a>
         </article>
         <article class="price-card">
           <p class="price-label">Оплатить после 19.08</p>
           <p class="price-amount">25&nbsp;000&nbsp;₽</p>
-          <a class="price-link" href="https://qr.nspk.ru/BS100078LCS44OLJ8U7OR8N8MVL6C9FT" data-payment-trigger>ссылка на оплату</a>
+          <a class="price-link" href="#payment" data-payment-trigger data-offer-id="late_2026_09" data-offer-label="Оплата после 19.08" data-offer-amount="25 000 ₽">оплатить</a>
         </article>
       </div>
       <p class="refund">Полный возврат при отмене в течение первой недели</p>
@@ -1611,12 +1664,25 @@ footer .foot-legal .legal-payment {
     <button class="payment-modal-backdrop" type="button" data-payment-modal-close aria-label="Закрыть окно оплаты"></button>
     <div class="payment-modal-panel" role="dialog" aria-modal="true" aria-labelledby="payment-modal-title" aria-describedby="payment-modal-description">
       <div class="payment-modal-head">
-        <p id="payment-modal-title">Перед оплатой</p>
+        <p id="payment-modal-title">Оплата</p>
         <button class="payment-modal-close" type="button" data-payment-modal-close aria-label="Закрыть">×</button>
       </div>
       <div class="payment-modal-body">
-        <p class="payment-modal-text" id="payment-modal-description">После оплаты обязательно скинь скрин/пдф об оплате Саше <a href="https://t.me/litsky_A" target="_blank" rel="noopener">@litsky_A</a>. Контакт есть на этой странице</p>
-        <a class="btn primary payment-modal-action" id="payment-modal-action" href="#">оплатить по qr</a>
+        <p class="payment-modal-text" id="payment-modal-description">Оплата картой (Мир, Visa, Mastercard) или через СБП на защищённой странице Банка Точка.</p>
+        <p class="payment-modal-tariff" id="payment-modal-tariff"></p>
+        <form class="payment-form" id="payment-form" novalidate>
+          <label class="payment-field">
+            <span>Email — на него придёт чек</span>
+            <input type="email" name="email" required autocomplete="email" placeholder="you@example.com">
+          </label>
+          <label class="payment-field">
+            <span>Telegram — чтобы добавить вас в чат курса (необязательно)</span>
+            <input type="text" name="telegram" autocomplete="off" placeholder="@username">
+          </label>
+          <p class="payment-form-error" id="payment-form-error" hidden></p>
+          <button class="btn primary payment-modal-action" id="payment-submit" type="submit">Перейти к оплате</button>
+          <p class="payment-consent">Нажимая «Перейти к оплате», вы соглашаетесь с <a href="/offer/" target="_blank" rel="noopener">офертой</a> и <a href="/privacy/" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</p>
+        </form>
       </div>
     </div>
   </div>
@@ -1769,24 +1835,71 @@ footer .foot-legal .legal-payment {
   const modal = document.querySelector("#payment-modal");
   if (!modal) return;
 
-  const action = modal.querySelector("#payment-modal-action");
+  const CHECKOUT_URL = "https://pay.aiforwork.courses/v1/checkouts";
+  const form = modal.querySelector("#payment-form");
+  const tariffEl = modal.querySelector("#payment-modal-tariff");
+  const errorEl = modal.querySelector("#payment-form-error");
+  const submitButton = modal.querySelector("#payment-submit");
   const closeButtons = [...modal.querySelectorAll("[data-payment-modal-close]")];
   let lastTrigger = null;
+  let offerId = null;
+
+  function showError(message) {
+    errorEl.textContent = message;
+    errorEl.hidden = false;
+  }
 
   function openModal(trigger) {
     lastTrigger = trigger;
-    action.href = trigger.href;
+    offerId = trigger.dataset.offerId;
+    tariffEl.textContent = `${trigger.dataset.offerLabel} — ${trigger.dataset.offerAmount}`;
+    form.reset();
+    errorEl.hidden = true;
+    submitButton.disabled = false;
+    submitButton.textContent = "Перейти к оплате";
     modal.hidden = false;
     document.body.style.overflow = "hidden";
-    action.focus();
+    form.elements.email.focus();
   }
 
   function closeModal() {
     modal.hidden = true;
-    action.removeAttribute("href");
     document.body.style.overflow = "";
     lastTrigger?.focus();
   }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const email = form.elements.email.value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      showError("Укажите корректный email — на него придёт чек об оплате.");
+      form.elements.email.focus();
+      return;
+    }
+    const telegram = form.elements.telegram.value.trim();
+    errorEl.hidden = true;
+    submitButton.disabled = true;
+    submitButton.textContent = "Создаём ссылку на оплату…";
+    try {
+      const response = await fetch(CHECKOUT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          projectId: "aiforwork",
+          offerId,
+          customer: { email, ...(telegram ? { telegram } : {}) },
+        }),
+      });
+      if (!response.ok) throw new Error(`checkout failed: ${response.status}`);
+      const data = await response.json();
+      if (!data.paymentUrl) throw new Error("checkout response without paymentUrl");
+      window.location.assign(data.paymentUrl);
+    } catch {
+      showError("Не получилось создать ссылку на оплату. Попробуйте ещё раз или напишите @litsky_A.");
+      submitButton.disabled = false;
+      submitButton.textContent = "Перейти к оплате";
+    }
+  });
 
   document.querySelectorAll("[data-payment-trigger]").forEach((trigger) => {
     trigger.addEventListener("click", (event) => {
