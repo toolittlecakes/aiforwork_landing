@@ -3,6 +3,8 @@
 Черновик v1.  
 Один маленький сервис для персональных ссылок Точки из разных лендингов.
 
+Код: [github.com/toolittlecakes/payment-service](https://github.com/toolittlecakes/payment-service) (private).
+
 ## Суть
 
 Лендос не доверяем.  
@@ -33,7 +35,7 @@ flowchart LR
 
 - CRM.
 - Админку офферов.
-- Email-доставку доступа (v2: тип действия заложен, провайдер выбран — Resend, реализация позже).
+- ~~Email-доставку доступа~~ (сделано: onPaid-действие `email` через Resend, домен aiforwork.courses верифицирован).
 - Промокоды.
 - Подписки.
 - Возвраты.
