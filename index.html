@@ -761,6 +761,50 @@ details.similar summary:hover::after { color: var(--bg); }
   color: #c0331b;
   font-size: 14px;
 }
+.payment-promo-toggle {
+  margin-top: 14px;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 13px;
+  color: var(--ink-3);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-style: dashed;
+  cursor: pointer;
+}
+.payment-promo-row {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+.payment-promo-row .payment-field {
+  flex: 1;
+}
+.payment-promo-apply {
+  align-self: flex-end;
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.payment-promo-apply:hover {
+  border-color: var(--accent);
+}
+.payment-promo-status {
+  margin-top: 8px;
+  font-size: 13px;
+}
+.payment-promo-status.is-error {
+  color: #c0331b;
+}
+.payment-promo-status.is-ok {
+  color: var(--accent);
+}
 .payment-consent {
   margin-top: 14px;
   font-size: 12.5px;
@@ -1679,6 +1723,17 @@ footer .foot-legal .legal-payment {
             <span>Telegram — чтобы добавить вас в чат курса (необязательно)</span>
             <input type="text" name="telegram" autocomplete="off" placeholder="@username">
           </label>
+          <button type="button" class="payment-promo-toggle" id="payment-promo-toggle">Есть промокод?</button>
+          <div id="payment-promo-wrap" hidden>
+            <div class="payment-promo-row">
+              <label class="payment-field">
+                <span>Промокод</span>
+                <input type="text" name="promo" autocomplete="off" placeholder="PROMO">
+              </label>
+              <button type="button" class="payment-promo-apply" id="payment-promo-apply">Применить</button>
+            </div>
+            <p class="payment-promo-status" id="payment-promo-status" hidden></p>
+          </div>
           <p class="payment-form-error" id="payment-form-error" hidden></p>
           <button class="btn primary payment-modal-action" id="payment-submit" type="submit">Перейти к оплате</button>
           <p class="payment-consent">Нажимая «Перейти к оплате», вы соглашаетесь с <a href="/offer/" target="_blank" rel="noopener">офертой</a> и <a href="/privacy/" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</p>
@@ -1836,31 +1891,95 @@ footer .foot-legal .legal-payment {
   if (!modal) return;
 
   const CHECKOUT_URL = "https://pay.aiforwork.courses/v1/checkouts";
+  const PROMO_CHECK_URL = "https://pay.aiforwork.courses/v1/promo/check";
   const form = modal.querySelector("#payment-form");
   const tariffEl = modal.querySelector("#payment-modal-tariff");
   const errorEl = modal.querySelector("#payment-form-error");
   const submitButton = modal.querySelector("#payment-submit");
+  const promoToggle = modal.querySelector("#payment-promo-toggle");
+  const promoWrap = modal.querySelector("#payment-promo-wrap");
+  const promoApply = modal.querySelector("#payment-promo-apply");
+  const promoStatus = modal.querySelector("#payment-promo-status");
   const closeButtons = [...modal.querySelectorAll("[data-payment-modal-close]")];
   let lastTrigger = null;
   let offerId = null;
+  let appliedPromo = null;
 
   function showError(message) {
     errorEl.textContent = message;
     errorEl.hidden = false;
   }
 
+  function baseTariffText(trigger) {
+    return `${trigger.dataset.offerLabel} — ${trigger.dataset.offerAmount}`;
+  }
+
+  function setPromoStatus(message, ok) {
+    promoStatus.textContent = message;
+    promoStatus.classList.toggle("is-ok", ok);
+    promoStatus.classList.toggle("is-error", !ok);
+    promoStatus.hidden = false;
+  }
+
+  function resetPromo() {
+    appliedPromo = null;
+    promoWrap.hidden = true;
+    promoToggle.hidden = false;
+    promoStatus.hidden = true;
+    promoStatus.classList.remove("is-ok", "is-error");
+  }
+
   function openModal(trigger) {
     lastTrigger = trigger;
     offerId = trigger.dataset.offerId;
-    tariffEl.textContent = `${trigger.dataset.offerLabel} — ${trigger.dataset.offerAmount}`;
+    tariffEl.textContent = baseTariffText(trigger);
     form.reset();
     errorEl.hidden = true;
+    resetPromo();
     submitButton.disabled = false;
     submitButton.textContent = "Перейти к оплате";
     modal.hidden = false;
     document.body.style.overflow = "hidden";
     form.elements.email.focus();
   }
+
+  promoToggle.addEventListener("click", () => {
+    promoToggle.hidden = true;
+    promoWrap.hidden = false;
+    form.elements.promo.focus();
+  });
+
+  promoApply.addEventListener("click", async () => {
+    const code = form.elements.promo.value.trim();
+    if (!code) {
+      setPromoStatus("Введите промокод.", false);
+      return;
+    }
+    promoApply.disabled = true;
+    try {
+      const response = await fetch(PROMO_CHECK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ projectId: "aiforwork", offerId, promoCode: code }),
+      });
+      if (response.status === 422) {
+        appliedPromo = null;
+        tariffEl.textContent = baseTariffText(lastTrigger);
+        setPromoStatus("Промокод не найден.", false);
+        return;
+      }
+      if (!response.ok) throw new Error(`promo check failed: ${response.status}`);
+      const data = await response.json();
+      appliedPromo = code;
+      const amount = `${(data.amountMinor / 100).toLocaleString("ru-RU")} ₽`;
+      tariffEl.textContent = `${lastTrigger.dataset.offerLabel} — ${amount} (промокод ${code.toUpperCase()})`;
+      setPromoStatus(`Промокод применён: цена ${amount}.`, true);
+    } catch {
+      setPromoStatus("Не получилось проверить промокод. Попробуйте ещё раз.", false);
+    } finally {
+      promoApply.disabled = false;
+    }
+  });
 
   function closeModal() {
     modal.hidden = true;
@@ -1888,8 +2007,15 @@ footer .foot-legal .legal-payment {
           projectId: "aiforwork",
           offerId,
           customer: { email, ...(telegram ? { telegram } : {}) },
+          ...(appliedPromo ? { promoCode: appliedPromo } : {}),
         }),
       });
+      if (response.status === 422) {
+        showError("Промокод больше не действует. Уберите его или напишите @litsky_A.");
+        submitButton.disabled = false;
+        submitButton.textContent = "Перейти к оплате";
+        return;
+      }
       if (!response.ok) throw new Error(`checkout failed: ${response.status}`);
       const data = await response.json();
       if (!data.paymentUrl) throw new Error("checkout response without paymentUrl");
