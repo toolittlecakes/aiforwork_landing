@@ -1,0 +1,202 @@
+{
+  "counts": {
+    "gemini": 136,
+    "local": 154,
+    "gemini_without_local_match": 6,
+    "local_without_gemini_match": 16
+  },
+  "unmatched_gemini": [
+    {
+      "slide_id": "slide-008",
+      "start_seconds": 597,
+      "end_seconds": 677,
+      "kind": "slide",
+      "visible_text": "спикер вебинара ДАРЬЯ ШУЛЬГИНА основатель и CEO карьерного сервиса AgileFluent больше 800 клиентов нашли работу по всему миру ex-консультант McKinsey",
+      "visual_summary": "Speaker introduction slide for Daria Shulgina.",
+      "confidence": "high",
+      "nearest_local": {
+        "second": 568,
+        "distance": 29
+      }
+    },
+    {
+      "slide_id": "slide-046",
+      "start_seconds": 3037,
+      "end_seconds": 3069,
+      "kind": "slide",
+      "visible_text": "СТРАТЕГИЯ — КЛЮЧЕВОЙ АРТЕФАКТ В ПОИСКЕ РАБОТЫ НА МЕЖДУНАРОДКЕ AS IS → TO BE → ACTION PLAN",
+      "visual_summary": "Framework for creating a job search strategy.",
+      "confidence": "high",
+      "nearest_local": {
+        "second": 3023,
+        "distance": 14
+      }
+    },
+    {
+      "slide_id": "slide-047",
+      "start_seconds": 3069,
+      "end_seconds": 3131,
+      "kind": "slide",
+      "visible_text": "ГИПОТЕЗА — СТРУКТУРИРОВАННЫЙ НАБОР ПРОВЕРЯЕМЫХ ПРЕДПОЛОЖЕНИЙ 1 ИЗОЛИРОВАТЬ 2 ПРОВЕРИТЬ НА ПРАКТИКЕ 3 ИЗМЕРИТЬ РЕЗУЛЬТАТ",
+      "visual_summary": "Definition and 3-step process of testing hypotheses in job search.",
+      "confidence": "high",
+      "nearest_local": {
+        "second": 3060,
+        "distance": 9
+      }
+    },
+    {
+      "slide_id": "slide-066",
+      "start_seconds": 4167,
+      "end_seconds": 4347,
+      "kind": "slide",
+      "visible_text": "ТИПИЧНЫЕ ОШИБКИ В ДОКУМЕНТАХ И ЧТО ДЕЛАТЬ, ЧТОБЫ ИХ НЕ ДОПУСКАТЬ документы составлены «как я вижу»... каша в резюме... игнор LinkedIn... чисто ггтшные каверы... документы сделаны 1 раз",
+      "visual_summary": "Five common document errors and recommended solutions.",
+      "confidence": "high",
+      "nearest_local": {
+        "second": 4154,
+        "distance": 13
+      }
+    },
+    {
+      "slide_id": "slide-121",
+      "start_seconds": 6713,
+      "end_seconds": 6737,
+      "kind": "slide",
+      "visible_text": "Наш подход — системная, регулярная работа на результат",
+      "visual_summary": "Re-display of approach summary slide.",
+      "confidence": "high",
+      "nearest_local": {
+        "second": 6723,
+        "distance": 10
+      }
+    },
+    {
+      "slide_id": "speaker-001",
+      "start_seconds": 8200,
+      "end_seconds": 8241.281,
+      "kind": "speaker_only",
+      "visible_text": "",
+      "visual_summary": "Speaker appears on full camera with her dog to say goodbye to the audience.",
+      "confidence": "high",
+      "nearest_local": {
+        "second": 6947,
+        "distance": 1253
+      }
+    }
+  ],
+  "unmatched_local": [
+    {
+      "second": 488,
+      "nearest_gemini": {
+        "second": 538,
+        "distance": 50
+      }
+    },
+    {
+      "second": 3023,
+      "nearest_gemini": {
+        "second": 3037,
+        "distance": 14
+      }
+    },
+    {
+      "second": 3060,
+      "nearest_gemini": {
+        "second": 3069,
+        "distance": 9
+      }
+    },
+    {
+      "second": 4071,
+      "nearest_gemini": {
+        "second": 4066,
+        "distance": 5
+      }
+    },
+    {
+      "second": 4091,
+      "nearest_gemini": {
+        "second": 4066,
+        "distance": 25
+      }
+    },
+    {
+      "second": 4154,
+      "nearest_gemini": {
+        "second": 4150,
+        "distance": 4
+      }
+    },
+    {
+      "second": 4192,
+      "nearest_gemini": {
+        "second": 4167,
+        "distance": 25
+      }
+    },
+    {
+      "second": 4228,
+      "nearest_gemini": {
+        "second": 4167,
+        "distance": 61
+      }
+    },
+    {
+      "second": 4563,
+      "nearest_gemini": {
+        "second": 4580,
+        "distance": 17
+      }
+    },
+    {
+      "second": 5751,
+      "nearest_gemini": {
+        "second": 5771,
+        "distance": 20
+      }
+    },
+    {
+      "second": 5752,
+      "nearest_gemini": {
+        "second": 5771,
+        "distance": 19
+      }
+    },
+    {
+      "second": 5754,
+      "nearest_gemini": {
+        "second": 5771,
+        "distance": 17
+      }
+    },
+    {
+      "second": 6026,
+      "nearest_gemini": {
+        "second": 6072,
+        "distance": 46
+      }
+    },
+    {
+      "second": 6027,
+      "nearest_gemini": {
+        "second": 6072,
+        "distance": 45
+      }
+    },
+    {
+      "second": 6723,
+      "nearest_gemini": {
+        "second": 6713,
+        "distance": 10
+      }
+    },
+    {
+      "second": 6768,
+      "nearest_gemini": {
+        "second": 6776,
+        "distance": 8
+      }
+    }
+  ]
+}

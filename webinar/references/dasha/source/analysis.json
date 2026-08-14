@@ -1,0 +1,1234 @@
+{
+  "duration_seconds": 8241.281,
+  "slide_occurrences": [
+    {
+      "slide_id": "slide-001",
+      "start_seconds": 0,
+      "end_seconds": 69,
+      "kind": "slide",
+      "visible_text": "мастер-класс AgileFluent 16 июня КАК ПРОБИВАТЬСЯ ЧЕРЕЗ AI ФИЛЬТРЫ и получать приглашения на интервью от топовых компаний?",
+      "visual_summary": "Title slide with purple mascot illustration and main topic of the masterclass.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-002",
+      "start_seconds": 69,
+      "end_seconds": 217,
+      "kind": "slide",
+      "visible_text": "РАБОТУ НА МЕЖДУНАРОДКЕ СТАЛО ИСКАТЬ ЕЩЕ СЛОЖНЕЕ 2021 2022 2023-2024 2025 2026",
+      "visual_summary": "Timeline chart showing increasing difficulty of finding international jobs from 2021 to 2026.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-003",
+      "start_seconds": 217,
+      "end_seconds": 288,
+      "kind": "slide",
+      "visible_text": "МЫ ТОЖЕ ВИДИМ, ЧТО ИСКАТЬ РАБОТУ СТАЛО ЕЩЕ СЛОЖНЕЕ 2022 - 2023 2025 - 2026",
+      "visual_summary": "Comparison of job search stats (applications vs offers) between 2022-2023 and 2025-2026.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-004",
+      "start_seconds": 288,
+      "end_seconds": 411,
+      "kind": "slide",
+      "visible_text": "ЧТО РАБОТАЛО РАНЬШЕ В МЕЖДУНАРОДНОМ ПОИСКЕ И ЧТО НЕ РАБОТАЕТ СЕЙЧАС 90% ребят кто к нам приходит в работу, пробовали искать сами и делали это неправильно { rejected }",
+      "visual_summary": "Grid of obsolete job search practices that no longer work on the international market.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-005",
+      "start_seconds": 411,
+      "end_seconds": 538,
+      "kind": "slide",
+      "visible_text": "А КАК ТОГДА НУЖНО ИСКАТЬ? системный и регулярный поиск мастер-CV мастер-кавер сильный профиль LinkedIn отклики на свежие вакансии каждый день работа с теневым рынком тщательная подготовка к собесам корректировка стратегии",
+      "visual_summary": "Overview of recommended modern job search strategy elements.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-006",
+      "start_seconds": 538,
+      "end_seconds": 567,
+      "kind": "slide",
+      "visible_text": "ЧТОБЫ ПОЛУЧАТЬ КРУТЫЕ ОФФЕРЫ КАК НАШИ КЛИЕНТЫ Дима Саша Никита Леша Миша Илья",
+      "visual_summary": "Client success cases with application and interview stats.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-007",
+      "start_seconds": 567,
+      "end_seconds": 597,
+      "kind": "slide",
+      "visible_text": "Большая цель мастер-класса: ИЗ СОСТОЯНИЯ «НЕ ПОНИМАЮ, КАК УСКОРИТЬ СВОЙ ОФФЕР НА МЕЖДУНАРОДКЕ» ПРИЙТИ К ЧЕТКОМУ ПЛАНУ Каждый заберет топ-10 пунктов, которые можно применить в своей ситуации уже завтра",
+      "visual_summary": "Main goal of the masterclass.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-008",
+      "start_seconds": 597,
+      "end_seconds": 677,
+      "kind": "slide",
+      "visible_text": "спикер вебинара ДАРЬЯ ШУЛЬГИНА основатель и CEO карьерного сервиса AgileFluent больше 800 клиентов нашли работу по всему миру ex-консультант McKinsey",
+      "visual_summary": "Speaker introduction slide for Daria Shulgina.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-009",
+      "start_seconds": 677,
+      "end_seconds": 749,
+      "kind": "slide",
+      "visible_text": "Что будет сегодня Обсудим, как и почему поиск работы на международке отличается от поиска в РФ... AI фильтры... Разберем ваши вопросы",
+      "visual_summary": "Agenda slide listing main topics of the masterclass.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-010",
+      "start_seconds": 749,
+      "end_seconds": 817,
+      "kind": "slide",
+      "visible_text": "ДЛЯ КОГО МАСТЕР-КЛАСС ДАВНО ИЩУ САМ ТОЛЬКО НАЧИНАЮ ПОИСК НУЖНО СРОЧНО",
+      "visual_summary": "Target audience segmentation for the webinar.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-011",
+      "start_seconds": 817,
+      "end_seconds": 826,
+      "kind": "slide",
+      "visible_text": "ВСТРЕЧА БУДЕТ ПОЛЕЗНА ВСЕМ, НО БОЛЬШЕ ВСЕГО IT И DIGITAL СПЕЦИАЛИСТАМ Product Manager Project Manager Software Engineer...",
+      "visual_summary": "List of target IT and Digital roles.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-012",
+      "start_seconds": 826,
+      "end_seconds": 888,
+      "kind": "slide",
+      "visible_text": "КАК БУДЕТ ПРОХОДИТЬ РАБОТА 2 ЧАСА ПЛОТНОГО КОНТЕНТА БУДЕТ ЗАПИСЬ ВСТРЕЧИ ПОШАГОВЫЕ ИНСТРУКЦИИ МАТЕРИАЛЫ В ЧАТИК ПРАКТИКА ВОПРОСЫ",
+      "visual_summary": "Webinar workflow and rules slide.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-013",
+      "start_seconds": 888,
+      "end_seconds": 1019,
+      "kind": "slide",
+      "visible_text": "РАССКАЖИТЕ НЕМНОГО О СЕБЕ :) 1 Живу за рубежом, но работаю на РФ 2 Мечтаю о работе на международке... 9 Не зовут в компании мечты",
+      "visual_summary": "Interactive audience poll with 9 numbered options.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-014",
+      "start_seconds": 1019,
+      "end_seconds": 1022,
+      "kind": "slide",
+      "visible_text": "ПАРУ СЛОВ ПРО AGILEFLUENT",
+      "visual_summary": "Section divider: About AgileFluent.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-015",
+      "start_seconds": 1022,
+      "end_seconds": 1059,
+      "kind": "slide",
+      "visible_text": "Лучшая карьерная поддержка для лучших 5 лет помогаем получить офферы профессионалам из IT и Digital за рубежом amazon Revolut Schneider Electric epam PLATA ANDERSEN FLO CISCO",
+      "visual_summary": "AgileFluent track record and logos of hiring companies.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-016",
+      "start_seconds": 1059,
+      "end_seconds": 1083,
+      "kind": "slide",
+      "visible_text": "Самые крупные на рынке — самая большая насмотренность на международке 800+ офферов 100+ человек в команде ICF 32 страны 34 индустрии 35+ позиций",
+      "visual_summary": "Key statistics about AgileFluent's team and experience.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-017",
+      "start_seconds": 1083,
+      "end_seconds": 1110,
+      "kind": "slide",
+      "visible_text": "800+ профессионалов из разных стран и индустрий нашли работу за границей с нашей помощью",
+      "visual_summary": "Testimonials and reviews from successful candidates.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-018",
+      "start_seconds": 1110,
+      "end_seconds": 1118,
+      "kind": "slide",
+      "visible_text": "Еще больше отзывов и кейсов о работе с нами тг-канал AgileFluent отзывы на TutorTop LinkedIn AgileFluent",
+      "visual_summary": "QR codes to Telegram channel, TutorTop, and LinkedIn.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-019",
+      "start_seconds": 1118,
+      "end_seconds": 1232,
+      "kind": "slide",
+      "visible_text": "Только для участников мастер-класса спец предложение на наши услуги до конца 19 июня Career Booster Отклики + нетворк +1 уровень в английском для работы Сопровождение до оффера",
+      "visual_summary": "Special offer pricing table for masterclass attendees.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-020",
+      "start_seconds": 1232,
+      "end_seconds": 1271,
+      "kind": "slide",
+      "visible_text": "Зафиксируй 15% скидки на сопровождение до оффера до 19 июня СОПРОВОЖДЕНИЕ НА РФ РЫНКЕ сопровождение до оффера в РФ за 3 месяца",
+      "visual_summary": "Special offer for RF market job search package.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-021",
+      "start_seconds": 1271,
+      "end_seconds": 1286,
+      "kind": "slide",
+      "visible_text": "ПРО РЫНОК И ТРЕНДЫ",
+      "visual_summary": "Section divider: Market and Trends.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-022",
+      "start_seconds": 1286,
+      "end_seconds": 1440,
+      "kind": "slide",
+      "visible_text": "ПОИСК РАБОТЫ НА МЕЖДУНАРОДКЕ СИЛЬНО ОТЛИЧАЕТСЯ ОТ ПОИСКОВ НА ЛОКАЛЬНОМ РЫНКЕ ВЫШЕ КОНКУРЕНЦИЯ РЫНОК НЕ ЗНАКОМ С ТВОИМ ОПЫТОМ НУЖНО БЫТЬ РЕАЛЬНО КРУТЫМ СПЕЦОМ НАДО УМЕТЬ ВЫДЕЛЯТЬСЯ ВСЕ НА НЕРОДНОМ ЯЗЫКЕ БОЛЬШЕ ЭТАПОВ ДОЛЬШЕ ПОИСКИ",
+      "visual_summary": "Key differences between international and local job markets.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-023",
+      "start_seconds": 1440,
+      "end_seconds": 1496,
+      "kind": "slide",
+      "visible_text": "МЕЖДУНАРОДКА — ДЕЛО НЕПРОСТОЕ. МОТИВАЦИИ ДОЛЖНО ХВАТИТЬ МИНИМУМ НА ПОЛГОДА. ДОВОЛЬНО УТОМИТЕЛЬНЫХ ПОЛГОДА 6-9 МЕСЯЦЕВ 350+ откликов 10+ КОМПАНИЙ 2-3 МЕСЯЦА 6+ МЕСЯЦЕВ 2-4 МЕСЯЦА",
+      "visual_summary": "Key metrics and timelines for international hiring processes.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-024",
+      "start_seconds": 1496,
+      "end_seconds": 1552,
+      "kind": "slide",
+      "visible_text": "КЕЙСЫ ДОЛГОЖДАННЫХ ОФФЕРОВ Юлия Сергей Юра Попов Глеб Панов Артем Женя Прагер",
+      "visual_summary": "Long-term job search case studies with candidate profiles.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-025",
+      "start_seconds": 1552,
+      "end_seconds": 1640,
+      "kind": "slide",
+      "visible_text": "А ЕЩЕ НА МЕЖДУНАРОДНОМ РЫНКЕ ЕСТЬ СЕЗОННОСТЬ январь — май июнь — август сентябрь — декабрь",
+      "visual_summary": "Seasonal breakdown of the international hiring market across three periods.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-026",
+      "start_seconds": 1640,
+      "end_seconds": 1661,
+      "kind": "slide",
+      "visible_text": "В СЕЗОН НАШИ КОМАНДНЫЕ ЧАТИКИ ПРОСТО РАЗРЫВАЮТСЯ ОТ ПОЗДРАВЛЕНИЙ С ОФФЕРАМИ",
+      "visual_summary": "Screenshots of chat messages celebrating job offers during peak season.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-027",
+      "start_seconds": 1661,
+      "end_seconds": 1724,
+      "kind": "slide",
+      "visible_text": "РЕЛОКАЦИЯ — МИФ ИЛИ РЕАЛЬНОСТЬ? Стас Кипр Глеб Мексика Юра ОАЭ Сергей Испания Георгий Германия Даниил Португалия",
+      "visual_summary": "Relocation cases across different destination countries.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-028",
+      "start_seconds": 1724,
+      "end_seconds": 1847,
+      "kind": "slide",
+      "visible_text": "А ЧТО ПО УДАЛЕНКЕ? ЕСТЬ РАЗНЫЕ ВАРИАНТЫ 1 РАБОТАТЬ ГДЕ-УГОДНО 2 УДАЛЕННО, НО ИЗ КОНКРЕТНЫХ СТРАН 3 УДАЛЕННО ИЗ СТРАНЫ",
+      "visual_summary": "Three remote work options explained.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-029",
+      "start_seconds": 1847,
+      "end_seconds": 1928,
+      "kind": "slide",
+      "visible_text": "Международка из РФ — миф или реальность? КОМПАНИИ С РУССКИМИ КОРНЯМИ УДАЛЕНКА НА США ГИБРИД В МЕНА/АЗИИ",
+      "visual_summary": "Possibilities and limitations of finding international remote jobs from Russia.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-020",
+      "start_seconds": 1928,
+      "end_seconds": 1985,
+      "kind": "slide",
+      "visible_text": "Зафиксируй 15% скидки на сопровождение до оффера до 19 июня СОПРОВОЖДЕНИЕ НА РФ РЫНКЕ сопровождение до оффера в РФ за 3 месяца",
+      "visual_summary": "Re-display of RF market package offer.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-031",
+      "start_seconds": 1985,
+      "end_seconds": 2197,
+      "kind": "slide",
+      "visible_text": "а что по локациям — где сейчас больше шансов? ГЕРМАНИЯ НИДЕРЛАНДЫ ПОРТУГАЛИЯ ИСПАНИЯ ФРАНЦИЯ NORDIC (SE, NO, DK, FI)",
+      "visual_summary": "Country-by-country breakdown of job market characteristics in European locations.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-032",
+      "start_seconds": 2197,
+      "end_seconds": 2336,
+      "kind": "slide",
+      "visible_text": "а что по локациям — где сейчас больше шансов? АНГЛИЯ ОАЭ/МЕНА США СЕРБИЯ",
+      "visual_summary": "Country-by-country breakdown of UK, UAE/MENA, USA, and Serbia job markets.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-033",
+      "start_seconds": 2336,
+      "end_seconds": 2352,
+      "kind": "slide",
+      "visible_text": "ПОИСК РАБОТЫ НА МЕЖДУНАРОДКЕ — ШАГИ И ИНСАЙТЫ",
+      "visual_summary": "Section divider: Steps and Insights for International Job Search.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-034",
+      "start_seconds": 2352,
+      "end_seconds": 2415,
+      "kind": "slide",
+      "visible_text": "подготовительный этап 3-4 недели активный поиск 6-12 месяцев",
+      "visual_summary": "Two main phases of the search process.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-035",
+      "start_seconds": 2415,
+      "end_seconds": 2446,
+      "kind": "slide",
+      "visible_text": "желание возможности",
+      "visual_summary": "Venn diagram representing alignment of desire and opportunity.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-036",
+      "start_seconds": 2446,
+      "end_seconds": 2464,
+      "kind": "slide",
+      "visible_text": "ЧТО ВЛИЯЕТ НА ШАНСЫ ПОЛУЧИТЬ МЕЖДУНАРОДНЫЙ ОФФЕР? ПРОФЕССИЯ & ГРЕЙД УРОВЕНЬ АНГЛИЙСКОГО ВЫБОР СТРАН... МОТИВАЦИЯ И ГИБКОСТЬ",
+      "visual_summary": "Overview of key factors influencing chance of receiving an offer.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-037",
+      "start_seconds": 2464,
+      "end_seconds": 2630,
+      "kind": "slide",
+      "visible_text": "ЧТО ВЛИЯЕТ НА ШАНСЫ ПОЛУЧИТЬ МЕЖДУНАРОДНЫЙ ОФФЕР? IT/digital профессия +3 балла английский от B2 +10 баллов...",
+      "visual_summary": "Scoring system to calculate candidate's chances.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-038",
+      "start_seconds": 2630,
+      "end_seconds": 2641,
+      "kind": "slide",
+      "visible_text": "ОТ 16 БАЛЛОВ ВЫСОКИЕ ШАНСЫ 12-15 БАЛЛОВ ХОРОШИЕ ШАНСЫ",
+      "visual_summary": "Score interpretation chart.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-039",
+      "start_seconds": 2641,
+      "end_seconds": 2677,
+      "kind": "slide",
+      "visible_text": "СЛОЖНЫЕ, НО ВОЗМОЖНЫЕ КЕЙСЫ",
+      "visual_summary": "Quotes and case highlights of difficult but successful hires.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-040",
+      "start_seconds": 2677,
+      "end_seconds": 2725,
+      "kind": "slide",
+      "visible_text": "КЕЙС ГЛЕБА ПАНОВА, PRODUCT ANALYST, PLATA, РЕЛОКАЦИЯ В МЕКСИКУ 12 месяцев 796 откликов 953 контакта в LinkedIn...",
+      "visual_summary": "In-depth case study of Gleb Panov.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-041",
+      "start_seconds": 2725,
+      "end_seconds": 2763,
+      "kind": "slide",
+      "visible_text": "С АНГЛИЙСКИМ ДЛЯ РАБОТЫ МОЖЕТ БЫТЬ НЕПРОСТО Мне страшно применить язык в реальной жизни... Страшно проходить интервью",
+      "visual_summary": "Common fears and challenges related to English proficiency.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-042",
+      "start_seconds": 2763,
+      "end_seconds": 2788,
+      "kind": "slide",
+      "visible_text": "ХОРОШИЙ РАБОЧИЙ АНГЛИЙСКИЙ БАЗОВЫЙ МИНИМУМ 1 СОВРЕМЕННАЯ БИЗНЕС-ЛЕКСИКА 2 ФУНКЦИОНАЛЬНАЯ ЛЕКСИКА 3 TONE OF VOICE",
+      "visual_summary": "Three components of good working English.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-043",
+      "start_seconds": 2788,
+      "end_seconds": 2818,
+      "kind": "slide",
+      "visible_text": "В АНГЛИЙСКОМ МНОГОЕ ЗАВИСИТ ОТ РОЛИ И ГРЕЙДА, А ЕЩЕ ОТ ТВОЕЙ КВАЛИФИКАЦИИ — ТАЛАНТЛИВОГО РАЗРАБОТЧИКА ПЕРЕВЕЗУТ И С B1 Middle+ Product Manager Director of Engineering Business Analyst",
+      "visual_summary": "English language requirements breakdown across various seniority roles.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-044",
+      "start_seconds": 2818,
+      "end_seconds": 2876,
+      "kind": "slide",
+      "visible_text": "+1 уровень в английском для работы Career Booster",
+      "visual_summary": "Offer for English course and Career Booster service.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-045",
+      "start_seconds": 2876,
+      "end_seconds": 3037,
+      "kind": "slide",
+      "visible_text": "ТИПИЧНЫЕ ОШИБКИ В АНГЛИЙСКОМ, И ЧТО ДЕЛАТЬ, ЧТОБЫ ИХ НЕ ДОПУСКАТЬ откладывать международку... заниматься с любимым преподом... сдавать IELTS/TOEFL... избегать практики... не готовить свой английский",
+      "visual_summary": "Common errors in English preparation and actionable solutions.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-046",
+      "start_seconds": 3037,
+      "end_seconds": 3069,
+      "kind": "slide",
+      "visible_text": "СТРАТЕГИЯ — КЛЮЧЕВОЙ АРТЕФАКТ В ПОИСКЕ РАБОТЫ НА МЕЖДУНАРОДКЕ AS IS → TO BE → ACTION PLAN",
+      "visual_summary": "Framework for creating a job search strategy.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-047",
+      "start_seconds": 3069,
+      "end_seconds": 3131,
+      "kind": "slide",
+      "visible_text": "ГИПОТЕЗА — СТРУКТУРИРОВАННЫЙ НАБОР ПРОВЕРЯЕМЫХ ПРЕДПОЛОЖЕНИЙ 1 ИЗОЛИРОВАТЬ 2 ПРОВЕРИТЬ НА ПРАКТИКЕ 3 ИЗМЕРИТЬ РЕЗУЛЬТАТ",
+      "visual_summary": "Definition and 3-step process of testing hypotheses in job search.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-048",
+      "start_seconds": 3131,
+      "end_seconds": 3191,
+      "kind": "slide",
+      "visible_text": "КАКИЕ ПАРАМЕТРЫ ВКЛЮЧАЕМ В ГИПОТЕЗУ И ПОЧЕМУ ВКЛЮЧАЕМ РОЛЬ ГРЕЙД СТРАНА ИНДУСТРИЯ КЛЮЧЕВЫЕ СКИЛЛЫ ФОРМАТ РАБОТЫ ДОП ЯЗЫКИ НЕ ВКЛЮЧАЕМ УРОВЕНЬ З/П ТИП КОМПАНИИ...",
+      "visual_summary": "List of parameters included vs excluded from job search hypotheses.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-049",
+      "start_seconds": 3191,
+      "end_seconds": 3203,
+      "kind": "slide",
+      "visible_text": "ДАВАЙТЕ РАЗБЕРЕМ НА ПРИМЕРЕ Это Петя, синьорный продакт из Т-Банка",
+      "visual_summary": "Case study introduction of Petya, Senior Product Manager.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-050",
+      "start_seconds": 3203,
+      "end_seconds": 3252,
+      "kind": "slide",
+      "visible_text": "КАКИЕ ПАРАМЕТРЫ ВКЛЮЧАЕМ В ГИПОТЕЗУ И ПОЧЕМУ гипотеза №1 гипотеза №2 гипотеза №1",
+      "visual_summary": "Comparison of good vs bad hypotheses using Petya's example.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-051",
+      "start_seconds": 3252,
+      "end_seconds": 3270,
+      "kind": "slide",
+      "visible_text": "СКРИН С КРУТЫМИ ГИПОТЕЗАМИ НАШИХ КЛИЕНТОВ Job Search Criteria Basic criteria",
+      "visual_summary": "Screenshot of Notion database with actual client hypotheses.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-052",
+      "start_seconds": 3270,
+      "end_seconds": 3370,
+      "kind": "slide",
+      "visible_text": "ТИПИЧНЫЕ ОШИБКИ В СТРАТЕГИИ И ЧТО ДЕЛАТЬ, ЧТОБЫ ИХ НЕ ДОПУСКАТЬ нет стратегии... хочу невозможное... хочу всего нового... беру выше своих возможностей... не работаю с гипотезами",
+      "visual_summary": "Five common strategy errors and how to solve them.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-053",
+      "start_seconds": 3370,
+      "end_seconds": 3373,
+      "kind": "slide",
+      "visible_text": "КАК ПРОХОДИТЬ AI-ФИЛЬТРЫ И ЧТО ЭТО ВООБЩЕ ТАКОЕ?",
+      "visual_summary": "Section divider: AI Filters and ATS.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-054",
+      "start_seconds": 3373,
+      "end_seconds": 3602,
+      "kind": "slide",
+      "visible_text": "ПОЧЕМУ ВАС НЕ ВИДЯТ РЕКРУТЕРЫ? PRE-SCREENING ATS ТЕБЯ НЕ «ОТСЕЯЛИ» — ТЫ ПРОСТО ОКАЗАЛСЯ 56 КАНДИДАТОМ В СПИСКЕ 1200 откликов 300 проходят ATS 50 первых смотрит рекрутер 23 собеседования 15 кандидатов на следующий этап",
+      "visual_summary": "Recruiter funnel diagram explaining how ATS pre-screening cuts off candidates.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-055",
+      "start_seconds": 3602,
+      "end_seconds": 3633,
+      "kind": "slide",
+      "visible_text": "ГЛАВНАЯ ЗАДАЧА — ПОНРАВИТЬСЯ НЕ РЕКРУТЕРУ, А ATS job description → keyword extraction → matching algorithm → candidate ranking → shortlist",
+      "visual_summary": "Diagram showing how ATS processes job descriptions to rank candidates.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-056",
+      "start_seconds": 3633,
+      "end_seconds": 3712,
+      "kind": "slide",
+      "visible_text": "ЧТО ATS ВАЖНО В ТВОЕМ ОТКЛИКЕ KEYWORD MATCH JOB TITLE MATCH EXPERIENCE LEVEL LOCATION / VISA RESUME STRUCTURE",
+      "visual_summary": "Five key parameters evaluated by ATS algorithms.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-057",
+      "start_seconds": 3712,
+      "end_seconds": 3724,
+      "kind": "slide",
+      "visible_text": "ПОЧЕМУ БОЛЬШИНСТВО ОТКЛИКОВ НЕ ПРОХОДИТ ATS 1 резюме без ключевых слов 2 generic/AI резюме 3 сложный дизайн 4 PDF с колонками 5 skills не совпадают с JD",
+      "visual_summary": "Five main reasons candidates fail ATS screens.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-058",
+      "start_seconds": 3724,
+      "end_seconds": 3819,
+      "kind": "slide",
+      "visible_text": "5 ПРАВИЛ СИЛЬНОГО РЕЗЮМЕ ДЛЯ МЕЖДУНАРОДКИ 1 четкая структура 2 опыт описан через результаты 3 много ключевых слов 4 саммари 5 суть важнее формы",
+      "visual_summary": "Five rules for creating an ATS-friendly international resume.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-059",
+      "start_seconds": 3819,
+      "end_seconds": 3858,
+      "kind": "slide",
+      "visible_text": "ЧТОБЫ ПОЛУЧИЛАСЬ ВОТ ТАКАЯ КРАСОТА PROFESSIONAL EXPERIENCE EDUCATION ADDITIONAL INFORMATION",
+      "visual_summary": "Example layout of a clean, ATS-compliant CV.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-060",
+      "start_seconds": 3858,
+      "end_seconds": 3886,
+      "kind": "slide",
+      "visible_text": "КЕЙС ГЛЕБА CV до / после → конверсия в интервью в 2 раза выше Gleb Panov",
+      "visual_summary": "Before vs after comparison of Gleb Panov's resume.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-061",
+      "start_seconds": 3886,
+      "end_seconds": 3930,
+      "kind": "slide",
+      "visible_text": "В КАКИХ СЛУЧАЯХ КАВЕР ВАЖЕН? РЕКРУТЕР НЕ УВЕРЕН ЕСТЬ 2 ПОДХОДЯЩИХ КАНДИДАТА",
+      "visual_summary": "Two scenarios where cover letters are critical.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-062",
+      "start_seconds": 3930,
+      "end_seconds": 3967,
+      "kind": "slide",
+      "visible_text": "СТРУКТУРА КАВЕРА Блок 1: Вступление (роль) Блок 2: Навыки и достижения Блок 3: Мотивация Блок 4: Заключение",
+      "visual_summary": "4-part structure of an effective cover letter with an example text.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-063",
+      "start_seconds": 3967,
+      "end_seconds": 4066,
+      "kind": "slide",
+      "visible_text": "ВАЖНО МАКСИМАЛЬНО ЗАПОЛНИТЬ СВОЙ ПРОФИЛЬ LINKEDIN И РЕГУЛЯРНО ЕГО РАЗВИВАТЬ Daria Shulgina сильный хэдлайн и блок About опыт рекомендации",
+      "visual_summary": "Best practices for LinkedIn profile optimization.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-064",
+      "start_seconds": 4066,
+      "end_seconds": 4150,
+      "kind": "slide",
+      "visible_text": "ВОТ ГОТОВ ПРОФИЛЬ, ЧТО ДАЛЬШЕ? 1 РАСШИРЯЙ СЕТЬ КОНТАКТОВ 2 АУТРИЧ 3 СТРОЙ ЛИЧНЫЙ БРЕНД 4 ТЕСТИРУЙ ГИПОТЕЗЫ 5 ИЩИ СКРЫТЫЕ ПРЕДЛОЖЕНИЯ 6 НАПИШИ ПОСТ OPEN TO WORK 7 ИСПОЛЬЗУЙ ФИЛЬТР ПО СВЕЖЕСТИ ВАКАНСИЙ",
+      "visual_summary": "Seven actionable next steps after completing a LinkedIn profile.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-065",
+      "start_seconds": 4150,
+      "end_seconds": 4167,
+      "kind": "slide",
+      "visible_text": "УСПЕХИ НАШИХ КЛИЕНТОВ В LINKEDIN даже наши бесплатные прогоны линков в тг-канале дают суперские результаты!",
+      "visual_summary": "Screenshots showing client success stories originating from LinkedIn.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-066",
+      "start_seconds": 4167,
+      "end_seconds": 4347,
+      "kind": "slide",
+      "visible_text": "ТИПИЧНЫЕ ОШИБКИ В ДОКУМЕНТАХ И ЧТО ДЕЛАТЬ, ЧТОБЫ ИХ НЕ ДОПУСКАТЬ документы составлены «как я вижу»... каша в резюме... игнор LinkedIn... чисто ггтшные каверы... документы сделаны 1 раз",
+      "visual_summary": "Five common document errors and recommended solutions.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-067",
+      "start_seconds": 4347,
+      "end_seconds": 4388,
+      "kind": "slide",
+      "visible_text": "Только для участников мастер-класса спец предложение на наши услуги до конца 19 июня РАБОТАЕМ С ДОКУМЕНТАМИ И СТРАТЕГИЕЙ Career Booster Отклики + нетворк +1 уровень в английском для работы Сопровождение до оффера",
+      "visual_summary": "Re-display of special offer pricing focusing on documents and strategy.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-068",
+      "start_seconds": 4388,
+      "end_seconds": 4470,
+      "kind": "slide",
+      "visible_text": "НАДО ВСЕМИ ПУТЯМИ ПОЛУЧИТЬ 10 ПРИГЛАШЕНИЙ НА ИНТЕРВЬЮ если все ок с английским, софтами и хард скиллами, 10 интервью достаточно, чтобы получить минимум 1 международный оффер",
+      "visual_summary": "Key target metric: secure 10 interview invites.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-069",
+      "start_seconds": 4470,
+      "end_seconds": 4512,
+      "kind": "slide",
+      "visible_text": "НО.. ВСЕ ОЧЕНЬ ИНДИВИДУАЛЬНО:) Наташа Второва Тимофей Ольга Лоффе Александра Наташа Ступакова Павел",
+      "visual_summary": "Candidate examples illustrating variable application-to-interview ratios.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-070",
+      "start_seconds": 4512,
+      "end_seconds": 4519,
+      "kind": "slide",
+      "visible_text": "ОТКУДА ВЗЯТЬ 10 ЗАВЕТНЫХ ПРИГЛАШЕНИЙ НА ИНТЕРВЬЮ?",
+      "visual_summary": "Section title: Where to get 10 interview invites.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-071",
+      "start_seconds": 4519,
+      "end_seconds": 4580,
+      "kind": "slide",
+      "visible_text": "ОТКУДА ВЗЯТЬ 10 ЗАВЕТНЫХ ПРИГЛАШЕНИЙ НА ИНТЕРВЬЮ? Входящий поток Открытый рынок Теневой рынок",
+      "visual_summary": "Three main sources for interview invites.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-072",
+      "start_seconds": 4580,
+      "end_seconds": 4598,
+      "kind": "slide",
+      "visible_text": "КАК ДРАЙВИТЬ ВХОДЯЩИХ ПОТОК ИНТЕРВЬЮ? СИЛЬНЫЙ ПРОФИЛЬ LINKEDIN РАБОТА С РЕКРУТИНГОВЫМИ АГЕНТСТВАМИ УЧАСТИЕ В ЛОКАЛЬНЫХ КОНФАХ, МИПАТАХ",
+      "visual_summary": "3 methods to drive inbound interview invites.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-073",
+      "start_seconds": 4598,
+      "end_seconds": 4628,
+      "kind": "slide",
+      "visible_text": "Это Настя, Middle Java Developer Аргентина, ремоут Оффер в Chegg — рекрутер написала в LinkedIn и позвала на интервью",
+      "visual_summary": "Inbound success case study: Nastya.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-074",
+      "start_seconds": 4628,
+      "end_seconds": 4642,
+      "kind": "slide",
+      "visible_text": "Это Андрей, CPO в топ-3 крупнейших банка. 7 интервью через рекрутинговые агентства",
+      "visual_summary": "Executive inbound case study: Andrey.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-075",
+      "start_seconds": 4642,
+      "end_seconds": 4664,
+      "kind": "slide",
+      "visible_text": "Это Анна, Оффер в Amazon после конференции Job Fair в Барселоне",
+      "visual_summary": "Event networking success case study: Anna.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-076",
+      "start_seconds": 4664,
+      "end_seconds": 4747,
+      "kind": "slide",
+      "visible_text": "ОТКРЫТЫЙ РЫНОК = ОПУБЛИКОВАННЫЕ ВАКАНСИИ ТЕНЕВОЙ РЫНОК = ЕСТЬ ПОТРЕБНОСТЬ В СОТРУДНИКЕ, НО ЕГО ИЩУТ ЧЕРЕЗ НЕТВОРК",
+      "visual_summary": "Definitions of open market vs hidden (shadow) market.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-077",
+      "start_seconds": 4747,
+      "end_seconds": 4752,
+      "kind": "slide",
+      "visible_text": "ОТКРЫТЫЙ РЫНОК: ФЛОУ ОТКЛИКОВ И РАБОТЫ С ГИПОТЕЗАМИ 1 Выбор приоритетов 2 Организация работы 3 Регулярный поиск и отклики 4 Корректировка стратегии",
+      "visual_summary": "4-step workflow for open job market applications.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-078",
+      "start_seconds": 4752,
+      "end_seconds": 4768,
+      "kind": "slide",
+      "visible_text": "КРИТЕРИИ ПОИСКА роль грейд страны индустрии технологии основные требования",
+      "visual_summary": "Search criteria building blocks.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-079",
+      "start_seconds": 4768,
+      "end_seconds": 4775,
+      "kind": "slide",
+      "visible_text": "ВОТ КАК ЭТО ВЫГЛЯДИТ У НАС В ТЕТРАДИ Job Search Criteria Basic criteria",
+      "visual_summary": "Example search criteria template in Notion.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-080",
+      "start_seconds": 4775,
+      "end_seconds": 4808,
+      "kind": "slide",
+      "visible_text": "ГДЕ МЫ ИЩЕМ ВАКАНСИИ КЛИЕНТАМ LinkedIn WWR Relocate indeed ZipRecruiter Dice MONSTER И ЕЩЕ 200+ САЙТОВ ЧАТИКОВ, КАНАЛОВ, ФОРУМОВ С ВАКАНСИЯМИ",
+      "visual_summary": "Logos of job boards and platforms used by AgileFluent.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-081",
+      "start_seconds": 4808,
+      "end_seconds": 4822,
+      "kind": "slide",
+      "visible_text": "А ЕЩЕ МЫ РАЗРАБОТАЛИ СВОЮ ПЛАТФОРМУ ПО ОТКЛИКАМ AgileFluent Dashboard",
+      "visual_summary": "AgileFluent internal platform dashboard interface.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-082",
+      "start_seconds": 4822,
+      "end_seconds": 4823,
+      "kind": "slide",
+      "visible_text": "АКТУАЛЬНЫЕ ВАКАНСИИ СО ВСЕГО МИРА В ОДНОМ МЕСТЕ Каждый день видим 100K+ новых вакансий из сотен источников",
+      "visual_summary": "Platform aggregator feature view.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-083",
+      "start_seconds": 4823,
+      "end_seconds": 4864,
+      "kind": "slide",
+      "visible_text": "AI-МЭТЧИНГ Каждая вакансия проверяется на совпадение с опытом и целями.",
+      "visual_summary": "Platform AI-matching interface score breakdown.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-084",
+      "start_seconds": 4864,
+      "end_seconds": 4890,
+      "kind": "slide",
+      "visible_text": "НАША БАЗА РЕФЕРАЛОВ 500+ рефералов из компаний по всему миру готовы тебя рекомендовать",
+      "visual_summary": "Internal referral request interface on the platform.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-085",
+      "start_seconds": 4890,
+      "end_seconds": 4900,
+      "kind": "slide",
+      "visible_text": "ПРОЗРАЧНОСТЬ И АНАЛИТИКА Видно всё: от откликов и нетворка до статистики по гипотезам, регионам и ролям.",
+      "visual_summary": "Analytics and statistics charts on the platform.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-086",
+      "start_seconds": 4900,
+      "end_seconds": 4952,
+      "kind": "slide",
+      "visible_text": "Только для участников мастер-класса спец предложение на наши услуги до конца 19 июня РАБОТАЕМ С ПЛАТФОРМОЙ Career Booster Отклики + нетворк +1 уровень в английском для работы Сопровождение до оффера",
+      "visual_summary": "Re-display of special offer focusing on platform access.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-087",
+      "start_seconds": 4952,
+      "end_seconds": 5035,
+      "kind": "slide",
+      "visible_text": "ЛАЙФХАКИ ОТ AGILEFLUENT ПО ПОИСКУ ВАКАНСИЙ Отсекай только те вакансии... Не отметай вакансии... Ищи вакансии в постах LinkedIn... Если вакансия очень нравится... Попробуй отыскать вакансию на сайте... Если вакансии больше 3-4 дней...",
+      "visual_summary": "Six practical job search tips from AgileFluent.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-088",
+      "start_seconds": 5035,
+      "end_seconds": 5131,
+      "kind": "slide",
+      "visible_text": "3 ПРОСТЫХ БОЛЬШИХ ШАГА ДО ОТКЛИКА АДАПТАЦИЯ РЕЗЮМЕ ПОДГОТОВКА КАВЕРА ЗАПОЛНЕНИЕ АНКЕТЫ",
+      "visual_summary": "Three core steps to execute an application.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-089",
+      "start_seconds": 5131,
+      "end_seconds": 5195,
+      "kind": "slide",
+      "visible_text": "ЧТО ЕЩЕ ПОМОГАЕТ ПОВЫШАТЬ КОНВЕРСИЮ ОТКЛИКОВ ПРИОРИТИЗАЦИЯ ВАКАНСИЙ ПО РЕЛЕВАНТНОСТИ ТРЕНД ПОСЛЕДНЕГО ГОДА: УСИЛЕНИЕ РОЛИ ДОМЕННОЙ ЭКСПЕРТИЗЫ ПЕРЕХОД МЕЖДУ ИНДУСТРИЯМИ СТАЛ СЛОЖНЕЕ И ДОЛЬШЕ РЫНОК ПРЕДПОЧИТАЕТ «LOW-RISK HIRES»",
+      "visual_summary": "Factors that boost application response rates.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-090",
+      "start_seconds": 5195,
+      "end_seconds": 5253,
+      "kind": "slide",
+      "visible_text": "КАК ИСПОЛЬЗОВАТЬ ЭТО ПРИ ПОИСКЕ ВАКАНСИЙ 1 СТАВИТЬ В ПРИОРИТЕТ РОЛИ... 2 РАЗДЕЛЯТЬ СТРАТЕГИИ... 3 ПРОВЕРКА ДОМЕННОЙ РЕЛЕВАНТНОСТИ... 4 ЯЗЫК ВАКАНСИИ = ЯЗЫК CV... 5 СТРАТЕГИЯ ДЛЯ ПЕРЕХОДА МЕЖДУ ИНДУСТРИЯМИ... 6 РЕГУЛЯРНЫЙ АУДИТ СТРАТЕГИИ...",
+      "visual_summary": "6 practical applications for job searching based on market trends.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-091",
+      "start_seconds": 5253,
+      "end_seconds": 5340,
+      "kind": "slide",
+      "visible_text": "ТИПИЧНЫЕ ОШИБКИ В ОТКЛИКАХ, И ЧТО ДЕЛАТЬ, ЧТОБЫ ИХ НЕ ДОПУСКАТЬ редкие, несистемные отклики... некачественные автоотклики... узкий поиск... отметать много вакансий... поиски только в LinkedIn... не ведешь срмку...",
+      "visual_summary": "Common mistakes when applying to jobs and corrective actions.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-092",
+      "start_seconds": 5340,
+      "end_seconds": 5382,
+      "kind": "slide",
+      "visible_text": "КОРРЕКТИРОВКА СТРАТЕГИИ — КОГДА ПОНИМАЕМ, ЧТО НУЖНО ПЕРЕХОДИТЬ К ПЛАНУ Б 1 нет приглашений после 50+ откликов по одной гипотезе 2 мало вакансий по выбранным критериям 3 на все отклики приходит автоотказ из ATS...",
+      "visual_summary": "Three indicators that a job search strategy needs adjustment.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-093",
+      "start_seconds": 5382,
+      "end_seconds": 5409,
+      "kind": "slide",
+      "visible_text": "САММАРИ ПО ОТКЛИКАМ — ЧТО НУЖНО ДЕЛАТЬ собрать стратегию... провести рисерч... организовать процесс... каждый день искать... откликаться... обновлять статистику... смотреть аналитику... писать фоллоу-апы",
+      "visual_summary": "Summary checklist of daily and weekly tasks for job applicants.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-094",
+      "start_seconds": 5409,
+      "end_seconds": 5455,
+      "kind": "slide",
+      "visible_text": "В КРУПНЫХ КОМПАНИЯХ СКРЫТЫЙ РЫНОК ОБЫЧНО СОСТАВЛЯЕТ 30–50% ВАКАНСИЙ. А ВОТ В СТАРТАПАХ — МОЖЕТ ДОХОДИТЬ ДО 80–100%",
+      "visual_summary": "Hidden job market statistics for corporations vs startups.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-095",
+      "start_seconds": 5455,
+      "end_seconds": 5498,
+      "kind": "slide",
+      "visible_text": "А КАК РАБОТАТЬ С ТЕНЕВЫМ РЫНКОМ? НЕТВОРКИНГ ЛИЧНЫЙ БРЕНД",
+      "visual_summary": "Two main approaches to tap into the shadow job market.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-096",
+      "start_seconds": 5498,
+      "end_seconds": 5568,
+      "kind": "slide",
+      "visible_text": "5 ПРОСТЫХ НЕПРОСТЫХ ШАГОВ К КАЧЕСТВЕННОМУ АУТРИЧУ В LINKEDIN 1 ПОИСК ЦЕЛЕВЫХ КОНТАКТОВ 2 ПОДГОТОВКА ШАБЛОНОВ СООБЩЕНИЙ 3 РЕГУЛЯРНОЕ ДОБАВЛЕНИЕ НОВЫХ КОНТАКТОВ 4 ВЕДЕНИЕ СТАТИСТИКИ 5 КОРРЕКТИРОВКА СТРАТЕГИИ",
+      "visual_summary": "Five steps to execute successful LinkedIn outreach.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-097",
+      "start_seconds": 5568,
+      "end_seconds": 5569,
+      "kind": "slide",
+      "visible_text": "У ВАС УЖЕ БЫЛИ ИНТЕРВЬЮ? Что сложнее всего дается?",
+      "visual_summary": "Brief placeholder/transition slide on interview experience.",
+      "confidence": "medium"
+    },
+    {
+      "slide_id": "slide-098",
+      "start_seconds": 5569,
+      "end_seconds": 5626,
+      "kind": "slide",
+      "visible_text": "А КАКИЕ БЫВАЮТ СТРАТЕГИИ В АУТРИЧЕ? FOLLOW-UP AFTER A JOB APPLICATION DISCUSS CAREER OPPORTUNITIES SHARE YOUR EXPERTISE ASKING FOR A REFERRAL EXPANDING YOUR NETWORK OF CONTACTS (P2P)",
+      "visual_summary": "Five outreach strategy options in LinkedIn.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-099",
+      "start_seconds": 5626,
+      "end_seconds": 5636,
+      "kind": "slide",
+      "visible_text": "НЕ СТОИТ НЕДООЦЕНИВАТЬ АУТРИЧ В LINKEDIN",
+      "visual_summary": "Chat screenshots illustrating positive responses from outreach.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-100",
+      "start_seconds": 5636,
+      "end_seconds": 5697,
+      "kind": "slide",
+      "visible_text": "ОФФЕРЫ С АУТРИЧА ЕКАТЕРИНА МАКСИМ ЮРА",
+      "visual_summary": "Case studies of offers obtained purely via cold outreach.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-101",
+      "start_seconds": 5697,
+      "end_seconds": 5771,
+      "kind": "slide",
+      "visible_text": "ТИПИЧНЫЕ ОШИБКИ В АУТРИЧЕ, И ЧТО ДЕЛАТЬ, ЧТОБЫ ИХ НЕ ДОПУСКАТЬ не работать с теневым рынком... писать только рекрутерам... прорабатывать только гипотезу с фоллоу-апом... слабые, рекламные сообщения... не уделять системно время аутричу...",
+      "visual_summary": "Outreach mistakes and corresponding recommendations.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-102",
+      "start_seconds": 5771,
+      "end_seconds": 5774,
+      "kind": "slide",
+      "visible_text": "У ВАС УЖЕ БЫЛИ ИНТЕРВЬЮ? Что сложнее всего дается?",
+      "visual_summary": "Section transition slide asking about interview experience.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-103",
+      "start_seconds": 5774,
+      "end_seconds": 6072,
+      "kind": "slide",
+      "visible_text": "ПОЧЕМУ К ИНТЕРВЬЮ ВАЖНО ГОТОВИТЬСЯ? 1 УМЕТЬ РАБОТАТЬ И УМЕТЬ ПРЕЗЕНТОВАТЬ СВОЙ ОПЫТ — 2 КАРДИНАЛЬНО РАЗНЫХ НАВЫКА 2 ИНТЕРВЬЮ НЕ ТАК ПРОСТО ПОЛУЧИТЬ — ВАЖНО ИСПОЛЬЗОВАТЬ КАЖДЫЙ ШАНС 3 ЛУЧШЕ ПОТРАТИТЬ ВРЕМЯ НА ПОДГОТОВКУ, ЧЕМ НА НЕУДАЧНЫЕ ИНТЕРВЬЮ",
+      "visual_summary": "Three reasons interview preparation is essential.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-104",
+      "start_seconds": 6072,
+      "end_seconds": 6093,
+      "kind": "slide",
+      "visible_text": "ТИПЫ ИНТЕРВЬЮ 1 SCREENING INTERVIEW 2 TECHNICAL INTERVIEW 3 BEHAVIORAL INTERVIEW 4 MANAGER/TEAM INTERVIEW 5 CASE INTERVIEW (В КОНСАЛТИНГЕ) 6 PORTFOLIO REVIEW (ДЛЯ ДИЗАЙНЕРОВ)",
+      "visual_summary": "Six standard types of interview stages.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-105",
+      "start_seconds": 6093,
+      "end_seconds": 6215,
+      "kind": "slide",
+      "visible_text": "КЛЮЧЕВЫЕ СОВЕТЫ: КАК ПРОХОДИТЬ СОБЕСЫ НА МЕЖДУНАРОДКЕ 1 Не рассказываем всю свою жизнь... 2 Подчеркиваем все самое релевантное... 3 Если нет релевантного опыта... 4 Критически важно слышать вопрос... 5 Можно и нужно озвучивать свой мыслительный процесс... 6 Подготовиться к каждому вопросу невозможно... 7 Не говорим плохо о предыдущих компаниях",
+      "visual_summary": "Seven key tips for passing international job interviews.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-106",
+      "start_seconds": 6215,
+      "end_seconds": 6276,
+      "kind": "slide",
+      "visible_text": "ТИПЫ ВОПРОСОВ ICEBREAKER & MOTIVATION PROJECT & EXPERIENCE DEEP-DIVE BEHAVIORAL QUESTIONS SITUATIONAL / HYPOTHETICAL QUESTIONS CULTURE FIT & COMMUNICATION LOGISTICS & SALARY",
+      "visual_summary": "Categorization of common interview question types with sample questions.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-107",
+      "start_seconds": 6276,
+      "end_seconds": 6280,
+      "kind": "slide",
+      "visible_text": "YOU WILL NEVER HAVE A SECOND CHANCE TO MAKE THE FIRST IMPRESSION Tell me about yourself",
+      "visual_summary": "Quote on first impressions introducing the 'Tell me about yourself' question.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-108",
+      "start_seconds": 6280,
+      "end_seconds": 6316,
+      "kind": "slide",
+      "visible_text": "WHO YOU ARE KEY CLIENTS OR INDUSTRIES SPECIALIZED SKILLS CURRENT SITUATION WHY YOU'RE LOOKING OFFER MORE DETAIL",
+      "visual_summary": "6-step structure for answering 'Tell me about yourself'.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-109",
+      "start_seconds": 6316,
+      "end_seconds": 6367,
+      "kind": "slide",
+      "visible_text": "ТОП-РЕКОМЕНДАЦИИ КОМАНДЫ AGILEFLUENT ИЗУЧАЙ КОМПАНИЮ И ВАКАНСИЮ ПОДГОТОВЬ КЕЙСЫ ОТТРЕНИРУЙ СИЛЬНУЮ САМОПРЕЗЕНТАЦИЮ ПРОЙДИ ТЕСТОВОЕ ИНТЕРВЬЮ ЗАПИСЫВАЙ СОБЕСЫ И РЕФЛЕКСИРУЙ",
+      "visual_summary": "Top 5 interview preparation recommendations.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-110",
+      "start_seconds": 6367,
+      "end_seconds": 6396,
+      "kind": "slide",
+      "visible_text": "+1 уровень в английском для работы Career Booster",
+      "visual_summary": "Re-display of English course and Career Booster service slide.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-111",
+      "start_seconds": 6396,
+      "end_seconds": 6415,
+      "kind": "slide",
+      "visible_text": "РЕЗУЛЬТАТЫ РЕБЯТ НА КУРСЕ АНГЛИЙСКИЙ ДЛЯ ИНТЕРВЬЮ (1/3) Михаил Корнев",
+      "visual_summary": "Client result case study 1: Mikhail Kornev.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-112",
+      "start_seconds": 6415,
+      "end_seconds": 6434,
+      "kind": "slide",
+      "visible_text": "РЕЗУЛЬТАТЫ РЕБЯТ НА КУРСЕ АНГЛИЙСКИЙ ДЛЯ ИНТЕРВЬЮ (2/3) Илья Хлесткин",
+      "visual_summary": "Client result case study 2: Ilya Khlestkin.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-113",
+      "start_seconds": 6434,
+      "end_seconds": 6449,
+      "kind": "slide",
+      "visible_text": "РЕЗУЛЬТАТЫ РЕБЯТ НА КУРСЕ АНГЛИЙСКИЙ ДЛЯ ИНТЕРВЬЮ (3/3) Алексей Юганов",
+      "visual_summary": "Client result case study 3: Alexey Yuganov.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-114",
+      "start_seconds": 6449,
+      "end_seconds": 6536,
+      "kind": "slide",
+      "visible_text": "ВОТ С КАКИМИ ТРУДНОСТЯМИ ОБЫЧНО СТАЛКИВАЮТСЯ РЕБЯТА В ПОИСКЕ РАБОТЫ ЗА РУБЕЖОМ непонятно с чего начать... сложно сесть сделать документы... мало вакансий... не прохожу первого этапа... в отчаянии... я нервничаю из-за своего английского...",
+      "visual_summary": "Grid summarizing common pain points and psychological barriers.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-115",
+      "start_seconds": 6536,
+      "end_seconds": 6540,
+      "kind": "slide",
+      "visible_text": "ТАК ДАВАЙ МЫ ПОМОЖЕМ",
+      "visual_summary": "Transition call-to-action slide: Let us help.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-116",
+      "start_seconds": 6540,
+      "end_seconds": 6607,
+      "kind": "slide",
+      "visible_text": "Только для участников мастер-класса спец предложение на наши услуги до конца 19 июня Career Booster Отклики + нетворк +1 уровень в английском для работы Сопровождение до оффера",
+      "visual_summary": "Re-display of special offer pricing.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-117",
+      "start_seconds": 6607,
+      "end_seconds": 6636,
+      "kind": "slide",
+      "visible_text": "Для нас главное — твой результат Лучшая команда экспертов на рынке Собственная платформа по откликам Эффективные стратегии и подходы в работе Большая база рефералов",
+      "visual_summary": "AgileFluent core values and competitive advantages.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-118",
+      "start_seconds": 6636,
+      "end_seconds": 6683,
+      "kind": "slide",
+      "visible_text": "Ставим ставку на сильную стратегию, качественные быстрые отклики и работу с теневым рынком Сильная стратегия и документы Качественные отклики быстрее других Аутрич в LinkedIn нанимающих, рекрутеров и рефералов",
+      "visual_summary": "AgileFluent approach highlights.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-119",
+      "start_seconds": 6683,
+      "end_seconds": 6701,
+      "kind": "slide",
+      "visible_text": "Своя AI-платформа для поиска вакансий и работы с откликами Dashboard",
+      "visual_summary": "Re-display of AgileFluent proprietary AI platform slide.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-120",
+      "start_seconds": 6701,
+      "end_seconds": 6713,
+      "kind": "slide",
+      "visible_text": "500+ рефералов из компаний по всему миру готовы тебя рекомендовать",
+      "visual_summary": "Re-display of referral database slide.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-121",
+      "start_seconds": 6713,
+      "end_seconds": 6737,
+      "kind": "slide",
+      "visible_text": "Наш подход — системная, регулярная работа на результат",
+      "visual_summary": "Re-display of approach summary slide.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-122",
+      "start_seconds": 6737,
+      "end_seconds": 6776,
+      "kind": "slide",
+      "visible_text": "Сопровождение до оффера — 7 месяцев системной и регулярной работы над твоим оффером Ментор Международные эксперты Технический ментор Рисерч-аналитик Тьюторы по английскому Карьерный коуч Операционный менеджер",
+      "visual_summary": "Full overview of team roles assigned to each client in the signature program.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-123",
+      "start_seconds": 6776,
+      "end_seconds": 6787,
+      "kind": "slide",
+      "visible_text": "Ментор, карьерные эксперты, рисерч аналитик, тех ментор и коуч AgileFluent помогут достичь цели подготовительный этап активный поиск",
+      "visual_summary": "Two-phase workflow summary with timelines.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-124",
+      "start_seconds": 6787,
+      "end_seconds": 6801,
+      "kind": "slide",
+      "visible_text": "Этап 1: Подготовка 2-3 недели интенсивной подготовки к поиску... Интро-встреча Карьерная консультация Консультация по резюме Консультация по LinkedIn Шаблон мотивационного письма Тестовое интервью / Мок-интервью",
+      "visual_summary": "Detailed schedule for Phase 1 (Preparation).",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-125",
+      "start_seconds": 6801,
+      "end_seconds": 6809,
+      "kind": "slide",
+      "visible_text": "Этап 2: Активный поиск и интро (1/2) Регулярная системная работа в команде над твоим оффером Встреча по критериям Регулярные отклики Подготовка цепочек в аутриче Регулярный аутрич в LinkedIn Ежедневная статистика в чатике Встречи команды",
+      "visual_summary": "Detailed schedule for Phase 2 (Active Search Part 1).",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-126",
+      "start_seconds": 6809,
+      "end_seconds": 6839,
+      "kind": "slide",
+      "visible_text": "Этап 2: Активный поиск и интро (2/2) Мок-интервью Консультации с техническим ментором Брейнштормы с командой экспертов Корректировка стратегии Встречи с карьерным коучем Групповые занятия по английскому языку",
+      "visual_summary": "Detailed schedule for Phase 2 (Active Search Part 2).",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-127",
+      "start_seconds": 6839,
+      "end_seconds": 6860,
+      "kind": "slide",
+      "visible_text": "Мы доводим до оффера — системно и на опыте тысяч кейсов Фокус на результате Фокус на теневой рынок Своя платформа по откликам и база рефералов Data-driven подход Сильная команда и большая насмотренность Работаем не со всеми",
+      "visual_summary": "Summary of AgileFluent's methodology.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-128",
+      "start_seconds": 6860,
+      "end_seconds": 6878,
+      "kind": "slide",
+      "visible_text": "Твой сильный оффер на международке с топовой поддержкой команды Осталось 7 мест Сопровождение до оффера стратегия документы отклики нетворк подготовка к собесам статусы и поддержка",
+      "visual_summary": "Signature offer details and availability.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-129",
+      "start_seconds": 6878,
+      "end_seconds": 6882,
+      "kind": "slide",
+      "visible_text": "Хоть каждый кейс и уникален, мы стремимся приносить все больше быстрых офферов нашим сопровожденцам 75% конверсия в оффер 4,5 МЕСЯЦА среднее время до оффера",
+      "visual_summary": "Core performance metrics for signature program participants.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-130",
+      "start_seconds": 6882,
+      "end_seconds": 6908,
+      "kind": "slide",
+      "visible_text": "КЕЙС ГЛЕБА ПАНОВА, PRODUCT ANALYST, PLATA, РЕЛОКАЦИЯ В МЕКСИКУ",
+      "visual_summary": "Re-display of Gleb Panov case study.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-131",
+      "start_seconds": 6908,
+      "end_seconds": 6923,
+      "kind": "slide",
+      "visible_text": "Пусть случится крутейший оффер как можно скорее — как у наших сопровожденцев",
+      "visual_summary": "Collection of offer announcement messages.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-132",
+      "start_seconds": 6923,
+      "end_seconds": 6945,
+      "kind": "slide",
+      "visible_text": "Отклики и нетворкинг 6-8 недель 121 125 руб вместо 142 500 руб -15% до 19 июня",
+      "visual_summary": "Outreach and applications service offer details.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-133",
+      "start_seconds": 6945,
+      "end_seconds": 6946,
+      "kind": "slide",
+      "visible_text": "Ежедневно ищем вакансии на 200+ источниках, откликаемся и делаем нетворк за тебя 1 Интро-встреча 2 Карьерная консультация 3 Консультация по CV... 12 Продолжаем работу по подписке",
+      "visual_summary": "12-step process map for applications and outreach service.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-134",
+      "start_seconds": 6946,
+      "end_seconds": 6946,
+      "kind": "slide",
+      "visible_text": "ВАШИ ВОПРОСИКИ",
+      "visual_summary": "Section transition slide: Q&A.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "slide-135",
+      "start_seconds": 6946,
+      "end_seconds": 8200,
+      "kind": "slide",
+      "visible_text": "СПЕЦИАЛЬНОЕ ПРЕДЛОЖЕНИЕ Только для участников мастер-класса спец предложение на наши услуги до конца 19 июня Career Booster Отклики + нетворк +1 уровень в английском для работы Сопровождение до оффера Сопровождение до оффера в РФ за 3 месяца",
+      "visual_summary": "Final pricing overview slide maintained throughout the live Q&A session.",
+      "confidence": "high"
+    },
+    {
+      "slide_id": "speaker-001",
+      "start_seconds": 8200,
+      "end_seconds": 8241.281,
+      "kind": "speaker_only",
+      "visible_text": "",
+      "visual_summary": "Speaker appears on full camera with her dog to say goodbye to the audience.",
+      "confidence": "high"
+    }
+  ],
+  "extraction_notes": [
+    "The video consists of a presentation delivered live via web stream with the speaker visible in the lower/upper corner webcam inset.",
+    "Between 6946 seconds (~01:55:46) and 8200 seconds (~02:16:40), the speaker answers live audience questions while keeping Slide 135 ('СПЕЦИАЛЬНОЕ ПРЕДЛОЖЕНИЕ') on screen.",
+    "In the final 41 seconds (8200–8241.281s), the speaker switches full-screen to camera/webcam to present her dog and conclude the session."
+  ]
+}

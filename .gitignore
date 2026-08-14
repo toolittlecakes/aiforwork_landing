@@ -15,3 +15,12 @@ build/
 .vscode/
 *.swp
 *.swo
+
+# Webinar: heavy local source media and reproducible renders
+webinar/references/dasha/source/source.mp4
+webinar/references/dasha/source/slides/
+webinar/references/dasha/source/scene-detection/
+webinar/references/dasha/source/scene-test-10m/
+webinar/references/dasha/source/contact-sheets-30s/
+webinar/presentation/rendered-40/
+webinar/archive/
