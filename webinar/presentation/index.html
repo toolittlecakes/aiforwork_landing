@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>От чатиков к ИИ-агентам — AI For Work</title>
+<title>Как вкатиться в ИИ-агентов — AI For Work</title>
 <link href="fonts/fonts.css" rel="stylesheet">
 <style>
 :root{
@@ -106,9 +106,6 @@ ul.list li{
 ul.list li::before{
   content:"—";position:absolute;left:0;color:var(--blue);font-weight:700;
 }
-.footer-note{
-  display:none;
-}
 .history-grid{
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;
   margin-top:34px;border:var(--line);background:var(--bg);box-shadow:7px 7px 0 var(--ink);
@@ -180,6 +177,7 @@ ul.list li::before{
   letter-spacing:.08em;
 }
 .rm-node .t{font-size:19px;font-weight:700;line-height:1.15;letter-spacing:-0.01em}
+.rm-node .d{font-size:13px;font-weight:500;line-height:1.25;opacity:.82}
 .rm-node.z1{box-shadow:5px 5px 0 var(--ink)}
 .rm-node.z2{box-shadow:5px 5px 0 var(--blue)}
 .rm-node.z3{background:var(--ink);color:var(--bg)}
@@ -217,7 +215,7 @@ ul.list li::before{
 /* ---------- no-go ---------- */
 .nogo li::before{content:"✕";color:var(--blue)}
 
-/* ---------- zone overview / gates ---------- */
+/* ---------- zone overview ---------- */
 .chain{display:flex;align-items:stretch;gap:0;margin-top:44px}
 .chain .card{flex:1;display:flex;flex-direction:column;gap:10px;justify-content:flex-start}
 .chain .card .cn{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--blue);font-weight:700}
@@ -268,9 +266,9 @@ ul.list li::before{
 <!-- 1. Титул -->
 <section class="slide s-title">
   <div class="brand"><span class="dot"></span>AI FOR WORK · LIVE</div>
-  <h1>От чатиков<br>к ИИ-агентам</h1>
-  <p class="sub">Что осваивать, в каком порядке и на каких задачах — одна карта вместо гонки за инструментами.</p>
-  <div class="plate">Прямой эфир · 2 часа · карта останется у вас</div>
+  <h1>Как вкатиться<br>в ИИ-агентов</h1>
+  <p class="sub">Пошаговый roadmap: что освоить, в каком порядке и на каких задачах.</p>
+  <div class="plate">Прямой эфир · после эфира карта останется у вас</div>
 </section>
 
 <!-- 2. Техчек -->
@@ -284,27 +282,12 @@ ul.list li::before{
     </div>
     <div class="col card shadow-blue">
       <p style="font-size:26px;font-weight:700;margin-bottom:14px">Познакомимся</p>
-      <p style="font-size:20px;line-height:1.4">Напишите в чат <span class="accent" style="font-weight:700">профессию и город</span> — эфир будет опираться на ваши реальные задачи.</p>
+      <p style="font-size:20px;line-height:1.4">Напишите в чат <span class="accent" style="font-weight:700">профессию и город</span>. По профессиям будем подбирать примеры, а заодно увидим, откуда вы нас смотрите.</p>
     </div>
   </div>
-  <div class="footer-note"><span>Чат — рабочий инструмент эфира</span><span class="accent">→</span></div>
 </section>
 
-<!-- 3. Self-poll -->
-<section class="slide">
-  <div class="kicker"><span class="num">03</span><span>Опрос</span><span class="rule"></span></div>
-  <h2>Как вы используете ИИ сейчас?</h2>
-  <p class="sub" style="margin-top:16px">Отправьте цифру в чат.</p>
-  <div class="poll">
-    <div class="card shadow"><span class="idx">1</span>Пока не пользуюсь</div>
-    <div class="card shadow"><span class="idx">2</span>Чатик: вопрос — ответ</div>
-    <div class="card shadow"><span class="idx">3</span>Пробовал агента</div>
-    <div class="card shadow-blue"><span class="idx">4</span>Регулярно работаю с агентом</div>
-  </div>
-  <div class="footer-note"><span>Любой ответ — нормальная стартовая точка</span><span class="accent">→</span></div>
-</section>
-
-<!-- 4. История: от чата к агентам -->
+<!-- 3. История: от чата к агентам -->
 <section class="slide">
   <div class="kicker"><span class="num">04</span><span>Как менялась работа с ИИ</span><span class="rule"></span></div>
   <h2>За четыре года чат превратился в рабочую среду</h2>
@@ -329,6 +312,19 @@ ul.list li::before{
       <h3>Появилась экосистема</h3>
       <ul><li>MCP и подключения</li><li>Skills и субагенты</li><li>Автоматизации и расписания</li></ul>
     </div>
+  </div>
+</section>
+
+<!-- 4. Self-poll -->
+<section class="slide">
+  <div class="kicker"><span class="num">04</span><span>Опрос</span><span class="rule"></span></div>
+  <h2>А вы уже вышли за пределы чатика?</h2>
+  <p class="sub" style="margin-top:16px">Отправьте цифру в чат.</p>
+  <div class="poll">
+    <div class="card shadow"><span class="idx">1</span>Пока не пользуюсь ИИ</div>
+    <div class="card shadow"><span class="idx">2</span>Работаю только в чатике</div>
+    <div class="card shadow"><span class="idx">3</span>Пробовал агента</div>
+    <div class="card shadow-blue"><span class="idx">4</span>Регулярно даю агенту задачи</div>
   </div>
 </section>
 
@@ -361,7 +357,7 @@ ul.list li::before{
       <ul class="list" style="margin-top:20px">
         <li>Одностраничная карта освоения агентов</li>
         <li>Ваша текущая точка на этой карте</li>
-        <li>Следующие три учебные задачи</li>
+        <li>Одна следующая рабочая задача и критерий готовности</li>
       </ul>
     </div>
     <div class="col card">
@@ -372,57 +368,65 @@ ul.list li::before{
       </ul>
     </div>
   </div>
-  <div class="footer-note"><span>Карта останется у вас после эфира</span><span class="accent">→</span></div>
 </section>
 
 <!-- 9. Кто ведёт -->
 <section class="slide">
   <div class="kicker"><span class="num">09</span><span>Кто ведёт</span><span class="rule"></span></div>
   <h2>Николай Шейко</h2>
-  <p class="sub" style="margin-top:14px">AI-инжиниринг и бизнес-операционка — карта собрана из реальной практики, а не из обзоров.</p>
+  <p class="sub" style="margin-top:14px;max-width:1040px">Разрабатываю ИИ-решения для бизнеса и каждый день использую агентов в работе команды. Поэтому здесь не обзор функций, а проверенный порядок освоения.</p>
   <ul class="list" style="margin-top:36px">
     <li>Ежедневная работа с агентами: документы, данные, интеграции, автоматизации</li>
     <li>Внедрение агентов в операционные процессы команд</li>
-    <li>Обучение специалистов без программирования — AI For Work</li>
+    <li>Два потока марафона AI For Work для специалистов без программирования</li>
   </ul>
-  <div class="footer-note">
-    <span>В конце — короткое предложение пройти карту с практикой и обратной связью</span>
-    <span class="accent">→</span>
+</section>
+
+<!-- 8. Ранний product anchor -->
+<section class="slide">
+  <div class="kicker"><span class="num">08</span><span>AI For Work</span><span class="rule"></span></div>
+  <h2>Мы уже дважды проходили этот путь с группой</h2>
+  <p class="sub" style="margin-top:14px;max-width:980px">Марафон AI For Work — тот же roadmap, только превращённый в последовательную практику.</p>
+  <div class="chain" style="margin-top:38px">
+    <div class="card shadow-blue"><span class="ct">Готовые задания</span><span class="cd">Каждое раскрывает один новый навык, а не сваливает всё сразу</span></div>
+    <div class="card shadow"><span class="ct">Инструкции и усложнения</span><span class="cd">Можно пройти базовый путь или копнуть глубже</span></div>
+    <div class="card shadow"><span class="ct">Поддержка и группа</span><span class="cd">Есть куда прийти с ошибкой и с кем сравнить результат</span></div>
   </div>
+  <p class="bigquote">Сейчас разберём саму карту. В конце покажем, как пройти её вместе с нами.</p>
 </section>
 
 <!-- 10. ROADMAP -->
 <section class="slide">
   <div class="kicker"><span class="num">10</span><span>Карта целиком</span><span class="rule"></span></div>
-  <h2 style="font-size:44px">Маршрут: девять шагов, один порядок</h2>
+  <h2 style="font-size:44px">Roadmap: что осваивать и в каком порядке</h2>
   <div class="rm-wrap">
     <div class="rm-row">
-      <div class="rm-node z1"><span class="n">01</span><span class="t">Настройка Codex</span></div>
+      <div class="rm-node z1"><span class="n">01</span><span class="t">Настроить Codex</span><span class="d">VPN, подписка, разрешения, инструкции</span></div>
       <div class="rm-arrow">→</div>
-      <div class="rm-node z1"><span class="n">02</span><span class="t">Базовые рабочие задачи</span></div>
+      <div class="rm-node z1"><span class="n">02</span><span class="t">Освоить базовые фишки</span><span class="d">Таблицы, документы, слайды, сайты</span></div>
       <div class="rm-arrow">→</div>
-      <div class="rm-node z1"><span class="n">03</span><span class="t">Усложнение работы с агентом</span></div>
+      <div class="rm-node z1"><span class="n">03</span><span class="t">Усложнять задачи</span><span class="d">Память, субагенты, встроенный браузер</span></div>
     </div>
     <div class="rm-gap"><div></div><div></div><div></div><div></div><div class="rm-down">↓</div></div>
     <div class="rm-row">
-      <div class="rm-node z2"><span class="n">06</span><span class="t">Браузер и неофициальные способы</span></div>
+      <div class="rm-node z2"><span class="n">06</span><span class="t">Неофициальные способы</span><span class="d">Парсинг, внешний браузер, сайты без API</span></div>
       <div class="rm-arrow">←</div>
-      <div class="rm-node z2"><span class="n">05</span><span class="t">API и MCP</span></div>
+      <div class="rm-node z2"><span class="n">05</span><span class="t">Подключать через API и MCP</span><span class="d">Telegram-бот, hh.ru, Метрика</span></div>
       <div class="rm-arrow">←</div>
-      <div class="rm-node z2"><span class="n">04</span><span class="t">Официальные подключения</span></div>
+      <div class="rm-node z2"><span class="n">04</span><span class="t">Подключить плагины</span><span class="d">Google Drive, Granola, Chrome</span></div>
     </div>
     <div class="rm-gap"><div class="rm-down">↓</div></div>
     <div class="rm-row">
-      <div class="rm-node z3"><span class="n">07</span><span class="t">Skills</span></div>
+      <div class="rm-node z3"><span class="n">07</span><span class="t">Освоить skills</span><span class="d">Скачать готовый, затем сделать свой</span></div>
       <div class="rm-arrow">→</div>
-      <div class="rm-node z3"><span class="n">08</span><span class="t">Автоматизации</span></div>
+      <div class="rm-node z3"><span class="n">08</span><span class="t">Запустить автоматизацию</span><span class="d">По расписанию и при выключенном ноутбуке</span></div>
       <div class="rm-arrow">→</div>
-      <div class="rm-node z3"><span class="n">09</span><span class="t">Вайбкодинг</span></div>
+      <div class="rm-node z3"><span class="n">09</span><span class="t">Попробовать вайбкодинг</span><span class="d">Сайт по ссылке, данные в Google Sheets</span></div>
     </div>
     <div class="rm-legend">
       <div class="li"><span class="sw s1"></span>База</div>
       <div class="li"><span class="sw s2"></span>Подключения</div>
-      <div class="li"><span class="sw s3"></span>Усиление</div>
+      <div class="li"><span class="sw s3"></span>Повторяемость</div>
       <div class="li" style="margin-left:auto"><span class="accent">Сфотографируйте — карта будет и в раздатке</span></div>
     </div>
   </div>
@@ -430,34 +434,30 @@ ul.list li::before{
 
 <!-- 11. Как читать карту -->
 <section class="slide">
-  <div class="kicker"><span class="num">11</span><span>Правила маршрута</span><span class="rule"></span></div>
-  <h2>Как проходить карту</h2>
-  <ul class="list" style="margin-top:40px;gap:22px">
-    <li>Шаги идут только <b>по порядку</b> — без перепрыгивания к автоматизациям</li>
-    <li>Внутри каждого шага — <b>одна задача из вашей работы</b>, а не все примеры сразу</li>
-    <li>Примеры сервисов — иллюстрации класса возможностей, не обязательный чек-лист</li>
-    <li>Дальше — только после <b>понятного проверяемого результата</b></li>
-  </ul>
-  <p class="bigquote">Не осваивайте всё одновременно. Один понятный уровень за раз.</p>
+  <div class="kicker"><span class="num">10</span><span>Три уровня</span><span class="rule"></span></div>
+  <h2>Что меняется после каждого ряда</h2>
+  <div class="chain" style="margin-top:48px">
+    <div class="card shadow"><span class="cn">Уровень 1 · База</span><span class="ct">Агент работает на вашем компьютере</span><span class="cd">Делает документы, таблицы, слайды и другие задачи с файлами</span></div>
+    <div class="card shadow-blue"><span class="cn">Уровень 2 · Подключения</span><span class="ct">Агент входит в вашу рабочую среду</span><span class="cd">Получает данные и действует в сервисах, которыми вы уже пользуетесь</span></div>
+    <div class="card" style="background:var(--ink);color:var(--bg)"><span class="cn" style="color:var(--blue2)">Уровень 3 · Повторяемость</span><span class="ct">Агент запоминает и повторяет процессы</span><span class="cd">Использует skills и запускает отлаженную работу без вашего участия</span></div>
+  </div>
+  <p class="bigquote">Остановиться можно на любом уровне. Но двигаться лучше по порядку.</p>
 </section>
 
 <!-- 12. Self-diagnostic -->
 <section class="slide">
-  <div class="kicker"><span class="num">12</span><span>Самодиагностика</span><span class="rule"></span></div>
-  <h2>Найдите себя на карте</h2>
-  <p class="sub" style="margin-top:12px">Отметьте, что делали самостоятельно хотя бы один раз.</p>
+  <div class="kicker"><span class="num">11</span><span>Самодиагностика</span><span class="rule"></span></div>
+  <h2>Что из этого вы уже делали сами?</h2>
+  <p class="sub" style="margin-top:12px">Быстро отметьте знакомые действия — без экзамена и долгих раздумий.</p>
   <div class="checks">
-    <div class="card"><span class="box"></span><span class="txt"><span class="cn">01</span>Настроил агента: инструкции, доступы, рабочая папка</span></div>
-    <div class="card"><span class="box"></span><span class="txt"><span class="cn">02</span>Получил от агента готовый рабочий артефакт</span></div>
-    <div class="card"><span class="box"></span><span class="txt"><span class="cn">03</span>Вёл многошаговую задачу: память, этапы, субагенты</span></div>
-    <div class="card"><span class="box"></span><span class="txt"><span class="cn">04</span>Подключил готовую интеграцию к сервису</span></div>
-    <div class="card"><span class="box"></span><span class="txt"><span class="cn">05</span>Подключил сервис через API или MCP</span></div>
-    <div class="card"><span class="box"></span><span class="txt"><span class="cn">06</span>Дал агенту действовать через браузер</span></div>
-    <div class="card"><span class="box"></span><span class="txt"><span class="cn">07</span>Использовал или собрал skill</span></div>
-    <div class="card"><span class="box"></span><span class="txt"><span class="cn">08</span>Поставил задачу на расписание</span></div>
-    <div class="card"><span class="box"></span><span class="txt"><span class="cn">09</span>Собрал страницу или мини-приложение</span></div>
+    <div class="card"><span class="box"></span><span class="txt">Настроил Codex: инструкции, разрешения, рабочая папка</span></div>
+    <div class="card"><span class="box"></span><span class="txt">Получил готовый документ, таблицу, слайд или сайт</span></div>
+    <div class="card"><span class="box"></span><span class="txt">Использовал память, субагента или встроенный браузер</span></div>
+    <div class="card"><span class="box"></span><span class="txt">Подключил рабочий сервис через плагин, API или MCP</span></div>
+    <div class="card"><span class="box"></span><span class="txt">Добыл данные там, где готового подключения нет</span></div>
+    <div class="card"><span class="box"></span><span class="txt">Сохранил процесс как skill или запустил по расписанию</span></div>
   </div>
-  <div class="footer-note"><span>Первый непройденный узел — ваша текущая точка</span><span class="accent">→</span></div>
+  <p class="bigquote" style="margin-top:24px">Первое незнакомое действие подсказывает, куда двигаться дальше.</p>
 </section>
 
 <!-- 13. No-go -->
@@ -465,7 +465,7 @@ ul.list li::before{
   <div class="kicker"><span class="num">13</span><span>Красные зоны</span><span class="rule"></span></div>
   <h2>Что пока сознательно <span class="accent">не трогаем</span></h2>
   <ul class="list nogo" style="margin-top:40px;gap:20px">
-    <li>Production-деплой через GitHub</li>
+    <li>Публикацию приложений через GitHub и серверы</li>
     <li>Массовые действия в рабочих аккаунтах</li>
     <li>Платежи</li>
     <li>Публикации и удаления без подтверждения</li>
@@ -474,27 +474,48 @@ ul.list li::before{
   <p class="bigquote">«Технически возможно» ≠ «хорошая учебная задача».</p>
 </section>
 
+<!-- 13. Шаг 0: доступ -->
+<section class="slide">
+  <div class="kicker"><span class="num">13</span><span>До roadmap</span><span class="rule"></span></div>
+  <h2>Шаг 0: добиться, чтобы Codex просто запустился</h2>
+  <div class="cols" style="margin-top:38px">
+    <div class="col card shadow-blue">
+      <span class="tag blue">Что потребуется</span>
+      <ul class="list" style="margin-top:18px;gap:14px">
+        <li>Рабочий VPN и аккаунт</li>
+        <li>Подписка с доступом к Codex</li>
+        <li>На Windows — отдельная настройка по инструкции</li>
+      </ul>
+    </div>
+    <div class="col card">
+      <span class="tag">Когда готово</span>
+      <p style="font-size:25px;font-weight:750;line-height:1.35;margin-top:20px">Codex открывается, видит вашу рабочую папку и может выполнить простую команду.</p>
+    </div>
+  </div>
+  <p class="bigquote">На эфире не будем устанавливать всё вместе. Дадим инструкции, а на марафоне поможем, если настройка застопорит.</p>
+</section>
+
 <!-- 14. Зона 1 overview -->
 <section class="slide">
   <div class="kicker"><span class="num">14</span><span>Зона 1 · База</span><span class="rule"></span></div>
-  <h2>Агент работает на вашем компьютере</h2>
+  <h2>Уровень 1: освоить то, что Codex умеет <span class="accent">из коробки</span></h2>
   <div class="chain">
-    <div class="card shadow"><span class="cn">Узел 01</span><span class="ct">Настройка</span><span class="cd">Агент может безопасно действовать в вашей среде</span></div>
+    <div class="card shadow"><span class="cn">Шаг 01</span><span class="ct">Настроить под себя</span><span class="cd">Инструкции, разрешения, рабочая папка, диктовка</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">Узел 02</span><span class="ct">Базовые задачи</span><span class="cd">Не совет, а готовый проверяемый артефакт</span></div>
+    <div class="card shadow"><span class="cn">Шаг 02</span><span class="ct">Сделать базовые задачи</span><span class="cd">Таблица, документ, слайды, исследование или сайт</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">Узел 03</span><span class="ct">Управление сложностью</span><span class="cd">Многошаговая работа без хаоса</span></div>
+    <div class="card shadow"><span class="cn">Шаг 03</span><span class="ct">Попробовать усилители</span><span class="cd">Память, субагенты и встроенный браузер</span></div>
   </div>
-  <div class="footer-note"><span>Каждый узел: что это → зачем → практика → ошибки → критерий выхода</span><span class="accent">→</span></div>
+  <p class="bigquote">После этого агент уже работает с вашими файлами. Но ещё не подключён к вашим рабочим сервисам.</p>
 </section>
 
-<!-- Узел 1: настройка + практика + gate -->
+<!-- Узел 1: настройка и практика -->
 <section class="slide">
   <div class="kicker"><span class="num">15</span><span>Узел 01 · Настройка</span><span class="rule"></span></div>
-  <h2>Настройте среду и проверьте её одной задачей</h2>
+  <h2>Задача 1: настроить Codex <span class="accent">под себя</span></h2>
   <div class="cols" style="margin-top:30px;gap:24px">
     <div class="col card shadow" style="padding:24px 26px">
-      <span class="tag">Настроить</span>
+      <span class="tag">Что настроить</span>
       <ul class="list" style="margin-top:18px;gap:10px">
         <li style="font-size:18px">Системные инструкции</li>
         <li style="font-size:18px">Разрешения и безопасные границы</li>
@@ -504,26 +525,26 @@ ul.list li::before{
       </ul>
     </div>
     <div class="col card shadow-blue" style="padding:24px 26px">
-      <span class="tag blue">Первая практика</span>
+      <span class="tag blue">Что сделать руками</span>
       <ul class="list" style="margin-top:18px;gap:10px">
-        <li>Прописать системные инструкции</li>
+        <li>Описать себя и свою работу в системных инструкциях</li>
         <li>Создать файл в тестовой папке</li>
         <li>Установить недостающий инструмент — с подтверждением</li>
       </ul>
     </div>
   </div>
   <div class="card shadow" style="margin-top:24px;padding:22px 26px;display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:center">
-    <span class="tag" style="justify-self:start">Gate</span>
-    <p style="font-size:21px;font-weight:700;line-height:1.35">Вы понимаете, где работает агент, что ему разрешено и как отменить действие. Агент создал <span class="accent">проверяемый файл</span> в рабочей среде.</p>
+    <span class="tag" style="justify-self:start">Задача выполнена, если</span>
+    <p style="font-size:21px;font-weight:700;line-height:1.35">Агент учитывает ваш контекст, работает в нужной папке и <span class="accent">спрашивает подтверждение</span> перед рискованным действием.</p>
   </div>
 </section>
 
 <!-- Узел 2: артефакт вместо ответа -->
 <section class="slide">
   <div class="kicker"><span class="num">19</span><span>Узел 02 · Базовые задачи</span><span class="rule"></span></div>
-  <h2>Готовый артефакт <span class="accent">вместо ответа</span></h2>
+  <h2>Раньше — текст в чате. Теперь — <span class="accent">готовый файл</span></h2>
   <div class="cloud" style="margin-top:22px;margin-bottom:22px">
-    <span class="mid">Таблица</span><span class="mid inv">Документ</span><span class="mid">Слайды</span><span class="mid blu">Исследование</span><span class="mid">Страница</span>
+    <span class="mid">Таблица</span><span class="mid inv">Документ</span><span class="mid">Слайды</span><span class="mid blu">Отчёт</span><span class="mid">Сайт</span>
   </div>
   <div class="cols" style="gap:24px">
     <div class="col card shadow"><span class="tag">Ответ в чате</span><ul class="list nogo" style="margin-top:16px;gap:10px"><li style="font-size:18px">Нужно переносить руками</li><li style="font-size:18px">Остаётся в истории диалога</li></ul></div>
@@ -534,171 +555,171 @@ ul.list li::before{
 <!-- 20. Постановка задачи -->
 <section class="slide">
   <div class="kicker"><span class="num">20</span><span>Узел 02 · Постановка</span><span class="rule"></span></div>
-  <h2>Пять частей рабочей постановки</h2>
+  <h2>Как поставить агенту задачу: <span class="accent">пять вопросов</span></h2>
   <div class="chain" style="margin-top:44px">
-    <div class="card shadow"><span class="cn">01</span><span class="ct">Цель</span><span class="cd">Зачем это нужно и кто получатель</span></div>
+    <div class="card shadow"><span class="cn">01</span><span class="ct">Что получить?</span><span class="cd">Конкретный результат работы</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">02</span><span class="ct">Контекст</span><span class="cd">Исходные файлы, данные, примеры</span></div>
+    <div class="card shadow"><span class="cn">02</span><span class="ct">Из чего?</span><span class="cd">Файлы, данные и примеры</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">03</span><span class="ct">Ограничения</span><span class="cd">Что нельзя трогать и менять</span></div>
+    <div class="card shadow"><span class="cn">03</span><span class="ct">Что нельзя?</span><span class="cd">Границы и запреты</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">04</span><span class="ct">Формат</span><span class="cd">Какой артефакт и как выглядит</span></div>
+    <div class="card shadow"><span class="cn">04</span><span class="ct">В каком виде?</span><span class="cd">Формат готового файла</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">05</span><span class="ct">Готово когда</span><span class="cd">Проверяемый критерий результата</span></div>
+    <div class="card shadow"><span class="cn">05</span><span class="ct">Как проверить?</span><span class="cd">Критерий готовности</span></div>
   </div>
-  <div class="footer-note"><span>Чем чётче «готово когда» — тем меньше итераций</span><span class="accent">→</span></div>
 </section>
 
 <!-- 21. Практика узла 2 -->
 <section class="slide">
   <div class="kicker"><span class="num">21</span><span>Узел 02 · Практика</span><span class="rule"></span></div>
-  <h2>Одна реальная задача: практика, ошибки, gate</h2>
+  <h2>Задача 2: получить <span class="accent">готовый результат</span> для работы</h2>
   <div class="cols" style="margin-top:28px;gap:22px">
     <div class="col card shadow-blue">
-      <span class="tag blue">Сделать</span>
+      <span class="tag blue">Выберите одну задачу</span>
       <ul class="list" style="margin-top:16px;gap:10px">
-        <li style="font-size:18px">Взять задачу из текущей работы</li>
-        <li style="font-size:18px">Поставить по пяти частям</li>
-        <li style="font-size:18px">Получить и проверить артефакт</li>
-        <li style="font-size:18px">После одной итерации — использовать</li>
+        <li style="font-size:18px">Собрать таблицу из нескольких файлов</li>
+        <li style="font-size:18px">Оформить документ или презентацию</li>
+        <li style="font-size:18px">Провести исследование и собрать отчёт</li>
+        <li style="font-size:18px">Сделать простую страницу или сайт</li>
       </ul>
     </div>
     <div class="col card">
-      <span class="tag">Не делать</span>
-      <ul class="list nogo" style="margin-top:16px;gap:10px">
-        <li style="font-size:18px">Задача без критерия готовности</li>
-        <li style="font-size:18px">Учебный пример вместо рабочей задачи</li>
-        <li style="font-size:18px">Артефакт без проверки</li>
-        <li style="font-size:18px">Все примеры сразу</li>
+      <span class="tag">Условия</span>
+      <ul class="list" style="margin-top:16px;gap:10px">
+        <li style="font-size:18px">Реальные материалы из вашей работы</li>
+        <li style="font-size:18px">Заранее понятный формат результата</li>
+        <li style="font-size:18px">Заранее понятный способ проверки</li>
+        <li style="font-size:18px">Одна задача, а не четыре сразу</li>
       </ul>
     </div>
   </div>
   <div class="card shadow" style="margin-top:22px;padding:20px 24px;display:grid;grid-template-columns:150px 1fr;gap:22px;align-items:center">
-    <span class="tag">Gate</span>
-    <p style="font-size:20px;font-weight:700;line-height:1.35">Агент выдал готовый артефакт по реальной задаче; вы приняли его по заранее заданному критерию и <span class="accent">использовали в работе</span>.</p>
+    <span class="tag">Задача выполнена, если</span>
+    <p style="font-size:20px;font-weight:700;line-height:1.35">Файл можно открыть, проверить и <span class="accent">сразу использовать или отправить</span> — без ручной пересборки из ответа в чате.</p>
   </div>
 </section>
 
-<!-- 24. Узел 3: управление сложностью -->
+<!-- Узел 3: встроенные усилители -->
 <section class="slide">
-  <div class="kicker"><span class="num">24</span><span>Узел 03 · Сложность</span><span class="rule"></span></div>
-  <h2>Разбейте большую задачу и подключайте инструменты по необходимости</h2>
-  <div class="cols" style="margin-top:28px;gap:22px">
-    <div class="col card shadow-blue"><span class="tag blue">Процесс</span><ul class="list" style="margin-top:16px;gap:10px"><li style="font-size:18px">Разбить задачу на этапы</li><li style="font-size:18px">Проверять промежуточные результаты</li><li style="font-size:18px">Сохранять нужный контекст</li><li style="font-size:18px">Управлять процессом, а не наблюдать</li></ul></div>
-    <div class="col" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div class="card shadow"><span class="tag">Память</span><p class="cd" style="margin-top:10px;font-size:15px">Факты нужны в следующих сессиях</p></div>
-      <div class="card shadow"><span class="tag">Инструкции</span><p class="cd" style="margin-top:10px;font-size:15px">Правило повторяется каждый раз</p></div>
-      <div class="card shadow"><span class="tag">Субагенты</span><p class="cd" style="margin-top:10px;font-size:15px">Независимые части идут параллельно</p></div>
-      <div class="card shadow"><span class="tag">Браузер</span><p class="cd" style="margin-top:10px;font-size:15px">Нужны живые данные или действия</p></div>
-    </div>
+  <div class="kicker"><span class="num">24</span><span>Узел 03 · Встроенные усилители</span><span class="rule"></span></div>
+  <h2>Задача 3: попробовать <span class="accent">три встроенные возможности</span></h2>
+  <div class="chain" style="margin-top:34px">
+    <div class="card shadow"><span class="cn">Память</span><span class="ct">Сохранить контекст</span><span class="cd">Дайте агенту факт о вашей работе и проверьте его в новой сессии</span></div>
+    <div class="arr">→</div>
+    <div class="card shadow"><span class="cn">Субагент</span><span class="ct">Получить второй взгляд</span><span class="cd">Попросите отдельно проверить результат или исследовать часть задачи</span></div>
+    <div class="arr">→</div>
+    <div class="card shadow"><span class="cn">Браузер</span><span class="ct">Проверить глазами</span><span class="cd">Откройте сделанный сайт и попросите исправить то, что видно на экране</span></div>
   </div>
+  <p class="bigquote">Это уже есть внутри Codex. Никаких плагинов, MCP и автоматизаций пока не нужно.</p>
 </section>
 
 <!-- 26. Управление диалогом -->
 <section class="slide">
-  <div class="kicker"><span class="num">26</span><span>Узел 03 · Диалог</span><span class="rule"></span></div>
-  <h2>Корректировка, ошибки и gate</h2>
+  <div class="kicker"><span class="num">26</span><span>Узел 03 · Управление работой</span><span class="rule"></span></div>
+  <h2>Три способа поправить агента, <span class="accent">не начиная заново</span></h2>
   <div class="chain" style="margin-top:26px">
-    <div class="card shadow"><span class="cn">Edit</span><span class="ct">Переписать</span><span class="cd">Постановка неверна</span></div>
-    <div class="card shadow"><span class="cn">Reply</span><span class="ct">Уточнить</span><span class="cd">Направление верное</span></div>
-    <div class="card shadow"><span class="cn">Queue</span><span class="ct">В очередь</span><span class="cd">Следующая мысль — потом</span></div>
+    <div class="card shadow"><span class="cn">Edit</span><span class="ct">Переписать задачу</span><span class="cd">Если вы с самого начала попросили не то</span></div>
+    <div class="card shadow"><span class="cn">Reply</span><span class="ct">Направить по ходу</span><span class="cd">Если общий путь верный, но нужна поправка</span></div>
+    <div class="card shadow"><span class="cn">Queue</span><span class="ct">Запланировать дальше</span><span class="cd">Если уже знаете, что агенту делать после текущего этапа</span></div>
   </div>
   <div class="cols" style="margin-top:22px;gap:22px">
-    <div class="col card"><span class="tag">Ошибки</span><ul class="list nogo" style="margin-top:14px;gap:8px"><li style="font-size:17px">Один гигантский промпт</li><li style="font-size:17px">Сломанную постановку чинить уточнениями</li><li style="font-size:17px">Терять контекст между сессиями</li></ul></div>
-    <div class="col card shadow-blue"><span class="tag blue">Gate</span><p style="font-size:21px;font-weight:700;line-height:1.35;margin-top:14px">Вы провели <span class="accent">многошаговую задачу</span> через этапы с проверками и довели её до принятого результата.</p></div>
+    <div class="col card"><span class="tag">Когда остановиться</span><p style="font-size:20px;font-weight:650;line-height:1.35;margin-top:14px">Если направление неверно целиком — исправьте исходную постановку, а не стройте башню из уточнений.</p></div>
+    <div class="col card shadow-blue"><span class="tag blue">Задача выполнена, если</span><p style="font-size:20px;font-weight:700;line-height:1.35;margin-top:14px">Вы довели многошаговую работу до результата и понимаете, <span class="accent">какой из трёх способов</span> использовать в следующий раз.</p></div>
   </div>
 </section>
 
 <!-- 28. Checkpoint зоны 1 -->
 <section class="slide">
-  <div class="kicker"><span class="num">28</span><span>Checkpoint · Зона 1</span><span class="rule"></span></div>
-  <h2>Что у вас уже есть</h2>
+  <div class="kicker"><span class="num">28</span><span>Итог · Уровень 1</span><span class="rule"></span></div>
+  <h2>После первого уровня вы уже умеете <span class="accent">работать с агентом</span></h2>
   <ul class="list" style="margin-top:36px;gap:18px">
-    <li>Настроенная среда, где агент действует безопасно</li>
-    <li>Артефакты по реальным задачам — принятые по критерию</li>
-    <li>Управляемые многошаговые задачи вместо одного гигантского промпта</li>
+    <li>Codex настроен под вас и безопасно работает в нужной папке</li>
+    <li>Вы получаете таблицы, документы, слайды, отчёты и сайты — не только текст</li>
+    <li>Умеете ставить задачу, проверять результат и поправлять работу по ходу</li>
+    <li>Попробовали память, субагентов и встроенный браузер</li>
   </ul>
-  <p class="bigquote">Эфир даёт <span class="accent">порядок</span>. Задачи под руководством и проверку результата даёт практика — об этом в конце.</p>
+  <p class="bigquote">Следующий уровень нужен, когда агенту не хватает <span class="accent">данных или действий из ваших рабочих сервисов</span>.</p>
 </section>
 
 <!-- 29. Зона 2 overview -->
 <section class="slide">
   <div class="kicker"><span class="num">29</span><span>Зона 2 · Подключения</span><span class="rule"></span></div>
-  <h2>Агент выходит к вашим сервисам</h2>
+  <h2>Уровень 2: подключить агента к <span class="accent">вашей работе</span></h2>
   <div class="chain">
-    <div class="card shadow"><span class="cn">Узел 04</span><span class="ct">Официальные подключения</span><span class="cd">Готовые интеграции — включил и работает</span></div>
+    <div class="card shadow"><span class="cn">Шаг 04</span><span class="ct">Plugins</span><span class="cd">Готовые подключения: Google Drive, Granola, Chrome</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">Узел 05</span><span class="ct">API и MCP</span><span class="cd">Прямой доступ к данным и действиям сервиса</span></div>
+    <div class="card shadow"><span class="cn">Шаг 05</span><span class="ct">API и MCP</span><span class="cd">Подключения, которые Codex собирает под вашу задачу</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">Узел 06</span><span class="ct">Браузер и неофициальное</span><span class="cd">Когда готового пути нет — с пониманием цены</span></div>
+    <div class="card shadow"><span class="cn">Шаг 06</span><span class="ct">Неофициальные способы</span><span class="cd">Парсинг и внешний браузер, когда готового входа нет</span></div>
   </div>
-  <div class="footer-note"><span>Порядок тот же: сначала простое и надёжное, потом гибкое и хрупкое</span><span class="accent">→</span></div>
+  <p class="bigquote">Идём от самого простого подключения к самому хрупкому: <span class="accent">plugin → API/MCP → браузер</span>.</p>
 </section>
 
 <!-- 30. Сначала данные, потом технология -->
 <section class="slide">
   <div class="kicker"><span class="num">30</span><span>Зона 2 · Принцип</span><span class="rule"></span></div>
-  <h2>Сначала «что нужно», потом «как подключить»</h2>
+  <h2>Для подключения нужны <span class="accent">три ответа</span></h2>
   <div class="chain" style="margin-top:56px">
-    <div class="card shadow"><span class="cn">01</span><span class="ct">Какие данные</span><span class="cd">Что агент должен читать: письма, таблицы, задачи</span></div>
+    <div class="card shadow"><span class="cn">01</span><span class="ct">Данные</span><span class="cd">Письма, таблицы, задачи, встречи</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">02</span><span class="ct">Какие действия</span><span class="cd">Что агент должен делать: создать, отправить, обновить</span></div>
+    <div class="card shadow"><span class="cn">02</span><span class="ct">Действия</span><span class="cd">Прочитать, создать, отправить, обновить</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">03</span><span class="ct">Способ подключения</span><span class="cd">Выбирается под задачу — а не наоборот</span></div>
+    <div class="card shadow"><span class="cn">03</span><span class="ct">Способ подключения</span><span class="cd">Plugin, API, MCP или браузер</span></div>
   </div>
-  <p class="bigquote">Ошибка — начинать с технологии. Начинают с задачи.</p>
+  <p class="bigquote">Сначала формулируем задачу. Потом выбираем <span class="accent">самый простой подходящий способ</span>.</p>
 </section>
 
 <!-- 31. Узел 4 -->
 <section class="slide">
-  <div class="kicker"><span class="num">31</span><span>Узел 04 · Официальные подключения</span><span class="rule"></span></div>
-  <h2>Официальное подключение: включить, проверить, использовать</h2>
-  <div class="cols" style="margin-top:26px;gap:22px">
-    <div class="col card shadow"><span class="tag">Что это</span><ul class="list" style="margin-top:14px;gap:8px"><li style="font-size:17px">Подключение без ключей и настройки</li><li style="font-size:17px">Почта, календарь, документы, диски</li><li style="font-size:17px">Явные и отзывные права</li><li style="font-size:17px">Поддерживается самим сервисом</li></ul></div>
-    <div class="col card shadow-blue"><span class="tag blue">Практика</span><ul class="list" style="margin-top:14px;gap:8px"><li style="font-size:17px">Выбрать один рабочий сервис</li><li style="font-size:17px">Подключить официально</li><li style="font-size:17px">Начать с задачи на чтение</li><li style="font-size:17px">Сверить результат с источником</li></ul></div>
-    <div class="col card"><span class="tag">Не делать</span><ul class="list nogo" style="margin-top:14px;gap:8px"><li style="font-size:17px">Подключать всё сразу</li><li style="font-size:17px">Начинать с действий</li><li style="font-size:17px">Верить сводке без проверки</li></ul></div>
+  <div class="kicker"><span class="num">31</span><span>Шаг 04 · Plugins</span><span class="rule"></span></div>
+  <h2>Сначала попробуйте <span class="accent">PLUGINS</span> — готовые подключения</h2>
+  <p style="font-size:21px;line-height:1.35;margin-top:0;max-width:980px">Plugin даёт Codex доступ к сервису без самостоятельной настройки API и MCP.</p>
+  <div class="chain" style="margin-top:30px">
+    <div class="card shadow"><span class="cn">Google Drive</span><span class="ct">Найти и собрать</span><span class="cd">Найти документы по теме и сделать по ним сводку</span></div>
+    <div class="card shadow"><span class="cn">Granola</span><span class="ct">Разобрать встречи</span><span class="cd">Собрать решения и задачи из нескольких созвонов</span></div>
+    <div class="card shadow"><span class="cn">Chrome</span><span class="ct">Работать в браузере</span><span class="cd">Использовать уже открытые вкладки и вашу сессию</span></div>
   </div>
   <div class="card shadow" style="margin-top:22px;padding:18px 22px;display:grid;grid-template-columns:130px 1fr;gap:20px;align-items:center">
-    <span class="tag">Gate</span><p style="font-size:18px;font-weight:700;line-height:1.3">Агент выполнил задачу на ваших данных, результат сверен с источником. <span style="font-weight:500">[ВСТАВИТЬ РЕАЛЬНЫЙ АРТЕФАКТ УЧАСТНИКА]</span></p>
+    <span class="tag">Задача выполнена, если</span><p style="font-size:18px;font-weight:700;line-height:1.3">Вы подключили один plugin, дали задачу на своих данных и <span class="accent">сверили результат с источником</span>.</p>
   </div>
 </section>
 
 <!-- Узел 5: API и MCP — смысл и классы задач -->
 <section class="slide">
-  <div class="kicker"><span class="num">34</span><span>Узел 05 · API и MCP</span><span class="rule"></span></div>
-  <h2>API и MCP: что это и что открывает</h2>
+  <div class="kicker"><span class="num">34</span><span>Шаг 05 · API и MCP</span><span class="rule"></span></div>
+  <h2>Если плагина нет: <span class="accent">API или MCP</span></h2>
   <div class="cols" style="margin-top:28px">
     <div class="col card shadow">
       <span class="tag">API</span>
       <p style="font-size:22px;font-weight:700;margin:12px 0 8px">Служебный вход в сервис</p>
-      <p style="font-size:18px;line-height:1.35">Сервис отдаёт данные и принимает команды напрямую, без интерфейса.</p>
+      <p style="font-size:18px;line-height:1.35">Через него Codex получает данные или выполняет действие без кликов в интерфейсе.</p>
     </div>
     <div class="col card shadow-blue">
       <span class="tag blue">MCP</span>
-      <p style="font-size:22px;font-weight:700;margin:12px 0 8px">Переходник для агента</p>
-      <p style="font-size:18px;line-height:1.35">Единый стандарт: агент сам понимает, что сервис умеет.</p>
+      <p style="font-size:22px;font-weight:700;margin:12px 0 8px">Готовый переходник для агента</p>
+      <p style="font-size:18px;line-height:1.35">Он описывает Codex, какие данные и действия доступны в сервисе.</p>
     </div>
   </div>
   <div class="chain" style="margin-top:24px">
-    <div class="card"><span class="ct">hh.ru</span><span class="cd">Свести вакансии или отклики</span></div>
-    <div class="card"><span class="ct">Telegram</span><span class="cd">Принимать задачи и присылать результат</span></div>
-    <div class="card"><span class="ct">Метрика</span><span class="cd">Забирать статистику в отчёт</span></div>
+    <div class="card"><span class="ct">hh.ru</span><span class="cd">Получить вакансии и собрать таблицу</span></div>
+    <div class="card"><span class="ct">Telegram-бот</span><span class="cd">Принять запрос и прислать результат</span></div>
+    <div class="card"><span class="ct">Яндекс Метрика</span><span class="cd">Забрать цифры и обновить отчёт</span></div>
   </div>
-  <p style="font-size:17px;margin-top:18px;font-weight:650">Это классы возможностей, а не обещание готовых интеграций.</p>
+  <p style="font-size:17px;margin-top:18px;font-weight:650">Вам не нужно писать интеграцию вручную: вы формулируете задачу, Codex помогает пройти настройку.</p>
 </section>
 
-<!-- Узел 5: практика и gate -->
+<!-- Узел 5: практика -->
 <section class="slide">
-  <div class="kicker"><span class="num">36</span><span>Узел 05 · Практика</span><span class="rule"></span></div>
-  <h2>Одно подключение через API или MCP</h2>
+  <div class="kicker"><span class="num">36</span><span>Шаг 05 · Задача</span><span class="rule"></span></div>
+  <h2>Задача 5: подключить <span class="accent">один нужный сервис</span></h2>
   <div class="cols" style="margin-top:26px">
     <div class="col card shadow-blue" style="flex:1.2">
-      <span class="tag blue">Сделать</span>
+      <span class="tag blue">Порядок</span>
       <ul class="list" style="margin-top:14px;gap:9px;font-size:18px">
-        <li>Выбрать сервис, где официальной интеграции не хватает</li>
-        <li>Получить ключ или подключить MCP — агент проведёт по шагам</li>
-        <li>Начать с чтения данных, действия — после проверки</li>
-        <li>Довести до артефакта, который входит в работу</li>
+        <li>Назвать сервис и конкретные данные или действие</li>
+        <li>Попросить Codex найти официальный способ подключения</li>
+        <li>Создать ключ или подключить MCP по его инструкции</li>
+        <li>Сначала прочитать данные; действия добавить после проверки</li>
       </ul>
     </div>
     <div class="col card">
@@ -711,111 +732,112 @@ ul.list li::before{
     </div>
   </div>
   <div class="card shadow" style="margin-top:22px;padding:17px 22px;display:grid;grid-template-columns:130px 1fr;gap:20px;align-items:center">
-    <span class="tag">Gate</span><p style="font-size:18px;font-weight:700;line-height:1.3">Агент получил данные или выполнил действие там, где готовой кнопки не было. Ключи защищены, права минимальны, результат сверен.</p>
+    <span class="tag">Задача выполнена, если</span><p style="font-size:18px;font-weight:700;line-height:1.3">Codex получил реальные данные из сервиса, ключ не попал в чат или общий файл, а результат <span class="accent">совпал с источником</span>.</p>
   </div>
 </section>
 
-<!-- Узел 6: браузер — решение, практика и gate -->
+<!-- Узел 6: браузер — решение и практика -->
 <section class="slide">
-  <div class="kicker"><span class="num">38</span><span>Узел 06 · Браузер</span><span class="rule"></span></div>
-  <h2>Браузер — последний способ подключения</h2>
-  <div class="cols" style="margin-top:24px">
+  <div class="kicker"><span class="num">38</span><span>Шаг 06 · Неофициальные способы</span><span class="rule"></span></div>
+  <h2>Внешний браузер — <span class="accent">последний</span> способ подключения</h2>
+  <div class="cols" style="margin-top:12px">
     <div class="col card shadow-blue">
       <span class="tag blue">Когда оправдано</span>
-      <ul class="list" style="margin-top:14px;gap:9px;font-size:18px">
+      <ul class="list" style="margin-top:12px;gap:6px;font-size:17px">
         <li>У сервиса нет ни интеграции, ни API</li>
-        <li>Задача видна только в веб-интерфейсе</li>
+        <li>Данные или действия доступны только на сайте</li>
         <li>Начинаем с чтения страницы, не с действий</li>
       </ul>
     </div>
     <div class="col card">
       <span class="tag">Цена</span>
-      <ul class="list nogo" style="margin-top:14px;gap:9px;font-size:18px">
+      <ul class="list nogo" style="margin-top:12px;gap:6px;font-size:17px">
         <li>Хрупко: интерфейс поменялся — сломалось</li>
         <li>Медленнее и дороже прямого доступа</li>
         <li>Требует наблюдения, а не «запустил и ушёл»</li>
       </ul>
     </div>
   </div>
-  <div class="chain" style="margin-top:22px">
+  <div class="chain" style="margin-top:12px">
     <div class="card"><span class="cn">01</span><span class="ct">Официальное</span><span class="cd">Есть готовая интеграция</span></div>
     <div class="arr">→</div>
     <div class="card"><span class="cn">02</span><span class="ct">API / MCP</span><span class="cd">Есть служебный вход</span></div>
     <div class="arr">→</div>
     <div class="card shadow-blue"><span class="cn">03</span><span class="ct">Браузер</span><span class="cd">Других путей нет</span></div>
   </div>
-  <div class="card shadow" style="margin-top:20px;padding:15px 22px;display:grid;grid-template-columns:130px 1fr;gap:20px;align-items:center">
-    <span class="tag">Gate</span><p style="font-size:18px;font-weight:700;line-height:1.3">Одна задача выполнена под присмотром, результат сверен с экраном, и вы понимаете, почему не подошёл более простой способ.</p>
-  </div>
 </section>
 
-<!-- 41. Микромост зоны 2 -->
+<!-- Кейс участницы после зоны 2 -->
 <section class="slide">
-  <div class="kicker"><span class="num">41</span><span>Зона 2 · Пройдена</span><span class="rule"></span></div>
-  <h2>Два пути через подключения</h2>
-  <div class="cols" style="margin-top:44px">
-    <div class="col card">
-      <span class="tag">Самостоятельно</span>
-      <p style="font-size:22px;line-height:1.45;margin-top:16px">Есть документация сервисов и общие инструкции — путь рабочий, но задачи и границы безопасности выбираете сами, методом проб.</p>
-    </div>
-    <div class="col card shadow-blue">
-      <span class="tag blue">В марафоне</span>
-      <p style="font-size:22px;line-height:1.45;margin-top:16px">Задачи для подключений заранее выбраны безопасными, а результат каждого узла проходит проверку — ошибка не остаётся незамеченной.</p>
-    </div>
+  <div class="kicker"><span class="num">41</span><span>Кейс с марафона</span><span class="rule"></span></div>
+  <h2>Сначала не запускался Codex. Потом — <span class="accent">своё подключение</span></h2>
+  <div class="chain" style="margin-top:42px">
+    <div class="card shadow"><span class="cn">В начале</span><span class="ct">Застряла на настройке</span><span class="cd">Codex не получалось нормально запустить и настроить</span></div>
+    <div class="arr">→</div>
+    <div class="card shadow"><span class="cn">На марафоне</span><span class="ct">Разобралась с базой</span><span class="cd">Настроила среду и прошла способы подключения по порядку</span></div>
+    <div class="arr">→</div>
+    <div class="card shadow-blue"><span class="cn">В результате</span><span class="ct">Нашла свой способ</span><span class="cd">Подключила сервис без официальной интеграции и перестала повторять работу руками</span></div>
   </div>
-  <div class="footer-note"><span>Дальше — зона 3: агент начинает работать без вас</span><span class="accent">→</span></div>
+  <p class="bigquote">Мы теперь называем её <span class="accent">Технофеей</span>. Не потому что она стала программистом — а потому что перестала бояться незнакомых подключений.</p>
 </section>
 
 <!-- 42. Зона 3 overview -->
 <section class="slide">
-  <div class="kicker"><span class="num">42</span><span>Зона 3 · Системы</span><span class="rule"></span></div>
-  <h2>От разовых задач к системам</h2>
+  <div class="kicker"><span class="num">42</span><span>Зона 3 · Повторяемость</span><span class="rule"></span></div>
+  <h2>Уровень 3: перестать каждый раз <span class="accent">начинать с нуля</span></h2>
   <div class="chain">
-    <div class="card shadow"><span class="cn">Узел 07</span><span class="ct">Skills</span><span class="cd">Повторяемые процессы, записанные один раз</span></div>
+    <div class="card shadow"><span class="cn">Шаг 07</span><span class="ct">Skills</span><span class="cd">Сохранить удачный способ работы как инструкцию</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">Узел 08</span><span class="ct">Автоматизации</span><span class="cd">Агент работает по расписанию, без вас</span></div>
+    <div class="card shadow"><span class="cn">Шаг 08</span><span class="ct">Автоматизации</span><span class="cd">Запускать готовый процесс по времени или событию</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">Узел 09</span><span class="ct">Вайбкодинг</span><span class="cd">Свои инструменты, когда готовых нет</span></div>
+    <div class="card shadow"><span class="cn">Шаг 09</span><span class="ct">Вайбкодинг</span><span class="cd">Собрать удобный интерфейс поверх рабочего процесса</span></div>
   </div>
-  <div class="footer-note"><span>Каждый следующий узел опирается на предыдущие</span><span class="accent">→</span></div>
+  <p class="bigquote">Сначала процесс должен стабильно получаться вручную с агентом. <span class="accent">Только потом</span> его стоит сохранять и запускать без себя.</p>
 </section>
 
 <!-- Узел 7: что такое skill и откуда его взять -->
 <section class="slide">
-  <div class="kicker"><span class="num">43</span><span>Узел 07 · Skills</span><span class="rule"></span></div>
-  <h2>Skill — процесс, записанный один раз</h2>
+  <div class="kicker"><span class="num">43</span><span>Шаг 07 · Skills</span><span class="rule"></span></div>
+  <h2>Skill — удачный процесс, <span class="accent">записанный как инструкция</span></h2>
   <p style="font-size:22px;line-height:1.4;max-width:1080px;margin-top:14px">Инструкция хранит ваши правила, формат и критерии качества. Это текст: его можно прочитать, проверить и поправить.</p>
-  <div class="cols" style="margin-top:26px">
+  <div class="cols" style="margin-top:26px;gap:20px">
     <div class="col card">
       <span class="tag">Готовый</span>
       <ul class="list" style="margin-top:14px;gap:10px;font-size:19px">
-        <li>Быстрый старт для типовых процессов</li>
-        <li>Сначала прочитать, что внутри, потом применять</li>
+        <li style="font-size:17px">Скачать для типовой задачи</li>
+        <li style="font-size:17px">Прочитать инструкцию перед запуском</li>
       </ul>
     </div>
     <div class="col card shadow-blue">
       <span class="tag blue">Свой</span>
       <ul class="list" style="margin-top:14px;gap:10px;font-size:19px">
-        <li>Для процессов, которые есть только у вас</li>
-        <li>Начинается с одного удачного прогона задачи</li>
+        <li style="font-size:17px">Собрать из удачного прогона</li>
+        <li style="font-size:17px">Проверить на новых данных</li>
+      </ul>
+    </div>
+    <div class="col card">
+      <span class="tag">Обновить</span>
+      <ul class="list" style="margin-top:14px;gap:10px;font-size:19px">
+        <li style="font-size:17px">Исправлять инструкцию, а не промпт каждый раз</li>
+        <li style="font-size:17px">Хранить понятную рабочую версию</li>
       </ul>
     </div>
   </div>
   <p class="bigquote" style="margin-top:24px">Промпт — просьба на один раз. Skill — процесс, который переживает сессию.</p>
 </section>
 
-<!-- Узел 7: практика и gate -->
+<!-- Узел 7: практика -->
 <section class="slide">
-  <div class="kicker"><span class="num">45</span><span>Узел 07 · Практика</span><span class="rule"></span></div>
-  <h2>Один процесс — один skill</h2>
+  <div class="kicker"><span class="num">45</span><span>Шаг 07 · Задача</span><span class="rule"></span></div>
+  <h2>Как сделать <span class="accent">свой skill</span></h2>
   <div class="cols" style="margin-top:26px">
     <div class="col card shadow-blue" style="flex:1.2">
-      <span class="tag blue">Сделать</span>
+      <span class="tag blue">Порядок</span>
       <ul class="list" style="margin-top:14px;gap:9px;font-size:18px">
-        <li>Взять процесс, который вы делаете регулярно</li>
-        <li>Прогнать его с агентом до принятого результата</li>
-        <li>Сохранить удачный прогон как skill</li>
-        <li>Запустить skill повторно на новых данных</li>
+        <li>Взять задачу, которую вы уже успешно сделали с Codex</li>
+        <li>Попросить Codex превратить удачный процесс в skill</li>
+        <li>Прочитать и поправить получившуюся инструкцию</li>
+        <li>Запустить skill на новых данных</li>
       </ul>
     </div>
     <div class="col card">
@@ -828,39 +850,39 @@ ul.list li::before{
     </div>
   </div>
   <div class="card shadow" style="margin-top:20px;padding:15px 22px;display:grid;grid-template-columns:130px 1fr;gap:20px;align-items:center">
-    <span class="tag">Gate</span><p style="font-size:18px;font-weight:700;line-height:1.3">Повторный запуск на новых данных дал принятый результат. <span style="font-weight:500">[ВСТАВИТЬ РЕАЛЬНЫЙ SKILL/СКРИНШОТ]</span></p>
+    <span class="tag">Задача выполнена, если</span><p style="font-size:18px;font-weight:700;line-height:1.3">Повторный запуск на новых данных дал <span class="accent">такой же пригодный результат</span> без повторного объяснения процесса.</p>
   </div>
 </section>
 
-<!-- Узел 8: автоматизации — механизм, практика и gate -->
+<!-- Узел 8: автоматизации — механизм и практика -->
 <section class="slide">
-  <div class="kicker"><span class="num">47</span><span>Узел 08 · Автоматизации</span><span class="rule"></span></div>
-  <h2>Одна отлаженная задача — на автомат</h2>
+  <div class="kicker"><span class="num">47</span><span>Шаг 08 · Автоматизации</span><span class="rule"></span></div>
+  <h2>Автоматизация — skill, который <span class="accent">запускается сам</span></h2>
   <div class="chain" style="margin-top:26px">
-    <div class="card shadow"><span class="ct">Расписание</span><span class="cd">Утром, раз в час или по событию</span></div>
-    <div class="card shadow"><span class="ct">Облако</span><span class="cd">Работает не на вашем ноутбуке</span></div>
-    <div class="card shadow"><span class="ct">Результат</span><span class="cd">Агент сам приходит с итогом и вопросами</span></div>
+    <div class="card shadow"><span class="ct">По таймеру</span><span class="cd">Например, каждый понедельник утром</span></div>
+    <div class="card shadow"><span class="ct">В облаке</span><span class="cd">Запуск не зависит от открытого ноутбука</span></div>
+    <div class="card shadow"><span class="ct">Как «ментор»</span><span class="cd">Сам приходит с еженедельным разбором и вопросами</span></div>
   </div>
   <ul class="list" style="margin-top:24px;gap:10px;font-size:19px">
-    <li>Взять процесс, который уже отлажен вручную или как skill</li>
-    <li>Поставить его на расписание</li>
-    <li>Дождаться запуска без вашего участия и проверить результат</li>
+    <li>Взять skill, который уже стабильно работает вручную</li>
+    <li>Назначить расписание и место, куда должен прийти результат</li>
+    <li>Дождаться первого самостоятельного запуска и проверить итог</li>
   </ul>
   <div class="card shadow" style="margin-top:22px;padding:15px 22px;display:grid;grid-template-columns:130px 1fr;gap:20px;align-items:center">
-    <span class="tag">Gate</span><p style="font-size:19px;font-weight:700;line-height:1.3">Задача выполнилась без вас — и результат прошёл вашу проверку.</p>
+    <span class="tag">Задача выполнена, если</span><p style="font-size:19px;font-weight:700;line-height:1.3">Задача запустилась без вашей команды — и результат <span class="accent">пришёл туда, куда вы ждали</span>.</p>
   </div>
 </section>
 
-<!-- Узел 9: вайбкодинг — механизм, практика и gate -->
+<!-- Узел 9: вайбкодинг — механизм и практика -->
 <section class="slide">
-  <div class="kicker"><span class="num">49</span><span>Узел 09 · Вайбкодинг</span><span class="rule"></span></div>
-  <h2>Один маленький инструмент — словами</h2>
+  <div class="kicker"><span class="num">49</span><span>Шаг 09 · Вайбкодинг</span><span class="rule"></span></div>
+  <h2>Вайбкодинг: вы описываете инструмент, <span class="accent">агент пишет код</span></h2>
   <div class="chain" style="margin-top:26px">
-    <div class="card shadow"><span class="cn">01</span><span class="ct">Страница</span><span class="cd">Описали словами — агент собрал</span></div>
+    <div class="card shadow"><span class="cn">01</span><span class="ct">Описать</span><span class="cd">Что должен видеть и делать пользователь</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">02</span><span class="ct">Ссылка</span><span class="cd">Открывается с другого устройства</span></div>
+    <div class="card shadow"><span class="cn">02</span><span class="ct">Собрать и открыть</span><span class="cd">Codex делает страницу и показывает её в браузере</span></div>
     <div class="arr">→</div>
-    <div class="card shadow"><span class="cn">03</span><span class="ct">Данные</span><span class="cd">Результат приходит в вашу таблицу</span></div>
+    <div class="card shadow"><span class="cn">03</span><span class="ct">Опубликовать</span><span class="cd">Страница открывается по ссылке и передаёт данные</span></div>
   </div>
   <ul class="list" style="margin-top:22px;gap:9px;font-size:18px">
     <li>Выбрать маленькую страницу или форму, которой не хватает в работе</li>
@@ -869,43 +891,43 @@ ul.list li::before{
     <li>Проверить, что данные действительно доходят до таблицы</li>
   </ul>
   <div class="card shadow" style="margin-top:20px;padding:15px 22px;display:grid;grid-template-columns:130px 1fr;gap:20px;align-items:center">
-    <span class="tag">Gate</span><p style="font-size:18px;font-weight:700;line-height:1.3">Инструмент работает по ссылке у другого человека — данные пришли туда, куда вы ждали.</p>
+    <span class="tag">Задача выполнена, если</span><p style="font-size:18px;font-weight:700;line-height:1.3">Инструмент работает по ссылке у другого человека — данные пришли туда, куда вы ждали.</p>
   </div>
 </section>
 
-<!-- 51. Карта второй раз: с задачами и gate -->
+<!-- Карта второй раз: с задачами -->
 <section class="slide">
-  <div class="kicker"><span class="num">51</span><span>Карта целиком · Второй проход</span><span class="rule"></span></div>
-  <h2 style="font-size:44px">Та же карта — теперь с задачей на каждом шаге</h2>
+  <div class="kicker"><span class="num">51</span><span>Roadmap · Что сделать</span><span class="rule"></span></div>
+  <h2 style="font-size:44px">Весь маршрут: по одной проверяемой задаче на шаг</h2>
   <div class="rm-wrap">
     <div class="rm-row">
-      <div class="rm-node z1"><span class="n">01</span><span class="t">Настройка Codex</span><span style="font-size:14px;line-height:1.25;font-weight:500">Агент выполнил первую команду у вас</span></div>
+      <div class="rm-node z1"><span class="n">01</span><span class="t">Настройка Codex</span><span style="font-size:14px;line-height:1.25;font-weight:500">Настроить инструкции, папку и разрешения</span></div>
       <div class="rm-arrow">→</div>
-      <div class="rm-node z1"><span class="n">02</span><span class="t">Базовые задачи</span><span style="font-size:14px;line-height:1.25;font-weight:500">Один рабочий артефакт принят по критерию</span></div>
+      <div class="rm-node z1"><span class="n">02</span><span class="t">Базовые задачи</span><span style="font-size:14px;line-height:1.25;font-weight:500">Сделать готовый рабочий файл</span></div>
       <div class="rm-arrow">→</div>
-      <div class="rm-node z1"><span class="n">03</span><span class="t">Усложнение</span><span style="font-size:14px;line-height:1.25;font-weight:500">Многошаговая задача доведена до конца</span></div>
+      <div class="rm-node z1"><span class="n">03</span><span class="t">Усилители</span><span style="font-size:14px;line-height:1.25;font-weight:500">Попробовать память, субагента и браузер</span></div>
     </div>
     <div class="rm-gap"><div></div><div></div><div></div><div></div><div class="rm-down">↓</div></div>
     <div class="rm-row">
-      <div class="rm-node z2"><span class="n">06</span><span class="t">Браузер</span><span style="font-size:14px;line-height:1.25;font-weight:500">Задача в вебе выполнена под присмотром</span></div>
+      <div class="rm-node z2"><span class="n">06</span><span class="t">Неофициальные способы</span><span style="font-size:14px;line-height:1.25;font-weight:500">Получить данные через внешний браузер</span></div>
       <div class="rm-arrow">←</div>
-      <div class="rm-node z2"><span class="n">05</span><span class="t">API и MCP</span><span style="font-size:14px;line-height:1.25;font-weight:500">Сервис без кнопки подключён и проверен</span></div>
+      <div class="rm-node z2"><span class="n">05</span><span class="t">API и MCP</span><span style="font-size:14px;line-height:1.25;font-weight:500">Подключить один нужный сервис</span></div>
       <div class="rm-arrow">←</div>
-      <div class="rm-node z2"><span class="n">04</span><span class="t">Официальные подключения</span><span style="font-size:14px;line-height:1.25;font-weight:500">Задача на своих данных, сверена с источником</span></div>
+      <div class="rm-node z2"><span class="n">04</span><span class="t">Plugins</span><span style="font-size:14px;line-height:1.25;font-weight:500">Подключить готовый plugin</span></div>
     </div>
     <div class="rm-gap"><div class="rm-down">↓</div></div>
     <div class="rm-row">
-      <div class="rm-node z3"><span class="n">07</span><span class="t">Skills</span><span style="font-size:14px;line-height:1.25;font-weight:500">Процесс повторён на новых данных</span></div>
+      <div class="rm-node z3"><span class="n">07</span><span class="t">Skills</span><span style="font-size:14px;line-height:1.25;font-weight:500">Повторить процесс на новых данных</span></div>
       <div class="rm-arrow">→</div>
-      <div class="rm-node z3"><span class="n">08</span><span class="t">Автоматизации</span><span style="font-size:14px;line-height:1.25;font-weight:500">Задача выполнилась без вас</span></div>
+      <div class="rm-node z3"><span class="n">08</span><span class="t">Автоматизации</span><span style="font-size:14px;line-height:1.25;font-weight:500">Запустить skill по расписанию</span></div>
       <div class="rm-arrow">→</div>
-      <div class="rm-node z3"><span class="n">09</span><span class="t">Вайбкодинг</span><span style="font-size:14px;line-height:1.25;font-weight:500">Свой инструмент работает по ссылке</span></div>
+      <div class="rm-node z3"><span class="n">09</span><span class="t">Вайбкодинг</span><span style="font-size:14px;line-height:1.25;font-weight:500">Собрать и опубликовать мини-инструмент</span></div>
     </div>
     <div class="rm-legend">
       <div class="li"><span class="sw s1"></span>База</div>
       <div class="li"><span class="sw s2"></span>Подключения</div>
-      <div class="li"><span class="sw s3"></span>Усиление</div>
-      <div class="li" style="margin-left:auto"><span class="accent">Один маршрут, без веток — каждый шаг закрывается задачей</span></div>
+      <div class="li"><span class="sw s3"></span>Повторяемость</div>
+      <div class="li" style="margin-left:auto"><span class="accent">Можно остановиться на любом уровне — но идти лучше по порядку</span></div>
     </div>
   </div>
 </section>
@@ -913,75 +935,76 @@ ul.list li::before{
 <!-- 52. Выберите следующие три задачи -->
 <section class="slide">
   <div class="kicker"><span class="num">52</span><span>Ваш ход</span><span class="rule"></span></div>
-  <h2>Выберите следующие три задачи</h2>
+  <h2>Запишите свой <span class="accent">следующий шаг</span></h2>
   <div class="checks">
-    <div class="card shadow"><div class="box"></div><div class="txt"><span class="cn">01</span>Мой текущий шаг на карте — где я сейчас</div></div>
-    <div class="card shadow"><div class="box"></div><div class="txt"><span class="cn">02</span>Задача из моей работы, которая закроет этот шаг</div></div>
-    <div class="card shadow"><div class="box"></div><div class="txt"><span class="cn">03</span>Следующий шаг, к которому перейду после</div></div>
+    <div class="card shadow"><div class="box"></div><div class="txt"><span class="cn">01</span>На каком шаге я сейчас?</div></div>
+    <div class="card shadow"><div class="box"></div><div class="txt"><span class="cn">02</span>Какую одну рабочую задачу я на нём сделаю?</div></div>
+    <div class="card shadow"><div class="box"></div><div class="txt"><span class="cn">03</span>Как я пойму, что задача готова?</div></div>
   </div>
-  <p class="bigquote">И честно запишите четвёртое: что я <span class="accent">пока не учу</span> — чтобы не размазаться по всей карте сразу.</p>
+  <p class="bigquote">И отдельно: что я <span class="accent">пока не изучаю</span> — чтобы не распыляться по всей карте сразу.</p>
 </section>
 
 <!-- Самостоятельный маршрут: ценность и точки буксовки -->
 <section class="slide">
-  <div class="kicker"><span class="num">53</span><span>Самостоятельный маршрут</span><span class="rule"></span></div>
-  <h2>Карту можно пройти самому. Вот где обычно буксуют</h2>
+  <div class="kicker"><span class="num">53</span><span>Самостоятельный путь</span><span class="rule"></span></div>
+  <h2>С этим roadmap можно идти <span class="accent">самостоятельно</span></h2>
   <div class="cols" style="margin-top:28px">
     <div class="col card shadow-blue">
-      <span class="tag blue">Что уже есть</span>
+      <span class="tag blue">Что останется после эфира</span>
       <ul class="list" style="margin-top:14px;gap:10px;font-size:18px">
-        <li>Порядок шагов — не нужно гадать</li>
-        <li>Проверяемый gate на каждом шаге</li>
-        <li>Свои задачи и свой темп</li>
-        <li>Вся карта доступна без курса</li>
+        <li>Порядок из девяти шагов</li>
+        <li>Конкретная задача на каждый шаг</li>
+        <li>Критерий, по которому идти дальше</li>
+        <li>Чек-лист, который можно проходить в своём темпе</li>
       </ul>
     </div>
     <div class="col card">
-      <span class="tag">Где буксуют</span>
+      <span class="tag">Что обычно требует больше всего сил</span>
       <ul class="list nogo" style="margin-top:14px;gap:10px;font-size:18px">
-        <li>Настройка съедает вечер и мотивацию</li>
-        <li>Задача слишком большая</li>
-        <li>Непонятную ошибку не у кого разобрать</li>
-        <li>Некому проверить результат</li>
+        <li>Первая настройка и доступ</li>
+        <li>Выбор задачи подходящего размера</li>
+        <li>Разбор непонятной ошибки</li>
+        <li>Регулярная практика, а не один вечер вдохновения</li>
       </ul>
     </div>
   </div>
-  <p class="bigquote" style="margin-top:24px">Буксует не карта — буксует прохождение без опоры.</p>
+  <p class="bigquote" style="margin-top:24px">Если вы умеете сами разбираться с ошибками и держать темп — <span class="accent">вам может быть достаточно этой карты</span>.</p>
 </section>
 
 <!-- 55. Что делает AI For Work -->
 <section class="slide">
-  <div class="kicker"><span class="num">55</span><span>AI For Work</span><span class="rule"></span></div>
-  <h2>Та же карта — с опорой на каждом шаге</h2>
-  <div class="chain" style="margin-top:40px">
-    <div class="card shadow-blue"><span class="cn">01</span><span class="ct">Готовые задачи</span><span class="cd">Подобраны по размеру — доводятся до конца</span></div>
-    <div class="arr">→</div>
-    <div class="card shadow-blue"><span class="cn">02</span><span class="ct">Исходники и подсказки</span><span class="cd">Не тонете в настройке и ошибках</span></div>
-    <div class="arr">→</div>
-    <div class="card shadow-blue"><span class="cn">03</span><span class="ct">Усложнения и проверка</span><span class="cd">Результат каждого шага смотрит человек</span></div>
+  <div class="kicker"><span class="num">55</span><span>AI For Work · Задания</span><span class="rule"></span></div>
+  <h2>Roadmap говорит «что». Марафон даёт <span class="accent">на чём потренироваться</span></h2>
+  <div class="chain" style="margin-top:34px">
+    <div class="card shadow-blue"><span class="cn">Задача</span><span class="ct">Маленький рабочий результат</span><span class="cd">Рассчитан на 15–20 минут, а не на ночной проект</span></div>
+    <div class="card shadow-blue"><span class="cn">Опора</span><span class="ct">Короткая теория и инструкция</span><span class="cd">Исходники, подсказки и понятный первый шаг</span></div>
+    <div class="card shadow-blue"><span class="cn">Усложнение</span><span class="ct">Если база далась легко</span><span class="cd">Можно докрутить задачу под свою работу</span></div>
+    <div class="card shadow-blue"><span class="cn">Помощь</span><span class="ct">Когда не получается</span><span class="cd">Чат и три живых созвона-разбора</span></div>
   </div>
-  <p class="bigquote">Мы не продаём другую карту. Мы помогаем <span class="accent">пройти эту</span> — без буксовки.</p>
+  <p class="bigquote">Не нужно самому придумывать учебный проект. Каждый день вы закрываете <span class="accent">один маленький кусок карты</span>.</p>
 </section>
 
 <!-- 56. Программа и результат -->
 <section class="slide">
   <div class="kicker"><span class="num">56</span><span>Программа и результат</span><span class="rule"></span></div>
-  <h2>Что будет и что останется</h2>
+  <h2>Три недели, чтобы <span class="accent">пройти карту руками</span></h2>
   <div class="cols" style="margin-top:40px">
     <div class="col card">
-      <span class="tag">Программа</span>
+      <span class="tag">Формат</span>
       <ul class="list" style="margin-top:18px;gap:14px">
-        <li>Девять узлов карты — по порядку, без перепрыгивания</li>
-        <li>На каждом узле — задача, подсказки, проверка</li>
-        <li>[ДЕТАЛИ ФОРМАТА НЕДЕЛЬ/МОДУЛЕЙ]</li>
+        <li>3 недели, задания по будням</li>
+        <li>15–20 минут на базовый вариант задачи</li>
+        <li>3 живых созвона-разбора, записи остаются</li>
+        <li>Чат с поддержкой и идеями других участников</li>
       </ul>
     </div>
     <div class="col card shadow-blue">
       <span class="tag blue">Результат</span>
       <ul class="list" style="margin-top:18px;gap:14px">
-        <li>Настроенный агент, встроенный в вашу реальную работу</li>
-        <li>Свои подключения, skills и хотя бы одна автоматизация</li>
-        <li>Артефакты по каждому узлу — принятые, а не «вроде получилось»</li>
+        <li>Codex, настроенный под вашу работу</li>
+        <li>Готовые файлы и несколько способов подключения</li>
+        <li>Собственный skill и опыт запуска автоматизации</li>
+        <li>Понимание, какой сценарий переносить в свою работу</li>
       </ul>
     </div>
   </div>
@@ -990,57 +1013,56 @@ ul.list li::before{
 <!-- 57. Оффер -->
 <section class="slide">
   <div class="kicker"><span class="num">57</span><span>Условия</span><span class="rule"></span></div>
-  <h2>Формат и условия</h2>
+  <h2>Старт — <span class="accent">1 сентября</span></h2>
   <div class="chain" style="margin-top:40px">
-    <div class="card shadow"><span class="cn">Формат</span><span class="ct">Марафон по карте</span><span class="cd">Задачи, подсказки, проверка на каждом узле</span></div>
-    <div class="card shadow"><span class="cn">Старт</span><span class="ct">[ДАТА]</span><span class="cd">Мест: [МЕСТА]</span></div>
-    <div class="card shadow-blue"><span class="cn">Цена</span><span class="ct">[ЦЕНА]</span><span class="cd">Для участников эфира</span></div>
+    <div class="card shadow-blue"><span class="cn">Первые 10 мест</span><span class="ct">15 000 ₽</span><span class="cd">Ранняя цена</span></div>
+    <div class="card shadow"><span class="cn">До 19 августа</span><span class="ct">18 000 ₽</span><span class="cd">После первых 10 мест</span></div>
+    <div class="card shadow"><span class="cn">После 19 августа</span><span class="ct">25 000 ₽</span><span class="cd">Если останутся места</span></div>
   </div>
   <div class="card shadow-blue" style="margin-top:36px;padding:30px 40px;max-width:1000px;display:flex;align-items:center;gap:28px">
-    <p style="font-size:30px;font-weight:800;letter-spacing:-0.01em">Записаться: <span class="accent">[ССЫЛКА/QR]</span></p>
+    <p style="font-size:30px;font-weight:800;letter-spacing:-0.01em">Записаться: <span class="accent">aiforwork.courses</span></p>
   </div>
 </section>
 
 <!-- 58. Честные ограничения -->
 <section class="slide">
-  <div class="kicker"><span class="num">58</span><span>Кому не подходит</span><span class="rule"></span></div>
-  <h2>Честные ограничения</h2>
+  <div class="kicker"><span class="num">58</span><span>Честно о формате</span><span class="rule"></span></div>
+  <h2>Не записывайтесь, если...</h2>
   <ul class="list nogo" style="margin-top:36px;gap:18px">
-    <li>Не подойдёт, если нет времени на практику — карта проходится руками, не просмотром</li>
-    <li>Не подойдёт, если ждёте «кнопку», которая сделает работу за вас</li>
-    <li>Не нужен, если вы уже уверенно проходите карту сами — идите самостоятельно</li>
-    <li>Это не курс по программированию — это про агента в вашей рабочей рутине</li>
+    <li>Не готовы выделять 15–20 минут по будням и делать задания руками</li>
+    <li>Ждёте, что мы настроим агента и выполним рабочие задачи вместо вас</li>
+    <li>Хотите курс по программированию и разработке production-систем</li>
+    <li>Уже уверенно работаете с файлами, plugins, API/MCP, skills и автоматизациями</li>
   </ul>
-  <p class="bigquote">Лучше честное «не моё» сейчас, чем брошенный маршрут на втором узле.</p>
+  <p class="bigquote">Марафон — для тех, кому нужен <span class="accent">ритм, готовая практика и помощь в сложных местах</span>. Не волшебная кнопка.</p>
 </section>
 
 <!-- 59. Q&A поверх оффера -->
 <section class="slide">
   <div class="kicker"><span class="num">59</span><span>Вопросы</span><span class="rule"></span></div>
-  <h2>Вопросы</h2>
+  <h2>Вопросы про ваш маршрут <span class="accent">и марафон</span></h2>
   <div class="chain" style="margin-top:36px">
-    <div class="card shadow"><span class="cn">Результат</span><span class="ct">Агент в вашей работе</span><span class="cd">Пройденная карта: подключения, skills, автоматизация</span></div>
-    <div class="card shadow"><span class="cn">Формат</span><span class="ct">Марафон по карте</span><span class="cd">Задачи, подсказки, проверка · старт [ДАТА]</span></div>
-    <div class="card shadow-blue"><span class="cn">Цена</span><span class="ct">[ЦЕНА]</span><span class="cd">Мест: [МЕСТА]</span></div>
+    <div class="card shadow-blue"><span class="cn">Первые 10 мест</span><span class="ct">15 000 ₽</span><span class="cd">Старт 1 сентября</span></div>
+    <div class="card shadow"><span class="cn">До 19 августа</span><span class="ct">18 000 ₽</span><span class="cd">После первых 10 мест</span></div>
+    <div class="card shadow"><span class="cn">После 19 августа</span><span class="ct">25 000 ₽</span><span class="cd">Если останутся места</span></div>
   </div>
   <div class="card shadow-blue" style="margin-top:32px;padding:26px 40px;max-width:1000px">
-    <p style="font-size:28px;font-weight:800;letter-spacing:-0.01em">Записаться: <span class="accent">[ССЫЛКА/QR]</span></p>
+    <p style="font-size:28px;font-weight:800;letter-spacing:-0.01em">Записаться: <span class="accent">aiforwork.courses</span></p>
   </div>
-  <div class="footer-note"><span>Задавайте вопросы — условия остаются на экране</span><span class="accent">→</span></div>
 </section>
 
 <!-- 60. Финальный CTA -->
 <section class="slide">
   <div class="kicker"><span class="num">60</span><span>Финал</span><span class="rule"></span></div>
-  <h2>Найдите текущий шаг. Закройте его реальной задачей. Потом — следующий.</h2>
+  <h2>Roadmap у вас. Хотите пройти его с нами — <span class="accent">увидимся 1 сентября</span></h2>
   <div class="chain" style="margin-top:40px">
-    <div class="card shadow"><span class="cn">Формат</span><span class="ct">Марафон по карте</span><span class="cd">Старт [ДАТА] · мест: [МЕСТА]</span></div>
-    <div class="card shadow-blue"><span class="cn">Цена</span><span class="ct">[ЦЕНА]</span><span class="cd">Для участников эфира</span></div>
+    <div class="card shadow"><span class="cn">Формат</span><span class="ct">3 недели</span><span class="cd">Задания по будням · 3 разбора · чат</span></div>
+    <div class="card shadow-blue"><span class="cn">Первые 10 мест</span><span class="ct">15 000 ₽</span><span class="cd">Дальше — 18 000 ₽ до 19 августа</span></div>
   </div>
   <div class="card shadow-blue" style="margin-top:36px;padding:30px 40px;max-width:1000px">
-    <p style="font-size:30px;font-weight:800;letter-spacing:-0.01em">Записаться: <span class="accent">[ССЫЛКА/QR]</span></p>
+    <p style="font-size:30px;font-weight:800;letter-spacing:-0.01em">Записаться: <span class="accent">aiforwork.courses</span></p>
   </div>
-  <p class="bigquote">Сам маршрут у вас уже есть. Вопрос только в том, как вы его пройдёте.</p>
+  <p class="bigquote">Спасибо! Карту и чек-лист пришлём в бот после эфира.</p>
 </section>
 
 </div></div>

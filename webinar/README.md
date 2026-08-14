@@ -4,9 +4,10 @@
 
 ## Быстрые ссылки
 
-- [Актуальная HTML-презентация](./presentation/index.html) — source of truth для слайдов, 40 экранов.
+- [Актуальная HTML-презентация](./presentation/index.html) — source of truth для слайдов, 42 экрана.
 - [PDF-презентация](./presentation/webinar-ai-for-work.pdf) — текущий экспорт 16:9.
-- [Contact sheet](./presentation/contact-sheet-40.png) — все 40 слайдов на одной картинке.
+- [Contact sheet](./presentation/contact-sheet-42.png) — все 42 слайда на одной картинке.
+- [Фидбек Саши](./feedback.md) — редакционный разбор, по которому сделан текущий проход.
 - [Публичная версия](https://aiforwork-webinar.surge.sh/) — текущий deploy на Surge.
 - [Транскрипт вебинара Даши](./references/dasha/source/transcript.md) — нормализованный транскрипт YouTube.
 - [Слайды вебинара Даши](./references/dasha/source/slides/) — 154 извлечённых физических состояния презентации.
@@ -25,7 +26,7 @@ webinar/
 │   └── meeting-2026-08-10/        # полная запись нашего обсуждения и выводы для вебинара
 ├── inputs/                        # материалы, которые задавали контекст, но не являются сценарием
 ├── drafts/                        # промежуточные варианты структуры вебинара
-└── archive/                       # старый Fable-прототип и устаревшие QA-рендеры
+└── archive/                       # старые версии презентации, Fable-прототип и устаревшие QA-рендеры
 ```
 
 ## Что является source of truth
