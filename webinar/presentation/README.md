@@ -2,11 +2,12 @@
 
 ## Файлы
 
-- [`index.html`](./index.html) — редактируемый source of truth, 42 слайда.
+- [`index.html`](./index.html) — редактируемый source of truth, 41 слайд.
+- [`assets/kolya.jpg`](./assets/kolya.jpg) — локальная фотография для слайда об авторе.
 - [`fonts/`](./fonts/) — локальные Inter и JetBrains Mono; презентация не зависит от интернета во время эфира.
-- [`webinar-ai-for-work.pdf`](./webinar-ai-for-work.pdf) — текущий PDF, 42 страницы, 16:9.
-- [`contact-sheet-42.png`](./contact-sheet-42.png) — обзор всей презентации.
-- [`rendered-42/`](./rendered-42/) — полноразмерные PNG текущих 42 слайдов; локальный производный артефакт, исключён из Git.
+- [`webinar-ai-for-work.pdf`](./webinar-ai-for-work.pdf) — текущий PDF, 41 страница, 16:9.
+- [`contact-sheet-41.png`](./contact-sheet-41.png) — обзор всей презентации.
+- [`rendered-41/`](./rendered-41/) — полноразмерные PNG текущего 41 слайда; локальный производный артефакт, исключён из Git.
 
 ## Управление
 
