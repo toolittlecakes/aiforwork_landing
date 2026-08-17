@@ -1056,6 +1056,35 @@ li + li { margin-top: 10px; }
   line-height: 1;
   font-size: clamp(40px, 5vw, 66px);
 }
+.price-card.has-promo .price-amount {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 18px;
+}
+.price-card.has-promo .price-original {
+  color: var(--ink-3);
+  font-size: .58em;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+.price-discounted {
+  color: var(--accent);
+}
+.price-promo-note {
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.price-promo-note.is-checking {
+  color: var(--ink-3);
+}
+.price-promo-note.is-error {
+  color: #c0331b;
+}
 .price-link {
   margin-top: 22px;
   font-size: 17px;
@@ -1667,7 +1696,8 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
       <div class="price">
         <article class="price-card">
           <p class="price-label">Участие в потоке</p>
-          <p class="price-amount">25&nbsp;000&nbsp;₽</p>
+          <p class="price-amount"><span class="price-original">25&nbsp;000&nbsp;₽</span><span class="price-discounted" data-promo-price hidden></span></p>
+          <p class="price-promo-note" data-promo-note aria-live="polite" hidden></p>
           <a class="price-link" href="#payment" data-payment-trigger data-offer-id="late_2026_09" data-offer-label="Участие в потоке" data-offer-amount="25 000 ₽">оплатить</a>
         </article>
       </div>
@@ -1872,9 +1902,17 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
   const promoApply = modal.querySelector("#payment-promo-apply");
   const promoStatus = modal.querySelector("#payment-promo-status");
   const closeButtons = [...modal.querySelectorAll("[data-payment-modal-close]")];
+  const paymentTrigger = document.querySelector("[data-payment-trigger]");
+  const priceCard = paymentTrigger?.closest(".price-card");
+  const promoPrice = priceCard?.querySelector("[data-promo-price]");
+  const promoNote = priceCard?.querySelector("[data-promo-note]");
+  if (!paymentTrigger || !priceCard || !promoPrice || !promoNote) return;
+  const urlPromoCode = new URLSearchParams(window.location.search).get("promo")?.trim();
   let lastTrigger = null;
   let offerId = null;
   let appliedPromo = null;
+  let linkedPromo = null;
+  let linkedPromoPending = Boolean(urlPromoCode);
 
   function showError(message) {
     errorEl.textContent = message;
@@ -1883,6 +1921,29 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
 
   function baseTariffText(trigger) {
     return `${trigger.dataset.offerLabel} — ${trigger.dataset.offerAmount}`;
+  }
+
+  function formatAmount(amountMinor) {
+    return `${(amountMinor / 100).toLocaleString("ru-RU")} ₽`;
+  }
+
+  function promoTariffText(trigger, promo) {
+    return `${trigger.dataset.offerLabel} — ${formatAmount(promo.amountMinor)} (промокод ${promo.code})`;
+  }
+
+  async function checkPromo(targetOfferId, code) {
+    const response = await fetch(PROMO_CHECK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ projectId: "aiforwork", offerId: targetOfferId, promoCode: code }),
+    });
+    if (response.status === 422) return null;
+    if (!response.ok) throw new Error(`promo check failed: ${response.status}`);
+    const data = await response.json();
+    if (!Number.isInteger(data.amountMinor) || data.amountMinor <= 0) {
+      throw new Error("promo check returned invalid amount");
+    }
+    return { code: code.trim().toUpperCase(), amountMinor: data.amountMinor };
   }
 
   function setPromoStatus(message, ok) {
@@ -1900,6 +1961,15 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     promoStatus.classList.remove("is-ok", "is-error");
   }
 
+  function applyPromoToModal(promo) {
+    appliedPromo = promo.code;
+    form.elements.promo.value = promo.code;
+    promoToggle.hidden = true;
+    promoWrap.hidden = false;
+    tariffEl.textContent = promoTariffText(lastTrigger, promo);
+    setPromoStatus(`Промокод применён: цена ${formatAmount(promo.amountMinor)}.`, true);
+  }
+
   function openModal(trigger) {
     lastTrigger = trigger;
     offerId = trigger.dataset.offerId;
@@ -1909,6 +1979,16 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     resetPromo();
     submitButton.disabled = false;
     submitButton.textContent = "Перейти к оплате";
+    if (linkedPromo) {
+      applyPromoToModal(linkedPromo);
+    } else if (urlPromoCode && linkedPromoPending) {
+      form.elements.promo.value = urlPromoCode;
+      promoToggle.hidden = true;
+      promoWrap.hidden = false;
+      promoApply.disabled = true;
+      submitButton.disabled = true;
+      setPromoStatus("Проверяем промокод…", true);
+    }
     modal.hidden = false;
     document.body.style.overflow = "hidden";
     form.elements.email.focus();
@@ -1928,23 +2008,14 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     }
     promoApply.disabled = true;
     try {
-      const response = await fetch(PROMO_CHECK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ projectId: "aiforwork", offerId, promoCode: code }),
-      });
-      if (response.status === 422) {
+      const promo = await checkPromo(offerId, code);
+      if (!promo) {
         appliedPromo = null;
         tariffEl.textContent = baseTariffText(lastTrigger);
         setPromoStatus("Промокод не найден.", false);
         return;
       }
-      if (!response.ok) throw new Error(`promo check failed: ${response.status}`);
-      const data = await response.json();
-      appliedPromo = code;
-      const amount = `${(data.amountMinor / 100).toLocaleString("ru-RU")} ₽`;
-      tariffEl.textContent = `${lastTrigger.dataset.offerLabel} — ${amount} (промокод ${code.toUpperCase()})`;
-      setPromoStatus(`Промокод применён: цена ${amount}.`, true);
+      applyPromoToModal(promo);
     } catch {
       setPromoStatus("Не получилось проверить промокод. Попробуйте ещё раз.", false);
     } finally {
@@ -1998,12 +2069,48 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     }
   });
 
-  document.querySelectorAll("[data-payment-trigger]").forEach((trigger) => {
-    trigger.addEventListener("click", (event) => {
-      event.preventDefault();
-      openModal(trigger);
-    });
+  paymentTrigger.addEventListener("click", (event) => {
+    event.preventDefault();
+    openModal(paymentTrigger);
   });
+
+  async function applyPromoFromUrl() {
+    if (!urlPromoCode) return;
+    const normalizedCode = urlPromoCode.toUpperCase();
+    promoNote.textContent = `Проверяем промокод ${normalizedCode}…`;
+    promoNote.classList.add("is-checking");
+    promoNote.hidden = false;
+
+    try {
+      const promo = await checkPromo(paymentTrigger.dataset.offerId, normalizedCode);
+      if (!promo) {
+        promoNote.textContent = `Промокод ${normalizedCode} не действует.`;
+        promoNote.classList.remove("is-checking");
+        promoNote.classList.add("is-error");
+        if (!modal.hidden) setPromoStatus("Промокод не найден.", false);
+        return;
+      }
+
+      linkedPromo = promo;
+      priceCard.classList.add("has-promo");
+      promoPrice.textContent = formatAmount(promo.amountMinor);
+      promoPrice.hidden = false;
+      promoNote.textContent = `Цена по промокоду ${promo.code}`;
+      promoNote.classList.remove("is-checking", "is-error");
+      if (!modal.hidden) applyPromoToModal(promo);
+    } catch {
+      promoNote.textContent = `Не удалось проверить промокод ${normalizedCode}. Обновите страницу.`;
+      promoNote.classList.remove("is-checking");
+      promoNote.classList.add("is-error");
+      if (!modal.hidden) setPromoStatus("Не получилось проверить промокод. Обновите страницу.", false);
+    } finally {
+      linkedPromoPending = false;
+      promoApply.disabled = false;
+      submitButton.disabled = false;
+    }
+  }
+
+  void applyPromoFromUrl();
 
   closeButtons.forEach((button) => {
     button.addEventListener("click", closeModal);
