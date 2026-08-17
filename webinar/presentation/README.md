@@ -15,14 +15,12 @@
 
 ## Публикация
 
-```bash
-npx -y surge webinar/presentation aiforwork-webinar.surge.sh
-```
+После push в `main` workflow [`.github/workflows/pages.yml`](../../.github/workflows/pages.yml) собирает безопасный публичный артефакт через [`scripts/build-pages.sh`](../../scripts/build-pages.sh). В него попадают основной лендинг и файлы презентации, но не feedback, транскрипты, inputs и другие исследовательские материалы из `webinar/`.
 
 После публикации проверить:
 
 ```bash
-curl -sS -o /dev/null -w '%{http_code}\n' https://aiforwork-webinar.surge.sh/
+curl -sSL -o /dev/null -w '%{http_code}\n' https://aiforwork.courses/webinar/
 ```
 
 Условия оффера синхронизированы с лендингом: старт 1 сентября, 18 000 ₽ до вечера 19 августа, затем 25 000 ₽. Единый CTA на офферных слайдах — «Зафиксировать цену» на `aiforwork.courses`.
