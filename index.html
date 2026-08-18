@@ -168,7 +168,6 @@ section {
   padding: 92px 0;
   border-bottom: 1px solid var(--rule);
 }
-section[id] { scroll-margin-top: 88px; }
 .paper { background: var(--paper); }
 .dark {
   background: var(--ink);
@@ -855,7 +854,7 @@ details.similar summary:hover::after { color: var(--bg); }
   border: 1px solid var(--rule);
   margin-bottom: 48px;
 }
-#format > .wrap > h3 {
+.format-section > .wrap > h3 {
   margin: 0 0 22px;
   font-size: clamp(26px, 3vw, 40px);
   line-height: 1.08;
@@ -1455,9 +1454,9 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     </div>
   </section>
 
-  <section class="paper" id="audience">
+  <section class="paper">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" id="audience">
         <div>
           <h2>Для кого</h2>
         </div>
@@ -1480,9 +1479,9 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     </div>
   </section>
 
-  <section id="authors">
+  <section>
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" id="authors">
         <div>
           <h2>От кого</h2>
         </div>
@@ -1512,9 +1511,9 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     </div>
   </section>
 
-  <section class="dark" id="why">
+  <section class="dark">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" id="why">
         <div>
           <h2>Почему?</h2>
         </div>
@@ -1529,9 +1528,9 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     </div>
   </section>
 
-  <section class="paper" id="testimonials">
+  <section class="paper">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" id="testimonials">
         <div>
           <h2>Отзывы с предыдущего потока</h2>
         </div>
@@ -1605,9 +1604,9 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     </div>
   </div>
 
-  <section id="format">
+  <section class="format-section">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" id="format">
         <div>
           <h2>Формат марафона</h2>
         </div>
@@ -1686,9 +1685,9 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     </div>
   </section>
 
-  <section class="paper" id="payment">
+  <section class="paper">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" id="payment">
         <div>
           <h2>Старт 1.09</h2>
         </div>
@@ -1753,9 +1752,9 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     </div>
   </div>
 
-  <section class="paper" id="faq">
+  <section class="paper">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" id="faq">
         <div>
           <h2>FAQ</h2>
         </div>
