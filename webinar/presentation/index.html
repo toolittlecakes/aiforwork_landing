@@ -127,6 +127,25 @@ ul.list li::before{
 .cols{display:flex;gap:36px}
 .col{flex:1;min-width:0}
 
+/* ---------- webinar contract ---------- */
+.contract-slide .contract-cols{margin-top:30px}
+.contract-slide .contract-cols .card{padding:18px 24px}
+.contract-slide .contract-cols ul.list{gap:10px!important;margin-top:16px!important}
+.contract-slide .contract-cols ul.list li{font-size:20px;line-height:1.25}
+.webinar-format{
+  margin-top:20px;
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border:var(--line);background:var(--ink);color:var(--bg);
+  box-shadow:6px 6px 0 var(--blue);
+}
+.webinar-format span{
+  min-height:54px;padding:12px 16px;
+  display:flex;align-items:center;justify-content:center;
+  border-right:1px solid rgba(236,235,230,.45);
+  font-size:17px;line-height:1.2;font-weight:700;text-align:center;
+}
+.webinar-format span:last-child{border-right:0}
+
 /* ---------- slide 1: title ---------- */
 .s-title{justify-content:center}
 .s-title .brand{
@@ -430,10 +449,10 @@ ul.list li::before{
 </section>
 
 <!-- 8. Контракт эфира -->
-<section class="slide">
+<section class="slide contract-slide">
   <div class="kicker"><span class="num">05</span><span>Контракт эфира</span><span class="rule"></span></div>
   <h2>Что вы унесёте с эфира</h2>
-  <div class="cols" style="margin-top:44px">
+  <div class="cols contract-cols">
     <div class="col card shadow-blue">
       <span class="tag blue">Будет</span>
       <ul class="list" style="margin-top:20px">
@@ -450,6 +469,12 @@ ul.list li::before{
         <li>Программирования</li>
       </ul>
     </div>
+  </div>
+  <div class="webinar-format">
+    <span>1,5 часа контента</span>
+    <span>Пошаговый чек-лист</span>
+    <span>Q&amp;A в конце</span>
+    <span>Спецпредложение по марафону</span>
   </div>
 </section>
 
