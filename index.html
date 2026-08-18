@@ -2164,6 +2164,22 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     activateTab(rowButtons[nextIndex].dataset.tabTarget);
   });
 })();
+
+(() => {
+  if (!window.location.hash) return;
+
+  window.addEventListener("load", async () => {
+    await document.fonts.ready;
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (!target) return;
+
+    const root = document.documentElement;
+    const scrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    target.scrollIntoView({ block: "start" });
+    root.style.scrollBehavior = scrollBehavior;
+  }, { once: true });
+})();
 </script>
 </body>
 </html>
