@@ -20,7 +20,6 @@ copy_dir() {
 }
 
 copy_file .nojekyll
-copy_file CNAME
 copy_file favicon.svg
 copy_file index.html
 copy_dir images
@@ -55,8 +54,8 @@ done
 
 forbidden_file="$(find "$output_dir" -type f \( -name '*.md' -o -name '*.json' -o -name '*.vtt' -o -name '*.ts' -o -name '*.mp4' \) -print -quit)"
 if [[ -n "$forbidden_file" ]]; then
-  echo "Forbidden research file found in Pages artifact: $forbidden_file" >&2
+  echo "Forbidden research file found in public artifact: $forbidden_file" >&2
   exit 1
 fi
 
-echo "Built safe Pages artifact at $output_dir"
+echo "Built safe public artifact at $output_dir"

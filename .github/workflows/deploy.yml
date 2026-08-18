@@ -1,0 +1,41 @@
+name: Deploy site
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Build public artifact
+        run: bash scripts/build-pages.sh
+
+      - name: Deploy to Yandex Object Storage
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.YANDEX_STORAGE_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YANDEX_STORAGE_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ru-central1
+          AWS_EC2_METADATA_DISABLED: "true"
+        run: >-
+          aws s3 sync _site s3://aiforwork.courses
+          --region ru-central1
+          --endpoint-url https://storage.yandexcloud.net
+          --delete
+
+      - name: Verify deployed pages
+        run: |
+          curl --fail --silent --show-error https://website.yandexcloud.net/aiforwork.courses/ >/dev/null
+          curl --fail --silent --show-error https://website.yandexcloud.net/aiforwork.courses/webinar/presentation/ >/dev/null

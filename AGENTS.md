@@ -34,8 +34,9 @@ Real mismatches that should be fixed:
 
 ## Deploy Process
 
-- This is a static site. There is no build step.
+- This is a static site. There is no application build toolchain; `scripts/build-pages.sh` only assembles the public artifact.
 - Deployment happens by pushing `main` to `origin`.
-- The custom domain is configured through `CNAME`: `aiforwork.courses`.
+- GitHub Actions builds the public artifact with `scripts/build-pages.sh` and syncs it to the `aiforwork.courses` bucket in Yandex Object Storage.
+- The custom domain `aiforwork.courses` points to the bucket through Namecheap DNS. HTTPS is provided by Yandex Certificate Manager.
 - After pushing, verify the deployed page at `https://aiforwork.courses/`.
-- GitHub Pages or CDN caching can delay visible updates briefly. Use a cache-busting query string if needed, for example `https://aiforwork.courses/?v=<commit>`.
+- DNS and browser caching can delay visible updates briefly. Use a cache-busting query string if needed, for example `https://aiforwork.courses/?v=<commit>`.
