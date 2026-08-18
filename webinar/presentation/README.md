@@ -2,12 +2,12 @@
 
 ## Файлы
 
-- [`index.html`](./index.html) — редактируемый source of truth, 36 слайдов.
+- [`index.html`](./index.html) — редактируемый source of truth, 35 слайдов.
 - [`assets/kolya.jpg`](./assets/kolya.jpg) — локальная фотография для слайда об авторе.
 - [`fonts/`](./fonts/) — локальные Inter и JetBrains Mono; презентация не зависит от интернета во время эфира.
-- [`webinar-ai-for-work.pdf`](./webinar-ai-for-work.pdf) — текущий PDF, 36 страниц, 16:9.
-- [`contact-sheet-36.png`](./contact-sheet-36.png) — обзор всей презентации.
-- [`rendered-36/`](./rendered-36/) — полноразмерные PNG текущих 36 слайдов; локальный производный артефакт, исключён из Git.
+- [`webinar-ai-for-work.pdf`](./webinar-ai-for-work.pdf) — текущий PDF, 35 страниц, 16:9.
+- [`contact-sheet-35.png`](./contact-sheet-35.png) — обзор всей презентации.
+- [`rendered-35/`](./rendered-35/) — полноразмерные PNG текущих 35 слайдов; локальный производный артефакт, исключён из Git.
 
 ## Управление
 

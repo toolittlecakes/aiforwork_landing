@@ -32,7 +32,7 @@ copy_file webinar/index.html
 copy_dir webinar/checklist
 copy_file webinar/presentation/index.html
 copy_file webinar/presentation/webinar-ai-for-work.pdf
-copy_file webinar/presentation/contact-sheet-36.png
+copy_file webinar/presentation/contact-sheet-35.png
 copy_dir webinar/presentation/assets
 copy_dir webinar/presentation/fonts
 
@@ -50,7 +50,7 @@ for required_path in \
   webinar/presentation/assets/queue-example.png \
   webinar/presentation/fonts/fonts.css \
   webinar/presentation/webinar-ai-for-work.pdf \
-  webinar/presentation/contact-sheet-36.png
+  webinar/presentation/contact-sheet-35.png
 do
   test -f "$output_dir/$required_path"
 done
