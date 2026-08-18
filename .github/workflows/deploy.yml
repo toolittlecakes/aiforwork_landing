@@ -29,13 +29,18 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.YANDEX_STORAGE_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ru-central1
           AWS_EC2_METADATA_DISABLED: "true"
-        run: >-
-          aws s3 sync _site s3://aiforwork.courses
-          --region ru-central1
-          --endpoint-url https://storage.yandexcloud.net
-          --delete
+        run: |
+          aws s3 sync _site s3://aiforwork.courses \
+            --region ru-central1 \
+            --endpoint-url https://storage.yandexcloud.net \
+            --delete
+          aws s3 sync _site s3://www.aiforwork.courses \
+            --region ru-central1 \
+            --endpoint-url https://storage.yandexcloud.net \
+            --delete
 
       - name: Verify deployed pages
         run: |
           curl --fail --silent --show-error https://website.yandexcloud.net/aiforwork.courses/ >/dev/null
+          curl --fail --silent --show-error https://website.yandexcloud.net/www.aiforwork.courses/ >/dev/null
           curl --fail --silent --show-error https://website.yandexcloud.net/aiforwork.courses/webinar/presentation/ >/dev/null
