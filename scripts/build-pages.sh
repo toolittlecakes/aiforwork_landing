@@ -29,6 +29,7 @@ copy_dir privacy
 copy_dir experiment
 
 copy_file webinar/index.html
+copy_dir webinar/checklist
 copy_file webinar/presentation/index.html
 copy_file webinar/presentation/webinar-ai-for-work.pdf
 copy_file webinar/presentation/contact-sheet-36.png
@@ -42,8 +43,10 @@ for required_path in \
   privacy/index.html \
   experiment/index.html \
   webinar/index.html \
+  webinar/checklist/index.html \
   webinar/presentation/index.html \
   webinar/presentation/assets/kolya.jpg \
+  webinar/presentation/assets/payment-qr.png \
   webinar/presentation/assets/queue-example.png \
   webinar/presentation/fonts/fonts.css \
   webinar/presentation/webinar-ai-for-work.pdf \

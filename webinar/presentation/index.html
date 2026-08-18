@@ -274,6 +274,30 @@ ul.list li::before{
   max-width:1000px;letter-spacing:-0.01em;
 }
 
+/* ---------- marathon lessons ---------- */
+.lesson-grid{margin-top:22px;border:var(--line);box-shadow:6px 6px 0 var(--blue)}
+.lesson-head,.lesson-row{display:grid;grid-template-columns:1fr 48px 1fr;align-items:center}
+.lesson-head{
+  padding:10px 20px;background:var(--ink);color:#fff;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.lesson-row{padding:13px 20px;border-top:1px solid rgba(14,14,13,.25)}
+.lesson-bad,.lesson-good{font-size:19px;font-weight:750;line-height:1.2}
+.lesson-arrow{text-align:center;color:var(--blue);font-size:22px;font-weight:800}
+.lesson-proof{
+  margin-top:20px;padding:14px 20px;background:var(--ink);color:#fff;
+  font-size:18px;font-weight:650;line-height:1.35;
+}
+.lesson-proof .tag{margin-right:14px;vertical-align:2px}
+.compact-list li{font-size:18px!important}
+.offer-qr{
+  margin-top:28px;padding:22px 28px;max-width:650px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;
+}
+.offer-qr p{font-size:32px;font-weight:850;letter-spacing:-.02em}
+.offer-qr img{width:142px;height:142px;display:block;image-rendering:pixelated}
+
 /* ---------- clickable queue example ---------- */
 .queue-trigger{cursor:zoom-in;position:relative;transition:background .15s ease,color .15s ease}
 .queue-trigger:hover,.queue-trigger:focus-visible{background:var(--ink);color:var(--bg);outline:0}
@@ -455,21 +479,15 @@ ul.list li::before{
 <!-- 8. Ранний product anchor -->
 <section class="slide">
   <div class="kicker"><span class="num">07</span><span>Что показал первый марафон</span><span class="rule"></span></div>
-  <h2>Термин становится понятным <span class="accent">после сделанной задачи</span></h2>
-  <div class="cols" style="margin-top:32px;gap:28px;align-items:stretch">
-    <div class="col card shadow-blue">
-      <span class="tag blue">Не лекция про инструменты</span>
-      <div style="display:flex;flex-direction:column;gap:18px;margin-top:22px">
-        <p style="font-size:22px;font-weight:700">Загрузили файл на Google Drive <span class="accent">→ поняли plugins</span></p>
-        <p style="font-size:22px;font-weight:700">Отправили отчёт в Telegram <span class="accent">→ поняли API</span></p>
-        <p style="font-size:22px;font-weight:700">Повторили удачный процесс <span class="accent">→ поняли skills</span></p>
-      </div>
-    </div>
-    <div class="col card shadow" style="background:var(--ink);color:white">
-      <span class="tag blue">Из отзыва участницы</span>
-      <p style="font-size:25px;font-weight:650;line-height:1.38;margin-top:24px">«Стало не страшно “тыкать” не туда. Стало понятнее, где Codex может существенно сократить время. Научились “вшивать” в него skills — я в шоке от такого прогресса».</p>
-    </div>
+  <h2>Первый марафон показал, <span class="accent">как реально осваивают агентов</span></h2>
+  <div class="lesson-grid">
+    <div class="lesson-head"><span>Не работает</span><span></span><span>Работает</span></div>
+    <div class="lesson-row"><span class="lesson-bad">Лекции про инструменты</span><span class="lesson-arrow">→</span><span class="lesson-good">Конкретная практическая задача</span></div>
+    <div class="lesson-row"><span class="lesson-bad">Большой проект целиком</span><span class="lesson-arrow">→</span><span class="lesson-good">Один навык за 15–20 минут</span></div>
+    <div class="lesson-row"><span class="lesson-bad">Упор на вайбкодинг</span><span class="lesson-arrow">→</span><span class="lesson-good">Делегирование операционки</span></div>
+    <div class="lesson-row"><span class="lesson-bad">Практика «когда получится»</span><span class="lesson-arrow">→</span><span class="lesson-good">Короткий ритм каждый будний день</span></div>
   </div>
+  <p class="lesson-proof"><span class="tag blue">Из отзыва участницы</span>«Стало не страшно “тыкать” не туда. Стало понятнее, где Codex может существенно сократить время. Научились “вшивать” в него skills — я в шоке от такого прогресса».</p>
 </section>
 
 <!-- Шаг 0: доступ -->
@@ -995,19 +1013,21 @@ ul.list li::before{
   <div class="cols" style="margin-top:40px">
     <div class="col card">
       <span class="tag">Формат</span>
-      <ul class="list" style="margin-top:18px;gap:14px">
+      <ul class="list compact-list" style="margin-top:16px;gap:10px">
         <li>3 недели, задания по будням</li>
         <li>15–20 минут на базовый вариант задачи</li>
         <li>3 живых созвона-разбора, записи остаются</li>
         <li>Чат с поддержкой и идеями других участников</li>
+        <li>Строгие дедлайны: не сдал — бот исключает</li>
       </ul>
     </div>
     <div class="col card shadow-blue">
       <span class="tag blue">Результат</span>
-      <ul class="list" style="margin-top:18px;gap:14px">
+      <ul class="list compact-list" style="margin-top:16px;gap:10px">
         <li>Codex, настроенный под вашу работу</li>
         <li>Готовые файлы и несколько способов подключения</li>
         <li>Собственный skill и опыт запуска автоматизации</li>
+        <li>Готовые skills и инструкции от Коли</li>
         <li>Понимание, какой сценарий переносить в свою работу</li>
       </ul>
     </div>
@@ -1019,13 +1039,13 @@ ul.list li::before{
 <section class="slide">
   <div class="kicker"><span class="num">32</span><span>Условия</span><span class="rule"></span></div>
   <h2>Старт — <span class="accent">1 сентября</span></h2>
-  <div class="chain" style="margin-top:40px">
-    <div class="card shadow-blue"><span class="cn">До вечера 19 августа</span><span class="ct">18 000 ₽</span><span class="cd">Зафиксируйте цену по кнопке</span></div>
-    <div class="card shadow"><span class="cn">Как зафиксировать</span><span class="ct">Нажать кнопку</span><span class="cd">Промокод действует до вечера среды</span></div>
-    <div class="card shadow"><span class="cn">После 19 августа</span><span class="ct">25 000 ₽</span><span class="cd">Базовая цена</span></div>
+  <div class="chain" style="margin-top:38px;gap:28px;max-width:880px">
+    <div class="col card shadow-blue"><span class="cn">До вечера 19 августа</span><span class="ct">19 000 ₽</span></div>
+    <div class="col card shadow"><span class="cn">После 19 августа</span><span class="ct">25 000 ₽</span></div>
   </div>
-  <div class="card shadow-blue" style="margin-top:36px;padding:30px 40px;max-width:1000px;display:flex;align-items:center;gap:28px">
-    <p style="font-size:30px;font-weight:800;letter-spacing:-0.01em">Зафиксировать цену: <span class="accent">aiforwork.courses</span></p>
+  <div class="card shadow-blue offer-qr">
+    <p>Зафиксировать цену</p>
+    <img src="assets/payment-qr.png" alt="QR-код для фиксации цены 19 000 рублей">
   </div>
 </section>
 
@@ -1068,7 +1088,7 @@ ul.list li::before{
   <h2>Вопросы про ваш маршрут <span class="accent">и марафон</span></h2>
   <p class="sub" style="margin-top:12px;font-size:19px">Разбираем рабочие сценарии и ваш следующий шаг. Production-архитектура и глубокая разработка — не сегодня.</p>
   <div class="chain" style="margin-top:24px">
-    <div class="card shadow-blue"><span class="cn">До вечера 19 августа</span><span class="ct">18 000 ₽</span><span class="cd">Зафиксируйте цену по кнопке</span></div>
+    <div class="card shadow-blue"><span class="cn">До вечера 19 августа</span><span class="ct">19 000 ₽</span><span class="cd">Зафиксируйте цену по кнопке</span></div>
     <div class="card shadow"><span class="cn">Старт</span><span class="ct">1 сентября</span><span class="cd">Три недели практики</span></div>
     <div class="card shadow"><span class="cn">После 19 августа</span><span class="ct">25 000 ₽</span><span class="cd">Базовая цена</span></div>
   </div>
@@ -1083,7 +1103,7 @@ ul.list li::before{
   <h2>Roadmap у вас. Хотите пройти его с нами — <span class="accent">увидимся 1 сентября</span></h2>
   <div class="chain" style="margin-top:40px">
     <div class="card shadow"><span class="cn">Формат</span><span class="ct">3 недели</span><span class="cd">Задания по будням · 3 разбора · чат</span></div>
-    <div class="card shadow-blue"><span class="cn">До вечера 19 августа</span><span class="ct">18 000 ₽</span><span class="cd">Дальше — 25 000 ₽</span></div>
+    <div class="card shadow-blue"><span class="cn">До вечера 19 августа</span><span class="ct">19 000 ₽</span><span class="cd">Дальше — 25 000 ₽</span></div>
   </div>
   <div class="card shadow-blue" style="margin-top:36px;padding:30px 40px;max-width:1000px">
     <p style="font-size:30px;font-weight:800;letter-spacing:-0.01em">Зафиксировать цену: <span class="accent">aiforwork.courses</span></p>

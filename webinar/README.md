@@ -7,6 +7,7 @@
 - [Актуальная HTML-презентация](./presentation/index.html) — source of truth для слайдов, 36 экранов.
 - [PDF-презентация](./presentation/webinar-ai-for-work.pdf) — текущий экспорт 16:9.
 - [Contact sheet](./presentation/contact-sheet-36.png) — все 36 слайдов на одной картинке.
+- [Чек-лист roadmap](./checklist/index.html) — короткие проверяемые действия по каждому из девяти шагов.
 - [Первый фидбек Саши](./feedback.md), [второй проход](./feedback2.md), [третий проход](./feedback3.md) и [четвёртый проход](./feedback4.md) — редакционные разборы презентации.
 - [Публичная версия](https://aiforwork.courses/webinar/) — подстраница основного лендинга.
 - [Транскрипт вебинара Даши](./references/dasha/source/transcript.md) — нормализованный транскрипт YouTube.
