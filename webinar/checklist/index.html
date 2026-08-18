@@ -18,8 +18,8 @@
     .intro{max-width:760px;margin:24px 0 0;font-size:clamp(19px,2.2vw,25px);line-height:1.42;font-weight:550}
     .accent{color:var(--blue)}
     .level{margin-top:64px}
-    .level-head{display:grid;grid-template-columns:160px 1fr;gap:24px;align-items:end;padding-bottom:18px;border-bottom:2px solid var(--ink)}
-    .level-num{font:700 13px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+    .level-head{display:grid;grid-template-columns:minmax(300px,.75fr) 1.25fr;gap:32px;align-items:center;padding-bottom:18px;border-bottom:2px solid var(--ink)}
+    .level-num{font:750 clamp(20px,2vw,26px)/1.05 'Inter',sans-serif;letter-spacing:-.025em;color:var(--blue)}
     h2{margin:0;font-size:clamp(30px,4vw,48px);line-height:1.05;letter-spacing:-.035em}
     .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:24px}
     .step{border:1px solid var(--ink);background:var(--bg);box-shadow:6px 6px 0 var(--ink);padding:24px}
@@ -63,19 +63,18 @@
           <span class="step-num">Шаг 02</span>
           <h3>Получить готовый рабочий файл</h3>
           <div class="checks">
-            <label><input type="checkbox"><span>Выбрал одну реальную задачу</span></label>
-            <label><input type="checkbox"><span>Задал формат результата</span></label>
-            <label><input type="checkbox"><span>Передал рабочие материалы</span></label>
-            <label><input type="checkbox"><span>Открыл и проверил готовый файл</span></label>
+            <label><input type="checkbox"><span>Отредактировал Excel-таблицу</span></label>
+            <label><input type="checkbox"><span>Создал презентацию в PPTX</span></label>
+            <label><input type="checkbox"><span>Создал презентацию в HTML</span></label>
           </div>
         </article>
         <article class="step">
           <span class="step-num">Шаг 03</span>
           <h3>Попробовать усилители</h3>
           <div class="checks">
-            <label><input type="checkbox"><span>Проверил память в новом чате</span></label>
+            <label><input type="checkbox"><span>Включил память в настройках</span></label>
             <label><input type="checkbox"><span>Поручил проверку субагенту</span></label>
-            <label><input type="checkbox"><span>Открыл и перепроверил результат в браузере</span></label>
+            <label><input type="checkbox"><span>Агент проверил HTML в браузере</span></label>
             <label><input type="checkbox"><span>Попробовал Edit, Reply и Queue</span></label>
           </div>
         </article>
@@ -90,29 +89,28 @@
           <h3>Подключить plugin</h3>
           <div class="checks">
             <label><input type="checkbox"><span>Выбрал plugin под реальную задачу</span></label>
-            <label><input type="checkbox"><span>Подключил нужный сервис</span></label>
-            <label><input type="checkbox"><span>Запустил задачу на своих данных</span></label>
-            <label><input type="checkbox"><span>Сверил результат с источником</span></label>
+            <label><input type="checkbox"><span>Подключил и залогинился</span></label>
+            <label><input type="checkbox"><span>Выставил настройки plugin</span></label>
+            <label><input type="checkbox"><span>Запустил и проверил результат</span></label>
           </div>
         </article>
         <article class="step">
           <span class="step-num">Шаг 05</span>
           <h3>Подключить API, MCP или CLI</h3>
           <div class="checks">
-            <label><input type="checkbox"><span>Назвал сервис и нужное действие</span></label>
-            <label><input type="checkbox"><span>Нашёл официальный способ подключения</span></label>
-            <label><input type="checkbox"><span>Сохранил ключ вне чата и документов</span></label>
-            <label><input type="checkbox"><span>Получил и проверил реальные данные</span></label>
+            <label><input type="checkbox"><span>Через API подключил Telegram-бота для уведомлений от агента</span></label>
+            <label><input type="checkbox"><span>Через CLI подключил yt-dlp для скачивания видео с YouTube</span></label>
+            <label><input type="checkbox"><span>Через MCP подключил ВкусВилл</span></label>
           </div>
         </article>
         <article class="step">
           <span class="step-num">Шаг 06</span>
           <h3>Использовать внешний браузер</h3>
           <div class="checks">
-            <label><input type="checkbox"><span>Выбрал сервис без удобного подключения</span></label>
-            <label><input type="checkbox"><span>Дал агенту задачу в своей сессии</span></label>
-            <label><input type="checkbox"><span>Подтвердил критичные действия сам</span></label>
-            <label><input type="checkbox"><span>Повторил сценарий и оценил прямое подключение</span></label>
+            <label><input type="checkbox"><span>Включил внешний браузер в настройках</span></label>
+            <label><input type="checkbox"><span>Установил расширение в Chrome</span></label>
+            <label><input type="checkbox"><span>Разрешил загрузку файлов в настройках расширения</span></label>
+            <label><input type="checkbox"><span>Делегировал задачу, недоступную через plugin, API, MCP или CLI</span></label>
           </div>
         </article>
       </div>
@@ -128,7 +126,7 @@
             <label><input type="checkbox"><span>Установил и прочитал готовый skill</span></label>
             <label><input type="checkbox"><span>Выбрал успешно выполненную задачу</span></label>
             <label><input type="checkbox"><span>Превратил процесс в свой skill</span></label>
-            <label><input type="checkbox"><span>Проверил skill на новых данных</span></label>
+            <label><input type="checkbox"><span>Запустил итеративную проверку субагентом на той же задаче</span></label>
           </div>
         </article>
         <article class="step">
@@ -145,10 +143,11 @@
           <span class="step-num">Шаг 09</span>
           <h3>Попробовать вайбкодинг</h3>
           <div class="checks">
-            <label><input type="checkbox"><span>Описал один маленький инструмент</span></label>
-            <label><input type="checkbox"><span>Собрал и открыл первую версию</span></label>
-            <label><input type="checkbox"><span>Проверил основные сценарии</span></label>
+            <label><input type="checkbox"><span>Взял референсы для дизайна</span></label>
+            <label><input type="checkbox"><span>Собрал визуал</span></label>
+            <label><input type="checkbox"><span>Подключил хранение данных</span></label>
             <label><input type="checkbox"><span>Опубликовал и открыл по ссылке</span></label>
+            <label><input type="checkbox"><span>★ Подключил кастомный домен</span></label>
           </div>
         </article>
       </div>
