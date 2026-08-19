@@ -73,7 +73,7 @@ body{
     pointer-events:none;user-select:none;opacity:0;
   }
   #swipe-hint.play{display:flex;animation:swipe-hint-shell 1.55s ease-out forwards}
-  .swipe-hint-track{position:relative;width:70px;height:18px;border-bottom:1px solid rgba(255,255,255,.35)}
+  .swipe-hint-track{position:relative;width:70px;height:18px}
   .swipe-hint-dot{
     position:absolute;right:0;top:4px;width:10px;height:10px;
     border-radius:50%;background:var(--blue2);box-shadow:0 0 0 2px #fff;
@@ -1253,7 +1253,7 @@ ul.list li::before{
   var roadmapActiveNode = null;
   var agentsCopyButton = document.querySelector('#deck .agents-copy-button');
   var swipeHint = document.getElementById('swipe-hint');
-  var swipeHintPlayed = false;
+  var swipeHintTimer = 0;
   var roadmapTips = {
     '01': {
       error:'Писать системные инструкции из головы одним длинным монологом.',
@@ -1443,12 +1443,14 @@ ul.list li::before{
   window.addEventListener('touchend',onTouchEnd,{passive:true});
 
   document.getElementById('stage').addEventListener('click',function(e){
-    if(swipeHintPlayed || current!==0 || !window.matchMedia('(hover:none) and (pointer:coarse)').matches) return;
+    if(current!==0 || !window.matchMedia('(hover:none) and (pointer:coarse)').matches) return;
     if(e.target.closest('a,button,input,textarea,select,[role="button"]')) return;
-    swipeHintPlayed = true;
+    window.clearTimeout(swipeHintTimer);
+    swipeHint.classList.remove('play');
+    void swipeHint.offsetWidth;
     swipeHint.classList.add('play');
     swipeHint.setAttribute('aria-hidden','false');
-    window.setTimeout(function(){
+    swipeHintTimer = window.setTimeout(function(){
       swipeHint.classList.remove('play');
       swipeHint.setAttribute('aria-hidden','true');
     },1600);
