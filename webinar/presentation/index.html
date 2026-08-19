@@ -26,12 +26,12 @@ body{
 /* ---------- screen stage ---------- */
 #stage{
   position:fixed;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--bg);
+  background:var(--bg);overflow:hidden;
 }
 #deck{
   width:1280px;height:720px;
-  position:relative;
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%) scale(var(--slide-scale,1));
   transform-origin:center center;
   background:var(--bg);
 }
@@ -1393,10 +1393,18 @@ ul.list li::before{
   }
 
   function fit(){
-    var deck = document.getElementById('deck');
     var scale = Math.min(window.innerWidth/1280, window.innerHeight/720);
-    deck.style.transform = 'scale('+scale+')';
+    document.documentElement.style.setProperty('--slide-scale',scale);
   }
+
+  var touchStartX = 0;
+  function onTouchStart(e){ touchStartX = e.touches[0].clientX; }
+  function onTouchEnd(e){
+    var diff = touchStartX - e.changedTouches[0].clientX;
+    if(Math.abs(diff)>60) show(current+(diff>0?1:-1));
+  }
+  window.addEventListener('touchstart',onTouchStart,{passive:true});
+  window.addEventListener('touchend',onTouchEnd,{passive:true});
 
   document.addEventListener('keydown', function(e){
     if(imageOverlay.classList.contains('open')){
@@ -1424,6 +1432,7 @@ ul.list li::before{
   });
   window.addEventListener('hashchange', function(){ show(parseHash()); });
   window.addEventListener('resize', function(){ fit(); closeRoadmapPopover(false); });
+  window.addEventListener('orientationchange', function(){ fit(); closeRoadmapPopover(false); });
 
   // print DOM: clone every slide into its own page
   var printRoot = document.getElementById('print-root');
