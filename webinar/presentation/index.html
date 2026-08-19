@@ -335,7 +335,17 @@ ul.list li::before{
   display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr;
   column-gap:30px;row-gap:10px;justify-content:stretch;
 }
-.agents-panel.dense .agents-file{grid-column:1/-1;margin:0}
+.agents-panel-head{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.agents-panel.dense .agents-file{margin:0}
+.agents-copy-button{
+  border:1px solid #7580ff;background:transparent;color:var(--bg);
+  padding:7px 13px;font:800 11px/1 'JetBrains Mono',monospace;
+  letter-spacing:.04em;cursor:pointer;
+}
+.agents-copy-button:hover,.agents-copy-button:focus-visible,.agents-copy-button[data-state="done"]{
+  background:var(--blue);border-color:var(--blue);outline:0;
+}
+.agents-copy-button[data-state="error"]{background:#a32121;border-color:#a32121}
 .agents-column{min-width:0;border-top:1px solid rgba(236,235,230,.28);padding-top:10px}
 .agents-column + .agents-column{border-left:1px solid rgba(236,235,230,.28);padding-left:30px}
 .agents-section{margin:0 0 7px;color:#7580ff;font:800 11px/1.15 'JetBrains Mono',monospace}
@@ -1120,7 +1130,10 @@ ul.list li::before{
   <div class="kicker"><span class="num">34</span><span>Обещанный пример</span><span class="rule"></span></div>
   <h2>Фрагмент моего <span class="accent">AGENTS.md</span></h2>
   <div class="agents-panel dense">
-    <div class="agents-file">~/agent_config/AGENTS.md</div>
+    <div class="agents-panel-head">
+      <div class="agents-file">~/agent_config/AGENTS.md</div>
+      <button class="agents-copy-button" type="button">Скопировать</button>
+    </div>
     <div class="agents-column">
       <h3 class="agents-section">## Коммуникация</h3>
       <ul class="agents-copy">
@@ -1150,7 +1163,6 @@ ul.list li::before{
       <h3 class="agents-section">## Окружение</h3>
       <ul class="agents-copy">
         <li>Если ты напарываешься на ограничения сэндбокса – пробуй запускать вне его, это абсолютно ок – тебя проверит внешняя модель на адекватность</li>
-        <li>Есть ~/.env с ключами к разным сервисам. Ты можешь использовать их, но не в коем случае не смотреть и не выводить</li>
       </ul>
     </div>
   </div>
@@ -1205,6 +1217,7 @@ ul.list li::before{
   var roadmapPopover = document.getElementById('roadmap-popover');
   var roadmapPopoverClose = document.querySelector('.roadmap-popover-close');
   var roadmapActiveNode = null;
+  var agentsCopyButton = document.querySelector('#deck .agents-copy-button');
   var roadmapTips = {
     '01': {
       error:'Писать системные инструкции из головы одним длинным монологом.',
@@ -1267,6 +1280,36 @@ ul.list li::before{
     if(e.target===imageOverlay) closeQueueExample();
   });
   overlayClose.addEventListener('click', closeQueueExample);
+
+  function buildAgentsPrompt(){
+    var lines = [];
+    document.querySelectorAll('#deck .agents-slide .agents-column').forEach(function(column){
+      column.querySelectorAll('.agents-section, .agents-copy li').forEach(function(node){
+        if(node.classList.contains('agents-section')){
+          if(lines.length) lines.push('');
+          lines.push(node.textContent.trim());
+        } else {
+          lines.push('- '+node.textContent.trim());
+        }
+      });
+    });
+    return lines.join('\n');
+  }
+
+  agentsCopyButton.addEventListener('keydown',function(e){ e.stopPropagation(); });
+  agentsCopyButton.addEventListener('click',function(){
+    navigator.clipboard.writeText(buildAgentsPrompt()).then(function(){
+      agentsCopyButton.textContent = 'Скопировано';
+      agentsCopyButton.dataset.state = 'done';
+      window.setTimeout(function(){
+        agentsCopyButton.textContent = 'Скопировать';
+        delete agentsCopyButton.dataset.state;
+      },3000);
+    },function(){
+      agentsCopyButton.textContent = 'Ошибка';
+      agentsCopyButton.dataset.state = 'error';
+    });
+  });
 
   function placeRoadmapPopover(node){
     var nodeRect = node.getBoundingClientRect();
