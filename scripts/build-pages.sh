@@ -36,6 +36,11 @@ copy_file webinar/presentation/contact-sheet-35.png
 copy_dir webinar/presentation/assets
 copy_dir webinar/presentation/fonts
 
+copy_file workshop/presentation/index.html
+copy_file workshop/presentation/workshop-go-to-market.pdf
+copy_dir workshop/presentation/assets
+copy_dir workshop/presentation/fonts
+
 for required_path in \
   index.html \
   offer/index.html \
@@ -50,7 +55,12 @@ for required_path in \
   webinar/presentation/assets/queue-example.png \
   webinar/presentation/fonts/fonts.css \
   webinar/presentation/webinar-ai-for-work.pdf \
-  webinar/presentation/contact-sheet-35.png
+  webinar/presentation/contact-sheet-35.png \
+  workshop/presentation/index.html \
+  workshop/presentation/assets/kolya.jpg \
+  workshop/presentation/assets/deck-qr.png \
+  workshop/presentation/fonts/fonts.css \
+  workshop/presentation/workshop-go-to-market.pdf
 do
   test -f "$output_dir/$required_path"
 done

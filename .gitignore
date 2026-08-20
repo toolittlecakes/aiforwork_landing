@@ -26,3 +26,6 @@ webinar/references/dasha/source/contact-sheets-30s/
 webinar/references/marathon-2026-06/result.json
 webinar/presentation/rendered-*/
 webinar/archive/
+
+# Workshop: reproducible renders
+workshop/presentation/rendered/
