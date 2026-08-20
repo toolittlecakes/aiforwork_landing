@@ -185,17 +185,36 @@ ul.list.big li{padding-left:48px}
 .s-title .brand .dot{width:10px;height:10px;background:var(--blue)}
 .s-title h1{font-size:92px;max-width:1100px}
 
-/* ---------- killed list ---------- */
-.killed{
-  margin-top:40px;align-self:flex-start;
-  border:var(--line);background:var(--ink);color:var(--bg);
-  box-shadow:8px 8px 0 var(--blue);
-  padding:30px 40px;
+/* ---------- one tool infographic ---------- */
+.onetool{flex:1;display:flex;align-items:center;gap:0;margin-top:8px}
+.onetool-chaos{position:relative;flex:1.2;height:420px}
+.onetool-chaos .dev{
+  position:absolute;display:flex;flex-direction:column;align-items:center;gap:8px;
+  border:var(--line);background:var(--bg);box-shadow:5px 5px 0 var(--ink);
+  padding:16px 22px 12px;
 }
-.killed .kt{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;letter-spacing:.04em;margin-bottom:20px;color:#7580ff}
-.killed ul{list-style:none;display:flex;flex-direction:column;gap:12px}
-.killed li{font-size:26px;font-weight:700;padding-left:26px;position:relative}
-.killed li::before{content:"—";position:absolute;left:0;color:#7580ff;font-weight:700}
+.onetool-chaos .dev .e{font-size:52px;line-height:1}
+.onetool-chaos .dev .l{
+  font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.onetool-arrow{
+  flex:none;padding:0 44px;
+  font-family:'JetBrains Mono',monospace;font-size:72px;font-weight:700;color:var(--blue);
+}
+.onetool-phone{
+  flex:none;width:230px;height:430px;
+  border:3px solid var(--ink);border-radius:34px;background:var(--ink);
+  box-shadow:9px 9px 0 var(--blue);
+  padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+.onetool-phone .notch{width:70px;height:8px;border-radius:4px;background:rgba(236,235,230,.4)}
+.onetool-phone .phone-screen{
+  flex:1;width:100%;border-radius:18px;background:var(--bg);
+  display:grid;grid-template-columns:1fr 1fr;place-items:center;
+  padding:18px 8px;
+}
+.onetool-phone .phone-screen span{font-size:44px;line-height:1}
 
 /* ---------- poll / steps ---------- */
 .checks{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
@@ -349,14 +368,25 @@ ul.list.big li{padding-left:48px}
 <section class="slide">
   <div class="kicker"><span class="num">03</span><span>Один инструмент</span><span class="rule"></span></div>
   <h2>Один инструмент</h2>
-  <div class="killed">
-    <p class="kt">Смартфоны убили:</p>
-    <ul>
-      <li>часы</li>
-      <li>плеер</li>
-      <li>телевизор</li>
-    </ul>
-    <p style="margin-top:16px;font-size:26px;font-weight:700;color:#7580ff">...</p>
+  <p class="sub" style="margin-top:10px;font-size:22px">Смартфоны убили:</p>
+  <div class="onetool">
+    <div class="onetool-chaos">
+      <div class="dev" style="left:2%;top:6%;transform:rotate(-7deg)"><span class="e">⌚</span><span class="l">часы</span></div>
+      <div class="dev" style="left:44%;top:0%;transform:rotate(5deg)"><span class="e">🎧</span><span class="l">плеер</span></div>
+      <div class="dev" style="left:16%;top:38%;transform:rotate(3deg)"><span class="e">📺</span><span class="l">телевизор</span></div>
+      <div class="dev" style="left:58%;top:33%;transform:rotate(-4deg)"><span class="e">📷</span><span class="l">камера</span></div>
+      <div class="dev" style="left:1%;top:70%;transform:rotate(6deg)"><span class="e">🗺️</span><span class="l">навигатор</span></div>
+      <div class="dev" style="left:43%;top:66%;transform:rotate(-6deg)"><span class="e">🔦</span><span class="l">фонарик</span></div>
+    </div>
+    <div class="onetool-arrow">→</div>
+    <div class="onetool-phone">
+      <div class="notch"></div>
+      <div class="phone-screen">
+        <span>⌚</span><span>🎧</span>
+        <span>📺</span><span>📷</span>
+        <span>🗺️</span><span>🔦</span>
+      </div>
+    </div>
   </div>
 </section>
 
