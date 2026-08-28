@@ -28,6 +28,10 @@ copy_dir payment-failed
 copy_dir privacy
 copy_dir experiment
 
+for redirect_slug in aiexee antonod ruspm aiunveiledplus aivolution; do
+  copy_file "$redirect_slug/index.html"
+done
+
 copy_file webinar/index.html
 copy_dir webinar/checklist
 copy_file webinar/presentation/index.html
@@ -43,6 +47,11 @@ copy_dir workshop/presentation/fonts
 
 for required_path in \
   index.html \
+  aiexee/index.html \
+  antonod/index.html \
+  ruspm/index.html \
+  aiunveiledplus/index.html \
+  aivolution/index.html \
   offer/index.html \
   payment-failed/index.html \
   privacy/index.html \

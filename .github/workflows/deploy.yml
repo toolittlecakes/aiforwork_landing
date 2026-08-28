@@ -44,3 +44,4 @@ jobs:
           curl --fail --silent --show-error https://website.yandexcloud.net/aiforwork.courses/ >/dev/null
           curl --fail --silent --show-error https://website.yandexcloud.net/www.aiforwork.courses/ >/dev/null
           curl --fail --silent --show-error https://website.yandexcloud.net/aiforwork.courses/webinar/presentation/ >/dev/null
+          curl --fail --silent --show-error https://website.yandexcloud.net/aiforwork.courses/aivolution/ >/dev/null
