@@ -1084,22 +1084,12 @@ li + li { margin-top: 10px; }
 .price-promo-note.is-error {
   color: #c0331b;
 }
-.price-link {
+.price-pay-btn {
   align-self: flex-start;
   margin-top: 26px;
-  font-family: var(--display);
-  font-size: clamp(28px, 3.2vw, 42px);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: var(--accent);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 6px;
-  transition: color .16s ease, transform .16s ease;
+  padding: 13px 36px;
+  font-size: 16px;
 }
-.price-link:hover { color: var(--accent-hot); transform: translateX(4px); }
-.price-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 6px; }
 .refund {
   margin-top: 18px;
   color: var(--ink-2);
@@ -1705,7 +1695,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
           <p class="price-label">Участие в потоке</p>
           <p class="price-amount"><span class="price-original">25&nbsp;000&nbsp;₽</span><span class="price-discounted" data-promo-price hidden></span></p>
           <p class="price-promo-note" data-promo-note aria-live="polite" hidden></p>
-          <a class="price-link" href="#payment" data-payment-trigger data-offer-id="late_2026_09" data-offer-label="Участие в потоке" data-offer-amount="25 000 ₽">оплатить</a>
+          <a class="btn primary price-pay-btn" href="#payment" data-payment-trigger data-offer-id="late_2026_09" data-offer-label="Участие в потоке" data-offer-amount="25 000 ₽">Оплатить</a>
         </article>
       </div>
       <p class="refund">Полный возврат при отмене в течение первой недели</p>
