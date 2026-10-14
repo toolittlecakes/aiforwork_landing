@@ -22,6 +22,7 @@ copy_dir() {
 copy_file .nojekyll
 copy_file favicon.svg
 copy_file index.html
+copy_file assets/course-start.js
 copy_dir images
 copy_dir offer
 copy_dir payment-failed
@@ -47,6 +48,7 @@ copy_dir workshop/presentation/fonts
 
 for required_path in \
   index.html \
+  assets/course-start.js \
   aiexee/index.html \
   antonod/index.html \
   ruspm/index.html \
