@@ -287,6 +287,66 @@ section[id] { scroll-margin-top: 88px; }
   margin-bottom: 22px;
   color: var(--ink-2);
 }
+.stickler[hidden] {
+  display: none;
+}
+.stickler {
+  margin-top: 28px;
+  padding: 24px 26px 24px 30px;
+  border: 1px solid var(--rule);
+  border-left: 8px solid var(--accent);
+  background: var(--paper);
+  box-shadow: 6px 6px 0 0 var(--ink);
+  animation: stickler-in .28s ease both;
+}
+.stickler-title {
+  font: 600 clamp(20px, 2vw, 26px)/1.15 var(--display);
+  letter-spacing: -.02em;
+}
+.stickler-body {
+  margin-top: 10px;
+  color: var(--ink-2);
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.5;
+}
+.stickler-code {
+  padding: 2px 7px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  font-family: var(--mono);
+  font-size: .92em;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  cursor: copy;
+  transition: background .16s ease, color .16s ease;
+}
+.stickler-code:hover {
+  background: var(--accent);
+  color: #fff;
+}
+.stickler-code:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.stickler-copy-note {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.stickler-copy-note.is-error {
+  color: var(--ink-3);
+}
+@keyframes stickler-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stickler { animation: none; }
+}
 
 .start-note {
   margin-top: 16px;
@@ -471,6 +531,7 @@ section[id] { scroll-margin-top: 88px; }
   height: 100%;
   object-fit: cover;
   display: block;
+  border: 1px solid var(--ink);
 }
 .author h3 {
   margin-bottom: 18px;
@@ -550,17 +611,19 @@ blockquote p + p { margin-top: 14px; }
 }
 .review-gallery-stage {
   width: 100%;
-  height: auto;
+  height: clamp(360px, 66dvh, 620px);
   padding: clamp(20px, 2.5vw, 32px);
   border: 0;
   border-bottom: 1px solid var(--rule);
   border-radius: 0;
   background: var(--bg);
   color: inherit;
-  display: block;
-  cursor: e-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
   touch-action: pan-y;
-  overflow: visible;
+  overflow: hidden;
 }
 .review-gallery-stage:focus-visible,
 .review-gallery-control:focus-visible {
@@ -569,20 +632,24 @@ blockquote p + p { margin-top: 14px; }
 }
 .review-gallery-slide {
   width: 100%;
-  height: auto;
+  height: 100%;
   min-width: 0;
   min-height: 0;
   margin: 0;
-  display: block;
-  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .review-gallery-slide[hidden] {
   display: none;
 }
 .review-gallery-slide img {
   display: block;
-  width: 100%;
+  width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   background: #fff;
   border: 1px solid var(--rule-soft);
   box-shadow: 0 3px 12px rgba(14, 14, 13, .1);
@@ -632,199 +699,52 @@ blockquote p + p { margin-top: 14px; }
   font-size: 13px;
   text-align: center;
 }
-
-.testimonials {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto 1fr auto;
-  gap: 16px;
-}
-.testimonial {
-  display: grid;
-  grid-row: span 3;
-  grid-template-rows: subgrid;
-  min-height: 0;
-  border: 1px solid var(--rule);
-  background: var(--paper);
-  transition: transform .16s ease, box-shadow .16s ease;
-}
-.testimonial:hover {
-  transform: translateY(-2px);
-  box-shadow: 6px 6px 0 0 var(--ink);
-}
-.testimonial-head {
-  min-height: 104px;
-  padding: 24px 26px;
-  border-bottom: 1px solid var(--rule);
-  background: var(--ink);
-  color: var(--bg);
-  position: relative;
-  overflow: hidden;
-}
-.testimonial-head::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 8px;
-  background: var(--accent);
-}
-.testimonial-head::after {
-  content: "";
-  position: absolute;
-  right: 22px;
-  top: 22px;
-  width: 14px;
-  height: 14px;
-  background: var(--accent-hot);
-}
-.testimonial-head h3 {
-  font-size: clamp(22px, 2.2vw, 30px);
-  line-height: 1.08;
-  max-width: 21ch;
-  padding-left: 10px;
-  color: var(--bg);
-  position: relative;
-  z-index: 1;
-}
-.quote {
-  padding: 28px 26px;
-  color: var(--ink-2);
-  font-size: 17px;
-  line-height: 1.55;
-}
-.quote.main {
-  flex: 1;
-  color: var(--ink);
-  font-size: clamp(18px, 1.8vw, 21px);
-  line-height: 1.45;
-}
-.quote .cut {
-  display: block;
-  margin: 12px 0;
-  color: var(--accent);
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: .08em;
-}
-details.similar {
-  border-top: 1px solid var(--rule);
-}
-details.similar summary {
-  min-height: 56px;
-  padding: 15px 26px;
-  cursor: pointer;
-  list-style: none;
-  font-weight: 600;
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  transition: background .16s ease, color .16s ease;
-}
-details.similar summary::-webkit-details-marker { display: none; }
-details.similar summary::after {
-  content: "↗";
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  flex: 0 0 26px;
-  color: var(--ink);
-  font-size: 22px;
-  line-height: 1;
-}
-details.similar summary:hover {
-  background: var(--ink);
-  color: var(--bg);
-}
-details.similar summary:hover::after { color: var(--bg); }
-.similar-list {
+.review-lightbox[hidden] {
   display: none;
 }
-.quote-modal[hidden] {
-  display: none;
-}
-.quote-modal {
+.review-lightbox {
   position: fixed;
   inset: 0;
-  z-index: 20;
-  display: grid;
-  place-items: center;
-  padding: 28px;
+  z-index: 40;
+  padding: clamp(12px, 3vw, 32px);
+  background: color-mix(in srgb, var(--ink) 92%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
 }
-.quote-modal-backdrop {
+.review-lightbox-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--rule-soft);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .45);
+}
+.review-lightbox-close {
   position: absolute;
-  inset: 0;
-  border: 0;
-  background: color-mix(in srgb, var(--ink) 72%, transparent);
-  cursor: pointer;
-}
-.quote-modal-panel {
-  position: relative;
-  z-index: 1;
-  width: min(860px, 100%);
-  max-height: min(760px, calc(100dvh - 56px));
-  display: grid;
-  grid-template-rows: auto 1fr;
-  border: 1px solid var(--rule);
-  background: var(--paper);
-  box-shadow: 10px 10px 0 0 var(--accent);
-}
-.quote-modal-head {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 20px;
-  align-items: start;
-  padding: 24px 26px;
-  border-bottom: 1px solid var(--rule);
-  background: var(--ink);
-  color: var(--bg);
-}
-.quote-modal-head p {
-  margin-bottom: 6px;
-  color: color-mix(in srgb, var(--bg) 62%, transparent);
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-.quote-modal-head h3 {
-  max-width: 24ch;
-  font-size: clamp(24px, 3vw, 38px);
-  line-height: 1.02;
-  color: var(--bg);
-}
-.quote-modal-close {
-  width: 38px;
-  height: 38px;
+  top: clamp(12px, 3vw, 24px);
+  right: clamp(12px, 3vw, 24px);
+  width: 40px;
+  height: 40px;
   border: 1px solid color-mix(in srgb, var(--bg) 45%, transparent);
   border-radius: 0;
-  background: transparent;
+  background: var(--ink);
   color: var(--bg);
   font: inherit;
-  font-size: 28px;
+  font-size: 26px;
   line-height: 1;
   cursor: pointer;
   transition: background .16s ease, color .16s ease;
 }
-.quote-modal-close:hover {
+.review-lightbox-close:hover {
   background: var(--bg);
   color: var(--ink);
 }
-.quote-modal-body {
-  overflow: auto;
-  padding: 0;
-}
-.quote-modal-body .quote {
-  padding: 28px 30px;
-  border-bottom: 1px solid var(--rule-soft);
-  color: var(--ink);
-}
-.quote-modal-body .quote:last-child {
-  border-bottom: 0;
-}
+
 .payment-modal[hidden] {
   display: none;
 }
@@ -950,16 +870,19 @@ details.similar summary:hover::after { color: var(--bg); }
 .payment-promo-row {
   display: flex;
   gap: 10px;
-  align-items: stretch;
+  align-items: flex-end;
 }
 .payment-promo-row .payment-field {
   flex: 1;
 }
+.payment-promo-row .payment-field input {
+  height: 48px;
+}
 .payment-promo-apply {
-  align-self: flex-end;
-  min-height: 48px;
-  padding: 12px 18px;
+  height: 48px;
+  padding: 0 18px;
   border: 1px solid var(--rule);
+  border-radius: 0;
   background: var(--paper);
   color: var(--ink);
   font: inherit;
@@ -1434,8 +1357,6 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
   .authors,
   .anger-list,
   .roadmap { grid-template-columns: 1fr; }
-  .testimonials { grid-template-columns: 1fr; grid-template-rows: none; }
-  .testimonial { display: flex; flex-direction: column; grid-row: auto; }
   .week { border-right: 0; border-bottom: 1px solid var(--rule); }
   .week:last-child { border-bottom: 0; }
 }
@@ -1464,17 +1385,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     font-size: 14px;
   }
   .review-gallery-stage {
-    height: auto;
-    min-height: 0;
     padding: 14px;
-    overflow: visible;
-  }
-  .review-gallery-slide {
-    height: auto;
-    overflow: visible;
-  }
-  .review-gallery-slide img {
-    height: auto;
   }
   .review-gallery-controls {
     min-height: 56px;
@@ -1522,42 +1433,6 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
   .check-grid p::before { top: calc(18px + 0.62em); }
   .author { grid-template-columns: 1fr; }
   .portrait { min-height: 280px; }
-  .testimonial-head {
-    min-height: 0;
-  }
-  .testimonial-head h3 {
-    font-size: 27px;
-  }
-  .quote,
-  .quote.main {
-    font-size: 18px;
-    line-height: 1.48;
-  }
-  .testimonial-head,
-  .quote,
-  details.similar summary { padding-left: 20px; padding-right: 20px; }
-  .quote-modal {
-    padding: 0;
-    place-items: stretch;
-  }
-  .quote-modal-panel {
-    width: 100%;
-    max-height: 100dvh;
-    min-height: 100dvh;
-    border: 0;
-    box-shadow: none;
-  }
-  .quote-modal-head {
-    padding: 20px;
-  }
-  .quote-modal-head h3 {
-    font-size: 27px;
-  }
-  .quote-modal-body .quote {
-    padding: 24px 20px;
-    font-size: 18px;
-    line-height: 1.5;
-  }
   .payment-modal {
     padding: 18px;
   }
@@ -1642,7 +1517,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
       <a href="#format">Формат</a>
       <a href="#tasks">Задачи</a>
       <a href="#authors">От кого</a>
-      <a href="#testimonials">Отзывы</a>
+      <a href="#review-screens">Отзывы</a>
       <a href="#faq">FAQ</a>
     </nav>
     <a class="btn primary" href="#payment">Записаться</a>
@@ -1822,6 +1697,12 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
           <ul><li>Например, защита бизнеса от потери знаний при смене сотрудников</li><li>Самообучение ассистента под ваш уникальный контекст</li></ul>
         </details>
       </div>
+
+      <aside class="stickler" data-stickler hidden>
+        <p class="stickler-title">Ачивка «Душнила»: открыть все 16/16 описаний задач</p>
+        <p class="stickler-body">Мы таких любим! Для вас у нас есть промокод <button class="stickler-code" type="button" data-stickler-code aria-label="Скопировать промокод STICKLER">STICKLER</button> <span data-stickler-plain>на скидку 1 000 ₽.</span><span data-stickler-stacked hidden>— это ещё 1 000 ₽ скидки сверху к вашему промокоду.</span><span data-stickler-bonus hidden>— скидка уже учтена в вашей цене.</span> <span class="stickler-copy-note" data-stickler-copy-note aria-live="polite" hidden></span></p>
+      </aside>
+
       <h3 class="tasks-weekend">Задания на выходные</h3>
       <p class="tasks-weekend-note">Необязательные модули</p>
       <div class="tasks-grid tasks-weekend-grid">
@@ -1887,7 +1768,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
       </div>
       <div class="authors">
         <article class="author">
-          <div class="portrait"><img src="/images/kolya.jpg" alt="Коля Шейко" loading="lazy"></div>
+          <div class="portrait"><img src="/images/kolya-portrait.jpg" alt="Коля Шейко" loading="lazy"></div>
           <div>
             <h3>Коля Шейко</h3>
             <blockquote>
@@ -1920,7 +1801,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
 
       <div class="review-gallery" data-review-gallery role="region" aria-roledescription="карусель" aria-label="Скрины отзывов с предыдущего потока">
         <p class="review-gallery-author" data-review-author aria-live="polite">Участница А.</p>
-        <div class="review-gallery-stage" data-review-stage role="button" tabindex="0" aria-label="Показать следующий скрин отзыва">
+        <div class="review-gallery-stage" data-review-stage role="button" tabindex="0" aria-label="Открыть скрин отзыва в полном размере">
           <figure class="review-gallery-slide" data-review-slide data-review-source="01" data-review-label="Участница А.">
             <img src="images/reviews/review-01.png" width="1300" height="596" alt="Отзыв участницы А., 1 из 27" loading="eager" fetchpriority="high" draggable="false">
           </figure>
@@ -2009,85 +1890,14 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
           <p class="review-gallery-counter" data-review-counter aria-live="polite" aria-atomic="true">1 / 27</p>
           <button class="review-gallery-control" type="button" data-review-next aria-label="Показать следующий скрин отзыва">Вперёд →</button>
         </div>
-        <p class="review-gallery-hint">Кликните по скрину, используйте кнопки, стрелки клавиатуры или свайп.</p>
+        <p class="review-gallery-hint">Клик по скрину открывает его в полном размере (повторный клик — закрыть). Листайте кнопками, стрелками клавиатуры или свайпом.</p>
       </div>
     </div>
   </section>
 
-  <section class="paper" id="testimonials">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2>Отзывы с предыдущего потока</h2>
-        </div>
-      </div>
-      <div class="testimonials">
-        <article class="testimonial">
-          <div class="testimonial-head"><h3>Оказывается, вот это можно не делать руками</h3></div>
-          <blockquote class="quote main">
-            <p>Абсолютно тупые, технические, там типа выгрузить целый плейлист с Ютуба, сверить названия со списком названий на сайте, пронумеровать их так, чтобы они стояли в нужном порядке в папке, добавить туда документы, которые тоже должны быть пронумерованы, чтобы стоять за определённым видео.</p>
-            <p>И вручную это был бы головняк на несколько дней. Агент это сделал там, условно, за 2 часа абсолютно автономно, сам перепроверяя, что упало, что не упало, чего хватает, чего не хватает.</p>
-          </blockquote>
-          <details class="similar">
-            <summary>Похожие отзывы</summary>
-            <div class="similar-list">
-              <blockquote class="quote"><p>И божественно то, что Кодекс совершенно спокойно ориентируется в документе, находит правильные места, может даже по какому-то такому очень поверхностному указанию догадаться, что именно нужно сделать, и это очень классно. Сейчас я пишу руководство для пользователя тоже с помощью Кодекс. Вот, и радуюсь, потому что это действительно экономит много моего времени.</p></blockquote>
-              <blockquote class="quote"><p>В жизни я, ну, уже применяю. Очень полезно мне то, что с таблицами, с гугловскими, отлично он ладит, ну, не только с гугловскими, с экселевскими.</p><p>Он быстро делает то, что я вручную делать вообще не хочу. Ну, то есть мне это очень хорошо зашло.</p></blockquote>
-              <blockquote class="quote"><p>Мне нужно было подвести промежуточные итоги: посчитать, сколько участников, у кого больше всего тренировок, у кого меньше.</p><p>И как бы я делала это раньше? Я бы делала, блядь, это вручную, буквально проверяя каждый тег, каждое сообщение и внося это, блядь, в документ Excel. Это был бы просто полный пиздец.</p><span class="cut">[...]</span><p>И я такая: «Блядь, ладно, давай». И я зашла в пачку, в интеграции, в API, вручную создала токен, я уже знала, как с ним работать, я уже, блядь, ничего не спрашивала.</p><span class="cut">[...]</span><p>Он мне выгрузил огромный архив. Я такая: «А теперь работай там, проанализируй вот это, вот это», ну тут как бы тут чуть-чуть побольше было настроек, потому что в чате в целом в нашем достаточно много мусора, поэтому надо было прямо хорошо прописать промпт. Вот. Он мне всё проанализировал, вообще всё красиво, всё заебись.</p></blockquote>
-              <blockquote class="quote"><p>Главная ценность это появляется именно ощущение ежедневного помощника. Сегодня выбирал пылесос, допустим. Кодекс сам походил, посравнивал характеристики по сайтам, поспрашивал у меня, что мне нужно, и выбрал, в общем-то, лучший вариант. Я бы, наверное, потратил бы на это больше часа.</p></blockquote>
-            </div>
-          </details>
-        </article>
-
-        <article class="testimonial">
-          <div class="testimonial-head"><h3>Вау, я теперь понимаю как все настроить под себя</h3></div>
-          <blockquote class="quote main">
-            <p>Получилось, что я самостоятельно в конце недели настроила какую-то рабочую среду тоже вместе с ним. Просто выясняла, что ему мешает работать, как это исправить, чем помочь, как поменять настройки, что он сам себе может прописать в качестве какого-то, господи, плейбука условно.</p>
-          </blockquote>
-          <details class="similar">
-            <summary>Похожие отзывы</summary>
-            <div class="similar-list">
-              <blockquote class="quote"><p>Накопившийся дискомфорт оказался достаточным, чтобы сесть и разобраться с этим. И вообще в целом, наверное, за эту неделю сформировалось ощущение, что я устала быть девочкой-гуманитарием, которая чуть что такая: «ой, у меня лапки, я не понимаю». Есть много накопившейся злости в положительном смысле этого слова, типа взять и разобраться, и понять, и перестать испытывать вот эту фрустрацию на тему того, что я сталкиваюсь с чем-то совершенно мне непонятным и незнакомым.</p></blockquote>
-              <blockquote class="quote"><p>стало Не страшно "тыкать"  не туда :)<br>    стало  понятнее чем и где в обычной жизни Кодекс может существенно сократить время задачи или даже целого проекта  <br>  стало понятно как Кодексу нужно ставить задачи -  как самому "несведущему"сотруднику . от правильной постановки задачи зависит 90% ее успеха ! <br> научились "вшивать" в него скиллы - благо Коля "вел за руку" ( я в шоке от такого прогресса)</p></blockquote>
-              <blockquote class="quote"><p>И тут мне Кодекс говорит, что можно через API, через токен попробовать всё это, короче, выгрузить через него. А я, нахуй, понимаю, что такое API и токен только потому, что я прошла ваш марафон. Если бы я просто, ну допустим, рандомно скачала Годекс, начала с ним работать, и вот бы он мне выдал такую хуйню, я бы нихуяшечки не поняла. Если бы я спрашивала GPT, он бы, нахуй, мне не подсказал такого решения.</p></blockquote>
-              <blockquote class="quote"><p>&gt;&gt;Кодекс не держит требования на всех слайдах → зафиксировать требования в документе, включить галочку «К цели» (плюсик в окне ввода), написать «должны быть удовлетворены требования из документа такого-то»</p><p>не знал, очень полезно, спасибо</p><p>про "к цели" это вообще божественно полезный момент<br>это ещё и философия 2025-2026 всех нейронок (и клод и чатгпт и пр.), которая пока у меня НЕ в голове</p></blockquote>
-            </div>
-          </details>
-        </article>
-
-        <article class="testimonial">
-          <div class="testimonial-head"><h3>У меня совсем нет времени, но приходится держать ритм, чтобы не вылететь – работает!</h3></div>
-          <blockquote class="quote main">
-            <p>А еще микродополнение, поскольку у меня последние дни не очень много времени на домашки, я заценила, что каждую из них абсолютно реально можно выполнить за 15-20 минут.</p>
-            <p>И поэтому я успевала их сделать там за сколько-то секунд, минут, десятков минут до дедлайна. И тоже кайфанула с того, что это прямо реально минимальный формат, с одной стороны, с другой стороны, он правда позволяет оставаться в ритме и в каком-то контакте и с группой, с марафоном, и с инструментом, что ты не выпадаешь совсем надолго,</p>
-          </blockquote>
-          <details class="similar">
-            <summary>Похожие отзывы</summary>
-            <div class="similar-list">
-              <blockquote class="quote"><p>Мне кажется, пользы больше в том, что это сделано своими руками, и есть понимание, что агент может, а что не может и сколько нужно приложить усилий, чтобы результат был хороший.</p><span class="cut">[...]</span><p>Вот, а на марафоне у нас обратная ситуация, что мы что-нибудь да делаем руками, и ну если говорить об этом максимально объективно, лучше сделать какую-нибудь маленькую вещь, чем узнать какие-то умные вещи и не сделать ничего.</p></blockquote>
-              <blockquote class="quote"><p>Что это, в общем, довольно легкая движуха, которая не воспринимается как типа курс, который надо сейчас сесть и заняться, и вот выделить на это время.</p><span class="cut">[...]</span><p>А если у меня сейчас нет на это времени, ресурса, возможности, то я могу за 15 минут сделать домашку и тем не менее оставаться в каком-то ритме, в контексте этого взаимодействия и внутри группы, и с агентом так, чтобы это к чему-то привело через месяц.</p></blockquote>
-              <blockquote class="quote"><p>Мне нравится формат. Я ленивая попа с маленьким ресурсом сейчас на развитие, а формат подпихивает меня хоть 15-30 минут уделить на "потыкать в кодекс". Домашки делаю на тройку, тк они пока на сильно стреляют в мою деятельность, а на эксперименты нет сил. Но я уже знаю несколько способов использовать агента. Именно "как использовать", а не просто теорию.</p></blockquote>
-              <blockquote class="quote"><p>Главный результат<br>Самое важное для меня - закрепить привычку обращаться к агенту.<br>Пока я вижу в этом не разовое решение конкретной задачи, а тренировку мышления: замечать, где агент может помочь, как формулировать запрос и как проверять результат.</p></blockquote>
-            </div>
-          </details>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="quote-modal" id="quote-modal" hidden>
-    <button class="quote-modal-backdrop" type="button" data-modal-close aria-label="Закрыть похожие отзывы"></button>
-    <div class="quote-modal-panel" role="dialog" aria-modal="true" aria-labelledby="quote-modal-title">
-      <div class="quote-modal-head">
-        <div>
-          <p>Похожие отзывы</p>
-          <h3 id="quote-modal-title"></h3>
-        </div>
-        <button class="quote-modal-close" type="button" data-modal-close aria-label="Закрыть">×</button>
-      </div>
-      <div class="quote-modal-body" id="quote-modal-body"></div>
-    </div>
+  <div class="review-lightbox" id="review-lightbox" role="dialog" aria-modal="true" aria-label="Скрин отзыва в полном размере" hidden>
+    <img class="review-lightbox-image" data-lightbox-image alt="" draggable="false">
+    <button class="review-lightbox-close" type="button" data-lightbox-close aria-label="Закрыть">×</button>
   </div>
 
   <section class="paper" id="payment">
@@ -2253,6 +2063,9 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
   const counter = gallery.querySelector("[data-review-counter]");
   const previousButton = gallery.querySelector("[data-review-prev]");
   const nextButton = gallery.querySelector(".review-gallery-controls [data-review-next]");
+  const lightbox = document.querySelector("#review-lightbox");
+  const lightboxImage = lightbox.querySelector("[data-lightbox-image]");
+  const lightboxClose = lightbox.querySelector("[data-lightbox-close]");
   let currentIndex = 0;
   let touchStartX = null;
   let ignoreNextClick = false;
@@ -2264,7 +2077,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     });
     author.textContent = slides[currentIndex].dataset.reviewLabel;
     counter.textContent = `${currentIndex + 1} / ${slides.length}`;
-    stage.setAttribute("aria-label", `Показать следующий скрин отзыва. Сейчас открыт ${currentIndex + 1} из ${slides.length}`);
+    stage.setAttribute("aria-label", `Открыть скрин отзыва в полном размере. Сейчас открыт ${currentIndex + 1} из ${slides.length}`);
   }
 
   function showPrevious() {
@@ -2275,20 +2088,42 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     showSlide(currentIndex + 1);
   }
 
+  function openLightbox() {
+    const image = slides[currentIndex].querySelector("img");
+    lightboxImage.src = image.currentSrc || image.src;
+    lightboxImage.alt = image.alt;
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+    lightboxClose.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightboxImage.removeAttribute("src");
+    lightboxImage.alt = "";
+    document.body.style.overflow = "";
+    stage.focus();
+  }
+
   previousButton.addEventListener("click", showPrevious);
   nextButton.addEventListener("click", showNext);
+  lightbox.addEventListener("click", closeLightbox);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !lightbox.hidden) closeLightbox();
+  });
+
   stage.addEventListener("click", () => {
     if (ignoreNextClick) {
       ignoreNextClick = false;
       return;
     }
-    showNext();
+    openLightbox();
   });
 
   gallery.addEventListener("keydown", (event) => {
     if (event.target === stage && (event.key === "Enter" || event.key === " ")) {
       event.preventDefault();
-      showNext();
+      openLightbox();
       return;
     }
     if (event.key === "ArrowLeft") {
@@ -2319,50 +2154,101 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
 })();
 
 (() => {
-  const modal = document.querySelector("#quote-modal");
-  if (!modal) return;
+  const banner = document.querySelector("[data-stickler]");
+  if (!banner) return;
 
-  const modalTitle = modal.querySelector("#quote-modal-title");
-  const modalBody = modal.querySelector("#quote-modal-body");
-  const closeButtons = [...modal.querySelectorAll("[data-modal-close]")];
-  let lastTrigger = null;
+  const cards = [...document.querySelectorAll(".tasks-grid:not(.tasks-weekend-grid) .task-card")];
+  if (cards.length === 0) return;
 
-  function openModal(trigger) {
-    const testimonial = trigger.closest(".testimonial");
-    const source = testimonial?.querySelector(".similar-list");
-    const title = testimonial?.querySelector(".testimonial-head h3")?.textContent.trim();
-    if (!source || !title) return;
+  const codeEl = banner.querySelector("[data-stickler-code]");
+  const copyNoteEl = banner.querySelector("[data-stickler-copy-note]");
+  const plainEl = banner.querySelector("[data-stickler-plain]");
+  const stackedEl = banner.querySelector("[data-stickler-stacked]");
+  const bonusEl = banner.querySelector("[data-stickler-bonus]");
+  const STORAGE_KEY = "aifw:stickler";
+  const STACKED_PROMOS = { AI_EXEE: "AI_EXEE_STICKLER" };
+  let appliedPromo = "";
+  let copyNoteTimer;
 
-    lastTrigger = trigger;
-    modalTitle.textContent = title;
-    modalBody.innerHTML = source.innerHTML;
-    modal.hidden = false;
-    document.body.style.overflow = "hidden";
-    modal.querySelector(".quote-modal-close").focus();
+  function showCopyNote(message, isError) {
+    copyNoteEl.textContent = message;
+    copyNoteEl.classList.toggle("is-error", isError);
+    copyNoteEl.hidden = false;
+    window.clearTimeout(copyNoteTimer);
+    copyNoteTimer = window.setTimeout(() => {
+      copyNoteEl.hidden = true;
+    }, 2500);
   }
 
-  function closeModal() {
-    modal.hidden = true;
-    modalBody.innerHTML = "";
-    document.body.style.overflow = "";
-    lastTrigger?.focus();
-  }
-
-  document.querySelectorAll("details.similar summary").forEach((summary) => {
-    summary.addEventListener("click", (event) => {
-      event.preventDefault();
-      openModal(summary);
-    });
-  });
-
-  closeButtons.forEach((button) => {
-    button.addEventListener("click", closeModal);
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !modal.hidden) {
-      closeModal();
+  async function copyCode() {
+    const code = codeEl.textContent.trim();
+    try {
+      await navigator.clipboard.writeText(code);
+      showCopyNote("✓ Скопировано", false);
+    } catch {
+      showCopyNote("Не скопировалось — выделите вручную", true);
     }
+  }
+
+  codeEl.addEventListener("click", copyCode);
+
+  // localStorage бросает SecurityError при заблокированных cookies: награда должна работать и без него
+  const isUnlocked = () => {
+    try {
+      return localStorage.getItem(STORAGE_KEY) === "unlocked";
+    } catch {
+      return false;
+    }
+  };
+
+  const markUnlocked = () => {
+    try {
+      localStorage.setItem(STORAGE_KEY, "unlocked");
+    } catch {
+      // без storage награда живёт до перезагрузки
+    }
+  };
+
+  function renderCode() {
+    const stackedCode = STACKED_PROMOS[appliedPromo];
+    const bonusUsed = appliedPromo === "STICKLER" || appliedPromo === "AI_EXEE_STICKLER";
+    const code = stackedCode || appliedPromo || "STICKLER";
+    codeEl.textContent = code;
+    codeEl.setAttribute("aria-label", `Скопировать промокод ${code}`);
+    plainEl.hidden = Boolean(stackedCode) || Boolean(appliedPromo);
+    stackedEl.hidden = !stackedCode;
+    bonusEl.hidden = !bonusUsed;
+  }
+
+  function reveal() {
+    banner.hidden = false;
+  }
+
+  renderCode();
+
+  if (isUnlocked()) {
+    reveal();
+  } else {
+    const opened = new Set();
+    cards.forEach((card, index) => {
+      card.addEventListener("toggle", () => {
+        if (!card.open) return;
+        opened.add(index);
+        if (opened.size !== cards.length) return;
+        markUnlocked();
+        reveal();
+      });
+    });
+  }
+
+  document.addEventListener("promo:applied", (event) => {
+    appliedPromo = event.detail?.code ?? "";
+    renderCode();
+  });
+
+  document.addEventListener("promo:cleared", () => {
+    appliedPromo = "";
+    renderCode();
   });
 })();
 
@@ -2438,6 +2324,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     promoToggle.hidden = false;
     promoStatus.hidden = true;
     promoStatus.classList.remove("is-ok", "is-error");
+    document.dispatchEvent(new CustomEvent("promo:cleared"));
   }
 
   function applyPromoToModal(promo) {
@@ -2447,6 +2334,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
     promoWrap.hidden = false;
     tariffEl.textContent = promoTariffText(lastTrigger, promo);
     setPromoStatus(`Промокод применён: цена ${formatAmount(promo.amountMinor)}.`, true);
+    document.dispatchEvent(new CustomEvent("promo:applied", { detail: { code: promo.code } }));
   }
 
   function openModal(trigger) {
@@ -2492,6 +2380,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
         appliedPromo = null;
         tariffEl.textContent = baseTariffText(lastTrigger);
         setPromoStatus("Промокод не найден.", false);
+        document.dispatchEvent(new CustomEvent("promo:cleared"));
         return;
       }
       applyPromoToModal(promo);
@@ -2532,9 +2421,15 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
         }),
       });
       if (response.status === 422) {
-        showError("Промокод больше не действует. Уберите его или напишите @litsky_A.");
+        appliedPromo = null;
+        form.elements.promo.value = "";
+        tariffEl.textContent = baseTariffText(lastTrigger);
+        promoStatus.hidden = true;
+        promoStatus.classList.remove("is-ok", "is-error");
+        showError("Промокод больше не действует, цена пересчитана без него. Напишите @litsky_A, если он должен работать.");
         submitButton.disabled = false;
         submitButton.textContent = "Перейти к оплате";
+        document.dispatchEvent(new CustomEvent("promo:cleared"));
         return;
       }
       if (!response.ok) throw new Error(`checkout failed: ${response.status}`);
@@ -2571,6 +2466,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
       }
 
       linkedPromo = promo;
+      document.dispatchEvent(new CustomEvent("promo:applied", { detail: { code: promo.code } }));
       priceCard.classList.add("has-promo");
       promoPrice.textContent = formatAmount(promo.amountMinor);
       promoPrice.hidden = false;
