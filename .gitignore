@@ -29,3 +29,7 @@ webinar/archive/
 
 # Workshop: reproducible renders
 workshop/presentation/rendered/
+
+# Agent scratch: orchestration state and local QA artifacts
+.tasks/
+tmp/
