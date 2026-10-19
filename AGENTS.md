@@ -47,3 +47,10 @@ Real mismatches that should be fixed:
 - Video and poster filenames contain the first 12 hex characters of their SHA-256. Deployment gives these files `Cache-Control: public, max-age=31536000, immutable`; changed bytes require a new filename and updated HTML, markdown, and build paths.
 - Serve H.264/AAC MP4 with `faststart` (the `moov` box before `mdat`), a lightweight WebP poster, native controls, `playsinline`, and `preload="none"`. Verify HTTP byte ranges, playback, and seeking after deployment.
 - The current source was received via Telegram (message 627) and is retained locally in ignored `tmp/intro-video/source.mp4`. The 217-second source has fixed black bars: crop `1280:360:0:180`, encode with `libx264 -preset slow -crf 25 -maxrate 1200k -bufsize 2400k -pix_fmt yuv420p -g 60 -c:a aac -b:a 80k -movflags +faststart -map_metadata -1`. Keep source media outside the public artifact.
+
+## Introduction Video Experiment
+
+- Varioqub experiment `77148`, flag `intro_video_v1`, Metrica counter `108774715`: 50/50 `with_video` / `without_video`, 19 October–17 November 2026. Protocol and report links: `docs/intro-video-test.md`.
+- `assets/intro-experiment.js` controls the entire `#intro` section and attaches experiment, variant, and Metrica ClientID to checkout metadata. No flag means outside the experiment, never the control group.
+- Primary outcome is server-confirmed payment, imported manually at least weekly with `scripts/export-experiment-payments.ts`; preserve its ignored local upload ledger. Checkout creation is only the secondary goal. Do not infer payment from a browser redirect or run synthetic paid conversions in production.
+- Run `bun test scripts/intro-experiment.test.ts` and the static build when changing experiment logic. Preserve the current treatment during the test; stop/restart under a new experiment ID for substantive changes.
