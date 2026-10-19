@@ -732,16 +732,66 @@ blockquote p + p { margin-top: 14px; }
   justify-content: center;
   cursor: zoom-out;
 }
+.review-lightbox-frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  max-height: 100%;
+}
 .review-lightbox-image {
   display: block;
   width: auto;
   height: auto;
+  min-height: 0;
   max-width: 100%;
-  max-height: 100%;
+  max-height: calc(100dvh - 130px);
   object-fit: contain;
   background: #fff;
   border: 1px solid var(--rule-soft);
   box-shadow: 0 12px 40px rgba(0, 0, 0, .45);
+}
+.review-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--bg) 45%, transparent);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--ink) 70%, transparent);
+  color: var(--bg);
+  font: 600 24px/1 var(--sans);
+  cursor: pointer;
+  transition: background .16s ease, color .16s ease;
+}
+.review-lightbox-nav:hover {
+  background: var(--accent);
+  color: #fff;
+}
+.review-lightbox-nav--prev { left: clamp(8px, 2vw, 24px); }
+.review-lightbox-nav--next { right: clamp(8px, 2vw, 24px); }
+@media (min-width: 760px) {
+  .review-lightbox {
+    padding-left: clamp(88px, 8vw, 120px);
+    padding-right: clamp(88px, 7vw, 104px);
+  }
+}
+.review-lightbox-caption {
+  margin: 0;
+  padding: 6px 12px;
+  background: color-mix(in srgb, var(--ink) 78%, transparent);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 .review-lightbox-close {
   position: absolute;
@@ -1929,13 +1979,18 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
           <p class="review-gallery-counter" data-review-counter aria-live="polite" aria-atomic="true">1 / 27</p>
           <button class="review-gallery-control" type="button" data-review-next aria-label="Показать следующий скрин отзыва">Вперёд →</button>
         </div>
-        <p class="review-gallery-hint">Клик по скрину открывает его в полном размере (повторный клик — закрыть). Листайте кнопками, стрелками клавиатуры или свайпом.</p>
+        <p class="review-gallery-hint">Клик по скрину открывает его в полном размере; там листайте стрелками на экране, клавишами ←/→ или свайпом, а закрыть можно повторным кликом, крестиком или Esc.</p>
       </div>
     </div>
   </section>
 
   <div class="review-lightbox" id="review-lightbox" role="dialog" aria-modal="true" aria-label="Скрин отзыва в полном размере" hidden>
-    <img class="review-lightbox-image" data-lightbox-image alt="" draggable="false">
+    <button class="review-lightbox-nav review-lightbox-nav--prev" type="button" data-lightbox-nav="prev" aria-label="Предыдущий скрин отзыва">←</button>
+    <div class="review-lightbox-frame">
+      <img class="review-lightbox-image" data-lightbox-image alt="" draggable="false">
+      <p class="review-lightbox-caption"><span data-lightbox-author></span> · <span data-lightbox-counter aria-live="polite"></span></p>
+    </div>
+    <button class="review-lightbox-nav review-lightbox-nav--next" type="button" data-lightbox-nav="next" aria-label="Следующий скрин отзыва">→</button>
     <button class="review-lightbox-close" type="button" data-lightbox-close aria-label="Закрыть">×</button>
   </div>
 
@@ -2104,10 +2159,16 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
   const nextButton = gallery.querySelector(".review-gallery-controls [data-review-next]");
   const lightbox = document.querySelector("#review-lightbox");
   const lightboxImage = lightbox.querySelector("[data-lightbox-image]");
+  const lightboxAuthor = lightbox.querySelector("[data-lightbox-author]");
+  const lightboxCounter = lightbox.querySelector("[data-lightbox-counter]");
   const lightboxClose = lightbox.querySelector("[data-lightbox-close]");
+  const lightboxPrevious = lightbox.querySelector('[data-lightbox-nav="prev"]');
+  const lightboxNext = lightbox.querySelector('[data-lightbox-nav="next"]');
   let currentIndex = 0;
   let touchStartX = null;
   let ignoreNextClick = false;
+  let lightboxTouchStartX = null;
+  let ignoreNextLightboxClick = false;
 
   function showSlide(nextIndex) {
     currentIndex = (nextIndex + slides.length) % slides.length;
@@ -2127,13 +2188,25 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
     showSlide(currentIndex + 1);
   }
 
-  function openLightbox() {
-    const image = slides[currentIndex].querySelector("img");
+  function renderLightbox() {
+    const slide = slides[currentIndex];
+    const image = slide.querySelector("img");
     lightboxImage.src = image.currentSrc || image.src;
     lightboxImage.alt = image.alt;
+    lightboxAuthor.textContent = slide.dataset.reviewLabel;
+    lightboxCounter.textContent = `${currentIndex + 1} / ${slides.length}`;
+  }
+
+  function openLightbox() {
+    renderLightbox();
     lightbox.hidden = false;
     document.body.style.overflow = "hidden";
     lightboxClose.focus();
+  }
+
+  function showLightboxSlide(offset) {
+    showSlide(currentIndex + offset);
+    renderLightbox();
   }
 
   function closeLightbox() {
@@ -2146,10 +2219,43 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
 
   previousButton.addEventListener("click", showPrevious);
   nextButton.addEventListener("click", showNext);
-  lightbox.addEventListener("click", closeLightbox);
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !lightbox.hidden) closeLightbox();
+  lightboxPrevious.addEventListener("click", () => showLightboxSlide(-1));
+  lightboxNext.addEventListener("click", () => showLightboxSlide(1));
+  lightbox.addEventListener("click", (event) => {
+    if (event.target.closest("[data-lightbox-nav]")) return;
+    if (ignoreNextLightboxClick) {
+      ignoreNextLightboxClick = false;
+      return;
+    }
+    closeLightbox();
   });
+
+  document.addEventListener("keydown", (event) => {
+    if (lightbox.hidden) return;
+    if (event.key === "Escape") {
+      closeLightbox();
+      return;
+    }
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      showLightboxSlide(event.key === "ArrowRight" ? 1 : -1);
+    }
+  });
+
+  lightbox.addEventListener("touchstart", (event) => {
+    lightboxTouchStartX = event.changedTouches[0]?.clientX ?? null;
+  }, { passive: true });
+
+  lightbox.addEventListener("touchend", (event) => {
+    if (lightboxTouchStartX === null) return;
+    const touchEndX = event.changedTouches[0]?.clientX ?? lightboxTouchStartX;
+    const distance = touchEndX - lightboxTouchStartX;
+    lightboxTouchStartX = null;
+    if (Math.abs(distance) < 48) return;
+    ignoreNextLightboxClick = true;
+    window.setTimeout(() => { ignoreNextLightboxClick = false; }, 500);
+    showLightboxSlide(distance > 0 ? -1 : 1);
+  }, { passive: true });
 
   stage.addEventListener("click", () => {
     if (ignoreNextClick) {
