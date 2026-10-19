@@ -1531,7 +1531,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
 html[data-intro-experiment="pending"] #intro { visibility: hidden; }
 html[data-intro-experiment="without_video"] #intro { display: none; }
 </style>
-<script src="/assets/intro-experiment.js?v=1"></script>
+<script src="/assets/intro-experiment.js?v=2"></script>
 </head>
 <body>
 <header>
@@ -2487,6 +2487,7 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
   paymentTrigger.addEventListener("click", (event) => {
     event.preventDefault();
     openModal(paymentTrigger);
+    window.introExperiment?.paymentOpened();
   });
 
   async function applyPromoFromUrl() {

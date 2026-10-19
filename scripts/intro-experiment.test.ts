@@ -17,7 +17,7 @@ function browser(clientId: string | null = "123456789") {
     ym(...args: any[]) {
       calls.push(args);
       if (args[1] === "getClientID" && clientId) args[2](clientId);
-      if (args[1] === "reachGoal") args[4]();
+      if (args[1] === "reachGoal" && typeof args[4] === "function") args[4]();
     },
   };
   sandbox.window = sandbox;
@@ -39,6 +39,27 @@ test("missing flag is outside the test, not control", () => {
   const b = browser(); b.assign({});
   expect(b.root.dataset.introExperiment).toBe("excluded");
   expect(b.api.checkoutMetadata()).toEqual({});
+});
+
+test.each(["with_video", "without_video"])("%s tracks the first payment form opening and exposes its visit segment", (variant) => {
+  const b = browser();
+  b.assign({ intro_video_v1: [variant] });
+  expect(b.calls.find((args) => args[1] === "params")?.[2]).toEqual({ intro_video_v1: variant });
+  b.api.paymentOpened();
+  b.api.paymentOpened();
+  expect(b.calls.filter((args) => args[2] === "aiforwork_payment_opened")).toHaveLength(1);
+  expect(b.calls.filter((args) => args[2] === "aiforwork_checkout_created")).toHaveLength(0);
+  expect(b.api.checkoutMetadata().variant).toBe(variant);
+});
+
+test("pending, excluded and failed assignments do not count payment clicks", () => {
+  const pending = browser();
+  pending.api.paymentOpened();
+  const excluded = browser(); excluded.assign({}); excluded.api.paymentOpened();
+  const failed = browser(); failed.listeners.error(); failed.api.paymentOpened();
+  for (const b of [pending, excluded, failed]) {
+    expect(b.calls.filter((args) => args[1] === "reachGoal")).toHaveLength(0);
+  }
 });
 
 test("blocked analytics and invalid flags cannot create attributed conversions", async () => {

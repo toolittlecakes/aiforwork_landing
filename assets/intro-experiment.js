@@ -6,6 +6,7 @@
   let clientId = null;
   let checkoutStarted = false;
   let checkoutEnrolled = false;
+  let paymentOpened = false;
   root.dataset.introExperiment = "pending";
 
   function fail(reason) {
@@ -14,6 +15,11 @@
   }
 
   window.introExperiment = {
+    paymentOpened() {
+      if (!variant || paymentOpened) return;
+      paymentOpened = true;
+      ym(counter, "reachGoal", "aiforwork_payment_opened");
+    },
     checkoutMetadata() {
       checkoutStarted = true;
       if (!variant || !clientId) return {};
@@ -63,6 +69,7 @@
     }
     variant = values[0];
     root.dataset.introExperiment = variant;
+    ym(counter, "params", { intro_video_v1: variant });
   });
   const timeout = setTimeout(() => fail("Varioqub did not initialize within 8 seconds"), 8000);
   const script = document.createElement("script");
