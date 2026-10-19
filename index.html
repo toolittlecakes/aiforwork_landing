@@ -1527,6 +1527,11 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/108774715" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+<style>
+html[data-intro-experiment="pending"] #intro { visibility: hidden; }
+html[data-intro-experiment="without_video"] #intro { display: none; }
+</style>
+<script src="/assets/intro-experiment.js?v=1"></script>
 </head>
 <body>
 <header>
@@ -2451,6 +2456,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
           projectId: "aiforwork",
           offerId,
           customer: { email, ...(telegram ? { telegram } : {}) },
+          metadata: window.introExperiment?.checkoutMetadata(),
           ...(appliedPromo ? { promoCode: appliedPromo } : {}),
         }),
       });
@@ -2469,6 +2475,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
       if (!response.ok) throw new Error(`checkout failed: ${response.status}`);
       const data = await response.json();
       if (!data.paymentUrl) throw new Error("checkout response without paymentUrl");
+      await window.introExperiment?.checkoutCreated();
       window.location.assign(data.paymentUrl);
     } catch {
       showError("Не получилось создать ссылку на оплату. Попробуйте ещё раз или напишите @litsky_A.");

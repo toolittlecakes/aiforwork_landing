@@ -23,6 +23,7 @@ copy_file .nojekyll
 copy_file favicon.svg
 copy_file index.html
 copy_file assets/course-start.js
+copy_file assets/intro-experiment.js
 copy_file assets/intro/meet-the-authors-d28a7f506a34.mp4
 copy_file assets/intro/meet-the-authors-c5efcd53e819.webp
 copy_dir images
@@ -51,6 +52,7 @@ copy_dir workshop/presentation/fonts
 for required_path in \
   index.html \
   assets/course-start.js \
+  assets/intro-experiment.js \
   assets/intro/meet-the-authors-d28a7f506a34.mp4 \
   assets/intro/meet-the-authors-c5efcd53e819.webp \
   aiexee/index.html \
