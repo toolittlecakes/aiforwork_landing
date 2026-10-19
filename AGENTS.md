@@ -40,3 +40,10 @@ Real mismatches that should be fixed:
 - The custom domain `aiforwork.courses` points to the bucket through Namecheap DNS. HTTPS is provided by Yandex Certificate Manager.
 - After pushing, verify the deployed page at `https://aiforwork.courses/`.
 - DNS and browser caching can delay visible updates briefly. Use a cache-busting query string if needed, for example `https://aiforwork.courses/?v=<commit>`.
+
+## Introduction Video Asset
+
+- The `#intro` section follows `#authors`. Its public files are explicitly allowlisted in `scripts/build-pages.sh` under `assets/intro/`; other MP4s remain excluded from the public artifact.
+- Video and poster filenames contain the first 12 hex characters of their SHA-256. Deployment gives these files `Cache-Control: public, max-age=31536000, immutable`; changed bytes require a new filename and updated HTML, markdown, and build paths.
+- Serve H.264/AAC MP4 with `faststart` (the `moov` box before `mdat`), a lightweight WebP poster, native controls, `playsinline`, and `preload="none"`. Verify HTTP byte ranges, playback, and seeking after deployment.
+- The current source was received via Telegram (message 627) and is retained locally in ignored `tmp/intro-video/source.mp4`. The 217-second source has fixed black bars: crop `1280:360:0:180`, encode with `libx264 -preset slow -crf 25 -maxrate 1200k -bufsize 2400k -pix_fmt yuv420p -g 60 -c:a aac -b:a 80k -movflags +faststart -map_metadata -1`. Keep source media outside the public artifact.

@@ -547,6 +547,25 @@ blockquote p + p { margin-top: 14px; }
   font-size: 17px;
 }
 
+.intro-video {
+  margin: 0;
+}
+.intro-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 32 / 9;
+  background: var(--ink);
+  border: 1px solid var(--rule);
+  box-shadow: 6px 6px 0 0 var(--accent);
+}
+.intro-video figcaption {
+  margin-top: 20px;
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 14px;
+}
+
 .anger-list {
   list-style: none;
   display: grid;
@@ -1362,6 +1381,7 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
 }
 @media (max-width: 680px) {
   section { padding: 68px 0; }
+  .intro-video video { aspect-ratio: 16 / 9; object-fit: contain; }
   .tasks-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tasks-weekend-grid { grid-template-columns: 1fr; }
   .task-card summary { padding: 16px; }
@@ -1788,6 +1808,20 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
           </div>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section id="intro" aria-labelledby="intro-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="intro-title">Давайте познакомимся</h2>
+      </div>
+      <figure class="intro-video">
+        <video controls playsinline preload="none" width="1280" height="360" poster="/assets/intro/meet-the-authors-c5efcd53e819.webp" aria-label="Видео-знакомство с Колей и Сашей" aria-describedby="intro-caption">
+          <source src="/assets/intro/meet-the-authors-d28a7f506a34.mp4" type="video/mp4">
+        </video>
+        <figcaption id="intro-caption">Коля и Саша · 3:37</figcaption>
+      </figure>
     </div>
   </section>
 

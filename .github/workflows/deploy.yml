@@ -33,11 +33,20 @@ jobs:
           aws s3 sync _site s3://aiforwork.courses \
             --region ru-central1 \
             --endpoint-url https://storage.yandexcloud.net \
+            --exclude "assets/intro/*" \
             --delete
           aws s3 sync _site s3://www.aiforwork.courses \
             --region ru-central1 \
             --endpoint-url https://storage.yandexcloud.net \
+            --exclude "assets/intro/*" \
             --delete
+          for bucket in aiforwork.courses www.aiforwork.courses; do
+            aws s3 sync _site/assets/intro "s3://$bucket/assets/intro" \
+              --region ru-central1 \
+              --endpoint-url https://storage.yandexcloud.net \
+              --cache-control "public, max-age=31536000, immutable" \
+              --delete
+          done
 
       - name: Verify deployed pages
         run: |

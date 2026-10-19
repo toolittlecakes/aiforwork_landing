@@ -23,6 +23,8 @@ copy_file .nojekyll
 copy_file favicon.svg
 copy_file index.html
 copy_file assets/course-start.js
+copy_file assets/intro/meet-the-authors-d28a7f506a34.mp4
+copy_file assets/intro/meet-the-authors-c5efcd53e819.webp
 copy_dir images
 copy_dir offer
 copy_dir payment-failed
@@ -49,6 +51,8 @@ copy_dir workshop/presentation/fonts
 for required_path in \
   index.html \
   assets/course-start.js \
+  assets/intro/meet-the-authors-d28a7f506a34.mp4 \
+  assets/intro/meet-the-authors-c5efcd53e819.webp \
   aiexee/index.html \
   antonod/index.html \
   ruspm/index.html \
@@ -78,7 +82,7 @@ do
   test -f "$output_dir/$required_path"
 done
 
-forbidden_file="$(find "$output_dir" -type f \( -name '*.md' -o -name '*.json' -o -name '*.vtt' -o -name '*.ts' -o -name '*.mp4' \) -print -quit)"
+forbidden_file="$(find "$output_dir" -type f \( -name '*.md' -o -name '*.json' -o -name '*.vtt' -o -name '*.ts' -o \( -name '*.mp4' ! -path "$output_dir/assets/intro/meet-the-authors-d28a7f506a34.mp4" \) \) -print -quit)"
 if [[ -n "$forbidden_file" ]]; then
   echo "Forbidden research file found in public artifact: $forbidden_file" >&2
   exit 1
