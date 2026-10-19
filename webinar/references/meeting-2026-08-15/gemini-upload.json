@@ -1,0 +1,14 @@
+{
+  "video": {
+    "name": "files/68y2nmy51dc2",
+    "uri": "https://generativelanguage.googleapis.com/v1beta/files/68y2nmy51dc2",
+    "mimeType": "video/mp4",
+    "state": "ACTIVE"
+  },
+  "deck": {
+    "name": "files/zes8zo2nxssd",
+    "uri": "https://generativelanguage.googleapis.com/v1beta/files/zes8zo2nxssd",
+    "mimeType": "application/pdf",
+    "state": "ACTIVE"
+  }
+}

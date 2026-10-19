@@ -7,6 +7,7 @@
 - [`source/transcript.md`](./source/transcript.md) — удобный нормализованный транскрипт, собранный из YouTube Russian Original auto-captions и сгруппированный примерно в 30-секундные интервалы.
 - [`source/slides/`](./source/slides/) — 154 полноразмерных кадра 1920×1080, source of truth по физическим состояниям презентации.
 - [`source/synthesis.md`](./source/synthesis.md) — итоговый reverse engineering: макроструктура, conceptual slides, продающие механики, сильные и слабые места, сравнение Fable и GPT‑5.6.
+- [`transition-bridges.md`](./transition-bridges.md) — короткий разбор речевых мостиков Даши: цитаты, механика и варианты переноса в текущий вебинар.
 - [`gallery.html`](./gallery.html) — автономная HTML-лента 11 контактных листов с таймкодами.
 - [`source/contact-sheets-30s/`](./source/contact-sheets-30s/) — 11 JPEG-контактных листов, кадр каждые 30 секунд.
 
