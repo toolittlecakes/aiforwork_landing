@@ -41,6 +41,12 @@ Real mismatches that should be fixed:
 - After pushing, verify the deployed page at `https://aiforwork.courses/`.
 - DNS and browser caching can delay visible updates briefly. Use a cache-busting query string if needed, for example `https://aiforwork.courses/?v=<commit>`.
 
+## Payments, Promo Codes, and Short Links
+
+- Payment backend: `https://pay.aiforwork.courses`, repo `toolittlecakes/payment-service`, current local checkout `/Users/sne/projects/aiforwork/payment-service`. Bun/Postgres on `racknerd-2`, acquiring through Tochka. `payment-service.md` here is an old design draft; use the backend README and config for current behavior.
+- Promo codes live in `src/config/payment-config.ts` under `offers.<offerId>.promoCodes`; values are final prices in kopecks. For `aiforwork` / `automarathon`, `FRIENDS` sets 8,000 RUB instead of 10,000 RUB. Check live pricing with `POST /v1/promo/check`, JSON `{ "projectId": "aiforwork", "offerId": "automarathon", "promoCode": "FRIENDS" }`.
+- Short links are static `<slug>/index.html` redirect pages in this repo, not a separate service. Copy the existing `aiexee/` pattern and add the path to both lists in `scripts/build-pages.sh`. `/friends/` points to `/?utm_source=friends&utm_medium=partner&utm_campaign=oct26&promo=FRIENDS`.
+
 ## Introduction Video Asset
 
 - The `#intro` section follows `#authors`. Its public files are explicitly allowlisted in `scripts/build-pages.sh` under `assets/intro/`; other MP4s remain excluded from the public artifact.

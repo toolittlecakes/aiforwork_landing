@@ -32,7 +32,7 @@ copy_dir payment-failed
 copy_dir privacy
 copy_dir experiment
 
-for redirect_slug in aiexee antonod ruspm aiunveiledplus aivolution ai_grably base; do
+for redirect_slug in aiexee antonod ruspm aiunveiledplus aivolution ai_grably base friends; do
   copy_file "$redirect_slug/index.html"
 done
 
@@ -62,6 +62,7 @@ for required_path in \
   aivolution/index.html \
   ai_grably/index.html \
   base/index.html \
+  friends/index.html \
   offer/index.html \
   payment-failed/index.html \
   privacy/index.html \
