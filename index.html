@@ -2319,7 +2319,7 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
   const stackedEl = banner.querySelector("[data-stickler-stacked]");
   const bonusEl = banner.querySelector("[data-stickler-bonus]");
   const STORAGE_KEY = "aifw:stickler";
-  const STACKED_PROMOS = { "AI-EXEE": "AI_EXEE_STICKLER" };
+  const STACKED_PROMOS = { "AI-EXEE": "AI_EXEE_STICKLER", FROMBOT: "FROMBOT_STICKLER" };
   let appliedPromo = "";
   let copyNoteTimer;
 
@@ -2364,7 +2364,7 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
 
   function renderCode() {
     const stackedCode = STACKED_PROMOS[appliedPromo];
-    const bonusUsed = appliedPromo === "STICKLER" || appliedPromo === "AI_EXEE_STICKLER";
+    const bonusUsed = appliedPromo === "STICKLER" || Object.values(STACKED_PROMOS).includes(appliedPromo);
     const code = stackedCode || appliedPromo || "STICKLER";
     codeEl.textContent = code;
     codeEl.setAttribute("aria-label", `Скопировать промокод ${code}`);
