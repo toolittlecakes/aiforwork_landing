@@ -1,0 +1,51 @@
+(landing_telemetry) {
+    @telemetry_config {
+        path /telemetry/config.json
+        method GET
+        header_regexp Origin ^https://(www\.)?aiforwork\.courses$
+    }
+    handle @telemetry_config {
+        header Access-Control-Allow-Origin {http.request.header.Origin}
+        header Vary Origin
+        header Cache-Control "no-store"
+        root * /var/lib/openobserve/public
+        rewrite * /config.json
+        file_server
+    }
+
+    @telemetry_preflight {
+        path /rum/v1/default/logs
+        method OPTIONS
+        header_regexp Origin ^https://(www\.)?aiforwork\.courses$
+    }
+    handle @telemetry_preflight {
+        header Access-Control-Allow-Origin {http.request.header.Origin}
+        header Vary Origin
+        header Access-Control-Allow-Methods "POST, OPTIONS"
+        header Access-Control-Allow-Headers "content-type"
+        respond "" 204
+    }
+
+    @telemetry_logs {
+        path /rum/v1/default/logs
+        method POST
+        header_regexp Origin ^https://(www\.)?aiforwork\.courses$
+    }
+    handle @telemetry_logs {
+        request_body {
+            max_size 256KB
+        }
+        reverse_proxy 127.0.0.1:5080 {
+            header_down Access-Control-Allow-Origin {http.request.header.Origin}
+            header_down Vary Origin
+            transport http {
+                response_header_timeout 10s
+            }
+        }
+    }
+
+    @other_telemetry path /telemetry/* /rum/*
+    handle @other_telemetry {
+        respond "Forbidden" 403
+    }
+}

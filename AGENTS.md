@@ -51,8 +51,8 @@ Real mismatches that should be fixed:
 
 - `assets/payment-request.js` is the checkout/promo transport: checkout timeout 20 seconds, promo timeout 10 seconds, slow-checkout notice after 3 seconds. The bank API timeout remains 15 seconds. No automatic checkout retries.
 - Every request sends a UUID v4 `X-Request-ID`; the service logs it and stores checkout IDs in `orders.metadata.paymentAttemptId`. Allowed origins receive CORS on error responses too. `provider.timeout` is HTTP 504; other provider failures are HTTP 502.
-- Browser stages are emitted as `payment:diagnostic` CustomEvents with request ID, operation, duration, error code and HTTP status, without form data. An external collector is not yet connected; these events alone are not a retained browser-error log.
-- Verify changes with `bun test scripts/payment-request.test.ts scripts/intro-experiment.test.ts`, the static build, and a browser scenario with an intercepted payment request. Test slow feedback, timeout recovery, duplicate submission prevention and successful navigation. Do not create synthetic paid conversions in production.
+- Browser stages are emitted as `payment:diagnostic` CustomEvents with request ID, operation, duration, error code and HTTP status, without form data. `assets/observability.js` forwards them and browser errors through the pinned OpenObserve logs SDK to OpenObserve on `racknerd-2`; only this landing is connected. Stream `_rumlog`, 7-day retention. Runbook: `docs/observability.md`; SQL access: `bun scripts/query-observability.ts '<SELECT SQL>' [hours]`. Credentials stay on the VPS; the public browser token is served at runtime.
+- Verify changes with `bun test scripts/observability.test.ts scripts/payment-request.test.ts scripts/intro-experiment.test.ts`, the static build, and a browser scenario with an intercepted payment request. Test slow feedback, timeout recovery, duplicate submission prevention and successful navigation. Verify saved browser events through SQL. Do not create synthetic paid conversions in production.
 
 ## Introduction Video Asset
 

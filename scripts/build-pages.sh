@@ -25,6 +25,9 @@ copy_file index.html
 copy_file assets/course-start.js
 copy_file assets/intro-experiment.js
 copy_file assets/payment-request.js
+copy_file assets/observability.js
+copy_file assets/vendor/openobserve-logs-0.4.3.js
+copy_file assets/vendor/openobserve-LICENSE.txt
 copy_file assets/intro/meet-the-authors-d28a7f506a34.mp4
 copy_file assets/intro/meet-the-authors-c5efcd53e819.webp
 copy_dir images
@@ -55,6 +58,8 @@ for required_path in \
   assets/course-start.js \
   assets/intro-experiment.js \
   assets/payment-request.js \
+  assets/observability.js \
+  assets/vendor/openobserve-logs-0.4.3.js \
   assets/intro/meet-the-authors-d28a7f506a34.mp4 \
   assets/intro/meet-the-authors-c5efcd53e819.webp \
   aiexee/index.html \
