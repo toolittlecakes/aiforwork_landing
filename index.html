@@ -2048,8 +2048,9 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
             </div>
             <p class="payment-promo-status" id="payment-promo-status" hidden></p>
           </div>
-          <p class="payment-form-error" id="payment-form-error" hidden></p>
+          <p class="payment-form-error" id="payment-form-error" role="alert" hidden></p>
           <button class="btn primary payment-modal-action" id="payment-submit" type="submit">Перейти к оплате</button>
+          <p class="payment-consent" id="payment-progress" role="status" aria-live="polite" hidden></p>
           <p class="payment-consent">Нажимая «Перейти к оплате», вы соглашаетесь с <a href="/offer/" target="_blank" rel="noopener">офертой</a> и <a href="/privacy/" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</p>
           <p class="payment-consent" id="payment-modal-description">Оплата — картой (Мир, Visa, Mastercard) или через СБП на защищённой странице Банка Точка. Условия возврата — в <a href="/offer/" target="_blank" rel="noopener">оферте</a>.</p>
         </form>
@@ -2157,6 +2158,7 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
     </div>
   </div>
 </footer>
+<script src="/assets/payment-request.js?v=1"></script>
 <script>
 (() => {
   const gallery = document.querySelector("[data-review-gallery]");
@@ -2412,12 +2414,11 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
   const modal = document.querySelector("#payment-modal");
   if (!modal) return;
 
-  const CHECKOUT_URL = "https://pay.aiforwork.courses/v1/checkouts";
-  const PROMO_CHECK_URL = "https://pay.aiforwork.courses/v1/promo/check";
   const form = modal.querySelector("#payment-form");
   const tariffEl = modal.querySelector("#payment-modal-tariff");
   const errorEl = modal.querySelector("#payment-form-error");
   const submitButton = modal.querySelector("#payment-submit");
+  const progressEl = modal.querySelector("#payment-progress");
   const promoToggle = modal.querySelector("#payment-promo-toggle");
   const promoWrap = modal.querySelector("#payment-promo-wrap");
   const promoApply = modal.querySelector("#payment-promo-apply");
@@ -2434,6 +2435,8 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
   let appliedPromo = null;
   let linkedPromo = null;
   let linkedPromoPending = Boolean(urlPromoCode);
+  let submitting = false;
+  let checkingPromo = false;
 
   function showError(message) {
     errorEl.textContent = message;
@@ -2453,18 +2456,13 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
   }
 
   async function checkPromo(targetOfferId, code) {
-    const response = await fetch(PROMO_CHECK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ projectId: "aiforwork", offerId: targetOfferId, promoCode: code }),
-    });
-    if (response.status === 422) return null;
-    if (!response.ok) throw new Error(`promo check failed: ${response.status}`);
-    const data = await response.json();
-    if (!Number.isInteger(data.amountMinor) || data.amountMinor <= 0) {
-      throw new Error("promo check returned invalid amount");
+    try {
+      const { data } = await window.paymentRequest("promo", { projectId: "aiforwork", offerId: targetOfferId, promoCode: code });
+      return { code: code.trim().toUpperCase(), amountMinor: data.amountMinor };
+    } catch (error) {
+      if (error.code === "promo.invalid") return null;
+      throw error;
     }
-    return { code: code.trim().toUpperCase(), amountMinor: data.amountMinor };
   }
 
   function setPromoStatus(message, ok) {
@@ -2494,11 +2492,17 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
   }
 
   function openModal(trigger) {
+    if (submitting || checkingPromo) {
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+      return;
+    }
     lastTrigger = trigger;
     offerId = trigger.dataset.offerId;
     tariffEl.textContent = baseTariffText(trigger);
     form.reset();
     errorEl.hidden = true;
+    progressEl.hidden = true;
     resetPromo();
     submitButton.disabled = false;
     submitButton.textContent = "Перейти к оплате";
@@ -2524,12 +2528,15 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
   });
 
   promoApply.addEventListener("click", async () => {
+    if (submitting || checkingPromo || linkedPromoPending) return;
     const code = form.elements.promo.value.trim();
     if (!code) {
       setPromoStatus("Введите промокод.", false);
       return;
     }
     promoApply.disabled = true;
+    checkingPromo = true;
+    submitButton.disabled = true;
     try {
       const promo = await checkPromo(offerId, code);
       if (!promo) {
@@ -2540,10 +2547,14 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
         return;
       }
       applyPromoToModal(promo);
-    } catch {
-      setPromoStatus("Не получилось проверить промокод. Попробуйте ещё раз.", false);
+    } catch (error) {
+      setPromoStatus(error.code === "client.timeout"
+        ? "Не удалось дождаться проверки промокода. Попробуйте ещё раз."
+        : "Не получилось проверить промокод. Попробуйте ещё раз.", false);
     } finally {
+      checkingPromo = false;
       promoApply.disabled = false;
+      submitButton.disabled = false;
     }
   });
 
@@ -2555,6 +2566,7 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (submitting || checkingPromo || linkedPromoPending) return;
     const email = form.elements.email.value.trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
       showError("Укажите корректный email — на него придёт чек об оплате.");
@@ -2563,40 +2575,52 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
     }
     const telegram = form.elements.telegram.value.trim();
     errorEl.hidden = true;
+    progressEl.hidden = true;
+    submitting = true;
     submitButton.disabled = true;
+    promoApply.disabled = true;
     submitButton.textContent = "Создаём ссылку на оплату…";
+    let checkoutRequestId;
     try {
-      const response = await fetch(CHECKOUT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          projectId: "aiforwork",
-          offerId,
-          customer: { email, ...(telegram ? { telegram } : {}) },
-          metadata: window.introExperiment?.checkoutMetadata(),
-          ...(appliedPromo ? { promoCode: appliedPromo } : {}),
-        }),
+      const { data, requestId } = await window.paymentRequest("checkout", {
+        projectId: "aiforwork",
+        offerId,
+        customer: { email, ...(telegram ? { telegram } : {}) },
+        metadata: window.introExperiment?.checkoutMetadata(),
+        ...(appliedPromo ? { promoCode: appliedPromo } : {}),
+      }, () => {
+        progressEl.textContent = "Ожидаем ответа от банка…";
+        progressEl.hidden = false;
       });
-      if (response.status === 422) {
+      checkoutRequestId = requestId;
+      progressEl.textContent = "Перенаправляем на страницу банка…";
+      progressEl.hidden = false;
+      await window.introExperiment?.checkoutCreated();
+      window.dispatchEvent(new CustomEvent("payment:diagnostic", { detail: { event: "redirect_requested", requestId, operation: "checkout" } }));
+      window.location.assign(data.paymentUrl);
+    } catch (error) {
+      if (error.code === "promo.invalid") {
         appliedPromo = null;
         form.elements.promo.value = "";
         tariffEl.textContent = baseTariffText(lastTrigger);
         promoStatus.hidden = true;
         promoStatus.classList.remove("is-ok", "is-error");
         showError("Промокод больше не действует, цена пересчитана без него. Напишите @litsky_A, если он должен работать.");
-        submitButton.disabled = false;
-        submitButton.textContent = "Перейти к оплате";
         document.dispatchEvent(new CustomEvent("promo:cleared"));
-        return;
+      } else {
+        const messages = {
+          "provider.timeout": "Банк не ответил вовремя. Попробуйте ещё раз через минуту или напишите @litsky_A.",
+          "client.timeout": "Не удалось дождаться ответа. Проверьте соединение и попробуйте ещё раз или напишите @litsky_A.",
+          "network.error": "Не удалось связаться с сервисом оплаты. Проверьте соединение и попробуйте ещё раз или напишите @litsky_A.",
+          "request.rate_limited": "Слишком много попыток. Подождите минуту и попробуйте ещё раз.",
+        };
+        showError(messages[error.code] || "Не получилось создать ссылку на оплату. Попробуйте ещё раз или напишите @litsky_A.");
       }
-      if (!response.ok) throw new Error(`checkout failed: ${response.status}`);
-      const data = await response.json();
-      if (!data.paymentUrl) throw new Error("checkout response without paymentUrl");
-      await window.introExperiment?.checkoutCreated();
-      window.location.assign(data.paymentUrl);
-    } catch {
-      showError("Не получилось создать ссылку на оплату. Попробуйте ещё раз или напишите @litsky_A.");
+      if (!error.requestId) window.dispatchEvent(new CustomEvent("payment:diagnostic", { detail: { event: "checkout_failed", requestId: checkoutRequestId, operation: "checkout", code: "checkout.error" } }));
+      progressEl.hidden = true;
+      submitting = false;
       submitButton.disabled = false;
+      promoApply.disabled = false;
       submitButton.textContent = "Перейти к оплате";
     }
   });
@@ -2632,11 +2656,13 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
       promoNote.textContent = `Цена по промокоду ${promo.code}`;
       promoNote.classList.remove("is-checking", "is-error");
       if (!modal.hidden) applyPromoToModal(promo);
-    } catch {
+    } catch (error) {
       promoNote.textContent = `Не удалось проверить промокод ${normalizedCode}. Обновите страницу.`;
       promoNote.classList.remove("is-checking");
       promoNote.classList.add("is-error");
-      if (!modal.hidden) setPromoStatus("Не получилось проверить промокод. Обновите страницу.", false);
+      if (!modal.hidden) setPromoStatus(error.code === "client.timeout"
+        ? "Не удалось дождаться проверки промокода. Попробуйте ещё раз."
+        : "Не получилось проверить промокод. Обновите страницу.", false);
     } finally {
       linkedPromoPending = false;
       promoApply.disabled = false;

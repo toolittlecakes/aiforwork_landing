@@ -47,6 +47,13 @@ Real mismatches that should be fixed:
 - Promo codes live in `src/config/payment-config.ts` under `offers.<offerId>.promoCodes`; values are final prices in kopecks. For `aiforwork` / `automarathon`, `FRIENDS` sets 8,000 RUB instead of 10,000 RUB. Check live pricing with `POST /v1/promo/check`, JSON `{ "projectId": "aiforwork", "offerId": "automarathon", "promoCode": "FRIENDS" }`.
 - Short links are static `<slug>/index.html` redirect pages in this repo, not a separate service. Copy the existing `aiexee/` pattern and add the path to both lists in `scripts/build-pages.sh`. `/friends/` points to `/?utm_source=friends&utm_medium=partner&utm_campaign=oct26&promo=FRIENDS`.
 
+## Payment Request Diagnostics
+
+- `assets/payment-request.js` is the checkout/promo transport: checkout timeout 20 seconds, promo timeout 10 seconds, slow-checkout notice after 3 seconds. The bank API timeout remains 15 seconds. No automatic checkout retries.
+- Every request sends a UUID v4 `X-Request-ID`; the service logs it and stores checkout IDs in `orders.metadata.paymentAttemptId`. Allowed origins receive CORS on error responses too. `provider.timeout` is HTTP 504; other provider failures are HTTP 502.
+- Browser stages are emitted as `payment:diagnostic` CustomEvents with request ID, operation, duration, error code and HTTP status, without form data. An external collector is not yet connected; these events alone are not a retained browser-error log.
+- Verify changes with `bun test scripts/payment-request.test.ts scripts/intro-experiment.test.ts`, the static build, and a browser scenario with an intercepted payment request. Test slow feedback, timeout recovery, duplicate submission prevention and successful navigation. Do not create synthetic paid conversions in production.
+
 ## Introduction Video Asset
 
 - The `#intro` section follows `#authors`. Its public files are explicitly allowlisted in `scripts/build-pages.sh` under `assets/intro/`; other MP4s remain excluded from the public artifact.
