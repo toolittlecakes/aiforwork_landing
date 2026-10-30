@@ -90,3 +90,10 @@ test("invalid configuration is rejected before initializing the SDK", async () =
   expect(b.window.landingObservability.status).toBe("unavailable");
   expect(b.config).toBeUndefined();
 });
+
+test("URL promo check starts only after the deferred diagnostics listener exists", () => {
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  expect(html.includes('<script defer src="/assets/observability.js')).toBe(true);
+  expect(html.includes('document.addEventListener("DOMContentLoaded", applyPromoFromUrl);')).toBe(true);
+  expect(html.includes("void applyPromoFromUrl()")).toBe(false);
+});

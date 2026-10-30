@@ -2672,7 +2672,7 @@ html[data-intro-experiment="without_video"] #intro { display: none; }
     }
   }
 
-  void applyPromoFromUrl();
+  document.addEventListener("DOMContentLoaded", applyPromoFromUrl);
 
   closeButtons.forEach((button) => {
     button.addEventListener("click", closeModal);
