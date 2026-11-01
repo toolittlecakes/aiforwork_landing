@@ -25,13 +25,14 @@
   --accent-hot: #3445ff;
   --wrap: 1280px;
   --gutter: clamp(20px, 4vw, 56px);
+  --header-height: 88px;
   --display: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Menlo, Monaco, monospace;
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 88px; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   background: var(--bg);
@@ -55,6 +56,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 20;
+  height: var(--header-height);
   background: color-mix(in srgb, var(--bg) 94%, transparent);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--rule);
@@ -64,8 +66,7 @@ header .wrap {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 24px;
-  padding-top: 18px;
-  padding-bottom: 18px;
+  height: 100%;
 }
 .brand {
   display: inline-flex;
@@ -170,7 +171,6 @@ section {
   padding: 92px 0;
   border-bottom: 1px solid var(--rule);
 }
-section[id] { scroll-margin-top: 88px; }
 .paper { background: var(--paper); }
 .dark {
   background: var(--ink);
@@ -1435,17 +1435,14 @@ footer .foot-legal .legal-links { display: flex; gap: 20px; justify-self: end; }
   .week:last-child { border-bottom: 0; }
 }
 @media (max-width: 680px) {
+  :root { --header-height: 73px; }
   section { padding: 68px 0; }
   .intro-video video { aspect-ratio: 16 / 9; object-fit: contain; }
   .tasks-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tasks-weekend-grid { grid-template-columns: 1fr; }
   .task-card summary { padding: 16px; }
   .task-card ul { margin: 0 16px 16px; }
-  header .wrap {
-    gap: 14px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-  }
+  header .wrap { gap: 14px; }
   .brand {
     gap: 8px;
     font-size: 17px;
