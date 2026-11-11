@@ -253,9 +253,9 @@ API-ключи, .env/секреты, консольные команды, бра
 
 Промокод — кнопка: клик или Tab + Enter копирует код в буфер, рядом на 2,5 секунды появляется «✓ Скопировано» (при отказе буфера — «Не скопировалось — выделите вручную»).
 
-Если у человека уже применён промокод (пришёл по ссылке `?promo=AI-EXEE` или ввёл его в модалке оплаты), плашка показывает `AI_EXEE_STICKLER` и текст «— это ещё 1 000 ₽ скидки сверху к вашему промокоду». Соответствие «базовый код → код со стиклером» задано вручную в скрипте лендинга (`AI-EXEE → AI_EXEE_STICKLER`, `FROMBOT → FROMBOT_STICKLER`, `AITOBUSINESS → AITOBUSINESS_STICKLER`).
+Если у человека уже применён промокод (пришёл по ссылке `?promo=AI-EXEE` или ввёл его в модалке оплаты), плашка показывает `AI_EXEE_STICKLER` и текст «— это ещё 1 000 ₽ скидки сверху к вашему промокоду». Соответствие «базовый код → код со стиклером» задано вручную в скрипте лендинга (`AI-EXEE → AI_EXEE_STICKLER`, `FROMBOT → FROMBOT_STICKLER`, `AITOBUSINESS → AITOBUSINESS_STICKLER`, `BLACKFRIDAY → BLACKFRIDAY_STICKLER`).
 
-Если бонус уже в применённом коде (`STICKLER`, `AI_EXEE_STICKLER`, `FROMBOT_STICKLER` или `AITOBUSINESS_STICKLER`), плашка показывает этот же код и текст «— скидка уже учтена в вашей цене» и не предлагает другой код.
+Если бонус уже в применённом коде (`STICKLER`, `AI_EXEE_STICKLER`, `FROMBOT_STICKLER`, `AITOBUSINESS_STICKLER` или `BLACKFRIDAY_STICKLER`), плашка показывает этот же код и текст «— скидка уже учтена в вашей цене» и не предлагает другой код.
 
 Если применён код, для которого нет комбо-записи, плашка показывает этот код без пояснений о скидке — ничего худшего не подсовываем.
 
@@ -379,6 +379,8 @@ API-ключи, .env/секреты, консольные команды, бра
 Промокод `FROMBOT`: скидка 2 000 ₽, к оплате 8 000 ₽. `FROMBOT_STICKLER`: ещё 1 000 ₽ за открытие всех 16 карточек, к оплате 7 000 ₽. Только для `automarathon`. Короткая ссылка `/frombot/` ведёт на `/?utm_source=frombot&utm_medium=partner&utm_campaign=oct26&promo=FROMBOT`.
 
 Промокод `AITOBUSINESS`: скидка 2 000 ₽, к оплате 8 000 ₽. `AITOBUSINESS_STICKLER`: ещё 1 000 ₽ за открытие всех 16 карточек, к оплате 7 000 ₽. Только для `automarathon`. Короткая ссылка `/aitobusiness/` ведёт на `/?utm_source=aitobusiness&utm_medium=partner&utm_campaign=nov26&promo=AITOBUSINESS`.
+
+Промокод `BLACKFRIDAY`: скидка 3 000 ₽, к оплате 7 000 ₽. `BLACKFRIDAY_STICKLER`: ещё 1 000 ₽ за открытие всех 16 карточек, к оплате 6 000 ₽. Только для `automarathon`. Короткая ссылка `/blackfriday/` ведёт на `/?utm_source=blackfriday&utm_medium=owned&utm_campaign=nov26&promo=BLACKFRIDAY`.
 
 Промокод `STICKLER`: скидка 1 000 ₽, к оплате 9 000 ₽. Промокод `AI_EXEE_STICKLER`: `AI-EXEE` + стиклер, скидка 3 000 ₽, к оплате 7 000 ₽. Оба действуют только на `automarathon`; комбинации заданы отдельными записями в конфиге платёжного сервиса, движка стакинга нет.
 
