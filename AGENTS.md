@@ -41,6 +41,17 @@ Real mismatches that should be fixed:
 - After pushing, verify the deployed page at `https://aiforwork.courses/`.
 - DNS and browser caching can delay visible updates briefly. Use a cache-busting query string if needed, for example `https://aiforwork.courses/?v=<commit>`.
 
+### Cache policy
+
+Set in `.github/workflows/deploy.yml` as separate `aws s3 sync` passes, most specific first (later passes skip files already uploaded, so the first pass wins on metadata):
+
+- `*.html` — `public, max-age=60, must-revalidate`. A push is visible within a minute; no more stale page after deploy.
+- `assets/*.js`, `assets/vendor/*` — `public, max-age=31536000, immutable`. These are loaded from markup with a `?v=N` query: **bump `N` in `index.html` (and any other page that loads the file) on every change**, otherwise browsers keep the old script for a year.
+- `assets/intro/*` — `public, max-age=31536000, immutable`; filenames carry the content hash, so a changed file must get a new name.
+- everything else (images, PDFs, fonts) — `public, max-age=86400`. Names are not hashed, so files are replaced in place and refreshed within a day. Never mark these `immutable`.
+
+The `Verify deployed pages` step fails the run if the live HTML lacks `og:image` or if the cache headers are missing, so the policy is checked against the deployed bucket, not just the commit.
+
 ## Social Preview (Telegram, messengers)
 
 - Link previews need Open Graph tags. Telegram does not fall back to `<title>` alone in practice, so a page without `og:*` shows no preview card.
