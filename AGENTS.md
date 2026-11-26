@@ -41,6 +41,13 @@ Real mismatches that should be fixed:
 - After pushing, verify the deployed page at `https://aiforwork.courses/`.
 - DNS and browser caching can delay visible updates briefly. Use a cache-busting query string if needed, for example `https://aiforwork.courses/?v=<commit>`.
 
+## Social Preview (Telegram, messengers)
+
+- Link previews need Open Graph tags. Telegram does not fall back to `<title>` alone in practice, so a page without `og:*` shows no preview card.
+- The landing head declares `og:title`, `og:description`, `og:image` (1200×630 `images/og-cover.jpg`), `og:url`, `og:locale` and `twitter:card`. Update them when the hero copy changes, together with `index.md` metadata block.
+- `scripts/og-cover/card.html` is the source of the cover image; render and re-encode commands are in the file header. Fonts load from Google Fonts, so rendering needs network.
+- Telegram caches previews per URL. After deploy, refresh through @WebpageBot or post the link with a cache-busting query string.
+
 ## Payments, Promo Codes, and Short Links
 
 - Payment backend: `https://pay.aiforwork.courses`, repo `toolittlecakes/payment-service`, current local checkout `/Users/sne/projects/aiforwork/payment-service`. Bun/Postgres on `racknerd-2`, acquiring through Tochka. `payment-service.md` here is an old design draft; use the backend README and config for current behavior.

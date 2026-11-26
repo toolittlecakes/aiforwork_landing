@@ -1,0 +1,62 @@
+<!--
+  Source for images/og-cover.jpg (1200x630 Open Graph / Telegram link preview).
+
+  Regenerate after copy or visual changes:
+    ~/.cache/ms-playwright/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell \
+      --no-sandbox --hide-scrollbars --force-device-scale-factor=1 \
+      --window-size=1200,630 --virtual-time-budget=8000 \
+      --screenshot=/tmp/og-cover.png "$PWD/scripts/og-cover/card.html"
+    uv run --with pillow python -c "from PIL import Image; Image.open('/tmp/og-cover.png').convert('RGB').save('images/og-cover.jpg','JPEG',quality=90,optimize=True,progressive=True)"
+
+  Any browser works; the fonts come from Google Fonts, so rendering needs network.
+-->
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1200px; height:630px; overflow:hidden; }
+body {
+  background:#ecebe6; color:#0e0e0d;
+  font-family:"Inter",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+.frame { position:absolute; inset:28px; border:2px solid #0e0e0d; }
+.sq { position:absolute; width:26px; height:26px; background:#1c2ce5; }
+.sq.tl { left:15px; top:15px; }
+.sq.br { right:15px; bottom:15px; }
+.inner { position:absolute; inset:60px 68px; display:flex; flex-direction:column; }
+.top { display:flex; align-items:center; justify-content:space-between; }
+.brand { display:flex; align-items:center; gap:14px; font-weight:600; font-size:26px; letter-spacing:-0.03em; }
+.mark { width:30px; height:30px; background:#0e0e0d; position:relative; }
+.mark::after { content:""; position:absolute; right:-7px; bottom:-7px; width:15px; height:15px; background:#1c2ce5; }
+.mono { font-family:"JetBrains Mono",monospace; font-size:19px; letter-spacing:0.06em; color:#77766f; text-transform:uppercase; }
+.mid { flex:1; display:flex; align-items:center; gap:24px; }
+h1 { font-size:66px; line-height:1.0; letter-spacing:-0.045em; font-weight:500; max-width:800px; }
+h1 em { font-style:normal; color:#1c2ce5; }
+.genie-card { width:246px; flex:none; background:#fff; border:2px solid #0e0e0d; padding:12px; box-shadow:8px 8px 0 0 #1c2ce5; }
+.genie { width:100%; display:block; }
+.bottom { display:flex; align-items:flex-end; justify-content:space-between; border-top:2px solid #0e0e0d; padding-top:22px; }
+.sub { font-size:27px; line-height:1.25; letter-spacing:-0.02em; color:#333330; max-width:800px; }
+.tag { font-family:"JetBrains Mono",monospace; font-size:17px; letter-spacing:0.08em; text-transform:uppercase; color:#1c2ce5; }
+</style></head>
+<body>
+<div class="frame"></div><div class="sq tl"></div><div class="sq br"></div>
+<div class="inner">
+  <div class="top">
+    <div class="brand"><span class="mark"></span>AI For Work</div>
+    <div class="mono">Марафон · старт каждую среду</div>
+  </div>
+  <div class="mid">
+    <h1>Марафон: <em>ИИ-агенты</em> для не-разработчиков</h1>
+    <div class="genie-card"><img class="genie" src="../../images/marathon-genie.webp"></div>
+  </div>
+  <div class="bottom">
+    <div class="sub">Практический марафон по вкату в ИИ-агенты. С нуля, <span style="white-space:nowrap">15–20 минут</span> в день.</div>
+    <div class="tag">aiforwork.courses</div>
+  </div>
+</div>
+</body></html>
