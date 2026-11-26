@@ -34,7 +34,7 @@ Real mismatches that should be fixed:
 
 ## Deploy Process
 
-- This is a static site. There is no application build toolchain; `scripts/build-pages.sh` only assembles the public artifact.
+- This is a static site. There is no application build toolchain; `scripts/build-pages.sh` assembles the public artifact and content-hashes script filenames.
 - Deployment happens by pushing `main` to `origin`.
 - GitHub Actions builds the public artifact with `scripts/build-pages.sh` and syncs it to the `aiforwork.courses` and `www.aiforwork.courses` buckets in Yandex Object Storage.
 - The custom domain `aiforwork.courses` points to the bucket through Namecheap DNS. HTTPS is provided by Yandex Certificate Manager.
@@ -43,7 +43,7 @@ Real mismatches that should be fixed:
 
 ### Cache policy
 
-Set in `.github/workflows/deploy.yml` as separate `aws s3 sync` passes, most specific first (later passes skip files already uploaded, so the first pass wins on metadata):
+Set in `.github/workflows/deploy.yml` as separate `aws s3 sync` passes, ordered scripts → video → HTML → everything else. The order is what keeps the site consistent mid-deploy: a later pass skips files an earlier pass already uploaded (same size, remote not older), so the first matching pass decides the metadata, and the live page never points at a file that is not uploaded yet. `--delete` runs only in the last pass.
 
 - `*.html` — `public, max-age=60, must-revalidate`. A push is visible within a minute; no more stale page after deploy.
 - `assets/*.js`, `assets/vendor/*` — `public, max-age=31536000, immutable`. `scripts/build-pages.sh` renames every script to `<name>.<first 12 hex of sha256>.js` and rewrites all references in the built HTML, so there is no version parameter to maintain: edit the file, the name changes by itself. Source pages keep the plain `/assets/payment-request.js` form; the build also strips any leftover `?v=N`.
