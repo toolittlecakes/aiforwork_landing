@@ -53,13 +53,52 @@ copy_file workshop/presentation/workshop-go-to-market.pdf
 copy_dir workshop/presentation/assets
 copy_dir workshop/presentation/fonts
 
+# Script filenames carry the first 12 hex characters of their SHA-256 so they can
+# be served as immutable for a year without any manual ?v=N bump. Every reference
+# in the built HTML is rewritten to the hashed name.
+sha256_prefix() {
+  if command -v sha256sum >/dev/null 2>&1; then
+    sha256sum "$1" | cut -c1-12
+  else
+    shasum -a 256 "$1" | cut -c1-12
+  fi
+}
+
+fingerprint_scripts() {
+  local js rel dir base hashed new escaped html tmp
+  while IFS= read -r -d '' js; do
+    rel="${js#"$output_dir"/}"
+    dir="$(dirname "$rel")"
+    base="$(basename "$rel" .js)"
+    hashed="$(sha256_prefix "$js")"
+    new="$dir/$base.$hashed.js"
+    mv "$js" "$output_dir/$new"
+
+    escaped="$(printf '%s' "/$rel" | sed 's/[.[\*^$]/\\&/g')"
+    while IFS= read -r -d '' html; do
+      tmp="$html.fingerprint"
+      sed -E "s#${escaped}(\?v=[0-9]+)?#/$new#g" "$html" > "$tmp"
+      mv "$tmp" "$html"
+    done < <(find "$output_dir" -name '*.html' -print0)
+  done < <(find "$output_dir/assets" -name '*.js' -print0)
+}
+
+fingerprint_scripts
+
+for script_base in course-start intro-experiment payment-request observability; do
+  compgen -G "$output_dir/assets/$script_base.*.js" >/dev/null \
+    || { echo "Hashed script missing: assets/$script_base.*.js" >&2; exit 1; }
+done
+compgen -G "$output_dir/assets/vendor/openobserve-logs-*.js" >/dev/null \
+  || { echo "Hashed vendor script missing" >&2; exit 1; }
+
+while IFS= read -r reference; do
+  test -f "$output_dir$reference" \
+    || { echo "Broken script reference in built HTML: $reference" >&2; exit 1; }
+done < <(grep --recursive --no-filename --only-matching --extended-regexp '/assets/[A-Za-z0-9._/-]+\.js' "$output_dir" --include='*.html' | sort -u)
+
 for required_path in \
   index.html \
-  assets/course-start.js \
-  assets/intro-experiment.js \
-  assets/payment-request.js \
-  assets/observability.js \
-  assets/vendor/openobserve-logs-0.4.3.js \
   assets/intro/meet-the-authors-d28a7f506a34.mp4 \
   assets/intro/meet-the-authors-c5efcd53e819.webp \
   aiexee/index.html \

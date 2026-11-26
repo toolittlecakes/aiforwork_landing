@@ -33,15 +33,12 @@ jobs:
           sync_bucket() {
             local bucket="$1"
 
-            # HTML: короткий TTL, чтобы деплой был виден сразу после пуша.
-            aws s3 sync _site "s3://$bucket" \
-              --region ru-central1 \
-              --endpoint-url https://storage.yandexcloud.net \
-              --exclude "*" --include "*.html" \
-              --cache-control "public, max-age=60, must-revalidate"
+            # Порядок важен: сначала новые скрипты, потом HTML, который на них
+            # ссылается, и только в конце удаление — иначе на несколько секунд
+            # живая страница ссылается на ещё не загруженные файлы.
 
-            # JS подключается из разметки как ?v=N: файл можно держать вечно,
-            # если версия в HTML поднимается при каждой правке (см. AGENTS.md).
+            # Скрипты: имя содержит хеш содержимого, его проставляет
+            # scripts/build-pages.sh, поэтому файл неизменяем.
             aws s3 sync _site "s3://$bucket" \
               --region ru-central1 \
               --endpoint-url https://storage.yandexcloud.net \
@@ -54,6 +51,13 @@ jobs:
               --endpoint-url https://storage.yandexcloud.net \
               --cache-control "public, max-age=31536000, immutable" \
               --delete
+
+            # HTML: короткий TTL, чтобы деплой был виден сразу после пуша.
+            aws s3 sync _site "s3://$bucket" \
+              --region ru-central1 \
+              --endpoint-url https://storage.yandexcloud.net \
+              --exclude "*" --include "*.html" \
+              --cache-control "public, max-age=60, must-revalidate"
 
             # Остальное (картинки, PDF, шрифты) + удаление устаревших файлов.
             # Сутки, без immutable: имена файлов не хешированы, их меняют на месте.
@@ -80,3 +84,9 @@ jobs:
           curl --fail --silent --show-error "$base/" | grep --quiet 'property="og:image"'
           curl --silent --show-error --head "$base/" | grep --ignore-case --quiet 'cache-control: public, max-age=60'
           curl --silent --show-error --head "$base/images/og-cover.jpg" | grep --ignore-case --quiet 'cache-control: public, max-age=86400'
+
+          # Script names are content-hashed by the build: the live page must point
+          # at an existing immutable file, not at a bare /assets/*.js.
+          script_path=$(curl --fail --silent --show-error "$base/" | grep --only-matching --extended-regexp '/assets/payment-request\.[0-9a-f]{12}\.js' | head -1)
+          test -n "$script_path"
+          curl --fail --silent --show-error --head "$base$script_path" | grep --ignore-case --quiet 'cache-control: public, max-age=31536000, immutable'
